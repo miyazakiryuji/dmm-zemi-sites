@@ -1,0 +1,8 @@
+# === dmm-zemi-sites（公開リポジトリ）用 .gitignore ===
+# このリポジトリは public。受講生PII・有料教材・内部資料は絶対に置かない。
+.DS_Store
+**/.DS_Store
+.claude/
+**/.claude/
+*.swp
+*~

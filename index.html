@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMM 生成AI CAMP ゼミ 資料サイト集</title>
+<style>
+  :root { --bg:#0f1320; --card:#1a2032; --ink:#eef1f8; --sub:#9aa6c4; --accent:#5b8cff; --line:#2a3350; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; background:var(--bg); color:var(--ink); line-height:1.7; }
+  .wrap { max-width: 880px; margin:0 auto; padding: 64px 20px 80px; }
+  header { text-align:center; margin-bottom: 48px; }
+  h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin:0 0 12px; letter-spacing:.02em; }
+  .lead { color:var(--sub); margin:0; font-size:1rem; }
+  .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  a.card { display:block; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line);
+           border-radius:14px; padding:22px 22px; transition:transform .15s ease, border-color .15s ease; }
+  a.card:hover { transform:translateY(-3px); border-color:var(--accent); }
+  .tag { display:inline-block; font-size:.72rem; color:var(--accent); border:1px solid var(--accent);
+         border-radius:999px; padding:2px 10px; margin-bottom:10px; }
+  .card h2 { font-size:1.08rem; margin:0 0 6px; }
+  .card p { margin:0; color:var(--sub); font-size:.88rem; }
+  footer { margin-top:56px; text-align:center; color:var(--sub); font-size:.8rem; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>DMM 生成AI CAMP ゼミ 資料サイト集</h1>
+      <p class="lead">講義で使用している資料サイトをまとめて公開しています。</p>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="claudecode-zemi/">
+        <span class="tag">Claude Code</span>
+        <h2>Claude Code マスターゼミ 資料サイト</h2>
+        <p>各回の講義資料・共通事項（受講生向けトップ）</p>
+      </a>
+      <a class="card" href="dify-zemi/">
+        <span class="tag">Dify</span>
+        <h2>Dify マスターゼミ 資料サイト</h2>
+        <p>Dify ゼミの受講生向け講義資料サイト</p>
+      </a>
+      <a class="card" href="html-css-js/">
+        <span class="tag">補助教材</span>
+        <h2>HTML / CSS / JS 比較サイト</h2>
+        <p>3層を1枚ずつ重ねて見る解説サイト</p>
+      </a>
+      <a class="card" href="skills/">
+        <span class="tag">補助教材</span>
+        <h2>Skills 説明資料サイト</h2>
+        <p>Claude Code の Skills の基礎をまとめた自習資料</p>
+      </a>
+      <a class="card" href="dify-chapter4-review/">
+        <span class="tag">レビュー（匿名）</span>
+        <h2>Dify 課題レビュー資料</h2>
+        <p>提出課題を匿名化して抜粋・解説した学習用レビュー</p>
+      </a>
+    </div>
+
+    <footer>DMM 生成AI CAMP ／ 講師作成資料</footer>
+  </div>
+</body>
+</html>

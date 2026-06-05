@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lesson4 Chapter4 課題レビュー資料｜プロンプトエンジニアリング応用編</title>
+<meta name="description" content="Difyマスターゼミ Lesson4 Chapter4（変数・コマンド・条件分岐）の提出課題レビュー。良かった提出と改善したい提出を匿名で抜粋し、教材の評価観点とあわせて解説します。" />
+<style>
+  :root{
+    --bg:#0f1226;
+    --bg-soft:#161a36;
+    --card:#1b2042;
+    --card-2:#222a52;
+    --ink:#e9ecff;
+    --ink-soft:#b6bce0;
+    --muted:#8c93c4;
+    --line:#2c3360;
+    --brand:#6c8cff;
+    --brand-2:#9d7bff;
+    --good:#34d399;
+    --good-bg:rgba(52,211,153,.10);
+    --good-line:rgba(52,211,153,.45);
+    --warn:#f6b352;
+    --warn-bg:rgba(246,179,82,.10);
+    --warn-line:rgba(246,179,82,.45);
+    --radius:16px;
+    --shadow:0 18px 50px -22px rgba(0,0,0,.7);
+    --mono:"SFMono-Regular",ui-monospace,"Menlo","Consolas","Noto Sans JP",monospace;
+    --sans:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{
+    margin:0;font-family:var(--sans);color:var(--ink);line-height:1.85;
+    background:
+      radial-gradient(1100px 600px at 12% -8%, rgba(108,140,255,.20), transparent 60%),
+      radial-gradient(900px 600px at 100% 0%, rgba(157,123,255,.16), transparent 55%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ===== Header / Nav ===== */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(140%) blur(10px);
+    background:rgba(15,18,38,.78);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:18px;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em;white-space:nowrap}
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 16px rgba(108,140,255,.8)}
+  .brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.04em}
+  .nav nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .nav nav a{font-size:13px;color:var(--ink-soft);text-decoration:none;padding:7px 12px;border-radius:999px;transition:.2s}
+  .nav nav a:hover{background:var(--card);color:#fff}
+  .menu-toggle{display:none}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 38px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;color:var(--brand);
+    border:1px solid var(--line);background:var(--bg-soft);padding:7px 14px;border-radius:999px;text-transform:uppercase}
+  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.25;margin:20px 0 14px;font-weight:850;letter-spacing:.01em}
+  .hero h1 .grad{background:linear-gradient(100deg,var(--brand),var(--brand-2) 60%,#f6b8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:17px;color:var(--ink-soft);max-width:760px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:12px}
+  .chip b{color:#fff}
+
+  /* ===== Sections ===== */
+  section{padding:42px 0;border-top:1px solid rgba(44,51,96,.55)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .sec-no{font-family:var(--mono);font-size:13px;color:var(--brand);font-weight:700;letter-spacing:.1em}
+  h2{font-size:clamp(22px,3.4vw,30px);margin:6px 0 6px;font-weight:820;letter-spacing:.01em}
+  h3{font-size:19px;margin:30px 0 10px;font-weight:780}
+  .sub{color:var(--muted);font-size:14.5px;margin:0 0 22px}
+  p{margin:0 0 14px}
+
+  /* cards */
+  .grid{display:grid;gap:18px}
+  .grid.c3{grid-template-columns:repeat(3,1fr)}
+  .grid.c2{grid-template-columns:repeat(2,1fr)}
+  .card{background:linear-gradient(180deg,var(--card),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .card h4{margin:0 0 8px;font-size:16.5px;font-weight:760}
+  .card p{margin:0;color:var(--ink-soft);font-size:14px}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:8px;letter-spacing:.05em;margin-bottom:12px}
+  .tag.v{color:#9fd0ff;background:rgba(108,140,255,.14);border:1px solid rgba(108,140,255,.4)}
+  .tag.c{color:#c7b3ff;background:rgba(157,123,255,.14);border:1px solid rgba(157,123,255,.4)}
+  .tag.b{color:#ffd59f;background:rgba(246,179,82,.14);border:1px solid rgba(246,179,82,.4)}
+
+  /* example blocks */
+  .example{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:18px 0;background:var(--bg-soft)}
+  .example > .ex-head{display:flex;align-items:center;gap:10px;padding:14px 18px;font-weight:740;font-size:15px;border-bottom:1px solid var(--line)}
+  .ex-head .pill{font-size:11.5px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:999px}
+  .good .ex-head{background:var(--good-bg)}
+  .good{border-color:var(--good-line)}
+  .good .pill{color:#06281d;background:var(--good)}
+  .warn .ex-head{background:var(--warn-bg)}
+  .warn{border-color:var(--warn-line)}
+  .warn .pill{color:#3a2606;background:var(--warn)}
+  .ex-body{padding:18px}
+  .ex-body .scene{font-size:13.5px;color:var(--muted);margin:0 0 12px}
+  .ex-body .scene b{color:var(--ink-soft)}
+
+  pre.prompt{
+    margin:0 0 6px;font-family:var(--mono);font-size:12.7px;line-height:1.7;color:#dfe4ff;
+    background:#0c0f24;border:1px solid var(--line);border-radius:12px;padding:15px 16px;
+    overflow:auto;white-space:pre-wrap;word-break:break-word;
+  }
+  pre.prompt .h{color:#7fa6ff;font-weight:700}
+  pre.prompt .var{color:#7be3b0}
+  pre.prompt .cmd{color:#d3b8ff;font-weight:700}
+  pre.prompt .cm{color:#6b73a6}
+
+  .why{margin-top:14px;padding:14px 16px;border-radius:12px;font-size:14px}
+  .why.good{background:var(--good-bg);border:1px solid var(--good-line)}
+  .why.warn{background:var(--warn-bg);border:1px solid var(--warn-line)}
+  .why h5{margin:0 0 8px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .why ul{margin:0;padding-left:20px}
+  .why li{margin:5px 0;color:var(--ink-soft)}
+  .why li b{color:#fff}
+
+  .fix{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+  .fix > div{padding:14px 16px}
+  .fix .before{background:rgba(246,179,82,.07);border-right:1px solid var(--line)}
+  .fix .after{background:rgba(52,211,153,.07)}
+  .fix .lbl{font-family:var(--mono);font-size:11.5px;font-weight:800;letter-spacing:.06em;margin-bottom:8px;display:block}
+  .fix .before .lbl{color:var(--warn)}
+  .fix .after .lbl{color:var(--good)}
+  .fix p{font-size:13.5px;color:var(--ink-soft);margin:0}
+
+  /* checklist */
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14px;color:var(--ink-soft)}
+  .checklist li .ck{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--brand);display:grid;place-items:center;color:var(--brand);font-size:13px;font-weight:900;margin-top:1px}
+  .checklist li b{color:#fff}
+
+  .callout{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14.5px;color:var(--ink-soft)}
+  .callout b{color:#fff}
+
+  table.eval{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:13.6px}
+  table.eval th,table.eval td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  table.eval th{background:var(--card-2);color:#fff;font-weight:740;white-space:nowrap}
+  table.eval td{color:var(--ink-soft)}
+  table.eval tr:nth-child(even) td{background:rgba(34,42,82,.35)}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 4px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+  .legend .g{background:var(--good)} .legend .w{background:var(--warn)}
+
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  footer b{color:var(--ink-soft)}
+  .note{font-size:12.5px;color:var(--muted)}
+
+  @media(max-width:860px){
+    .grid.c3,.grid.c2{grid-template-columns:1fr}
+    .fix{grid-template-columns:1fr}
+    .fix .before{border-right:none;border-bottom:1px solid var(--line)}
+    .nav nav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg-soft);border-bottom:1px solid var(--line);padding:10px 16px;gap:2px}
+    .nav nav.open{display:flex}
+    .nav nav a{padding:11px 12px}
+    .menu-toggle{display:inline-grid;place-items:center;margin-left:auto;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:#fff;font-size:18px;cursor:pointer}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    header.top{display:none}
+    .card,.example,pre.prompt{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>Chapter4 課題レビュー<small>Difyマスターゼミ / Lesson4 プロンプトエンジニアリング</small></span>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <nav id="navlinks">
+      <a href="#overview">課題概要</a>
+      <a href="#criteria">評価の観点</a>
+      <a href="#q1">①変数</a>
+      <a href="#q2">②コマンド</a>
+      <a href="#q3">③条件分岐</a>
+      <a href="#summary">総括</a>
+      <a href="#checklist">チェックリスト</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">● 提出課題レビュー資料</span>
+    <h1>プロンプトエンジニアリング<span class="grad">応用編</span>の課題から学ぶ<br>「伝わるプロンプト」の作り方</h1>
+    <p class="lead">
+      Lesson4 Chapter4 の3つの提出課題（<b>変数 / コマンド / 条件分岐</b>）について、提出された解答を匿名で抜粋しました。
+      「良かった提出」と「あと一歩の提出」を見比べながら、教材の評価観点に沿って“どこを直せばより伝わるプロンプトになるか”を整理します。
+    </p>
+    <div class="meta-row">
+      <span class="chip">対象：<b>Lesson4 / Chapter4</b></span>
+      <span class="chip">課題数：<b>3 テクニック</b></span>
+      <span class="chip">レビュー対象：<b>提出 11 件</b></span>
+      <span class="chip">提出形態：<b>役割・命令・文脈・制約・出力指示の型を活用</b></span>
+      <span class="chip note">※氏名・ハンドル名は伏せ、内容のみを抜粋しています</span>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">01</span><h2>課題の概要</h2></div>
+    <p class="sub">Chapter4「応用編」では、入門・基本編で学んだ<strong>プロンプトの基本5要素</strong>を土台に、3つの上級テクニックを実務テーマで使う課題が出されました。</p>
+    <div class="grid c3">
+      <div class="card">
+        <span class="tag v">提出課題①</span>
+        <h4>変数を使う</h4>
+        <p>毎回変わる情報を <span style="font-family:var(--mono);color:#7be3b0">{ }</span> の変数として切り出し、プロンプトをテンプレート化する。普段の業務で繰り返し使える形にするのがねらい。</p>
+      </div>
+      <div class="card">
+        <span class="tag c">提出課題②</span>
+        <h4>コマンドを使う</h4>
+        <p><span style="font-family:var(--mono);color:#d3b8ff">[C1][C2]…</span> と実行プロセスを順番に指示する。各手順が具体的で、前の結果が次につながる「流れ」を設計する。</p>
+      </div>
+      <div class="card">
+        <span class="tag b">提出課題③</span>
+        <h4>条件分岐を使う</h4>
+        <p>ニュース記事が自社にとってポジティブか否かを判定させ、<strong>判定結果によって異なるアクション</strong>を指示する。例外処理を含む実務的な分岐を作る。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>共通テーマ（課題③）：</b> 「児童向けプログラミング教育サービス」を自社と想定し、<i>『8割の小学生保護者が学校以外でプログラミングを学ばせていない』</i>という調査記事を分析。判定に応じて次の一手を提案するプロンプトを設計する、という同一お題で全員が取り組みました。
+    </div>
+  </div>
+</section>
+
+<!-- CRITERIA -->
+<section id="criteria">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">02</span><h2>評価の観点</h2></div>
+    <p class="sub">教材（Chapter2〜4）で示された基準に沿ってレビューしています。まずは全課題に共通する“土台”、続いて各テクニック固有のチェックポイントです。</p>
+
+    <h3>土台：プロンプトの基本5要素（Chapter2・3）</h3>
+    <div class="grid c3">
+      <div class="card"><h4>① 役割</h4><p>AIに何者として振る舞ってほしいか（例：情報セキュリティ推進者、コピーライター）。</p></div>
+      <div class="card"><h4>② 命令</h4><p>実行してほしい具体的なタスク（例：比較表を作る、告知文を書く）。</p></div>
+      <div class="card"><h4>③ 文脈</h4><p>背景・状況。なぜ・誰のために行うのかを補う情報。</p></div>
+      <div class="card"><h4>④ 制約事項</h4><p>守るべき条件（字数、使ってはいけない表現、匿名化ルールなど）。</p></div>
+      <div class="card"><h4>⑤ 出力指示</h4><p>出力の形式・構造（表、箇条書き、◎○△評価、項目立てなど）。</p></div>
+      <div class="card"><h4>＋ 構造化</h4><p><span style="font-family:var(--mono)">#</span> や <span style="font-family:var(--mono)">*</span> で見出し・箇条書きにし、テンプレートとして再利用できる形に。</p></div>
+    </div>
+
+    <h3>テクニック別チェックポイント</h3>
+    <table class="eval">
+      <thead><tr><th>テクニック</th><th>「良い」と評価したポイント</th><th>つまずきやすいポイント</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>① 変数</b></td>
+          <td>毎回変わる情報を過不足なく変数化／変数名が分かりやすい／<b>値を入れて“動く状態”</b>で提出／出力指示まで具体的</td>
+          <td>用途が私的で業務テンプレにならない／変数の値が未記入でAI任せ／出力形式の指定が「テキスト形式」だけ</td>
+        </tr>
+        <tr>
+          <td><b>② コマンド</b></td>
+          <td>手順が順序立っている／各コマンドが具体的／<b>前の結果を次で使う“連鎖”</b>を明記／出力形式や最終確認まで設計</td>
+          <td>手順が独立した箇条書きの羅列／判断基準を後出し／各ステップの出力形式が無い</td>
+        </tr>
+        <tr>
+          <td><b>③ 条件分岐</b></td>
+          <td>判定<b>基準</b>が具体的（数値・条件）／各分岐のタスクが具体／「該当分岐のみ実行」と指示／分岐ごとに出力形式を指定／最新情報を参照させる</td>
+          <td>ポジ/ネガの判定基準が主観任せ／分岐はあるが出力形式が無い／自然文で1回に詰め込み再利用しにくい</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="legend">
+      <span><i class="g"></i> 良かった提出（抜粋）</span>
+      <span><i class="w"></i> あと一歩・改善したい提出（抜粋）</span>
+    </div>
+  </div>
+</section>
+
+<!-- Q1 VARIABLES -->
+<section id="q1">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">03</span><h2>提出課題①：変数</h2></div>
+    <p class="sub">「毎回変わる情報」を変数に切り出し、テンプレートとして再利用できるか。値まで入れて実際に動く状態かが分かれ目でした。</p>
+
+    <!-- good 1 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 01</span> 役員向け「セキュリティ製品 比較表」テンプレート</div>
+      <div class="ex-body">
+        <p class="scene"><b>業務シーン：</b>情報システム部門が、現行ツールと他製品を比較して役員に提案する場面。</p>
+<pre class="prompt"><span class="h"># 役割</span> 企業の情報セキュリティ推進者
+<span class="h"># 命令</span> ・<span class="var">{service}</span>の製品比較一覧を作成／説明相手はセキュリティ部門長
+  ・役員が30秒で理解できる粒度／「推奨案」を必ず明示／現行製品を基準列に固定
+<span class="h"># 補足情報</span> 利用人数は<span class="var">{company_employee}</span>人、現在は<span class="var">{main_product}</span>を利用
+<span class="h"># 出力指示</span> ・観点（コスト/セキュリティ/監査/利用しやすさ/移行）に従う
+  ・◎○△で評価／説明文は1製品2行以内／結論を最後に1行
+<span class="h"># 変数</span>
+<span class="var">{service}</span>：セキュアなファイル共有ソフト
+<span class="var">{company_employee}</span>：2,000人
+<span class="var">{main_product}</span>：Box(Enterprise版)</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>「毎回変わる情報」を的確に変数化：</b>比較したい製品ジャンル・利用人数・現行ツールを変数にし、別案件でも値を差し替えるだけで使える。</li>
+            <li><b>出力指示が具体的：</b>「◎○△評価」「1製品2行以内」「推奨案を明示」まで決めているため、誰が実行しても出力がブレない。</li>
+            <li>役割・命令・補足情報・出力指示と<b>5要素が揃い</b>、そのままチームで共有できるテンプレートになっている。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- good 2 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 02</span> イベント告知文ジェネレーター（文章の「雰囲気」も変数化）</div>
+      <div class="ex-body">
+        <p class="scene"><b>業務シーン：</b>毎回テーマの異なる講座・イベントの告知文を、SNS用に量産する場面。</p>
+<pre class="prompt"><span class="h"># 変数</span>
+- イベント名：<span class="var">{event_title}</span>／対象者：<span class="var">{target_audience}</span>／テーマ：<span class="var">{main_theme}</span>
+- 読者の悩み：<span class="var">{reader_problem}</span>／参加後の未来：<span class="var">{desired_future}</span>
+- 開催日：<span class="var">{event_date}</span>／形式：<span class="var">{event_format}</span>／特典：<span class="var">{benefits}</span>
+- 申込案内：<span class="var">{call_to_action}</span>／<span class="var">{tone}</span>：文章の雰囲気
+<span class="cm"># 使用例（値を差し替えて再利用）</span>
+<span class="var">{event_title}</span>：はじめてのマインドフルネス体験会
+<span class="var">{tone}</span>：やさしく、前向きで、安心感のある雰囲気 …</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>網羅性が高い：</b>テーマ・対象・悩み・未来・特典・申込まで、告知文に必要な可変要素をひと通り変数化している。</li>
+            <li><b>「文章のトーン」まで変数化：</b><span style="font-family:var(--mono)">{tone}</span>を用意し、同じ枠組みで“やさしい告知”も“きりっとした告知”も作り分けられる。</li>
+            <li><b>「使用例」を添付：</b>変数を差し替えた具体像を示しており、テンプレートが“動く状態”で提出されている。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- warn -->
+    <div class="example warn">
+      <div class="ex-head"><span class="pill">あと一歩</span> 手元の食材から料理を提案する</div>
+      <div class="ex-body">
+        <p class="scene"><b>業務シーン：</b>家にある食材を入力して献立を決める（私的な用途）。</p>
+<pre class="prompt"><span class="h"># 役割</span> 夕飯を毎日作る人
+<span class="h"># 命令</span> 材料をもとに作る料理を決めて手順を書き出す
+<span class="h"># 変数</span>
+<span class="var">{material_1}</span>: じゃがいも　<span class="var">{material_2}</span>: 人参　<span class="var">{material_3}</span>: とまと
+<span class="h"># 出力指示</span> テキスト形式</pre>
+        <div class="why warn">
+          <h5>△ 惜しいポイント</h5>
+          <ul>
+            <li>役割・命令・変数の<b>型は押さえている</b>（基礎はOK）。一方で、課題のねらい「<b>普段の業務で活用できる</b>」テンプレートからはやや離れた題材になっている。</li>
+            <li>出力指示が「テキスト形式」のみで、<b>粒度の指定が無い</b>ため、出力の見た目が毎回変わりやすい。</li>
+          </ul>
+        </div>
+        <div class="fix">
+          <div class="before"><span class="lbl">Before の発想</span><p>「家にある食材」という1回限りの情報を変数にしている。</p></div>
+          <div class="after"><span class="lbl">After（こう直すと伸びる）</span><p>「毎週の献立メール作成」など<b>繰り返す業務</b>を題材に、<span style="font-family:var(--mono)">{宛先}{人数}{予算}{調理時間}{トーン}</span>を変数化。出力指示に「見出し＋表形式・200字以内」を加えると、そのまま業務テンプレになる。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>もう一つの“あと一歩”：</b> 変数の<u>定義（テンプレート）は秀逸なのに、肝心の値を入れずに提出</u>したケースもありました。値が空のままだとAIが勝手に例を補完してしまいます。<b>必ず1セットは具体値を入れ、「実行して結果が出る状態」</b>で提出しましょう。
+    </div>
+  </div>
+</section>
+
+<!-- Q2 COMMANDS -->
+<section id="q2">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">04</span><h2>提出課題②：コマンド</h2></div>
+    <p class="sub">手順を <span style="font-family:var(--mono);color:#d3b8ff">[C1][C2]…</span> と分解できているか。さらに「前のコマンドの結果を次でどう使うか」まで設計できると、出力が一気に安定します。</p>
+
+    <!-- good 1 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 01</span> 各コマンドの“受け渡し”を明記した告知文づくり</div>
+      <div class="ex-body">
+        <p class="scene"><b>業務シーン：</b>悩み→未来→内容→安心材料、と整理してから告知文に仕上げる。</p>
+<pre class="prompt"><span class="cmd">[C1]</span> 読者の悩みを整理 → <span class="cm">ここで整理した悩みは[C5]の「冒頭文」「共感」に必ず反映</span>
+<span class="cmd">[C2]</span> 望む未来を整理 → <span class="cm">[C5]の「得られる未来」に反映</span>
+<span class="cmd">[C3]</span> イベント内容を整理／<span class="cmd">[C4]</span> 安心して参加できる要素を整理
+<span class="cmd">[C5]</span> 告知文の構成を作成（C1〜C4をどこに使うか意識）
+<span class="cmd">[C6]</span> 告知文を作成（C1〜C4の整理を必ず反映）
+<span class="cmd">[C7]</span> 文章の雰囲気を調整
+<span class="cmd">[C8]</span> 最終確認：条件を満たさなければ修正してから出力</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>コマンドが“連鎖”している：</b>各手順の末尾に「整理した内容を次のどの工程で使うか」を書いており、手順が分断されない。</li>
+            <li><b>自己チェック工程まで設計：</b>最後の <span style="font-family:var(--mono)">[C8]</span> で「条件を満たさなければ修正してから出力」と、教材の“自己改良”を組み込んでいる。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- good 2 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 02</span> 「収集→匿名化→平易化→整形」と段階を積み上げる</div>
+      <div class="ex-body">
+        <p class="scene"><b>業務シーン：</b>社内向けに、今週のセキュリティ事例を注意喚起としてまとめる。</p>
+<pre class="prompt"><span class="cmd">[C1]</span> 客観的事実(Fact)を収集・整理する
+<span class="cmd">[C2]</span> 該当事例を絞り込み、被害組織を<span class="var">匿名化</span>（業種・規模に変換）
+<span class="cmd">[C3]</span> 専門用語にカッコ書き説明を付け平易化（例：MFA（多要素認証））
+<span class="cmd">[C4]</span> マークダウンの<span class="var">表形式</span>で出力</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>各コマンドが具体的で、次につながる：</b>「集める→加工する→整える」と段階的に積み上がる設計。</li>
+            <li><b>制約と出力形式を各手順に内蔵：</b>匿名化ルール・用語注釈・表形式まで指示しており、出力がそのまま社内資料になる。</li>
+          </ul>
+        </div>
+        <div class="callout" style="margin-top:14px">
+          <b>別解として光った形：</b> <span style="font-family:var(--mono)">/整理 → /原因分析 → /改善提案 → /優先順位 → /実行計画</span> のように<u>スラッシュ風コマンド</u>で“次に渡す”流れを作った提出もありました。記法は自由でも「順番に積み上げる」発想が共通しています。
+        </div>
+      </div>
+    </div>
+
+    <!-- warn -->
+    <div class="example warn">
+      <div class="ex-head"><span class="pill">あと一歩</span> 評価の「基準」を手順の後ろに置いてしまった例</div>
+      <div class="ex-body">
+        <p class="scene"><b>業務シーン：</b>接客ロールプレイングを評価し、良かった点・課題点をまとめる。</p>
+<pre class="prompt"><span class="cmd">[C1]</span> ①の場面を「良かった点／課題点」に600字でまとめる
+<span class="cmd">[C2]</span> ②の場面を「良かった点／課題点」に600字でまとめる
+<span class="cmd">[C3]</span> [C1][C2]を600字以内にまとめる
+<span class="cmd">[C4]</span> <span class="cm">良かった点の基準は「共感」「寄り添い」を優先 ← 基準が後出し</span>
+<span class="cmd">[C5]</span> <span class="cm">課題点の基準は「共感欠如」「代案なし」を優先 ← 基準が後出し</span></pre>
+        <div class="why warn">
+          <h5>△ 惜しいポイント</h5>
+          <ul>
+            <li>「評価基準を明示する」という発想は<b>とても良い</b>。ただし基準（C4・C5）が、実際に評価を行う手順（C1〜C3）の<b>後ろ</b>に来ている。</li>
+            <li>AIは上から順に読むため、基準が後出しだと<b>前半の手順に基準が反映されにくい</b>。</li>
+          </ul>
+        </div>
+        <div class="fix">
+          <div class="before"><span class="lbl">Before</span><p>評価する → そのあとで評価基準を提示。</p></div>
+          <div class="after"><span class="lbl">After（順番を入れ替える）</span><p><b>基準を先に定義</b>（[C1]良かった点の基準／[C2]課題点の基準）→ その基準で各場面を評価（[C3][C4]）→ まとめる（[C5]）。基準を手順の前に置くと、AIが一貫して同じ物差しで評価できる。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Q3 BRANCHING -->
+<section id="q3">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">05</span><h2>提出課題③：条件分岐</h2></div>
+    <p class="sub">最も差がついた課題。<strong>「何をもってポジ/ネガと判定するか」の基準</strong>と、<strong>分岐ごとの出力形式</strong>を決められたかが評価の分かれ目でした。</p>
+
+    <!-- good 1 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 01</span> 判定を「数値スコア化」して IF/ELSE で分岐</div>
+      <div class="ex-body">
+        <p class="scene"><b>工夫：</b>「ポジ/ネガ」を主観で決めさせず、市場データの条件でスコア1〜5に落とし込んでから分岐。</p>
+<pre class="prompt"><span class="h">### 判定ルール（スコア1〜5）</span>
+【5:非常にポジティブ】市場浸透率10%未満 かつ 自社の強みを求める声50%超
+【4:ややポジティブ】未実施50%以上 かつ その理由を自社の強みで解決できる
+【3:中立】… 【2:ややネガ】… 【1:非常にネガ】…
+<span class="h">### 条件分岐（IF / ELSE）</span>
+<span class="cmd">IF スコア4以上</span> → 事業戦略を3つ（各「実現性」を必須記載）
+<span class="cmd">ELSE スコア3以下</span> → 改善点を3つ（各「課題/提案/実現性/タスク」）
+<span class="h">### 出力形式</span> 総括 → 比較表 → 提案3案（マークダウン）</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>判定基準が数値・条件で具体化：</b>「なんとなくポジティブ」を排し、誰が見ても同じ判定になる。</li>
+            <li><b>分岐ごとに出力項目を固定：</b>4以上と3以下で書かせる内容を変え、出力形式まで指定している。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- good 2 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 02</span> ポジ/ネガ/中立の3分岐＋「該当分岐のみ実行」</div>
+      <div class="ex-body">
+        <p class="scene"><b>工夫：</b>2択でなく「中立」も用意し、暴走を防ぐ制約と、経営者向けの最終まとめ表まで設計。</p>
+<pre class="prompt"><span class="h">### 影響判定</span> ポジティブ / ネガティブ / 中立 を判定（理由も）
+<span class="h">### 条件分岐</span>
+<span class="cmd">条件A（ポジ）</span> 事業機会／訴求メッセージ／SNS投稿案／NextAction3つ
+<span class="cmd">条件B（ネガ）</span> リスク／利用しない理由の仮説／改善案 …
+<span class="cmd">条件C（中立）</span> 示唆／注視点／発信の切り口 …
+<span class="h">### 最終提案</span> 表形式（判定結果/理由/示唆/優先アクション/実行内容）
+<span class="cm">出力条件：判定結果に該当するアクションのみ実行する</span></pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>3分岐で“どちらとも言えない”を吸収：</b>現実のニュース分析に近い、堅い設計。</li>
+            <li><b>「該当分岐のみ実行」と明示：</b>全分岐を出力する暴走を防止。「自社に都合よく解釈しすぎない」と<b>恣意的判定を戒める制約</b>を入れた提出も見られました。</li>
+            <li>最後に<b>経営者向けの表</b>でまとめる出力指示があり、そのまま意思決定に使える。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- warn -->
+    <div class="example warn">
+      <div class="ex-head"><span class="pill">あと一歩</span> 自然文で1回に詰め込み、判定基準と出力形式が未指定</div>
+      <div class="ex-body">
+        <p class="scene"><b>提出の傾向：</b>依頼内容は的確で出力結果も良質。ただしプロンプトが会話文に近く、再利用しにくい。</p>
+<pre class="prompt">下記URLの内容を分析し、プログラミングを学ばせたい保護者が
+多いのか少ないのかを総合評価して。
+学ばせたい保護者が多い場合は、なぜ通わせていないのかを分析して改善策を、
+学ばせたくない保護者が多い場合は理由をまとめて。
+<span class="h">#参照URL</span> https://… （記事を参照させる工夫はGOOD）</pre>
+        <div class="why warn">
+          <h5>△ 惜しいポイント</h5>
+          <ul>
+            <li>記事URLを<b>参照させている点は良い</b>。一方で「多い/少ない」を判定する<b>基準が示されておらず</b>、判定がAIの主観任せになる。</li>
+            <li>各分岐の<b>出力形式（項目・字数・表）が無い</b>ため、出力の構造が安定しない。自然文1回の依頼で、テンプレートとして再利用しづらい。</li>
+          </ul>
+        </div>
+        <div class="fix">
+          <div class="before"><span class="lbl">Before</span><p>会話文で「多い/少ない→それぞれ◯◯して」と一気に依頼。</p></div>
+          <div class="after"><span class="lbl">After（構造化する）</span><p><span style="font-family:var(--mono)">#役割 / #判定基準 / #条件分岐 / #出力形式</span> に分け、<b>判定基準を具体化</b>（例：未実施が50%以上ならポジ）。各分岐の出力項目を固定すれば、GOOD例のスコア型やA/B/C型に近づく。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">06</span><h2>全体の総括</h2></div>
+    <p class="sub">11件を通して見えた、伸びている提出の共通点と、あと一歩の提出に共通する“つまずき”です。</p>
+    <div class="grid c2">
+      <div class="card" style="border-color:var(--good-line)">
+        <span class="tag" style="color:#06281d;background:var(--good)">伸びている提出の共通点</span>
+        <h4 style="margin-top:10px">「出力の形」まで指示している</h4>
+        <p style="margin-bottom:12px">役割・命令で止めず、<b>◎○△評価・表形式・字数・項目立て</b>まで指定。AIに考えさせる前に“ゴールの見た目”を共有できている。</p>
+        <h4>判断の「基準」を自分で決めている</h4>
+        <p style="margin-bottom:12px">条件分岐では、数値や条件で<b>判定ルールを定義</b>。コマンドでは<b>評価基準を手順の前に提示</b>。AIに丸投げしていない。</p>
+        <h4>手順が「連鎖」している</h4>
+        <p>各コマンドで「次にどう使うか」を明記。最後に<b>自己チェック</b>を入れる提出もあり、教材の自己改良を実践できている。</p>
+      </div>
+      <div class="card" style="border-color:var(--warn-line)">
+        <span class="tag" style="color:#3a2606;background:var(--warn)">あと一歩の提出に多い点</span>
+        <h4 style="margin-top:10px">出力指示が「テキスト形式」だけ</h4>
+        <p style="margin-bottom:12px">何を・どんな粒度で出すかが無く、出力の見た目が毎回ブレる。<b>形式の指定</b>を足すだけで安定する。</p>
+        <h4>判定・基準がAI任せ</h4>
+        <p style="margin-bottom:12px">「ポジ/ネガ」を分けるが、<b>その線引きの基準が無い</b>。基準を1〜2行足すと一気に再現性が上がる。</p>
+        <h4>自然文で1回に詰め込む</h4>
+        <p>結果は良くても<b>テンプレート化できず</b>、次に使い回せない。<span style="font-family:var(--mono)">#</span>で構造化し、変数・分岐を切り出す。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>レビューを通じた一番の学び：</b> 良い提出ほど「AIに考えさせる量」を減らし、<u>判定基準・出力形式・手順の受け渡しを“人間側で先に決めている”</u>傾向がありました。これはまさに Chapter4 が目指す<b>「実行の手軽さ」と「意図した回答生成」の両立</b>です。次の一歩は、自分の良い提出を<b>変数化してチームで共有できるテンプレート</b>に育てることです。
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">07</span><h2>提出前セルフチェックリスト</h2></div>
+    <p class="sub">次の課題や実務でプロンプトを書くとき、提出前にこの観点で見直すと“あと一歩”を埋められます。</p>
+
+    <h3>共通（基本5要素）</h3>
+    <ul class="checklist">
+      <li><span class="ck">✓</span><span><b>役割・命令・文脈・制約・出力指示</b>の5要素がそろっているか</span></li>
+      <li><span class="ck">✓</span><span><span style="font-family:var(--mono)">#</span> や <span style="font-family:var(--mono)">*</span> で<b>構造化</b>され、見出しで役割が一目で分かるか</span></li>
+      <li><span class="ck">✓</span><span>出力指示が<b>「形式・粒度・字数」</b>まで具体的か（「テキスト形式」だけになっていないか）</span></li>
+    </ul>
+
+    <h3>① 変数</h3>
+    <ul class="checklist">
+      <li><span class="ck">✓</span><span><b>毎回変わる情報</b>だけを変数にしているか（固定情報は本文に書く）</span></li>
+      <li><span class="ck">✓</span><span>変数に<b>具体的な値を入れ、実行して結果が出る状態</b>で提出しているか</span></li>
+      <li><span class="ck">✓</span><span>その題材は<b>業務で繰り返し使える</b>テンプレートになっているか</span></li>
+    </ul>
+
+    <h3>② コマンド</h3>
+    <ul class="checklist">
+      <li><span class="ck">✓</span><span>手順が <span style="font-family:var(--mono)">[C1][C2]…</span> と<b>順序立て</b>られているか</span></li>
+      <li><span class="ck">✓</span><span>各コマンドが<b>前の結果を次で使う“連鎖”</b>になっているか（独立した羅列でないか）</span></li>
+      <li><span class="ck">✓</span><span>評価<b>基準は手順の前</b>に置いているか／最後に<b>自己チェック</b>工程があるか</span></li>
+    </ul>
+
+    <h3>③ 条件分岐</h3>
+    <ul class="checklist">
+      <li><span class="ck">✓</span><span>判定の<b>基準（数値・条件）</b>を自分で定義しているか（AI任せでないか）</span></li>
+      <li><span class="ck">✓</span><span>各分岐の<b>出力項目・形式</b>を固定し、「<b>該当分岐のみ実行</b>」と指示しているか</span></li>
+      <li><span class="ck">✓</span><span>最新情報は<b>URL等でAIに参照</b>させているか</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Difyマスターゼミ｜Lesson4 プロンプトエンジニアリング / Chapter4 応用編 課題レビュー資料</b></p>
+    <p class="note">本資料は提出課題（11件）をもとに作成した学習用のレビュー資料です。提出者の氏名・ハンドル名は伏せ、内容の一部のみを匿名で抜粋・要約しています。掲載した抜粋は解説のために整形しており、原文と細部の表記が異なる場合があります。プロンプト内の製品名・サービス名は提出者が比較・例示のために挙げたものです。</p>
+  </div>
+</footer>
+
+<script>
+  // smooth-scroll + close mobile menu + active nav highlight
+  const links=[...document.querySelectorAll('#navlinks a')];
+  links.forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+  const secs=[...document.querySelectorAll('section[id]')];
+  const byId=id=>links.find(a=>a.getAttribute('href')==='#'+id);
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      const l=byId(e.target.id); if(!l) return;
+      if(e.isIntersecting){links.forEach(x=>x.style.color='');l.style.color='#fff';l.style.background='var(--card)';
+        links.forEach(x=>{if(x!==l)x.style.background=''});}
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

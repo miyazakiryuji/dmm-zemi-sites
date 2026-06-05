@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 02 ｜ Node.js・Claude Codeインストール／Claude Code体験 ｜ Claude Codeマスターゼミ</title>
+<meta name="description" content="DMM 生成AI CAMP 学び放題 Claude Codeマスターゼミ 第2回の講義資料サイト。EP07〜EP09（Node.jsインストール / Claude Codeインストール・ログイン認証 / Web Search→Markdown生成の体験）の自習ポイントと、Lesson 01からの事前課題『やりたいこと深掘り版』の公開添削アジェンダをまとめています。">
+<link rel="canonical" href="https://claudecode-zemi.netlify.app/lessons/lesson02/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Claude Codeマスターゼミ">
+<meta property="og:title" content="Lesson 02 ｜ Node.js・Claude Codeインストール／Claude Code体験 ｜ Claude Codeマスターゼミ">
+<meta property="og:description" content="第2回の講義資料サイト。EP07〜EP09 の自習ポイントと、Lesson 01からの事前課題「やりたいこと深掘り版」の公開添削アジェンダをまとめています。">
+<meta property="og:url" content="https://claudecode-zemi.netlify.app/lessons/lesson02/">
+<meta property="og:image" content="https://claudecode-zemi.netlify.app/assets/images/face_icon.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<style>
+:root {
+  --bg-main: #FFF9F0;
+  --bg-soft: #FFF3E6;
+  --bg-card: #FFFFFF;
+  --text-main: #2A2F45;
+  --text-sub: #5A6178;
+  --text-mute: #646B82;
+  --accent-orange: #FF8C42;
+  --accent-orange-hover: #FF7424;
+  --text-accent: #B84A00;
+  --accent-blue: #4DA8FF;
+  --accent-pink: #FF9EC3;
+  --accent-green: #6FD49D;
+  --accent-yellow: #FFD166;
+  --border: #FFE2C7;
+  --shadow-sm: 0 4px 16px rgba(255, 140, 66, 0.08);
+  --shadow-md: 0 12px 32px rgba(255, 140, 66, 0.12);
+  --shadow-lg: 0 20px 60px rgba(255, 140, 66, 0.18);
+  --radius: 18px;
+  --radius-lg: 28px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 1100px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-main);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--text-accent); text-decoration: none; transition: color .2s var(--ease); }
+a:hover { color: var(--accent-orange); }
+
+/* ===== Nav ===== */
+.nav {
+  position: sticky;
+  top: 0; z-index: 100;
+  background: rgba(255, 249, 240, 0.9);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.nav__brand { display: flex; align-items: baseline; gap: 10px; font-weight: 800; }
+.nav__brand small { font-size: 12px; color: var(--text-sub); font-weight: 600; }
+.nav__menu { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.nav__link { font-size: 13px; font-weight: 600; color: var(--text-sub); }
+.nav__link:hover { color: var(--accent-orange); }
+.nav__back {
+  font-size: 12px; font-weight: 700;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-sub);
+}
+.nav__back:hover { background: var(--bg-soft); color: var(--accent-orange); }
+
+/* ===== Hero ===== */
+.hero {
+  padding: 80px 24px 56px;
+  text-align: center;
+  background: radial-gradient(circle at 20% 0%, rgba(255, 209, 102, 0.25), transparent 60%),
+              radial-gradient(circle at 80% 20%, rgba(255, 158, 195, 0.18), transparent 55%);
+}
+.hero__badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: var(--accent-orange);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+.hero__lesson { font-size: 14px; color: var(--text-sub); margin: 24px 0 8px; font-weight: 700; letter-spacing: .06em; }
+.hero__title {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 900;
+  line-height: 1.35;
+  margin: 0 0 20px;
+}
+.hero__title em { font-style: normal; color: var(--text-accent); }
+.hero__meta {
+  display: inline-flex; flex-wrap: wrap; gap: 16px;
+  padding: 14px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  font-size: 14px;
+  color: var(--text-sub);
+  font-weight: 600;
+  margin-top: 20px;
+}
+.hero__meta strong { color: var(--text-main); }
+.hero__meta-item { display: inline-flex; align-items: center; gap: 8px; }
+.hero__meta-item svg { width: 18px; height: 18px; color: var(--accent-orange); flex-shrink: 0; }
+
+/* ===== Section ===== */
+.section { padding: 64px 24px; }
+.section__inner { max-width: var(--container); margin: 0 auto; }
+.section__kicker {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: var(--text-accent);
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.section__title {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 900;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+.section__title em { font-style: normal; color: var(--text-accent); }
+.section__lead {
+  color: var(--text-sub);
+  font-size: 15px;
+  margin: 0 0 32px;
+}
+
+/* ===== Cycle Map (Phase position) ===== */
+.cycle-map {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.cycle-map__phase {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  border-top: 5px solid var(--accent-orange);
+}
+.cycle-map__phase--live { border-top-color: var(--accent-blue); }
+.cycle-map__label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  padding: 5px 12px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 999px;
+  margin: 0 0 10px;
+}
+.cycle-map__phase--live .cycle-map__label { background: var(--accent-blue); }
+.cycle-map__title {
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0 0 4px;
+  color: var(--text-main);
+}
+.cycle-map__title small {
+  font-size: 12.5px;
+  color: var(--text-sub);
+  font-weight: 600;
+  display: block;
+  margin-top: 2px;
+}
+.cycle-map__steps {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.cycle-map__step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--text-main);
+}
+.cycle-map__step a {
+  color: var(--text-main);
+  font-weight: 700;
+}
+.cycle-map__step a:hover { color: var(--accent-orange); }
+.cycle-map__phase--live .cycle-map__step a:hover { color: var(--accent-blue); }
+.cycle-map__num {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 900;
+}
+.cycle-map__phase--live .cycle-map__num { background: var(--accent-blue); }
+.cycle-map__step-text { line-height: 1.6; }
+.cycle-map__step-meta {
+  font-size: 11.5px;
+  color: var(--text-sub);
+  font-weight: 700;
+  margin-left: 6px;
+  letter-spacing: .04em;
+}
+.cycle-map__note {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+/* ===== Agenda ===== */
+.agenda { display: grid; gap: 14px; }
+.agenda__item {
+  padding: 18px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--accent-orange);
+}
+.agenda__item--review { border-left-color: var(--accent-pink); }
+.agenda__item--lecture { border-left-color: var(--accent-blue); }
+.agenda__item--next { border-left-color: var(--accent-green); }
+.agenda__title { font-weight: 800; margin: 0 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.agenda__desc { color: var(--text-sub); font-size: 14px; margin: 0; }
+.agenda__phase-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  padding: 3px 9px;
+  background: var(--accent-blue);
+  color: #fff;
+  border-radius: 999px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.agenda__phase-badge--open { background: var(--text-mute); }
+.agenda__phase-badge--review { background: var(--accent-pink); }
+.agenda__phase-badge--lecture { background: var(--accent-blue); }
+.agenda__phase-badge--next { background: var(--accent-green); }
+
+/* ===== Homework phase badge ===== */
+.homework-phase {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  padding: 4px 11px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 999px;
+  margin: 0 0 10px;
+}
+
+/* ===== EP cards ===== */
+.ep-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.ep-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.ep-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.ep-card__num {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-accent);
+  letter-spacing: .08em;
+  margin: 0 0 6px;
+}
+.ep-card__title { font-size: 16px; font-weight: 800; margin: 0 0 10px; line-height: 1.5; }
+.ep-card__desc { font-size: 13px; color: var(--text-sub); margin: 0 0 12px; flex: 1; }
+.ep-card__tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: var(--bg-soft);
+  color: var(--text-accent);
+  border-radius: 999px;
+}
+
+/* ===== Points ===== */
+.points { display: grid; gap: 16px; }
+.point {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  padding: 18px 22px;
+  background: var(--bg-card);
+  border-left: 4px solid var(--accent-orange);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.point__badge {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  display: grid; place-items: center;
+}
+.point__title { font-weight: 800; margin: 0 0 4px; }
+.point__body { font-size: 14px; color: var(--text-sub); margin: 0; }
+.point code {
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* ===== Setup checklist ===== */
+.checklist {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+}
+.checklist h3 {
+  font-size: 16px; font-weight: 800;
+  margin: 0 0 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.checklist h3 svg {
+  width: 20px; height: 20px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+.checklist ol {
+  margin: 0; padding-left: 22px;
+}
+.checklist li { margin: 8px 0; font-size: 14.5px; }
+.checklist li strong { color: var(--text-main); }
+.checklist li small { display: block; color: var(--text-mute); font-size: 12.5px; margin-top: 2px; }
+.checklist code {
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* ===== Homework recap ===== */
+.homework-recap {
+  background: linear-gradient(135deg, #FFF3E6, #FFE2C7);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+}
+.homework-recap__label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: var(--text-accent);
+  margin: 0 0 8px;
+}
+.homework-recap__title { font-size: 22px; font-weight: 900; margin: 0 0 12px; }
+.homework-recap__body { color: var(--text-sub); margin: 0 0 18px; }
+.homework-recap__list {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 16px 22px 16px 38px;
+  margin: 0;
+}
+.homework-recap__list li { margin: 6px 0; font-size: 14px; }
+.homework-recap__list strong { color: var(--text-main); }
+.homework-recap__link {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--text-accent);
+}
+
+/* ===== Homework ===== */
+.homework {
+  background: var(--bg-card);
+  border: 2px dashed var(--accent-orange);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.homework__title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 18px; font-weight: 900; margin: 0 0 12px;
+}
+.homework__title svg {
+  width: 24px; height: 24px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+.homework__body { margin: 0 0 14px; }
+.homework__deadline {
+  display: inline-block;
+  font-weight: 800;
+  background: var(--accent-orange);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+/* ===== Next ===== */
+.next {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.next__label { font-size: 12px; color: var(--text-sub); font-weight: 800; letter-spacing: .1em; margin: 0 0 4px; }
+.next__title { font-size: 18px; font-weight: 900; margin: 0; }
+.next__date { font-size: 14px; color: var(--text-sub); font-weight: 700; }
+
+/* ===== Stuck flow ===== */
+.stuck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.stuck__step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
+.stuck__step--primary { border-top: 4px solid var(--accent-orange); }
+.stuck__step--secondary { border-top: 4px solid var(--accent-blue); }
+.stuck__step--tertiary { border-top: 4px solid var(--accent-pink); }
+.stuck__num {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--text-accent);
+  margin: 0 0 10px;
+}
+.stuck__num span {
+  display: grid; place-items: center;
+  width: 28px; height: 28px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+}
+.stuck__step--secondary .stuck__num { color: var(--accent-blue); }
+.stuck__step--secondary .stuck__num span { background: var(--accent-blue); }
+.stuck__step--tertiary .stuck__num { color: var(--accent-pink); }
+.stuck__step--tertiary .stuck__num span { background: var(--accent-pink); }
+.stuck__title { font-size: 17px; font-weight: 900; margin: 0 0 8px; line-height: 1.5; }
+.stuck__body { font-size: 14px; color: var(--text-sub); margin: 0 0 12px; }
+.stuck__tips {
+  background: var(--bg-soft);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  margin: 0;
+}
+.stuck__tips strong { color: var(--text-main); }
+.stuck__tips ul { margin: 4px 0 0; padding-left: 18px; }
+.stuck__tips li { margin: 2px 0; }
+.stuck__quote {
+  background: var(--bg-soft);
+  border-left: 4px solid var(--accent-orange);
+  padding: 18px 20px 18px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-main);
+  margin: 24px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stuck__quote img {
+  width: 72px; height: auto;
+  flex-shrink: 0;
+}
+
+/* ===== Penguin mascots ===== */
+.hero__mascot,
+.cycle-map__mascot,
+.homework__mascot {
+  pointer-events: none;
+  user-select: none;
+}
+.hero__mascot {
+  display: block;
+  width: 160px;
+  height: auto;
+  margin: 28px auto 0;
+}
+.cycle-map__phase { position: relative; overflow: hidden; }
+.cycle-map__mascot {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 64px;
+  height: auto;
+  opacity: 0.95;
+}
+.homework__mascot {
+  display: block;
+  width: 96px;
+  height: auto;
+  margin: 0 0 -8px auto;
+}
+@media (max-width: 720px) {
+  .hero__mascot { width: 124px; margin-top: 20px; }
+  .cycle-map__mascot { width: 48px; bottom: 10px; right: 10px; }
+  .homework__mascot { width: 72px; }
+}
+
+/* ===== Common notice ===== */
+.notice {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.notice h3 {
+  font-size: 15px; font-weight: 800; margin: 0 0 10px;
+}
+.notice ul { margin: 0; padding-left: 20px; color: var(--text-sub); font-size: 14px; }
+.notice li { margin: 6px 0; }
+.notice__link {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 700;
+  color: var(--text-accent);
+}
+
+/* ===== Footer ===== */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text-sub);
+  font-size: 13px;
+}
+.footer a { font-weight: 700; }
+
+@media (max-width: 720px) {
+  .cycle-map { grid-template-columns: 1fr; gap: 16px; }
+}
+@media (max-width: 640px) {
+  .agenda__item { padding: 14px 16px; }
+  .section { padding: 48px 20px; }
+  .hero { padding: 56px 20px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG Icon Sprite (custom, no emoji) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-cal" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="5" width="17" height="15" rx="2.5"/>
+        <path d="M8 3v4M16 3v4M3.5 10h17"/>
+      </g>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8.5"/>
+        <path d="M12 7v5l3.2 2"/>
+      </g>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s7-6.2 7-11.2A7 7 0 1 0 5 9.8C5 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="10" r="2.6"/>
+      </g>
+    </symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20h4l10.5-10.5a2.6 2.6 0 0 0-3.7-3.7L4.3 16.3V20z"/>
+        <path d="M13.5 7.5l3.7 3.7"/>
+      </g>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8.6"/>
+        <path d="M12 7.5v5.5M12 16v.6"/>
+      </g>
+    </symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18h6M10 21h4"/>
+        <path d="M8 14.5a5.5 5.5 0 1 1 8 0c-.8.9-1.4 1.7-1.5 3.5h-5c-.1-1.8-.7-2.6-1.5-3.5z"/>
+      </g>
+    </symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.5 5.5a4 4 0 0 0 5 5l-2 2-5-5 2-2z"/>
+        <path d="M12.5 7.5L4 16v4h4l8.5-8.5"/>
+      </g>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+      </g>
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="12" y1="2.5" x2="12" y2="21.5"/>
+        <line x1="2.5" y1="12" x2="21.5" y2="12"/>
+        <line x1="5.3" y1="5.3" x2="18.7" y2="18.7"/>
+        <line x1="18.7" y1="5.3" x2="5.3" y2="18.7"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__brand">
+      Lesson 02 <small>Claude Codeマスターゼミ</small>
+    </div>
+    <div class="nav__menu">
+      <a href="#cycle-map" class="nav__link">サイクル位置</a>
+      <a href="#agenda" class="nav__link">アジェンダ</a>
+      <a href="#eps" class="nav__link">対象EP</a>
+      <a href="#points" class="nav__link">要点</a>
+      <a href="#setup" class="nav__link">事前準備</a>
+      <a href="#homework" class="nav__link">事前課題</a>
+      <a href="#stuck" class="nav__link">困ったら</a>
+      <a href="../lesson01/index.html" class="nav__back">← Lesson 01</a>
+      <a href="../../index.html" class="nav__back">← Home</a>
+      <a href="../lesson03/index.html" class="nav__back">Lesson 03 →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <span class="hero__badge">DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ</span>
+  <p class="hero__lesson">LESSON 02</p>
+  <h1 class="hero__title">
+    <em>Node.js</em>と<em>Claude Code</em>を入れて、まず<em>触ってみる</em>
+  </h1>
+  <p style="color: var(--text-sub); max-width: 760px; margin: 0 auto;">
+    EP07〜EP09 を扱います。LIVE冒頭でLesson 01からの事前課題「やりたいこと深掘り版」を公開添削した後、Node.js → Claude Code 本体を導入し、初回ログイン認証まで完了。最後はWeb Search→Markdownファイル自動生成という最初の「動く体験」をします。
+  </p>
+  <div class="hero__meta">
+    <span class="hero__meta-item"><svg aria-hidden="true"><use href="#i-pin"/></svg>Google Meet</span>
+  </div>
+  <img src="../../assets/penguins/penguin_teaching.png" alt="ペンギン先生" class="hero__mascot" loading="lazy">
+</header>
+
+<!-- サイクル位置 -->
+<section class="section" id="cycle-map" style="background: var(--bg-soft);">
+  <div class="section__inner">
+    <p class="section__kicker">Cycle Position</p>
+    <h2 class="section__title">この回の<em>サイクル位置</em></h2>
+    <p class="section__lead">
+      毎週のサイクル（事前準備 → LIVE講義）の中で、Lesson 02がどの位置にあたるかを示します。今回は <strong>初めての完全な1サイクル</strong>。事前提出された「やりたいこと深掘り版」を冒頭で講評するパートが加わります。
+    </p>
+
+    <div class="cycle-map">
+      <div class="cycle-map__phase">
+        <span class="cycle-map__label">PHASE 1</span>
+        <h3 class="cycle-map__title">事前準備<small>LIVE前までに各自で進める</small></h3>
+        <ol class="cycle-map__steps">
+          <li class="cycle-map__step">
+            <span class="cycle-map__num">1</span>
+            <span class="cycle-map__step-text">
+              <a href="#eps">指定Lessonを自習（EP06〜EP09）</a>
+              <span class="cycle-map__step-meta">／DMM 生成AI CAMP</span>
+            </span>
+          </li>
+          <li class="cycle-map__step">
+            <span class="cycle-map__num">2</span>
+            <span class="cycle-map__step-text">
+              <a href="#homework">プラスアルファの課題を提出（「やりたいこと深掘り版」）</a>
+              <span class="cycle-map__step-meta">／開催2日前まで 締切</span>
+            </span>
+          </li>
+        </ol>
+        <p class="cycle-map__note">
+          ※自習対象は EP07・EP08・EP09 の3本（EP06「Cursor初期設定」は短いので冒頭で詰まりどころのみ拾います）。
+        </p>
+        <img src="../../assets/penguins/penguin_holding_book.png" alt="" class="cycle-map__mascot" loading="lazy" aria-hidden="true">
+      </div>
+
+      <div class="cycle-map__phase cycle-map__phase--live">
+        <span class="cycle-map__label">PHASE 2</span>
+        <h3 class="cycle-map__title">週次LIVE講義<small>3パート構成</small></h3>
+        <ol class="cycle-map__steps">
+          <li class="cycle-map__step">
+            <span class="cycle-map__num">1</span>
+            <span class="cycle-map__step-text">
+              <a href="#agenda">提出課題のピックアップ＆講評（公開添削）</a>
+            </span>
+          </li>
+          <li class="cycle-map__step">
+            <span class="cycle-map__num">2</span>
+            <span class="cycle-map__step-text">
+              <a href="#agenda">自習内容の補足説明（EP07〜EP09）</a>
+            </span>
+          </li>
+          <li class="cycle-map__step">
+            <span class="cycle-map__num">3</span>
+            <span class="cycle-map__step-text">
+              <a href="#agenda">次回課題・自習の確認 ／ Q&A</a>
+            </span>
+          </li>
+        </ol>
+        <img src="../../assets/penguins/penguin_teaching.png" alt="" class="cycle-map__mascot" loading="lazy" aria-hidden="true">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- アジェンダ -->
+<section class="section" id="agenda">
+  <div class="section__inner">
+    <p class="section__kicker">Agenda</p>
+    <h2 class="section__title">当日の<em>アジェンダ</em></h2>
+    <p class="section__lead">
+      <strong>①提出課題の講評 → ②自習内容の補足 → ③次回案内</strong>の順で進めます。各項目のバッジは <a href="#cycle-map">サイクル位置</a> に対応しています。
+    </p>
+
+    <div class="agenda">
+      <div class="agenda__item">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--open">OPEN</span>オープニング・前回の振り返り</h3>
+        <p class="agenda__desc">Lesson 01のおさらい（Claude Codeの立ち位置／Cursorインストール状況の確認）、本日のゴール共有。EP06（Cursor初期設定）の自習状況も軽く確認します。</p>
+      </div>
+      <div class="agenda__item agenda__item--review">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--review">PHASE 2.1</span>公開添削＆講評：「やりたいこと深掘り版」</h3>
+        <p class="agenda__desc">Lesson 01 の事前課題から数本ピックアップして公開添削。匿名化のうえ、改善点・良かった点を共有し、お互いの「やりたいこと」を見てヒントを持ち帰る回。</p>
+      </div>
+      <div class="agenda__item agenda__item--lecture">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP07 Node.js 補足解説</h3>
+        <p class="agenda__desc">なぜNode.jsが必要か（JavaScriptの実行環境）／<code>node -v</code> による既存確認／公式サイトからのDL／<code>node -v</code>・<code>npm -v</code> のバージョン確認まで。エディタ再起動が必要な落とし穴も共有。</p>
+      </div>
+      <div class="agenda__item agenda__item--lecture">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP08 Claude Code インストール＆ログイン認証</h3>
+        <p class="agenda__desc"><code>npm install -g @anthropic-ai/claude-code</code> でグローバル導入 → <code>claude</code> 起動 → 信頼ダイアログ承認 → サブスク認証。Pro ($20) / Max ($100以上) / API従量課金 の選び分けと、Web版「使用量」での5時間／週次リセットの見方まで。</p>
+      </div>
+      <div class="agenda__item agenda__item--lecture">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP09 Claude Code 体験</h3>
+        <p class="agenda__desc">Cursorからプロジェクトフォルダを作って <code>claude</code> 起動 →「公式ドキュメントを検索してまとめて」と依頼 → Web Search／Fetch／Edit 権限の許可と <code>.claude/settings.local.json</code> の役割 → Markdown自動生成 → Markdown Preview拡張で確認、まで一気通貫。</p>
+      </div>
+      <div class="agenda__item agenda__item--next">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--next">PHASE 2.3</span>次回案内＆Q&A</h3>
+        <p class="agenda__desc">次回（CLAUDE.md／Skills の基礎、Aqua Voice）の自習対象と事前課題の案内、本日の質問対応。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 対象EP -->
+<section class="section" id="eps" style="background: var(--bg-soft);">
+  <div class="section__inner">
+    <p class="section__kicker">Episodes</p>
+    <h2 class="section__title">今回の<em>自習対象エピソード</em></h2>
+    <p class="section__lead">
+      LIVE講義までに、以下のエピソードを「ツール別コース ＞ Claude Code」から視聴してください。手を動かしながら見るとそのまま事前準備になります。
+    </p>
+
+    <div class="ep-grid">
+      <div class="ep-card">
+        <p class="ep-card__num">EP07</p>
+        <h3 class="ep-card__title">【環境構築②】Node.jsのインストール</h3>
+        <p class="ep-card__desc">Claude Codeを動かす土台となるNode.jsを導入。<code>node -v</code> での既存チェックから公式DL、<code>npm -v</code> までセットで確認。</p>
+        <span class="ep-card__tag">環境構築</span>
+      </div>
+      <div class="ep-card">
+        <p class="ep-card__num">EP08</p>
+        <h3 class="ep-card__title">【環境構築③】Claude Codeのインストール</h3>
+        <p class="ep-card__desc"><code>npm install -g @anthropic-ai/claude-code</code> → <code>claude</code> 起動 → サブスク認証。Pro / Max / API従量課金 の選び分けと「使用量」画面の見方も。</p>
+        <span class="ep-card__tag">環境構築</span>
+      </div>
+      <div class="ep-card">
+        <p class="ep-card__num">EP09</p>
+        <h3 class="ep-card__title">Claude Codeの体験</h3>
+        <p class="ep-card__desc">プロジェクトフォルダを切ってWeb Search→Markdown生成までを体験。Web Search／Fetch／Edit の権限承認と <code>.claude/settings.local.json</code> の役割を確認。</p>
+        <span class="ep-card__tag">基礎</span>
+      </div>
+    </div>
+
+    <p style="margin: 18px 0 0; font-size: 13px; color: var(--text-mute);">
+      ※ <strong>EP06「Cursorの初期設定とショートカットキー」</strong> は短めのエピソードなので、LIVE当日までに各自で視聴しておいてください。当日は冒頭で詰まりどころだけ拾います。
+    </p>
+  </div>
+</section>
+
+<!-- 要点 -->
+<section class="section" id="points">
+  <div class="section__inner">
+    <p class="section__kicker">Key Points</p>
+    <h2 class="section__title">今回押さえる<em>3つのポイント</em></h2>
+    <p class="section__lead">LIVE講義でも重点的に解説する観点です。自習時の視聴メモの目安にもどうぞ。</p>
+
+    <div class="points">
+      <div class="point">
+        <div class="point__badge">1</div>
+        <div>
+          <p class="point__title">Node.js → Claude Code の順は<em>必須セット</em>。バージョン確認まででワンセット</p>
+          <p class="point__body">Claude Code は npm 経由で入れるので、Node.js を先に入れていないと <code>npm install</code> 自体ができません。入れたら必ず <code>node -v</code> / <code>npm -v</code> でバージョンが表示されるところまで確認。Node.js インストール後はエディタを<em>一度落として開き直す</em>必要があるのも詰まりやすいポイントです。</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point__badge">2</div>
+        <div>
+          <p class="point__title">初回ログインは <strong>Subscription 認証 (Pro $20〜)</strong> がおすすめ</p>
+          <p class="point__body">ログインは3択（Subscription / Anthropic Console API / その他）。<em>API従量課金</em>は使うほど課金されるので、初心者は <strong>Pro $20プラン</strong> から始めるのが安全。「5時間ごとリセット」「週次制限」はWeb版 Claude の「使用量」画面で確認できます。本格運用に切替えるなら Max $100 以上。</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point__badge">3</div>
+        <div>
+          <p class="point__title">Claude Code は<em>フォルダ単位</em>で動く。権限は <code>.claude/settings.local.json</code> に蓄積</p>
+          <p class="point__body">Web Search / Fetch / Edit などの権限ダイアログで <strong>「2. 常に許可」</strong> を選ぶと、そのフォルダの <code>.claude/settings.local.json</code> に <code>permissions.allow</code> として記録されます。<em>フォルダごとに別の権限</em>になるので、用途別にプロジェクトフォルダを切る発想が大事。EP09 では <code>claude-code-tutorial/lesson1</code> のように切る例を扱います。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 事前準備チェックリスト -->
+<section class="section" id="setup" style="background: var(--bg-soft);">
+  <div class="section__inner">
+    <p class="section__kicker">Pre-Live Setup</p>
+    <h2 class="section__title">LIVE当日までに<em>済ませておく</em>こと</h2>
+    <p class="section__lead">LIVE中は<strong>つまずきポイントの解説とQ&A</strong>に時間を使いたいので、一通り手は動かしておくのがおすすめです。</p>
+
+    <div class="checklist">
+      <h3><svg aria-hidden="true"><use href="#i-tool"/></svg>事前セットアップ チェックリスト</h3>
+      <ol>
+        <li>
+          <strong>EP06（Cursor初期設定・ショートカット）を視聴済み</strong>
+          <small>日本語化・サインイン・<code>Ctrl+J</code>（ターミナル）／<code>Ctrl+B</code>（サイドバー）など最低限のショートカットを把握。</small>
+        </li>
+        <li>
+          <strong>Node.js がインストールされていて、バージョンが表示される</strong>
+          <small>ターミナルで <code>node -v</code> と <code>npm -v</code> を実行し、両方ともバージョン番号が出ればOK。<em>インストール後はエディタを一度落として開き直す</em>のがコツ。EP07 を参照。</small>
+        </li>
+        <li>
+          <strong>Claude Code がインストールされていて、<code>claude</code> コマンドで起動できる</strong>
+          <small><code>npm install -g @anthropic-ai/claude-code</code> → <code>claude</code> 起動。初回ログイン（Subscription 認証）まで通せていればベスト。サブスク課金がまだの場合は Pro $20 プランから検討。EP08 を参照。</small>
+        </li>
+        <li>
+          <strong>プロジェクトフォルダを切って、Claude Codeで何か1つ試した</strong>
+          <small>EP09 を参照。例：<code>~/Desktop/claude-code-tutorial/lesson1</code> を作って Cursor で開き、<code>claude</code> 起動 →「公式ドキュメントを検索してまとめて」と依頼。Web Search／Fetch の権限を Yes（できれば「2. 常に許可」）で進める。</small>
+        </li>
+        <li>
+          <strong>Lesson 01 の事前課題（「やりたいこと深掘り版」）を提出済み</strong>
+          <small>開催2日前まで が締切。詳細は <a href="../lesson01/index.html#homework">Lesson 01 の課題セクション</a> を参照。</small>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Lesson 01 からの事前課題（再掲） -->
+<section class="section">
+  <div class="section__inner">
+    <p class="section__kicker">Homework from Lesson 01</p>
+    <h2 class="section__title">Lesson 01からの<em>事前課題（再掲）</em></h2>
+    <p class="section__lead">
+      Lesson 01 で出題した「やりたいこと深掘り版」を、Lesson 02 開催2日前までに提出してください。LIVE冒頭の <strong>PHASE 2.1 公開添削＆講評</strong> で公開添削の対象になる可能性があります（匿名化のうえ）。
+    </p>
+
+    <div class="homework-recap">
+      <img src="../../assets/penguins/penguin_pointing.png" alt="" class="homework__mascot" loading="lazy" aria-hidden="true">
+      <p class="homework-recap__label">深掘り課題</p>
+      <h3 class="homework-recap__title">「Claude Codeでやりたいこと」を深掘りして書き出す</h3>
+      <p class="homework-recap__body">
+        以下の5つの観点で言語化して提出してください（詳しい解説は Lesson 01 のページに記載）。
+      </p>
+      <ol class="homework-recap__list">
+        <li><strong>①</strong> 何を作る／自動化したいか（具体的に）</li>
+        <li><strong>②</strong> なぜそれをやりたいのか（自分にとっての意義）</li>
+        <li><strong>③</strong> 今のままだと、何が一番のボトルネックか</li>
+        <li><strong>④</strong> ゼミ終了時点で、どの状態になっていたら満足か</li>
+        <li><strong>⑤</strong> 直近1〜2週間で踏み出せそうな最小の一歩</li>
+      </ol>
+      <a class="homework-recap__link" href="../lesson01/index.html#homework">→ Lesson 01 の詳細・記入例を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 事前課題（締切再掲） -->
+<section class="section" id="homework" style="background: var(--bg-soft);">
+  <div class="section__inner">
+    <p class="section__kicker">Submission</p>
+    <span class="homework-phase">PHASE 1.2 ／ プラスアルファ課題（LIVE前までに提出）</span>
+    <h2 class="section__title">提出方法と<em>締切</em></h2>
+    <p class="section__lead">
+      「【共通】ゼミ参加者向け 事前課題提出・質問受付フォーム」から提出してください。
+      これは <a href="#cycle-map">サイクル位置</a> の <strong>PHASE 1.2 「プラスアルファの課題を提出」</strong> にあたります。
+    </p>
+
+    <div class="homework">
+      <p class="homework__title"><svg aria-hidden="true"><use href="#i-pencil"/></svg>「やりたいこと深掘り版」の回答を提出</p>
+      <p class="homework__body">
+        Lesson 01 で説明した①〜⑤の観点で書き出した内容を、フォームに記入して送信してください。<br>
+        匿名化したうえで、LIVE講義内で公開添削の対象になる可能性があります。
+      </p>
+      <span class="homework__deadline">締切：開催2日前まで</span>
+    </div>
+  </div>
+</section>
+
+<!-- 困ったら（対処フロー） -->
+<section class="section" id="stuck">
+  <div class="section__inner">
+    <p class="section__kicker">When You're Stuck</p>
+    <h2 class="section__title">分からないことが出てきたら<em>この順番</em>で</h2>
+    <p class="section__lead">
+      学習中・課題実施中に詰まったら、以下のフローで進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。今回は環境構築回なので、特に詰まりやすいです。気軽に投げてください。
+    </p>
+
+    <div class="stuck">
+      <div class="stuck__step stuck__step--primary">
+        <p class="stuck__num"><span>1</span>STEP 1</p>
+        <h3 class="stuck__title">まずは<br>スクショしてAIに聞く</h3>
+        <p class="stuck__body">
+          エラー画面・つまずいた画面を <strong>スクリーンショット</strong> で撮り、Claude／ChatGPT／Gemini など普段使っている生成AIに貼り付けて質問してみてください。
+        </p>
+        <div class="stuck__tips">
+          <strong>精度を上げるコツ：</strong>
+          <ul>
+            <li>何をしようとしていたか</li>
+            <li>どうなる予定だったか</li>
+            <li>実際にどうなったか</li>
+          </ul>
+          をスクショに添えて投げる。
+        </div>
+      </div>
+
+      <div class="stuck__step stuck__step--secondary">
+        <p class="stuck__num"><span>2</span>STEP 2</p>
+        <h3 class="stuck__title">それでも解決しなければ<br>ゼミ掲示板へ</h3>
+        <p class="stuck__body">
+          AIに聞いても解決しない／そもそも何を聞けばいいか分からない場合は、<strong>DMM 生成AI CAMP 学び放題</strong> の上部ナビゲーション
+          <strong>「ゼミ掲示板」</strong> から投稿してください。他の受講生・運営・講師が回答できます。
+        </p>
+        <div class="stuck__tips">
+          <strong>投稿テンプレ：</strong>
+          <ul>
+            <li>実現したかったこと</li>
+            <li>試したこと（STEP 1 のAIとのやり取りも含めるとなお良い）</li>
+            <li>つまずきポイント（スクショ歓迎）</li>
+            <li>環境（OS／ツール／バージョン）</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="stuck__quote">
+      <img src="../../assets/penguins/penguin_thumbs_up.png" alt="ペンギン先生" loading="lazy">
+      <span>「これは聞いていいレベルか…」と迷う必要はありません。<strong>STEP 1 → STEP 2 の順番で気軽に出してください。</strong></span>
+    </p>
+  </div>
+</section>
+
+<!-- 共通注意事項 -->
+<section class="section">
+  <div class="section__inner">
+    <p class="section__kicker">Common Notes</p>
+    <h2 class="section__title">共通の<em>注意事項</em></h2>
+    <p class="section__lead">全Lesson共通の運営ルールです。詳細は <a href="../../guide.html">共通事項</a> を参照ください。</p>
+
+    <div class="notice">
+      <h3>LIVE参加・配布物まわり</h3>
+      <ul>
+        <li>Google Meet 入室リンク：<a href="https://meet.google.com/odd-wexx-bwc" target="_blank" rel="noopener">meet.google.com/odd-wexx-bwc</a>（招待メールが届かない場合の予備）</li>
+        <li>事前課題・質問は「【共通】ゼミ参加者向け 事前課題提出・質問受付フォーム」から、各回の<strong>開催2日前まで</strong>に提出。</li>
+        <li>参加が難しい回は、後日公開のアーカイブ動画を視聴ください（事前の欠席連絡は不要）。</li>
+        <li>LIVE講義で配布した資料・リンク・プロンプト等の再配布は原則行っておりません。</li>
+        <li>修了要件は「全13回中8回以上の事前課題提出」＋「卒業制作の提出」です。</li>
+      </ul>
+      <a class="notice__link" href="../../guide.html">→ 共通事項の全文を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 次回案内 -->
+<section class="section" style="background: var(--bg-soft);">
+  <div class="section__inner">
+    <p class="section__kicker">Next</p>
+    <h2 class="section__title">次回<em>予告</em></h2>
+
+    <div class="next">
+      <div>
+        <p class="next__label">LESSON 03</p>
+        <p class="next__title">CLAUDE.md・Skills の基礎 ＋ 会社HP制作スタート</p>
+      </div>
+      <div>
+        <p style="color: var(--text-sub); font-size: 14px; margin: 0;">
+          自習対象：EP10・11・13・14（予定）<br>
+          事前課題：LIVE講義内で案内します
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ Lesson 02</p>
+  <p><a href="../../index.html">← Home に戻る</a></p>
+</footer>
+
+</body>
+</html>
