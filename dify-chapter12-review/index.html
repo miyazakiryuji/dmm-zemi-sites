@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter12【提出課題②】子供向けチャットボット 課題レビュー資料｜Difyマスターゼミ</title>
+<meta name="description" content="Difyマスターゼミ Chapter12 提出課題②「子供向けチャットボット」の提出作品レビュー。良かった作品とあと一歩の作品を匿名で抜粋し、3つの要件に沿って初学者向けにやさしく解説します。" />
+<style>
+  :root{
+    --bg:#0f1226;
+    --bg-soft:#161a36;
+    --card:#1b2042;
+    --card-2:#222a52;
+    --ink:#e9ecff;
+    --ink-soft:#b6bce0;
+    --muted:#8c93c4;
+    --line:#2c3360;
+    --brand:#6c8cff;
+    --brand-2:#9d7bff;
+    --good:#34d399;
+    --good-bg:rgba(52,211,153,.10);
+    --good-line:rgba(52,211,153,.45);
+    --warn:#f6b352;
+    --warn-bg:rgba(246,179,82,.10);
+    --warn-line:rgba(246,179,82,.45);
+    --radius:16px;
+    --shadow:0 18px 50px -22px rgba(0,0,0,.7);
+    --mono:"SFMono-Regular",ui-monospace,"Menlo","Consolas","Noto Sans JP",monospace;
+    --sans:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{
+    margin:0;font-family:var(--sans);color:var(--ink);line-height:1.85;
+    background:
+      radial-gradient(1100px 600px at 12% -8%, rgba(108,140,255,.20), transparent 60%),
+      radial-gradient(900px 600px at 100% 0%, rgba(157,123,255,.16), transparent 55%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ===== Header / Nav ===== */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(140%) blur(10px);
+    background:rgba(15,18,38,.78);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:18px;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em;white-space:nowrap}
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 16px rgba(108,140,255,.8)}
+  .brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.04em}
+  .nav nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .nav nav a{font-size:13px;color:var(--ink-soft);text-decoration:none;padding:7px 12px;border-radius:999px;transition:.2s}
+  .nav nav a:hover{background:var(--card);color:#fff}
+  .menu-toggle{display:none}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 38px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;color:var(--brand);
+    border:1px solid var(--line);background:var(--bg-soft);padding:7px 14px;border-radius:999px;text-transform:uppercase}
+  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.25;margin:20px 0 14px;font-weight:850;letter-spacing:.01em}
+  .hero h1 .grad{background:linear-gradient(100deg,var(--brand),var(--brand-2) 60%,#f6b8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:17px;color:var(--ink-soft);max-width:780px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:12px}
+  .chip b{color:#fff}
+
+  /* ===== Sections ===== */
+  section{padding:42px 0;border-top:1px solid rgba(44,51,96,.55)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .sec-no{font-family:var(--mono);font-size:13px;color:var(--brand);font-weight:700;letter-spacing:.1em}
+  h2{font-size:clamp(22px,3.4vw,30px);margin:6px 0 6px;font-weight:820;letter-spacing:.01em}
+  h3{font-size:19px;margin:30px 0 10px;font-weight:780}
+  .sub{color:var(--muted);font-size:14.5px;margin:0 0 22px}
+  p{margin:0 0 14px}
+
+  /* cards */
+  .grid{display:grid;gap:18px}
+  .grid.c3{grid-template-columns:repeat(3,1fr)}
+  .grid.c2{grid-template-columns:repeat(2,1fr)}
+  .card{background:linear-gradient(180deg,var(--card),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .card h4{margin:0 0 8px;font-size:16.5px;font-weight:760}
+  .card p{margin:0;color:var(--ink-soft);font-size:14px}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:8px;letter-spacing:.05em;margin-bottom:12px}
+  .tag.v{color:#9fd0ff;background:rgba(108,140,255,.14);border:1px solid rgba(108,140,255,.4)}
+  .tag.c{color:#c7b3ff;background:rgba(157,123,255,.14);border:1px solid rgba(157,123,255,.4)}
+  .tag.b{color:#ffd59f;background:rgba(246,179,82,.14);border:1px solid rgba(246,179,82,.4)}
+
+  /* example blocks */
+  .example{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:18px 0;background:var(--bg-soft)}
+  .example > .ex-head{display:flex;align-items:center;gap:10px;padding:14px 18px;font-weight:740;font-size:15px;border-bottom:1px solid var(--line)}
+  .ex-head .pill{font-size:11.5px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:999px}
+  .good .ex-head{background:var(--good-bg)}
+  .good{border-color:var(--good-line)}
+  .good .pill{color:#06281d;background:var(--good)}
+  .warn .ex-head{background:var(--warn-bg)}
+  .warn{border-color:var(--warn-line)}
+  .warn .pill{color:#3a2606;background:var(--warn)}
+  .ex-body{padding:18px}
+  .ex-body .scene{font-size:13.5px;color:var(--muted);margin:0 0 12px}
+  .ex-body .scene b{color:var(--ink-soft)}
+
+  .feat{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
+  .feat span{font-size:12px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+  .feat span.plus{color:#bfe9d3;background:var(--good-bg);border-color:var(--good-line)}
+
+  pre.prompt{
+    margin:0 0 6px;font-family:var(--mono);font-size:12.7px;line-height:1.7;color:#dfe4ff;
+    background:#0c0f24;border:1px solid var(--line);border-radius:12px;padding:15px 16px;
+    overflow:auto;white-space:pre-wrap;word-break:break-word;
+  }
+  pre.prompt .h{color:#7fa6ff;font-weight:700}
+  pre.prompt .var{color:#7be3b0}
+  pre.prompt .cmd{color:#d3b8ff;font-weight:700}
+  pre.prompt .cm{color:#6b73a6}
+
+  .why{margin-top:14px;padding:14px 16px;border-radius:12px;font-size:14px}
+  .why.good{background:var(--good-bg);border:1px solid var(--good-line)}
+  .why.warn{background:var(--warn-bg);border:1px solid var(--warn-line)}
+  .why h5{margin:0 0 8px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .why ul{margin:0;padding-left:20px}
+  .why li{margin:5px 0;color:var(--ink-soft)}
+  .why li b{color:#fff}
+
+  .fix{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+  .fix > div{padding:14px 16px}
+  .fix .before{background:rgba(246,179,82,.07);border-right:1px solid var(--line)}
+  .fix .after{background:rgba(52,211,153,.07)}
+  .fix .lbl{font-family:var(--mono);font-size:11.5px;font-weight:800;letter-spacing:.06em;margin-bottom:8px;display:block}
+  .fix .before .lbl{color:var(--warn)}
+  .fix .after .lbl{color:var(--good)}
+  .fix p{font-size:13.5px;color:var(--ink-soft);margin:0}
+
+  /* checklist */
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14px;color:var(--ink-soft)}
+  .checklist li .ck{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--brand);display:grid;place-items:center;color:var(--brand);font-size:13px;font-weight:900;margin-top:1px}
+  .checklist li b{color:#fff}
+
+  .callout{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14.5px;color:var(--ink-soft)}
+  .callout b{color:#fff}
+
+  table.eval{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:13.6px}
+  table.eval th,table.eval td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  table.eval th{background:var(--card-2);color:#fff;font-weight:740;white-space:nowrap}
+  table.eval td{color:var(--ink-soft)}
+  table.eval td.c{text-align:center;white-space:nowrap}
+  table.eval tr:nth-child(even) td{background:rgba(34,42,82,.35)}
+  .mk{font-weight:800}
+  .mk.o{color:var(--good)}
+  .mk.t{color:var(--warn)}
+  .mk.x{color:#ff7a92}
+
+  .term{display:grid;gap:10px;grid-template-columns:repeat(2,1fr);margin-top:6px}
+  .term div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--ink-soft)}
+  .term b{color:#fff}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 4px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+  .legend .g{background:var(--good)} .legend .w{background:var(--warn)}
+
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  footer b{color:var(--ink-soft)}
+  .note{font-size:12.5px;color:var(--muted)}
+
+  @media(max-width:860px){
+    .grid.c3,.grid.c2{grid-template-columns:1fr}
+    .term{grid-template-columns:1fr}
+    .fix{grid-template-columns:1fr}
+    .fix .before{border-right:none;border-bottom:1px solid var(--line)}
+    .nav nav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg-soft);border-bottom:1px solid var(--line);padding:10px 16px;gap:2px}
+    .nav nav.open{display:flex}
+    .nav nav a{padding:11px 12px}
+    .menu-toggle{display:inline-grid;place-items:center;margin-left:auto;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:#fff;font-size:18px;cursor:pointer}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    header.top{display:none}
+    .card,.example,pre.prompt{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>Chapter12 課題レビュー<small>Difyマスターゼミ / 提出課題② 子供向けチャットボット</small></span>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <nav id="navlinks">
+      <a href="#overview">課題概要</a>
+      <a href="#criteria">評価の観点</a>
+      <a href="#good">良かった提出</a>
+      <a href="#step">あと一歩の提出</a>
+      <a href="#summary">総括</a>
+      <a href="#checklist">チェックリスト</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">● 提出課題レビュー資料</span>
+    <h1>子供向けチャットボットの課題から学ぶ<br><span class="grad">「要件を満たす」×「使う子にやさしい」</span>作り方</h1>
+    <p class="lead">
+      Chapter12 提出課題②「子供向けチャットボットを作成してみよう」について、提出された作品を匿名で抜粋しました。
+      <b>良かった作品を3つ</b>、<b>あと一歩の作品を3つ</b>、課題の3つの要件に沿って見比べます。
+      初学者の方が「次に何を直せばもっと良くなるか」を具体的にイメージできるよう、やさしく解説します。
+    </p>
+    <div class="meta-row">
+      <span class="chip">対象：<b>Chapter12 / 提出課題②</b></span>
+      <span class="chip">テーマ：<b>子供向けチャットボット（Dify）</b></span>
+      <span class="chip">評価軸：<b>3つの要件</b></span>
+      <span class="chip">抜粋：<b>良かった 3 ／ あと一歩 3</b></span>
+      <span class="chip note">※氏名・ニックネームは伏せ、内容のみを匿名で抜粋しています</span>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">01</span><h2>課題の概要</h2></div>
+    <p class="sub">「対象年齢・テーマ・話し方」を選ぶと、その子に合わせて会話してくれる子供向けチャットボットを Dify で作る課題です。次の<strong>3つの要件</strong>を満たすことがゴールでした。</p>
+    <div class="grid c3">
+      <div class="card">
+        <span class="tag v">要件 1</span>
+        <h4>基本設定</h4>
+        <p>チャットボットの<b>名前と説明文</b>を、「何に使うボットか」が一目で分かるように設定する。</p>
+      </div>
+      <div class="card">
+        <span class="tag c">要件 2</span>
+        <h4>入力フォーム（4項目）</h4>
+        <p><b>対象年齢・会話テーマ・話し方のトーン・追加指示</b>の4つを用意。追加指示だけ任意、ほかは必須にする。</p>
+      </div>
+      <div class="card">
+        <span class="tag b">要件 3</span>
+        <h4>フォローアップ</h4>
+        <p>回答が表示されたあとに、<b>次の質問の候補ボタン</b>を出して、続けて会話しやすくする。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>この課題のねらい：</b> 「すごいボットを作る」ことよりも、まず<u>提示された要件を正確に形にする</u>ことが目標でした（教材にも「凝りすぎなくてOK。まず要件を満たそう」とあります）。だからこのレビューも、<b>要件を満たせているか</b>を土台に、その上で光った工夫を紹介します。
+    </div>
+  </div>
+</section>
+
+<!-- CRITERIA -->
+<section id="criteria">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">02</span><h2>評価の観点</h2></div>
+    <p class="sub">課題の3要件を、Difyの設定画面のどこに当たるかと合わせて、もう少し具体的に分解します。各作品はこの表を“ものさし”にして見ています。</p>
+
+    <table class="eval">
+      <thead><tr><th>要件</th><th>具体的にやること</th><th>Difyのどこ？</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>1. 基本設定</b></td>
+          <td><b>名前</b>と<b>説明文</b>で「対象年齢・テーマ・話し方を選べる子供向けの会話ボット」だと一目で分かる。</td>
+          <td>アプリ名 ／ 説明</td>
+        </tr>
+        <tr>
+          <td><b>2-a 対象年齢</b></td>
+          <td><b>数値入力</b>・必須（例：5、8、10）。</td>
+          <td>入力フィールド「数値」</td>
+        </tr>
+        <tr>
+          <td><b>2-b 会話テーマ</b></td>
+          <td><b>短文入力</b>・必須（例：「動物の名前」「宇宙の話」）。</td>
+          <td>入力フィールド「短文」</td>
+        </tr>
+        <tr>
+          <td><b>2-c 話し方のトーン</b></td>
+          <td><b>選択式（5択）</b>・必須。下の5つを用意：<br>①丁寧でやさしい口調 ②明るく元気な話し方 ③落ち着いた説明スタイル ④お兄さん/お姉さん風 ⑤フレンドリーでカジュアル</td>
+          <td>入力フィールド「選択」</td>
+        </tr>
+        <tr>
+          <td><b>2-d 追加指示</b></td>
+          <td><b>段落入力</b>・任意（長さや避けたい言葉、キャラ設定などを自由記入）。</td>
+          <td>入力フィールド「段落」</td>
+        </tr>
+        <tr>
+          <td><b>3. フォローアップ</b></td>
+          <td>回答後に<b>次の質問候補</b>を出す（オン）。</td>
+          <td>機能 →「次の質問の提案」</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>用語ミニ解説（初学者向け）：</b>
+      <div class="term">
+        <div><b>システムプロンプト</b>：AIへの「役割・ルール」の指示文。ここの作り込みで応答の質が決まります。</div>
+        <div><b>入力フィールドの種類</b>：「数値／短文／段落／選択」など。中身に合った種類を選ぶのがコツ。</div>
+        <div><b>フォローアップ（次の質問の提案）</b>：回答の後に出る“次はこれ聞く？”ボタン。会話が続けやすくなる。</div>
+        <div><b>オープニングメッセージ</b>：最初に表示される一言。ここで子供が話し出しやすくなります。</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="g"></i> 良かった提出（抜粋）</span>
+      <span><i class="w"></i> あと一歩・改善したい提出（抜粋）</span>
+      <span><span class="mk o">✓</span> 要件OK</span>
+      <span><span class="mk t">△</span> 惜しい</span>
+      <span><span class="mk x">✗</span> 未設定</span>
+    </div>
+  </div>
+</section>
+
+<!-- GOOD -->
+<section id="good">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">03</span><h2>良かった提出（3作品）</h2></div>
+    <p class="sub">3要件をしっかり満たしたうえで、それぞれ別の角度で「使う子供のこと」を考えられていた作品です。真似したいポイントを中心に紹介します。</p>
+
+    <!-- GOOD 01 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 01</span> 要件を完全達成＋「安全」と「年齢チェック」まで配慮</div>
+      <div class="ex-body">
+        <p class="scene"><b>ひとことで：</b>子供が使うことを本気で想定し、要件＋αで“守る仕組み”まで組み込んだ作品。</p>
+        <div class="feat">
+          <span>対象年齢：数値 <span class="mk o">✓</span></span>
+          <span>会話テーマ：短文 <span class="mk o">✓</span></span>
+          <span>トーン：5択 <span class="mk o">✓</span></span>
+          <span>追加指示：段落 <span class="mk o">✓</span></span>
+          <span>フォローアップ：ON <span class="mk o">✓</span></span>
+          <span class="plus">＋ 個人情報・NGワード対策</span>
+          <span class="plus">＋ 年齢の範囲チェック</span>
+          <span class="plus">＋ 音声入力 / 専用アイコン</span>
+        </div>
+<pre class="prompt"><span class="h">## 役割</span> 児童心理学と幼児教育にくわしい小学校の先生
+
+<span class="h">## 年齢チェックのルール</span>
+<span class="var">{{age}}</span> が「5未満」または「12超」のときは、会話せず固定メッセージで案内：
+  「ごめんね！このチャットは 6さい〜12さい のお友達専用なんだ。もういちど年齢をたしかめてね！」
+
+<span class="h">## テーマの絞り込み</span> 「宇宙」など広いテーマは、子供が喜ぶ1つ（例：無重力・宇宙食）に絞る
+
+<span class="h">## 出力</span> 絵文字を散りばめ／3〜4文以内／1〜2文ごとに改行 …</pre>
+        <p class="scene" style="margin:10px 0 6px"><b>さらに：</b>不適切ワード対策（コンテンツモデレーション）も設定し、子供が名前・住所・電話番号などを書いたり、乱暴な言葉を使ったときは、やさしい定型文でそっと止めるようにしていました。</p>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>要件をすべて達成（しかも追加指示を「段落」入力に）：</b>4項目の入力タイプが要件どおりで、3作品の中でも特に正確。</li>
+            <li><b>“使う子供を守る”発想：</b>個人情報・乱暴な言葉のフィルタ、対象年齢の範囲チェックまで設計。子供向けだからこその配慮が光る。</li>
+            <li><b>役割（ペルソナ）が具体的：</b>「児童心理の専門家＝小学校の先生」と決めることで、言葉づかいが一貫する。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOOD 02 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 02</span> 要件達成＋「最初のあいさつ」で子供が話し出しやすい</div>
+      <div class="ex-body">
+        <p class="scene"><b>ひとことで：</b>システムプロンプトの型がきれいで、オープニングメッセージの工夫が秀逸な作品。</p>
+        <div class="feat">
+          <span>対象年齢：数値 <span class="mk o">✓</span></span>
+          <span>会話テーマ：短文 <span class="mk o">✓</span></span>
+          <span>トーン：5択 <span class="mk o">✓</span></span>
+          <span>追加指示：任意 <span class="mk o">✓</span></span>
+          <span>フォローアップ：ON <span class="mk o">✓</span></span>
+          <span class="plus">＋ ひらがな＋絵文字のあいさつ文</span>
+        </div>
+<pre class="prompt"><span class="cm">▼ オープニングメッセージ（最初に表示される一言）</span>
+こんにちは！😊
+ぼく（わたし）は、みんなのおはなしを聞いたり、しつもんにこたえたりするおともだちだよ！
+たとえば、
+🌟「きょうりゅうのことがしりたい！」
+🌟「さんすうをおしえて！」
+🌟「たのしいクイズをだして！」
+みたいに、おはなししてくれるとうれしいな。</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>最初の一言で会話のハードルを下げている：</b>全部ひらがな＋絵文字＋具体例で、子供が「何を聞けばいいか」すぐ分かる。空欄にしがちな所を丁寧に作り込んだ好例。</li>
+            <li><b>システムプロンプトの型がお手本：</b>「役割／目的／入力情報／出力要件／注意点」と整理され、4つの変数（年齢・テーマ・トーン・追加指示）をきちんと使っている。</li>
+            <li><b>要件をすべて達成：</b>入力4項目・必須/任意・トーン5択・フォローアップONまで過不足なし。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOOD 03 -->
+    <div class="example good">
+      <div class="ex-head"><span class="pill">GOOD 03</span> 要件達成＋「AIの出力ルール」を具体的に決めて応答が安定</div>
+      <div class="ex-body">
+        <p class="scene"><b>ひとことで：</b>応答の長さ・言葉づかい・禁止事項まで指示し、答えがブレない作品。</p>
+        <div class="feat">
+          <span>対象年齢：数値 <span class="mk o">✓</span></span>
+          <span>会話テーマ：短文 <span class="mk o">✓</span></span>
+          <span>トーン：5択 <span class="mk o">✓</span></span>
+          <span>追加指示：任意 <span class="mk o">✓</span></span>
+          <span>フォローアップ：ON <span class="mk o">✓</span></span>
+          <span class="plus">＋ 説明文も分かりやすい</span>
+        </div>
+<pre class="prompt"><span class="h">## 出力要件</span>
+- 子供が自然に理解できる言葉づかいで書く
+- 応答は1ターン分（数文以内）。長すぎず短すぎず
+- 難しい言葉は、かんたんな説明を添えるか言い換える
+- 見出しや箇条書き（Markdown）は使わず、会話文だけで返す
+<span class="h">## 注意点</span>
+- 年齢に合わない言葉や、むずかしい抽象表現は避ける
+- 否定・命令・きつい表現は避け、やさしく肯定的に</pre>
+        <div class="why good">
+          <h5>✓ ここが良い</h5>
+          <ul>
+            <li><b>「どう答えるか」のルールが具体的：</b>長さ・言い換え・会話文のみ…とAIの出力を細かく方向づけているので、毎回の応答が安定する。</li>
+            <li><b>“やってはいけないこと”も明記：</b>否定・命令・きつい表現を避ける、と書くことで子供向けにふさわしいトーンを保てる。</li>
+            <li><b>要件をすべて達成：</b>入力の種類・必須/任意・5択・フォローアップまできちんと設定。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>良かった3作品の共通点：</b> どれも<u>まず3要件を確実に満たし</u>、そのうえで「安全」「最初のあいさつ」「出力ルール」と、<b>使う子供の体験を一歩ずつ良くする工夫</b>を足していました。土台（要件）＋ひと工夫、が伸びる作品の形です。
+    </div>
+  </div>
+</section>
+
+<!-- STEP -->
+<section id="step">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">04</span><h2>あと一歩の提出（3作品）</h2></div>
+    <p class="sub">どの作品も<strong>良いところがしっかりあります</strong>。要件のうち1〜2か所を直すだけで「良かった作品」に届くものばかりなので、<b>まず良い点 → 次に直すと伸びる点</b>の順に見ていきましょう。</p>
+
+    <!-- STEP 01 -->
+    <div class="example warn">
+      <div class="ex-head"><span class="pill">あと一歩 01</span> 入力の作りは正確。あとは「説明文・あいさつ・候補の指示」</div>
+      <div class="ex-body">
+        <p class="scene"><b>傾向：</b>入力フォームとシステムプロンプトはきちんとできている。仕上げの“見せ方”が少し惜しい。</p>
+        <div class="feat">
+          <span>対象年齢：数値 <span class="mk o">✓</span></span>
+          <span>会話テーマ：短文 <span class="mk o">✓</span></span>
+          <span>トーン：5択 <span class="mk o">✓</span></span>
+          <span>追加指示：任意 <span class="mk o">✓</span></span>
+          <span>フォローアップ：ON <span class="mk o">✓</span></span>
+          <span>説明文：空 <span class="mk x">✗</span></span>
+          <span>あいさつ文：なし <span class="mk t">△</span></span>
+        </div>
+        <div class="why good">
+          <h5>◎ まず、ここが良い</h5>
+          <ul>
+            <li><b>入力フォームが要件どおり正確：</b>対象年齢を「数値」、トーンを「5択」で作れており、必須/任意の区別もOK。基礎がしっかりしている。</li>
+            <li><b>システムプロンプトの型が整っている：</b>役割・目的・入力情報・出力要件…と構造化され、変数も正しく使えている。</li>
+          </ul>
+        </div>
+        <div class="why warn">
+          <h5>△ あと一歩（直すと伸びる）</h5>
+          <ul>
+            <li><b>説明文が空：</b>要件1「一目で用途が分かる」が片手落ち。一覧で何のボットか分からなくなる。</li>
+            <li><b>最初のあいさつ（オープニング）が無い：</b>子供が「何を話せばいい？」と迷いやすい。</li>
+            <li><b>フォローアップの指示文が“設定の説明文そのまま”：</b>「次の入力候補を提案するボタンを表示」と書いてある＝これはAIへの指示になっていない。</li>
+          </ul>
+        </div>
+        <div class="fix">
+          <div class="before"><span class="lbl">Before</span><p>説明文＝空／あいさつ＝無し／候補の指示＝「ボタンを表示」とだけ。</p></div>
+          <div class="after"><span class="lbl">After（こう直す）</span><p>説明文に<b>「対象年齢・テーマ・話し方を選べる子供向けの会話ボット」</b>を一文。あいさつに<b>ひらがなの一言＋例</b>。候補の指示は<b>「15文字以内・ひらがな多め・子供が選びやすい質問を3つ」</b>に。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 02 -->
+    <div class="example warn">
+      <div class="ex-head"><span class="pill">あと一歩 02</span> 4項目そろってる。「年齢＝数値」にできれば完成度アップ</div>
+      <div class="ex-body">
+        <p class="scene"><b>傾向：</b>要件の形はほぼ満たしている。入力の“種類”の選び方がもう一歩。</p>
+        <div class="feat">
+          <span>対象年齢：短文 <span class="mk t">△</span></span>
+          <span>会話テーマ：短文 <span class="mk o">✓</span></span>
+          <span>トーン：5択 <span class="mk o">✓</span></span>
+          <span>追加指示：任意 <span class="mk o">✓</span></span>
+          <span>フォローアップ：ON <span class="mk o">✓</span></span>
+          <span>名前・説明文：あり <span class="mk o">✓</span></span>
+        </div>
+        <div class="why good">
+          <h5>◎ まず、ここが良い</h5>
+          <ul>
+            <li><b>必要な4項目とトーン5択がそろっている：</b>必須/任意も要件どおりで、フォローアップもON。要件の全体像をきちんと押さえている。</li>
+            <li><b>名前・説明文が設定済み：</b>何のボットかが分かる。会話の流れ（あいさつ→テーマ）もプロンプトで設計できている。</li>
+          </ul>
+        </div>
+        <div class="why warn">
+          <h5>△ あと一歩（直すと伸びる）</h5>
+          <ul>
+            <li><b>「対象年齢」が短文入力：</b>要件は「数値入力」。数値にすると「5」「8」のように入り、年齢で出し分ける処理も安定する。</li>
+            <li><b>追加指示が1行（短文）：</b>本来は「段落」入力。長めの指示（避けたい言葉やキャラ設定）が書けるようになる。</li>
+            <li><b>追加指示の“説明文”をプロンプトに貼り付け：</b>変数のすぐ後に説明文が続いて役割が混ざりぎみ。説明は入力欄のラベル側へ。</li>
+          </ul>
+        </div>
+        <div class="fix">
+          <div class="before"><span class="lbl">Before</span><p>対象年齢＝短文／追加指示＝短文（1行）。</p></div>
+          <div class="after"><span class="lbl">After（こう直す）</span><p>対象年齢の種類を<b>「数値」</b>に変更。追加指示を<b>「段落」</b>に変更。説明は欄のラベル/プレースホルダに移すと、プロンプト本文がすっきりする。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 03 -->
+    <div class="example warn">
+      <div class="ex-head"><span class="pill">あと一歩 03</span> 子供目線のUXが一番豊か。あとは「名前・型・プロンプト整理」</div>
+      <div class="ex-body">
+        <p class="scene"><b>傾向：</b>「子供が使う」イメージが3作品で一番できている。仕上げの整理で大きく伸びる。</p>
+        <div class="feat">
+          <span class="plus">ひらがなラベル</span>
+          <span class="plus">最初の話題ボタン</span>
+          <span class="plus">音声入力 ON</span>
+          <span>トーン：5択 <span class="mk o">✓</span></span>
+          <span>フォローアップ：ON <span class="mk o">✓</span></span>
+          <span>名前：あいまい <span class="mk t">△</span></span>
+          <span>ねんれい：短文 <span class="mk t">△</span></span>
+        </div>
+        <div class="why good">
+          <h5>◎ まず、ここが良い（ここは積極的に真似したい）</h5>
+          <ul>
+            <li><b>子供本人が読めるUX：</b>入力欄を「ねんれい」「おはなししたいないよう」「どんなひととはなしたい？」とひらがな表記。使う子供への想像力が素晴らしい。</li>
+            <li><b>会話の入口を用意：</b>最初に「どうぶつ／えほん／なぞなぞ」など話題ボタンを提示。音声入力もON。話し始めやすい。</li>
+            <li><b>フォローアップに独自の指示：</b>「15文字以内・ひらがな多め」と、子供が選びやすい候補を出す工夫。</li>
+          </ul>
+        </div>
+        <div class="why warn">
+          <h5>△ あと一歩（直すと伸びる）</h5>
+          <ul>
+            <li><b>アプリ名が「こども向け」だけ：</b>用途が一目で伝わりにくい（要件1）。会話ボットだと分かる名前に。</li>
+            <li><b>「ねんれい」が短文入力：</b>要件は数値入力。</li>
+            <li><b>システムプロンプトに“別のボットの名残”と重複：</b>「職業・業界・役職になりきって…」など別用途の文や、同じ見出し（追加指示／出力要件）が2回出てくる。コピペの整理を。</li>
+            <li><b>追加指示欄のラベルが変数名のまま：</b>「additional_instruction」→ 日本語ラベルに。</li>
+          </ul>
+        </div>
+        <div class="fix">
+          <div class="before"><span class="lbl">Before</span><p>名前「こども向け」／年齢＝短文／プロンプトに別ボットの文＋見出しの重複。</p></div>
+          <div class="after"><span class="lbl">After（こう直す）</span><p>名前を<b>「子供向け会話チャットボット」</b>等に。年齢を<b>「数値」</b>へ。プロンプトは<b>1本の筋に整理</b>（別用途の文・重複見出しを削除）。ラベルも日本語に。<b>中身の発想は良いので、整えるだけで一気に良作</b>。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">05</span><h2>全体の総括</h2></div>
+    <p class="sub">今回の作品を通して見えた「伸びている作品の共通点」と、「あと一歩の作品に多いつまずき」をまとめます。どれも“次に直せばすぐ良くなる”ものばかりです。</p>
+    <div class="grid c2">
+      <div class="card" style="border-color:var(--good-line)">
+        <span class="tag" style="color:#06281d;background:var(--good)">伸びている作品の共通点</span>
+        <h4 style="margin-top:10px">まず3要件を“正確に”満たす</h4>
+        <p style="margin-bottom:12px">入力の<b>種類（数値・短文・段落・選択）</b>を中身に合わせて選び、必須/任意・トーン5択・フォローアップまで漏れなく設定している。</p>
+        <h4>使う子供の目線で整える</h4>
+        <p style="margin-bottom:12px">やさしい言葉の<b>あいさつ文</b>、安全への配慮、<b>読みやすい出力ルール</b>など、「使う子のこと」をひと手間考えている。</p>
+        <h4>システムプロンプトが整理されている</h4>
+        <p>「役割／目的／入力情報／出力要件／注意点」の型で、<b>変数を全部使い切る</b>。余計な文が混ざっていない。</p>
+      </div>
+      <div class="card" style="border-color:var(--warn-line)">
+        <span class="tag" style="color:#3a2606;background:var(--warn)">あと一歩の作品に多い点</span>
+        <h4 style="margin-top:10px">名前・説明文が空／あいまい</h4>
+        <p style="margin-bottom:12px">一覧で何のボットか分からない。<b>一文の説明</b>を足すだけで要件1が埋まる。</p>
+        <h4>入力の「種類」が惜しい</h4>
+        <p style="margin-bottom:12px">対象年齢が<b>文字入力</b>のまま／追加指示が<b>1行</b>のまま。数値・段落に変えるだけで要件どおりに。</p>
+        <h4>プロンプトの“コピペ残り”と指示の流用</h4>
+        <p>別用途の文や見出しの重複、フォローアップ欄に<b>設定の説明文をそのまま</b>。整理すると一気に伝わる。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>このレビューの一番の学び：</b> 良い作品ほど、特別なことをしているわけではありません。<u>①3要件を正確に満たす → ②入力の“種類”を中身に合わせる → ③使う子供の目線でひと工夫</u>、という順番を踏んでいるだけです。あと一歩の作品も、<b>良い発想はすでに持っています</b>。要件の抜けを1つずつ埋めれば、しっかり良作になります。
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">06</span><h2>提出前セルフチェックリスト</h2></div>
+    <p class="sub">次にチャットボットを作るとき、提出前にこの順番で見直すと“あと一歩”を埋められます。</p>
+
+    <h3>まず要件（ここが土台）</h3>
+    <ul class="checklist">
+      <li><span class="ck">✓</span><span>名前・説明文で<b>「何のボットか」が一目で分かる</b>か（説明文が空になっていないか）</span></li>
+      <li><span class="ck">✓</span><span><b>対象年齢＝数値</b>／<b>会話テーマ＝短文</b>／<b>話し方トーン＝選択(5つ)</b>／<b>追加指示＝段落</b>で作れているか</span></li>
+      <li><span class="ck">✓</span><span>必須/任意の設定が正しいか（<b>追加指示だけ任意</b>、ほかは必須）</span></li>
+      <li><span class="ck">✓</span><span>トーンの<b>選択肢は5つ</b>そろっているか</span></li>
+      <li><span class="ck">✓</span><span>回答後の<b>フォローアップ（次の質問の提案）がオン</b>になっているか</span></li>
+    </ul>
+
+    <h3>つぎに“ひと工夫”（ここで差がつく）</h3>
+    <ul class="checklist">
+      <li><span class="ck">✓</span><span><b>最初のあいさつ文</b>を入れ、子供が話し出しやすくしているか（ひらがな＋例）</span></li>
+      <li><span class="ck">✓</span><span>システムプロンプトに<b>別用途の文や重複が残っていないか</b>／<b>変数を全部使えているか</b></span></li>
+      <li><span class="ck">✓</span><span>フォローアップの指示が<b>「子供が選びやすい質問を3つ・15文字以内」</b>など、AIへの指示になっているか</span></li>
+      <li><span class="ck">✓</span><span>（応用）<b>年齢の範囲チェック</b>や<b>個人情報・NGワード対策</b>など、子供向けの安全配慮を入れられるか</span></li>
+    </ul>
+
+    <div class="callout">
+      <b>提出のコツ：</b> 作ったら、自分で<u>「年齢8・テーマ＝宇宙・トーン＝明るく元気」</u>のように実際に1回動かしてみましょう。<b>動く状態</b>を確認してから、DSLファイル（エクスポート）を提出すると安心です。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Difyマスターゼミ｜Chapter12 提出課題②「子供向けチャットボットを作成してみよう」課題レビュー資料</b></p>
+    <p class="note">本資料は提出作品をもとに作成した学習用のレビュー資料です。提出者の氏名・ニックネームは伏せ、内容の一部のみを匿名で抜粋・要約しています。掲載した抜粋は解説のために整形しており、原文と細部の表記が異なる場合があります。評価はあくまで学習目的のものです。</p>
+  </div>
+</footer>
+
+<script>
+  // smooth-scroll + close mobile menu + active nav highlight
+  const links=[...document.querySelectorAll('#navlinks a')];
+  links.forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+  const secs=[...document.querySelectorAll('section[id]')];
+  const byId=id=>links.find(a=>a.getAttribute('href')==='#'+id);
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      const l=byId(e.target.id); if(!l) return;
+      if(e.isIntersecting){links.forEach(x=>x.style.color='');l.style.color='#fff';l.style.background='var(--card)';
+        links.forEach(x=>{if(x!==l)x.style.background=''});}
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
