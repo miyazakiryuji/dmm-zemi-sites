@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Netlifyのアカウント作成から最初のデプロイ、カスタムドメイン設定までを画面付きで解説する完全ガイド。">
+  <title>Netlify 利用開始ガイド | はじめての方へ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 読み進めゲージ -->
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+  <!-- 背景アニメーション -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- トップナビゲーション -->
+  <header class="top-nav" id="topNav">
+    <div class="nav-container">
+      <a href="#top" class="logo">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <path d="M20 5 L20 12"/>
+            <path d="M20 28 L20 35"/>
+            <path d="M5 20 L12 20"/>
+            <path d="M28 20 L35 20"/>
+            <path d="M9 9 L14 14"/>
+            <path d="M26 26 L31 31"/>
+            <path d="M31 9 L26 14"/>
+            <path d="M14 26 L9 31"/>
+          </g>
+          <circle cx="20" cy="20" r="4" fill="currentColor"/>
+        </svg>
+        <span class="logo-text">Netlify <em>Start Guide</em></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#chapter-1" class="nav-link">アカウント作成</a>
+        <a href="#chapter-2" class="nav-link">設定</a>
+        <a href="#chapter-3" class="nav-link">デプロイ</a>
+        <a href="#chapter-4" class="nav-link">カスタマイズ</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ヒーロー -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          完全初心者OK・10分で完了
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-line">はじめての</span>
+          <span class="hero-line gradient-text">Netlify</span>
+          <span class="hero-line">利用開始ガイド</span>
+        </h1>
+        <p class="hero-subtitle">
+          アカウント作成から最初のデプロイ、カスタムドメイン設定まで。<br>
+          実画面のスクリーンショットつきで、迷わず進められる17ステップ。
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number" data-count="17">0</div>
+            <div class="stat-label">ステップ</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-count="10">0</div>
+            <div class="stat-label">分で完了</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-count="0">0</div>
+            <div class="stat-label">円(無料)</div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href="#chapter-1" class="btn btn-primary">
+            ガイドを始める
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#toc" class="btn btn-ghost">目次を見る</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="float-card float-card-1">
+          <div class="float-card-bar"></div>
+          <div class="float-card-bar short"></div>
+          <div class="float-card-tag">Deploy</div>
+        </div>
+        <div class="float-card float-card-2">
+          <div class="float-card-icon">🚀</div>
+          <div class="float-card-label">Published</div>
+        </div>
+        <div class="float-card float-card-3">
+          <div class="float-card-dot"></div>
+          <div class="float-card-text">netlify.app</div>
+        </div>
+        <div class="orbit"></div>
+        <div class="orbit orbit-2"></div>
+      </div>
+    </div>
+    <a class="scroll-indicator" href="#chapter-1" aria-label="下にスクロール">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- レイアウト本体 -->
+  <div class="layout">
+    <!-- 追従TOC -->
+    <aside class="toc" id="toc">
+      <div class="toc-title">
+        <span class="toc-icon">📑</span>
+        目次
+      </div>
+      <ol class="toc-list">
+        <li><a href="#chapter-1" class="toc-link"><span class="toc-num">01</span><span class="toc-label">アカウント作成</span></a></li>
+        <li><a href="#chapter-2" class="toc-link"><span class="toc-num">02</span><span class="toc-label">オンボーディング設定</span></a></li>
+        <li><a href="#chapter-3" class="toc-link"><span class="toc-num">03</span><span class="toc-label">初回デプロイ</span></a></li>
+        <li><a href="#chapter-4" class="toc-link"><span class="toc-num">04</span><span class="toc-label">カスタマイズ</span></a></li>
+      </ol>
+      <div class="toc-tip">
+        <kbd>←</kbd> <kbd>→</kbd> で画像送り<br>
+        <kbd>Esc</kbd> でLightbox閉じる
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <!-- Chapter 1 -->
+      <section id="chapter-1" class="chapter">
+        <header class="chapter-header reveal">
+          <div class="chapter-meta">
+            <span class="chapter-tag">Chapter 01</span>
+            <span class="chapter-progress">3 ステップ</span>
+          </div>
+          <h2 class="chapter-title">アカウントを作成しよう</h2>
+          <p class="chapter-description">Netlify公式サイトにアクセスし、サインアップから氏名登録までを行います。</p>
+        </header>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">01</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">Netlify公式サイトにアクセス</h3>
+            <p class="step-text">
+              ブラウザで <a href="https://www.netlify.com" target="_blank" rel="noopener" class="link">https://www.netlify.com</a> を開きます。
+              右上の <strong>「Sign up」</strong> ボタン、もしくは中央の <strong>「Start building」</strong> をクリックして登録に進みましょう。
+            </p>
+            <div class="callout callout-tip">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">
+                <div class="callout-title">ヒント</div>
+                <p>どちらのボタンを押しても、同じサインアップ画面に進めます。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/01-netlify-top.png" alt="Netlify公式トップページ" class="step-image" data-caption="Netlify公式トップページ" loading="lazy">
+              <figcaption class="figcaption">Netlify公式トップページ</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">02</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">サインアップ方法を選ぶ</h3>
+            <p class="step-text">
+              <strong>「The launch center for first-time builders」</strong> の画面が表示されます。
+              利用するアカウントを選んで進みましょう。
+            </p>
+            <ul class="check-list">
+              <li><span class="check-mark">✓</span> <strong>Google</strong>でサインアップ(おすすめ・最も手軽)</li>
+              <li><span class="check-mark">✓</span> <strong>GitHub</strong>でサインアップ(開発者向け)</li>
+              <li><span class="check-mark">✓</span> <strong>GitLab / Bitbucket</strong>(他Gitホスティング利用者)</li>
+              <li><span class="check-mark">✓</span> <strong>Email</strong>でサインアップ(SNS連携したくない場合)</li>
+            </ul>
+            <figure class="figure">
+              <img src="Assets/02-signup-options.png" alt="サインアップ画面" class="step-image" data-caption="サインアップ方法選択画面" loading="lazy">
+              <figcaption class="figcaption">サインアップ方法の選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">03</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">名前を入力する</h3>
+            <p class="step-text">
+              <strong>「Nice to meet you! Let's get acquainted.」</strong> の画面で、First name(名)と Last name(姓)を入力します。
+              ここから複数の質問にステップ形式で答えていきます。
+            </p>
+            <div class="image-pair">
+              <figure class="figure figure-half">
+                <img src="Assets/03-onboarding-name-empty.png" alt="名前入力フォーム(空欄)" class="step-image" data-caption="名前入力フォーム - 空の状態" loading="lazy">
+                <figcaption class="figcaption">入力前</figcaption>
+              </figure>
+              <figure class="figure figure-half">
+                <img src="Assets/04-onboarding-name-filled.png" alt="名前入力フォーム(入力済み)" class="step-image" data-caption="名前入力フォーム - 入力済み" loading="lazy">
+                <figcaption class="figcaption">入力後</figcaption>
+              </figure>
+            </div>
+            <div class="callout callout-note">
+              <div class="callout-icon">📌</div>
+              <div class="callout-body">
+                <div class="callout-title">入力例</div>
+                <p>First name: <code>Ryuji</code> / Last name: <code>Miyazaki</code> のようにローマ字で入力するとシンプルです。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Chapter 2 -->
+      <section id="chapter-2" class="chapter">
+        <header class="chapter-header reveal">
+          <div class="chapter-meta">
+            <span class="chapter-tag">Chapter 02</span>
+            <span class="chapter-progress">6 ステップ</span>
+          </div>
+          <h2 class="chapter-title">オンボーディング設定</h2>
+          <p class="chapter-description">Netlifyからの簡単な質問に答えていきます。回答内容に応じて、最適な案内が用意されます。</p>
+        </header>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">04</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">利用目的を選ぶ</h3>
+            <p class="step-text">
+              <strong>「How are you planning to use Netlify?」</strong>(どのように利用しますか?) の質問に答えます。
+            </p>
+            <div class="option-grid">
+              <div class="option-card"><div class="option-emoji">🏢</div><div class="option-label">Client</div><div class="option-desc">クライアント案件</div></div>
+              <div class="option-card"><div class="option-emoji">🎓</div><div class="option-label">School</div><div class="option-desc">学校・授業</div></div>
+              <div class="option-card option-card-active"><div class="option-emoji">👤</div><div class="option-label">Personal</div><div class="option-desc">個人利用</div></div>
+              <div class="option-card"><div class="option-emoji">💼</div><div class="option-label">Work</div><div class="option-desc">仕事</div></div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/05-onboarding-usage-purpose.png" alt="利用目的の選択画面" class="step-image" data-caption="利用目的の選択 - Personal" loading="lazy">
+              <figcaption class="figcaption">利用目的の選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">05</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">Web開発の経験レベルを選ぶ</h3>
+            <p class="step-text">
+              <strong>「What's your experience building on the web?」</strong>(Web開発の経験はどのくらいですか?) に回答します。
+              4段階から正直に選びましょう。
+            </p>
+            <div class="level-list">
+              <div class="level-item"><span class="level-bar level-1"></span><strong>Beginner</strong> — 開発自体がはじめて</div>
+              <div class="level-item"><span class="level-bar level-2"></span><strong>Basic</strong> — シンプルなプロジェクト経験あり</div>
+              <div class="level-item"><span class="level-bar level-3"></span><strong>Intermediate</strong> — 定期的にビルド・公開している</div>
+              <div class="level-item"><span class="level-bar level-4"></span><strong>Advanced</strong> — 複雑なプロジェクトを設計できる</div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/06-onboarding-experience-level.png" alt="経験レベル選択画面" class="step-image" data-caption="Web開発経験レベルの選択" loading="lazy">
+              <figcaption class="figcaption">経験レベル選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">06</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">最初に作るプロジェクトの種類を選ぶ</h3>
+            <p class="step-text">
+              <strong>「What kind of project do you want to build first?」</strong>(最初に何を作りますか?) を選びます。
+              ポートフォリオなら <span class="hl">Personal project</span> がおすすめです。
+            </p>
+            <div class="tag-cloud">
+              <span class="tag">Blog</span>
+              <span class="tag">Web app</span>
+              <span class="tag">Prototype/MVP</span>
+              <span class="tag tag-active">Personal project</span>
+              <span class="tag">Documentation</span>
+              <span class="tag">Games</span>
+              <span class="tag">School assignment</span>
+              <span class="tag">Learning/experimenting</span>
+              <span class="tag">eCommerce</span>
+            </div>
+            <figure class="figure">
+              <img src="Assets/07-onboarding-project-type.png" alt="プロジェクト種類の選択画面" class="step-image" data-caption="プロジェクト種類の選択 - Personal project" loading="lazy">
+              <figcaption class="figcaption">プロジェクト種類の選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">07</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">自分の役割を選ぶ</h3>
+            <p class="step-text">
+              <strong>「What best describes your role?」</strong>(あなたの役割は?) で、最も近いものを選択します。
+              該当しない場合は <code>Other</code> でOKです。
+            </p>
+            <figure class="figure">
+              <img src="Assets/08-onboarding-role.png" alt="役割選択画面" class="step-image" data-caption="役割の選択" loading="lazy">
+              <figcaption class="figcaption">役割選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">08</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">Netlifyを知ったきっかけを選ぶ</h3>
+            <p class="step-text">
+              <strong>「How did you hear about us?」</strong>(どこでNetlifyを知りましたか?) を選びます。
+            </p>
+            <div class="source-grid">
+              <div class="source-card"><div class="source-icon">🔍</div><strong>Search</strong><small>Google, DuckDuckGo</small></div>
+              <div class="source-card"><div class="source-icon">🤖</div><strong>AI or code tool</strong><small>Claude, Bolt</small></div>
+              <div class="source-card"><div class="source-icon">👥</div><strong>Someone else</strong><small>同僚・友人</small></div>
+              <div class="source-card"><div class="source-icon">💬</div><strong>Social</strong><small>X, Reddit</small></div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/09-onboarding-referral-source.png" alt="認知経路の選択画面" class="step-image" data-caption="Netlifyを知ったきっかけ" loading="lazy">
+              <figcaption class="figcaption">認知経路の選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">09</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">チーム名を入力する</h3>
+            <p class="step-text">
+              <strong>「What is the name of your team?」</strong> で、チーム名を入力します。
+              個人利用の場合は <strong>自分の名前やプロジェクト名</strong> を入れるのが一般的です。
+            </p>
+            <div class="callout callout-warning">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-body">
+                <div class="callout-title">あとから変更可能ですが…</div>
+                <p>チーム名はURLの一部などに使われることがあるため、シンプルでわかりやすい名前にしておくのがおすすめです。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/10-onboarding-team-name.png" alt="チーム名入力画面" class="step-image" data-caption="チーム名の入力" loading="lazy">
+              <figcaption class="figcaption">チーム名入力画面</figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <!-- Chapter 3 -->
+      <section id="chapter-3" class="chapter">
+        <header class="chapter-header reveal">
+          <div class="chapter-meta">
+            <span class="chapter-tag">Chapter 03</span>
+            <span class="chapter-progress">5 ステップ</span>
+          </div>
+          <h2 class="chapter-title">最初のプロジェクトをデプロイする</h2>
+          <p class="chapter-description">いよいよ実際のサイト公開へ。ファイルをドラッグ&ドロップするだけでデプロイできます。</p>
+        </header>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">10</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">「Continue to deploy」で次に進む</h3>
+            <p class="step-text">
+              質問への回答が完了したら、画面下部に <strong>「Continue to deploy」</strong> ボタンが現れます。
+              これをクリックすると、いよいよデプロイ画面へ進みます。
+            </p>
+            <figure class="figure">
+              <img src="Assets/11-continue-to-deploy-button.png" alt="Continue to deployボタン" class="step-image" data-caption="Continue to deployボタン" loading="lazy">
+              <figcaption class="figcaption">Continue to deploy ボタン</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">11</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">デプロイ方法を選ぶ</h3>
+            <p class="step-text">
+              <strong>「Deploy your first project.」</strong> の画面で、デプロイ方法を3パターンから選択できます。
+            </p>
+            <div class="method-list">
+              <div class="method-item">
+                <div class="method-num">A</div>
+                <div class="method-body">
+                  <strong>AIエージェントで作る</strong>
+                  <p>Claude Agent等を使い、プロンプトから自動でサイト生成。<span class="hl">400 Extra Credits</span> がもらえる。</p>
+                </div>
+              </div>
+              <div class="method-item">
+                <div class="method-num">B</div>
+                <div class="method-body">
+                  <strong>Gitリポジトリから取り込む</strong>
+                  <p>GitHub / GitLab / Bitbucket / Azure DevOps から既存リポジトリを連携。</p>
+                </div>
+              </div>
+              <div class="method-item method-active">
+                <div class="method-num">C</div>
+                <div class="method-body">
+                  <strong>ファイルを直接アップロード</strong>
+                  <p>HTML/CSSの完成ファイルをドラッグ&ドロップ。<span class="hl">今回はこの方法</span>を使います。</p>
+                </div>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/12-deploy-method-selection.png" alt="デプロイ方法の選択画面" class="step-image" data-caption="デプロイ方法の選択" loading="lazy">
+              <figcaption class="figcaption">デプロイ方法の選択画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">12</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">ファイルをアップロードする</h3>
+            <p class="step-text">
+              <strong>「Upload your project files」</strong> エリアに、プロジェクトフォルダ・ZIP・単一HTMLファイルをドラッグ&ドロップします。
+              <code>browse files to upload</code> から選択することも可能です。
+            </p>
+            <div class="callout callout-tip">
+              <div class="callout-icon">📦</div>
+              <div class="callout-body">
+                <div class="callout-title">用意するファイル</div>
+                <p><code>index.html</code> をエントリーポイントとして含むフォルダ、もしくはZIPがあればOKです。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/13-upload-files-area.png" alt="ファイルアップロードエリア" class="step-image" data-caption="ファイルアップロードエリア" loading="lazy">
+              <figcaption class="figcaption">ファイルアップロードエリア</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">13</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">index.html へのリネーム確認</h3>
+            <p class="step-text">
+              アップロードしたファイル名が <code>index.html</code> でない場合、
+              <strong>「Rename to index.html?」</strong> のダイアログが表示されます。
+              <strong>「Rename and deploy」</strong> を選ぶと、自動でリネームしてデプロイされます。
+            </p>
+            <div class="callout callout-warning">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-body">
+                <div class="callout-title">なぜ重要?</div>
+                <p>Webサイトのトップページは <code>index.html</code> である必要があります。これがないと「Page Not Found」エラーになります。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/14-rename-to-index-html-dialog.png" alt="index.htmlへのリネーム確認ダイアログ" class="step-image" data-caption="index.htmlへのリネーム確認" loading="lazy">
+              <figcaption class="figcaption">リネーム確認ダイアログ</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">14</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">デプロイ完了 🎉</h3>
+            <p class="step-text">
+              アップロードが完了すると、自動的に <strong>プロジェクトダッシュボード</strong> に遷移します。
+              ランダムなプロジェクト名(例: <code>glowing-sawine-2df6e3</code>)で公開されます。
+            </p>
+            <div class="success-banner">
+              <div class="success-emoji">🚀</div>
+              <div>
+                <strong>あなたのサイトが世界に公開されました!</strong>
+                <p><code>https://*****.netlify.app</code> でアクセス可能です。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/15-dashboard-after-deploy.png" alt="デプロイ完了後のダッシュボード" class="step-image" data-caption="デプロイ完了後のプロジェクトダッシュボード" loading="lazy">
+              <figcaption class="figcaption">プロジェクトダッシュボード</figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <!-- Chapter 4 -->
+      <section id="chapter-4" class="chapter">
+        <header class="chapter-header reveal">
+          <div class="chapter-meta">
+            <span class="chapter-tag">Chapter 04</span>
+            <span class="chapter-progress">3 ステップ</span>
+          </div>
+          <h2 class="chapter-title">公開後のカスタマイズ</h2>
+          <p class="chapter-description">プロジェクト名やドメインを整えて、シェアしやすいサイトに仕上げます。</p>
+        </header>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">15</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">プロジェクト名を変更する</h3>
+            <p class="step-text">
+              ダッシュボードの <strong>「Quick setup」</strong> から <strong>「Update the project name」</strong> を開きます。
+              プロジェクト名はそのままURLになるので、覚えやすい名前にしましょう。
+            </p>
+            <div class="url-preview">
+              <span class="url-protocol">https://</span>
+              <span class="url-name">miyazaki-portfolio</span>
+              <span class="url-suffix">.netlify.app</span>
+            </div>
+            <div class="callout callout-note">
+              <div class="callout-icon">📝</div>
+              <div class="callout-body">
+                <div class="callout-title">命名ルール</div>
+                <p>英数字と単一のハイフン(<code>-</code>)のみ使用可。最大37文字です。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/16-update-project-name.png" alt="プロジェクト名更新画面" class="step-image" data-caption="プロジェクト名の更新" loading="lazy">
+              <figcaption class="figcaption">プロジェクト名更新画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">16</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">カスタムドメイン・パスワード保護を設定</h3>
+            <p class="step-text">
+              次の画面で、より上級のカスタマイズを選べます。必要なければスキップでOKです。
+            </p>
+            <div class="feature-grid">
+              <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h4>Set custom domain</h4>
+                <p>独自ドメイン(例: <code>example.com</code>)を接続できます。
+                所有しているドメインを追加、または新規購入も可能。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h4>Set password protection</h4>
+                <p>サイトをパスワードで保護できます。クライアント確認用や、初期段階の制作物の限定共有に便利。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/17-domain-and-password-settings.png" alt="ドメイン・パスワード設定画面" class="step-image" data-caption="ドメイン・パスワード設定" loading="lazy">
+              <figcaption class="figcaption">ドメイン・パスワード設定画面</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">17</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">プロジェクト一覧で確認 🎊</h3>
+            <p class="step-text">
+              すべての設定が完了すると、プロジェクト一覧に <strong>サムネイル付きのカード</strong> が表示されます。
+              緑のドットが <code>Published</code> 状態を示しています。
+            </p>
+            <div class="success-banner success-final">
+              <div class="success-emoji">🎉</div>
+              <div>
+                <strong>これで Netlify 利用開始は完了です!</strong>
+                <p>あとは作りたいサイトをどんどん公開していくだけ。Have fun shipping!</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/18-published-project-card.png" alt="公開済みプロジェクトカード" class="step-image" data-caption="公開済みプロジェクトカード" loading="lazy">
+              <figcaption class="figcaption">公開済みプロジェクトカード</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <div class="completion-box reveal">
+          <div class="completion-confetti">
+            <span>🎉</span><span>✨</span><span>🚀</span><span>💫</span><span>🎊</span>
+          </div>
+          <h3>お疲れさまでした!</h3>
+          <p>あなたはもう Netlify で自由にサイトを公開できます。次のステップとして、独自ドメイン接続や Git 連携にもチャレンジしてみてください。</p>
+          <div class="completion-actions">
+            <a href="#top" class="btn btn-primary">最初に戻る</a>
+            <a href="https://www.netlify.com" target="_blank" rel="noopener" class="btn btn-ghost">Netlifyを開く</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="前へ">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="次へ">›</button>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-image" id="lightboxImage">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+      <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M20 5 L20 12"/><path d="M20 28 L20 35"/><path d="M5 20 L12 20"/><path d="M28 20 L35 20"/>
+              <path d="M9 9 L14 14"/><path d="M26 26 L31 31"/><path d="M31 9 L26 14"/><path d="M14 26 L9 31"/>
+            </g>
+            <circle cx="20" cy="20" r="4" fill="currentColor"/>
+          </svg>
+          <span class="logo-text">Netlify Start Guide</span>
+        </div>
+        <p class="footer-tagline">画面付きで迷わない、Netlify利用開始のための完全ガイド。</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>ガイド</h4>
+          <a href="#chapter-1">アカウント作成</a>
+          <a href="#chapter-2">設定</a>
+          <a href="#chapter-3">デプロイ</a>
+          <a href="#chapter-4">カスタマイズ</a>
+        </div>
+        <div class="footer-section">
+          <h4>外部リンク</h4>
+          <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify公式</a>
+          <a href="https://docs.netlify.com" target="_blank" rel="noopener">Docs</a>
+          <a href="https://app.netlify.com" target="_blank" rel="noopener">ダッシュボード</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <small>© 2026 Netlify Start Guide — 個人作成の学習資料です。Netlify公式とは無関係です。</small>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="トップへ戻る">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z" fill="currentColor"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
