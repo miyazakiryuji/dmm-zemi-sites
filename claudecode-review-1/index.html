@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1回 Claude Codeマスターゼミ｜事前課題レビュー</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="eyebrow">Claude Codeマスターゼミ 第1回</p>
+    <h1>事前課題 匿名レビューレポート</h1>
+    <p class="lead">「Claude Codeでやりたいこと」として集まった<strong>89件</strong>の提出を、講師目線で5観点から振り返ります。良かった点と改善のヒントを同じ熱量で。</p>
+    <p class="anon-notice">⚠️ 個人・組織・サービス名はすべて匿名化／一般化されています。</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <section id="overall" class="section">
+    <h2>📊 全体傾向</h2>
+    <p class="trend">全体としては「業務自動化」「サイト・LP制作」「AI秘書・スケジュール管理」「SNS運用自動化」の4ジャンルが大多数を占めた。3〜5割は『〇〇の自動化をしたい』レベルでアイデアが箇条書きされている段階で、対象ユーザー・入力データ・出力先まで踏み込んで書けている提出は2割程度に留まる。一方で、業務フローを段階分けし、API・DB設計・評価指標まで言語化できている提出もあり、具体性のレンジが非常に広い回となった。</p>
+
+    <div class="stats-grid">
+      <div class="stat-card stat-good">
+        <div class="stat-num">15</div>
+        <div class="stat-pct">16.9%</div>
+        <div class="stat-label">具体性◎<br/>そのまま実装着手できる粒度</div>
+      </div>
+      <div class="stat-card stat-mid">
+        <div class="stat-num">38</div>
+        <div class="stat-pct">42.7%</div>
+        <div class="stat-label">具体性〇<br/>もう1段の掘り下げで実装可能に</div>
+      </div>
+      <div class="stat-card stat-vague">
+        <div class="stat-num">36</div>
+        <div class="stat-pct">40.4%</div>
+        <div class="stat-label">アイデア段階<br/>対象・I/Oの言語化が次のステップ</div>
+      </div>
+    </div>
+
+    <div class="bar-chart">
+      <div class="bar bar-good" style="width:16.9%;" title="具体性◎ 15件"><span>15</span></div>
+      <div class="bar bar-mid" style="width:42.7%;" title="具体性〇 38件"><span>38</span></div>
+      <div class="bar bar-vague" style="width:40.4%;" title="アイデア段階 36件"><span>36</span></div>
+    </div>
+    <p class="bar-caption">具体性別の構成比</p>
+  </section>
+
+  <nav class="quick-nav">
+    <a href="#good">👍 良い例 (5件)</a>
+    <a href="#improvement">✏️ 改善余地のある例 (5件)</a>
+  </nav>
+
+  <section id="good" class="section">
+    <h2>👍 具体的に書けていた例</h2>
+    <p class="section-lead">5観点（Why / What / I/O / 業務シーン / 実現の構想）のうち複数で高得点だった5件。テーマがバラけるよう選んでいます。</p>
+    <div class="cards-grid">
+      
+    <article class="card card-good">
+      <header class="card-header">
+        <span class="card-badge">👍 良い例</span>
+        <span class="card-id">G1</span>
+      </header>
+      <h3 class="card-theme">採用応募者情報の自動転記パイプライン</h3>
+      <div class="card-meta"><span class="chip-domain">中小企業の人事・採用バックオフィス</span></div>
+      <p class="card-summary">複数の採用媒体から届く応募者情報を、現状は手作業でスプレッドシートに転記しておりミス・工数が課題。媒体ごとに『API連携／メール解析／手動』と自動化レベルを分類し、データ取得→情報抽出→重複チェック→シート書込みのパイプラインとして整理。学びたいことやセキュリティの基礎まで言語化されている。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>媒体ごとに『どこまで自動化できる／できない』を3段階で整理してあり、スコープの強弱がはっきりしている</li>
+<li>応募発生→取得→抽出→書込みの処理フローが図示されており、Claude Codeにそのまま指示として渡せる粒度</li>
+<li>学びたい技術要素（API、Gmail解析、定期実行）まで明示しているので、ゼミ期間中の評価がしやすい</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>『重複チェック』のキー（メールアドレスか氏名+電話か）を1行決めておくと、実装着手時に迷いません</li>
+<li>1日あたりの応募件数の見込みを書き足すと、定期実行頻度やAPIコストの設計判断がしやすくなります</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="4">
+            <div class="score-fill" style="width:80%;"></div>
+          </div>
+          <div class="score-value">4/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-good">
+      <header class="card-header">
+        <span class="card-badge">👍 良い例</span>
+        <span class="card-id">G2</span>
+      </header>
+      <h3 class="card-theme">宿泊予約サイトの在庫・価格管理＋ダッシュボード</h3>
+      <div class="card-meta"><span class="chip-domain">小規模宿泊業の運営者</span></div>
+      <p class="card-summary">複数の宿泊予約サイトの予約状況を一元管理し、価格を半自動で調整するシステム。スプレッドシートやカレンダーを管理画面として始め、ダッシュボード（売上・稼働率・価格変更履歴）、通知（新規予約・キャンセル・ダブルブッキング）、ノウハウのnote発信＆SNS転載まで一気通貫で構想されている。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>『最初は完全自動ではなく、AI提案＋人間確認』という段階設計があり、現実的に着地させる思考が見える</li>
+<li>ダッシュボードに何を表示したいかが10項目近く具体的に列挙されている</li>
+<li>通知先（LINE/メール/Slack）まで挙げられており、外部連携の検討が進んでいる</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>最初に手をつけるMVPを1つに絞ると進めやすいので、『まず予約状況の一元表示だけ』など第一目標を1行追加するとよさそうです</li>
+<li>価格自動調整のルール例（稼働率〇％超なら〇％UP等）を1パターン書いておくと、ロジック実装の初手が決まります</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="4">
+            <div class="score-fill" style="width:80%;"></div>
+          </div>
+          <div class="score-value">4/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="4">
+            <div class="score-fill" style="width:80%;"></div>
+          </div>
+          <div class="score-value">4/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="4">
+            <div class="score-fill" style="width:80%;"></div>
+          </div>
+          <div class="score-value">4/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-good">
+      <header class="card-header">
+        <span class="card-badge">👍 良い例</span>
+        <span class="card-id">G3</span>
+      </header>
+      <h3 class="card-theme">新規事業テーマ調査と提案書生成の自動パイプライン</h3>
+      <div class="card-meta"><span class="chip-domain">事業開発・経営企画</span></div>
+      <p class="card-summary">新規事業テーマ名を入力すると、市場・競合・顧客・規制・技術など複数の調査モジュールが並列実行され、最終的にCEO向けPPTXまで生成されるパイプライン。打ち合わせ文字起こしから『CEO観点DB』を進化させるループも設計済み。Notion DB3つの設計、評価スコアカード、開発フェーズ計画まで整理されている。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>Layer1（効率化）/Layer2（品質均一化）/Layer3（組織学習）と、システムの狙いを3層で言語化できている</li>
+<li>M1〜M9の調査モジュールごとに『INPUT/調査項目/OUTPUTスライド枚数』が定義されていて、実装単位として切り出せる</li>
+<li>技術スタック（python-pptx、notion-client、Streamlit、Whisper等）と開発フェーズ計画まで踏み込んでいる</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>全部を一気に作ると重いので、『最初の2週間で動かす最小ループ』をフェーズ1から1行だけ抜き出すと進捗管理が楽になります</li>
+<li>CEO観点DBに最初に登録する10項目だけでも仮置きすると、Phase 1から提案書のカバー率が測れます</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-good">
+      <header class="card-header">
+        <span class="card-badge">👍 良い例</span>
+        <span class="card-id">G4</span>
+      </header>
+      <h3 class="card-theme">セキュリティアラートの自動通知と台帳記録</h3>
+      <div class="card-meta"><span class="chip-domain">情報システム・社内セキュリティ運用</span></div>
+      <p class="card-summary">クラウドストレージ監視ツールから管理者にセキュリティアラートメールが届いた際、メール内のリンクをたどって発生日時・内容・該当ユーザー・該当URLを取得し、所属部署の組織管理担当者へメール通知＆管理台帳Excelへ記載するまでを自動化したい、という社内運用の自動化提案。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>現状の人手フロー（メール受信→リンクをたどる→確認→転記）が時系列で書かれていて、自動化したい範囲が明確</li>
+<li>出力先が『該当部署担当者へのメール』と『管理台帳Excel』の2系統に分かれており、ゴール条件がはっきりしている</li>
+<li>取得したい項目が5つ箇条書きで列挙されており、抽出スキーマがそのまま設計に使える</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>監視ツールがメール本文以外にAPIを公開していれば、リンク先スクレイピングよりAPI参照のほうが安定するので一度確認してみましょう</li>
+<li>通知時のテンプレ（件名・本文の定型）を1サンプル付けておくと、運用部門との認識合わせが早まります</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="4">
+            <div class="score-fill" style="width:80%;"></div>
+          </div>
+          <div class="score-value">4/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="3">
+            <div class="score-fill" style="width:60%;"></div>
+          </div>
+          <div class="score-value">3/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-good">
+      <header class="card-header">
+        <span class="card-badge">👍 良い例</span>
+        <span class="card-id">G5</span>
+      </header>
+      <h3 class="card-theme">オフライン来場者の挙手カウンタ</h3>
+      <div class="card-meta"><span class="chip-domain">イベント・教室運営</span></div>
+      <p class="card-summary">オフラインの会場で複数の選択肢に対して『何人が手を挙げているか』を毎回数えるのが手間で、リアルタイムに集計したい、というニッチだが解像度の高い課題提示。1行の提出だが、利用シーンと痛みが具体的で、要件の絞り込みが進んでいる。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>『誰が・どんな場面で・何に困っているか』が一文で伝わる、痛みベースの課題設定が秀逸</li>
+<li>対象が『手を挙げた人数』とスコープがはっきり狭く、MVPの着地が見えやすい</li>
+<li>AI画像認識の典型題材として、ゼミ期間で十分実装可能な現実的サイズ感</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>入力が『カメラ映像／写真撮影／別デバイスでのカウント』のどれかで構成が変わります。撮影できる環境を1行足すと一気に固まります</li>
+<li>1回の会場で『何択 × 何人 × 何回』のオーダーかを書き足すと、リアルタイム処理の必要性が判断できます</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="4">
+            <div class="score-fill" style="width:80%;"></div>
+          </div>
+          <div class="score-value">4/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="3">
+            <div class="score-fill" style="width:60%;"></div>
+          </div>
+          <div class="score-value">3/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="5">
+            <div class="score-fill" style="width:100%;"></div>
+          </div>
+          <div class="score-value">5/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+      </div>
+    </article>
+    
+    </div>
+  </section>
+
+  <section id="improvement" class="section">
+    <h2>✏️ もう一歩で具体化できる例</h2>
+    <p class="section-lead">アイデアの方向性は良いものの、対象や入出力が見えにくかった5件。<strong>ダメ出しではなく、「あと1〜2行足すと急に伝わる」という観点でヒント</strong>を添えました。</p>
+    <div class="cards-grid">
+      
+    <article class="card card-improvement">
+      <header class="card-header">
+        <span class="card-badge">✏️ 改善余地</span>
+        <span class="card-id">I1</span>
+      </header>
+      <h3 class="card-theme">管理システムの自作</h3>
+      <div class="card-meta"><span class="chip-domain">自社業務システム保有の事業者</span></div>
+      <p class="card-summary">『自社の管理システムがあるので、それと同じものを自分で作ってみたい』という1行の提出。やりたいことの方向性は固まっているが、対象システムの規模・機能・データ・利用者が一切書かれておらず、何から手をつければ良いかが見えない状態。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>既存システムが手元にあるので、画面・データ構造を直接参照できる強い前提を持っている</li>
+<li>『同じものを作ってみる』という、学習題材としては取り組みやすいゴールを置いている</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>そのシステムの主要機能を3〜5個リストアップしてみてください（例：顧客一覧／受注登録／請求書発行）</li>
+<li>1日何人くらいが、どんな操作をするシステムでしょうか？利用者像が決まると優先順位が決まります</li>
+<li>全部を再現するのは大変なので『今回のゼミではこの1機能だけ』というスコープを1行決めると進めやすくなります</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-improvement">
+      <header class="card-header">
+        <span class="card-badge">✏️ 改善余地</span>
+        <span class="card-id">I2</span>
+      </header>
+      <h3 class="card-theme">AI秘書アプリ（メール・スケジュール・タスク）</h3>
+      <div class="card-meta"><span class="chip-domain">個人事業主・ナレッジワーカー</span></div>
+      <p class="card-summary">『AI秘書を作りたい。メール確認・返信、スケジュール管理・調整、タスク管理』という1〜2行の提出。やりたい方向は明確だが、対象ユーザーが誰でも当てはまる粒度のため、実装ポイントが定まらない。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>ニーズの大きいテーマ選定で、完成すれば日常的に効果を実感できるはず</li>
+<li>対象3領域（メール／予定／タスク）が並列で挙げられているので、優先順位を決めれば即着手できる</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>今、どのツールを使っていますか？（Gmail / Outlook / Googleカレンダー / Notion など）使っているサービスが書かれていると、連携先が即決まります</li>
+<li>『1日のうちで一番時間が溶けているのはどれか』を選び、まずその1機能だけのAI秘書から始めるとMVPになります</li>
+<li>返信メールを書く際の判断材料（過去履歴、定型文、優先度）を1行書くと、AIに任せたい範囲が明確になります</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="3">
+            <div class="score-fill" style="width:60%;"></div>
+          </div>
+          <div class="score-value">3/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-improvement">
+      <header class="card-header">
+        <span class="card-badge">✏️ 改善余地</span>
+        <span class="card-id">I3</span>
+      </header>
+      <h3 class="card-theme">LP・HPの制作と『第二の脳』化</h3>
+      <div class="card-meta"><span class="chip-domain">個人事業主・コーチ/コンサル</span></div>
+      <p class="card-summary">『訴求力のあるLPをつくる／集客力のあるHPをつくる／ノートアプリと協業して第二の脳をつくる／売れるコンセプトをつくる』の4項目を箇条書きで提出。一見やりたいことは明確だが、誰の・何のためのLPなのか、第二の脳に何を入れて何を取り出したいのかが書かれておらず、Claude Codeに渡せる粒度になっていない。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>アウトプット形式（LP・HP・知識ベース・コンセプト）に幅があり、Claude Codeの守備範囲を広く試そうとしている姿勢が見える</li>
+<li>ノートアプリとの連携を視野に入れている点は、個人知識管理のテーマとして良い切り口</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>『誰に・何を売るLP』なのかを1文で書くと、コピーもデザインもAIに指示しやすくなります</li>
+<li>『第二の脳』に入れたい既存メモは何件あって、どんな問いに答えてほしいですか？（例：『過去のクライアント事例を業種で横断検索したい』など）</li>
+<li>4項目のうち今期一番効果が出るものを1つ選び、それだけ深掘りすると進捗が出ます</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-improvement">
+      <header class="card-header">
+        <span class="card-badge">✏️ 改善余地</span>
+        <span class="card-id">I4</span>
+      </header>
+      <h3 class="card-theme">業務効率化アプリ全般</h3>
+      <div class="card-meta"><span class="chip-domain">事業主・営業マネジメント</span></div>
+      <p class="card-summary">『簡単なSaaS系サイト（SFAや勤怠管理など）／営業数字を管理するダッシュボード／AIをフル活用して可能性を確認したい』という方向性のみの提出。何を解決したい・誰が使うかの記述が少なく、ゼミ題材として絞り込まれていない。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>『まずAIの可能性を試したい』という探索的なスタンスは、ゼミの初回課題として悪くない出発点</li>
+<li>SFA／勤怠／営業数字と業務系で関心の輪郭は出ている</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>現在、営業数字はどこで管理していますか？（Excel／スプレッドシート／既存SaaS）そこを起点に『置き換えたい一画面』を選ぶとMVPになります</li>
+<li>ダッシュボードに表示したい指標を5つ書き出すと、データソースと描画ライブラリ選定がぐっと進みます</li>
+<li>『SaaS系サイト』は範囲が広いので、自分が毎日触っている画面を1つ模写するところから始めると現実的です</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="card card-improvement">
+      <header class="card-header">
+        <span class="card-badge">✏️ 改善余地</span>
+        <span class="card-id">I5</span>
+      </header>
+      <h3 class="card-theme">オープンデータ分析プログラム</h3>
+      <div class="card-meta"><span class="chip-domain">公共・自治体／データ活用に関心のある個人</span></div>
+      <p class="card-summary">『オープンデータを自動的に分析できるプログラムを作ってみたい／ウェブサイトの構築もチャレンジしたい』という2行の提出。テーマには筋が良いがどのオープンデータを、どんな目的で、誰に向けて見せるかが書かれていない。</p>
+      
+      <div class="card-section">
+        <h4>👍 良かったところ</h4>
+        <ul class="good-list"><li>オープンデータというテーマ選びは公益性・学習素材として優秀で、ライセンス的にも扱いやすい</li>
+<li>『自動分析』と『ウェブで公開』の2段階を最初から視野に入れている</li></ul>
+      </div>
+      
+      <div class="card-section">
+        <h4>💡 さらに良くするヒント</h4>
+        <ul class="hint-list"><li>対象データを1つに絞ってみましょう（例：気象庁の降水データ／e-Statの人口統計／自治体の予算データ）</li>
+<li>誰が見て、どんな判断や気づきを得るレポートにしたいかを1行で書くと、分析軸が決まります</li>
+<li>『分析』のアウトプットは表／グラフ／ダッシュボード／自然文サマリ等で難易度が変わるので、形式を1つ決めると進めやすいです</li></ul>
+      </div>
+      
+      <div class="card-scores">
+        <h4>5観点スコア</h4>
+        
+        <div class="score-row">
+          <div class="score-label">目的 (Why)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">対象範囲 (What)</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">入出力 (I/O)</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">業務シーン</div>
+          <div class="score-bar" data-value="1">
+            <div class="score-fill" style="width:20%;"></div>
+          </div>
+          <div class="score-value">1/5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">実現の構想</div>
+          <div class="score-bar" data-value="2">
+            <div class="score-fill" style="width:40%;"></div>
+          </div>
+          <div class="score-value">2/5</div>
+        </div>
+      </div>
+    </article>
+    
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="site-footer">
+  <p>Claude Codeマスターゼミ｜第1回事前課題レビュー</p>
+  <p class="anon-footer">本レビューは匿名化済みです。提出物の個別IDや個人情報は一切記載していません。</p>
+</footer>
+
+</body>
+</html>
