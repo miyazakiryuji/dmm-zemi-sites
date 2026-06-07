@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 04 ｜ 会社HPの仕上げ → 生成AIアプリ開発の入口 ｜ Claude Codeマスターゼミ</title>
-<meta name="description" content="DMM 生成AI CAMP 学び放題 ［1期］Claude Codeマスターゼミ 第04回の講義資料サイト。EP15〜EP19 の自習ポイントとLIVE講義のアジェンダをまとめています。">
+<title>Lesson 04 ｜ 会社HPの仕上げ・公開と生成AIアプリ開発の入口 ｜ Claude Codeマスターゼミ</title>
+<meta name="description" content="DMM 生成AI CAMP 学び放題 Claude Codeマスターゼミ 第4回の講義資料サイト。EP15〜19（会社HPのデザイン仕上げ→公開／生成AIアプリ開発の入口：Python・Streamlit・API）の自習ポイントと、Lesson 03からの事前課題「Claude Codeで作り始めた会社HP」の公開添削アジェンダをまとめています。">
+<link rel="canonical" href="https://claudecode-zemi.netlify.app/lessons/lesson04/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Claude Codeマスターゼミ">
-<meta property="og:title" content="Lesson 04 ｜ 会社HPの仕上げ → 生成AIアプリ開発の入口 ｜ Claude Codeマスターゼミ">
-<meta property="og:description" content="第04回の講義資料サイト。EP15〜EP19 の自習ポイントとLIVE講義のアジェンダをまとめています。">
+<meta property="og:title" content="Lesson 04 ｜ 会社HPの仕上げ・公開と生成AIアプリ開発の入口 ｜ Claude Codeマスターゼミ">
+<meta property="og:description" content="第4回の講義資料サイト。EP15〜19 の自習ポイントと、Lesson 03からの事前課題「Claude Codeで作り始めた会社HP」の公開添削アジェンダをまとめています。">
+<meta property="og:url" content="https://claudecode-zemi.netlify.app/lessons/lesson04/">
+<meta property="og:image" content="https://claudecode-zemi.netlify.app/assets/images/face_icon.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <style>
@@ -18,9 +21,10 @@
   --bg-card: #FFFFFF;
   --text-main: #2A2F45;
   --text-sub: #5A6178;
-  --text-mute: #8A91A8;
+  --text-mute: #646B82;
   --accent-orange: #FF8C42;
   --accent-orange-hover: #FF7424;
+  --text-accent: #B84A00;
   --accent-blue: #4DA8FF;
   --accent-pink: #FF9EC3;
   --accent-green: #6FD49D;
@@ -28,11 +32,13 @@
   --border: #FFE2C7;
   --shadow-sm: 0 4px 16px rgba(255, 140, 66, 0.08);
   --shadow-md: 0 12px 32px rgba(255, 140, 66, 0.12);
+  --shadow-lg: 0 20px 60px rgba(255, 140, 66, 0.18);
   --radius: 18px;
   --radius-lg: 28px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --container: 1100px;
 }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -43,128 +49,554 @@ body {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
 }
-a { color: var(--accent-orange-hover); text-decoration: none; transition: color .2s var(--ease); }
+img { max-width: 100%; display: block; }
+a { color: var(--text-accent); text-decoration: none; transition: color .2s var(--ease); }
 a:hover { color: var(--accent-orange); }
 
-.nav { position: sticky; top: 0; z-index: 100; background: rgba(255, 249, 240, 0.9); backdrop-filter: saturate(180%) blur(14px); border-bottom: 1px solid var(--border); }
-.nav__inner { max-width: var(--container); margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.nav__brand { font-weight: 800; }
-.nav__brand small { font-size: 12px; color: var(--text-sub); font-weight: 600; margin-left: 8px; }
+/* ===== Nav ===== */
+.nav {
+  position: sticky;
+  top: 0; z-index: 100;
+  background: rgba(255, 249, 240, 0.9);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.nav__brand { display: flex; align-items: baseline; gap: 10px; font-weight: 800; }
+.nav__brand small { font-size: 12px; color: var(--text-sub); font-weight: 600; }
 .nav__menu { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
 .nav__link { font-size: 13px; font-weight: 600; color: var(--text-sub); }
 .nav__link:hover { color: var(--accent-orange); }
-.nav__back { font-size: 12px; font-weight: 700; padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); color: var(--text-sub); }
+.nav__back {
+  font-size: 12px; font-weight: 700;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-sub);
+}
 .nav__back:hover { background: var(--bg-soft); color: var(--accent-orange); }
 
-.hero { padding: 80px 24px 56px; text-align: center; background: radial-gradient(circle at 20% 0%, rgba(255, 209, 102, 0.25), transparent 60%), radial-gradient(circle at 80% 20%, rgba(255, 158, 195, 0.18), transparent 55%); }
-.hero__badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--accent-orange); color: #fff; font-size: 13px; font-weight: 700; border-radius: 999px; box-shadow: var(--shadow-sm); }
+/* ===== Hero ===== */
+.hero {
+  padding: 80px 24px 56px;
+  text-align: center;
+  background: radial-gradient(circle at 20% 0%, rgba(255, 209, 102, 0.25), transparent 60%),
+              radial-gradient(circle at 80% 20%, rgba(255, 158, 195, 0.18), transparent 55%);
+}
+.hero__badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: var(--accent-orange);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
 .hero__lesson { font-size: 14px; color: var(--text-sub); margin: 24px 0 8px; font-weight: 700; letter-spacing: .06em; }
-.hero__title { font-size: clamp(28px, 5vw, 44px); font-weight: 900; line-height: 1.35; margin: 0 0 20px; }
-.hero__title em { font-style: normal; color: var(--accent-orange); }
-.hero__meta { display: inline-flex; flex-wrap: wrap; gap: 16px; padding: 14px 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); font-size: 14px; color: var(--text-sub); font-weight: 600; margin-top: 20px; }
+.hero__title {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 900;
+  line-height: 1.35;
+  margin: 0 0 20px;
+}
+.hero__title em { font-style: normal; color: var(--text-accent); }
+.hero__meta {
+  display: inline-flex; flex-wrap: wrap; gap: 16px;
+  padding: 14px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  font-size: 14px;
+  color: var(--text-sub);
+  font-weight: 600;
+  margin-top: 20px;
+}
 .hero__meta strong { color: var(--text-main); }
+.hero__meta-item { display: inline-flex; align-items: center; gap: 8px; }
+.hero__meta-item svg { width: 18px; height: 18px; color: var(--accent-orange); flex-shrink: 0; }
 
+/* ===== Section ===== */
 .section { padding: 64px 24px; }
 .section__inner { max-width: var(--container); margin: 0 auto; }
-.section__kicker { font-size: 12px; font-weight: 800; letter-spacing: .15em; color: var(--accent-orange); text-transform: uppercase; margin: 0 0 8px; }
-.section__title { font-size: clamp(24px, 4vw, 34px); font-weight: 900; margin: 0 0 8px; line-height: 1.4; }
-.section__title em { font-style: normal; color: var(--accent-orange); }
-.section__lead { color: var(--text-sub); font-size: 15px; margin: 0 0 32px; }
+.section__kicker {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: var(--text-accent);
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.section__title {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 900;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+.section__title em { font-style: normal; color: var(--text-accent); }
+.section__lead {
+  color: var(--text-sub);
+  font-size: 15px;
+  margin: 0 0 32px;
+}
 
-/* Cycle Map (Phase position) */
-.cycle-map { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.cycle-map__phase { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 26px; box-shadow: var(--shadow-sm); border-top: 5px solid var(--accent-orange); }
+/* ===== Cycle Map (Phase position) ===== */
+.cycle-map {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.cycle-map__phase {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px 84px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  border-top: 5px solid var(--accent-orange);
+}
 .cycle-map__phase--live { border-top-color: var(--accent-blue); }
-.cycle-map__label { display: inline-block; font-size: 11px; font-weight: 900; letter-spacing: .12em; padding: 5px 12px; background: var(--accent-orange); color: #fff; border-radius: 999px; margin: 0 0 10px; }
+.cycle-map__label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  padding: 5px 12px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 999px;
+  margin: 0 0 10px;
+}
 .cycle-map__phase--live .cycle-map__label { background: var(--accent-blue); }
-.cycle-map__title { font-size: 16px; font-weight: 900; margin: 0 0 4px; color: var(--text-main); }
-.cycle-map__title small { font-size: 12.5px; color: var(--text-sub); font-weight: 600; display: block; margin-top: 2px; }
-.cycle-map__steps { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
-.cycle-map__step { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; padding: 10px 12px; background: var(--bg-soft); border-radius: 10px; font-size: 13.5px; color: var(--text-main); }
-.cycle-map__step a { color: var(--text-main); font-weight: 700; }
+.cycle-map__title {
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0 0 4px;
+  color: var(--text-main);
+}
+.cycle-map__title small {
+  font-size: 12.5px;
+  color: var(--text-sub);
+  font-weight: 600;
+  display: block;
+  margin-top: 2px;
+}
+.cycle-map__steps {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.cycle-map__step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--text-main);
+}
+.cycle-map__step a {
+  color: var(--text-main);
+  font-weight: 700;
+}
 .cycle-map__step a:hover { color: var(--accent-orange); }
 .cycle-map__phase--live .cycle-map__step a:hover { color: var(--accent-blue); }
-.cycle-map__num { display: grid; place-items: center; width: 24px; height: 24px; background: var(--accent-orange); color: #fff; border-radius: 50%; font-size: 12px; font-weight: 900; }
+.cycle-map__num {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 900;
+}
 .cycle-map__phase--live .cycle-map__num { background: var(--accent-blue); }
 .cycle-map__step-text { line-height: 1.6; }
-.cycle-map__step-meta { font-size: 11.5px; color: var(--text-sub); font-weight: 700; margin-left: 6px; letter-spacing: .04em; }
-.cycle-map__note { margin: 14px 0 0; padding: 10px 12px; background: var(--bg-soft); border-left: 3px solid var(--accent-blue); border-radius: 6px; font-size: 12.5px; color: var(--text-sub); line-height: 1.7; }
+.cycle-map__step-meta {
+  font-size: 11.5px;
+  color: var(--text-sub);
+  font-weight: 700;
+  display: block;
+  margin-left: 0;
+  margin-top: 2px;
+  letter-spacing: .04em;
+}
+.cycle-map__note {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  line-height: 1.7;
+}
 
+/* ===== Agenda ===== */
 .agenda { display: grid; gap: 14px; }
-.agenda__item { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 18px 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent-orange); }
+.agenda__item {
+  padding: 18px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--accent-orange);
+}
 .agenda__item--review { border-left-color: var(--accent-pink); }
 .agenda__item--lecture { border-left-color: var(--accent-blue); }
 .agenda__item--next { border-left-color: var(--accent-green); }
-.agenda__time { font-weight: 800; color: var(--accent-orange); font-size: 14px; font-variant-numeric: tabular-nums; }
 .agenda__title { font-weight: 800; margin: 0 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .agenda__desc { color: var(--text-sub); font-size: 14px; margin: 0; }
-.agenda__phase-badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 900; letter-spacing: .08em; padding: 3px 9px; background: var(--accent-blue); color: #fff; border-radius: 999px; line-height: 1.4; white-space: nowrap; }
+.agenda__phase-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  padding: 3px 9px;
+  background: var(--accent-blue);
+  color: #fff;
+  border-radius: 999px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
 .agenda__phase-badge--open { background: var(--text-mute); }
 .agenda__phase-badge--review { background: var(--accent-pink); }
 .agenda__phase-badge--lecture { background: var(--accent-blue); }
 .agenda__phase-badge--next { background: var(--accent-green); }
 
-.homework-phase { display: inline-block; font-size: 11px; font-weight: 900; letter-spacing: .1em; padding: 4px 11px; background: var(--accent-orange); color: #fff; border-radius: 999px; margin: 0 0 10px; }
+/* ===== Homework phase badge ===== */
+.homework-phase {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  padding: 4px 11px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 999px;
+  margin: 0 0 10px;
+}
 
-.ep-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
-.ep-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+/* ===== EP cards ===== */
+.ep-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.ep-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
 .ep-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.ep-card__num { font-size: 12px; font-weight: 800; color: var(--accent-orange); letter-spacing: .08em; margin: 0 0 6px; }
+.ep-card__num {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-accent);
+  letter-spacing: .08em;
+  margin: 0 0 6px;
+}
 .ep-card__title { font-size: 16px; font-weight: 800; margin: 0 0 10px; line-height: 1.5; }
 .ep-card__desc { font-size: 13px; color: var(--text-sub); margin: 0 0 12px; flex: 1; }
-.ep-card__tag { align-self: flex-start; font-size: 11px; font-weight: 700; padding: 4px 10px; background: var(--bg-soft); color: var(--accent-orange-hover); border-radius: 999px; }
+.ep-card__tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: var(--bg-soft);
+  color: var(--text-accent);
+  border-radius: 999px;
+}
 
+/* ===== Points ===== */
 .points { display: grid; gap: 16px; }
-.point { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 18px 22px; background: var(--bg-card); border-left: 4px solid var(--accent-orange); border-radius: 12px; box-shadow: var(--shadow-sm); }
-.point__badge { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-orange); color: #fff; font-weight: 900; font-size: 14px; display: grid; place-items: center; }
+.point {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  padding: 18px 22px;
+  background: var(--bg-card);
+  border-left: 4px solid var(--accent-orange);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.point__badge {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  display: grid; place-items: center;
+}
 .point__title { font-weight: 800; margin: 0 0 4px; }
 .point__body { font-size: 14px; color: var(--text-sub); margin: 0; }
+.point code {
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
 
-.homework { background: var(--bg-card); border: 2px dashed var(--accent-orange); border-radius: var(--radius); padding: 26px 28px; }
-.homework__title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 900; margin: 0 0 12px; }
-.homework__title::before { content: "📝"; font-size: 22px; }
+/* ===== Setup checklist ===== */
+.checklist {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+}
+.checklist h3 {
+  font-size: 16px; font-weight: 800;
+  margin: 0 0 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.checklist h3 svg {
+  width: 20px; height: 20px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+.checklist ol {
+  margin: 0; padding-left: 22px;
+}
+.checklist li { margin: 8px 0; font-size: 14.5px; }
+.checklist li strong { color: var(--text-main); }
+.checklist li small { display: block; color: var(--text-mute); font-size: 12.5px; margin-top: 2px; }
+.checklist code {
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* ===== Homework recap ===== */
+.homework-recap {
+  background: linear-gradient(135deg, #FFF3E6, #FFE2C7);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+}
+.homework-recap__label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: var(--text-accent);
+  margin: 0 0 8px;
+}
+.homework-recap__title { font-size: 22px; font-weight: 900; margin: 0 0 12px; }
+.homework-recap__body { color: var(--text-sub); margin: 0 0 18px; }
+.homework-recap__list {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 16px 22px 16px 38px;
+  margin: 0;
+}
+.homework-recap__list li { margin: 6px 0; font-size: 14px; }
+.homework-recap__list strong { color: var(--text-main); }
+.homework-recap__link {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--text-accent);
+}
+
+/* ===== Homework ===== */
+.homework {
+  background: var(--bg-card);
+  border: 2px dashed var(--accent-orange);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.homework__title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 18px; font-weight: 900; margin: 0 0 12px;
+}
+.homework__title svg {
+  width: 24px; height: 24px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
 .homework__body { margin: 0 0 14px; }
-.homework__deadline { display: inline-block; font-weight: 800; background: var(--accent-orange); color: #fff; padding: 6px 14px; border-radius: 999px; font-size: 13px; }
+.homework__deadline {
+  display: inline-block;
+  font-weight: 800;
+  background: var(--accent-orange);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+}
 
-.next { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 28px; background: var(--bg-soft); border-radius: var(--radius); border: 1px solid var(--border); }
+/* ===== Next ===== */
+.next {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
 .next__label { font-size: 12px; color: var(--text-sub); font-weight: 800; letter-spacing: .1em; margin: 0 0 4px; }
 .next__title { font-size: 18px; font-weight: 900; margin: 0; }
 .next__date { font-size: 14px; color: var(--text-sub); font-weight: 700; }
 
-.stuck { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
-.stuck__step { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 22px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+/* ===== Stuck flow ===== */
+.stuck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.stuck__step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
 .stuck__step--primary { border-top: 4px solid var(--accent-orange); }
 .stuck__step--secondary { border-top: 4px solid var(--accent-blue); }
 .stuck__step--tertiary { border-top: 4px solid var(--accent-pink); }
-.stuck__num { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--accent-orange); margin: 0 0 10px; }
-.stuck__num span { display: grid; place-items: center; width: 28px; height: 28px; background: var(--accent-orange); color: #fff; border-radius: 50%; font-size: 14px; }
+.stuck__num {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--text-accent);
+  margin: 0 0 10px;
+}
+.stuck__num span {
+  display: grid; place-items: center;
+  width: 28px; height: 28px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+}
 .stuck__step--secondary .stuck__num { color: var(--accent-blue); }
 .stuck__step--secondary .stuck__num span { background: var(--accent-blue); }
 .stuck__step--tertiary .stuck__num { color: var(--accent-pink); }
 .stuck__step--tertiary .stuck__num span { background: var(--accent-pink); }
 .stuck__title { font-size: 17px; font-weight: 900; margin: 0 0 8px; line-height: 1.5; }
 .stuck__body { font-size: 14px; color: var(--text-sub); margin: 0 0 12px; }
-.stuck__tips { background: var(--bg-soft); border-radius: 10px; padding: 10px 14px; font-size: 12.5px; color: var(--text-sub); margin: 0; }
+.stuck__tips {
+  background: var(--bg-soft);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  margin: 0;
+}
 .stuck__tips strong { color: var(--text-main); }
 .stuck__tips ul { margin: 4px 0 0; padding-left: 18px; }
 .stuck__tips li { margin: 2px 0; }
-.stuck__quote { background: var(--bg-soft); border-left: 4px solid var(--accent-orange); padding: 14px 20px; border-radius: 10px; font-size: 14px; color: var(--text-main); margin: 24px 0 0; }
+.stuck__quote {
+  background: var(--bg-soft);
+  border-left: 4px solid var(--accent-orange);
+  padding: 18px 20px 18px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-main);
+  margin: 24px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stuck__quote img {
+  width: 72px; height: auto;
+  flex-shrink: 0;
+}
 
-.notice { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 26px; box-shadow: var(--shadow-sm); }
-.notice h3 { font-size: 15px; font-weight: 800; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
-.notice h3::before { content: "❗"; }
+/* ===== Penguin mascots ===== */
+.hero__mascot,
+.cycle-map__mascot,
+.homework__mascot {
+  pointer-events: none;
+  user-select: none;
+}
+.hero__mascot {
+  display: block;
+  width: 160px;
+  height: auto;
+  margin: 28px auto 0;
+}
+.cycle-map__phase { position: relative; overflow: hidden; }
+.cycle-map__mascot {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 64px;
+  height: auto;
+  opacity: 0.95;
+}
+.homework__mascot {
+  display: block;
+  width: 96px;
+  height: auto;
+  margin: 0 0 8px auto;
+}
+@media (max-width: 720px) {
+  .hero__mascot { width: 124px; margin-top: 20px; }
+  .cycle-map__mascot { width: 48px; bottom: 10px; right: 10px; }
+  .homework__mascot { width: 72px; }
+}
+
+/* ===== Common notice ===== */
+.notice {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.notice h3 {
+  font-size: 15px; font-weight: 800; margin: 0 0 10px;
+}
 .notice ul { margin: 0; padding-left: 20px; color: var(--text-sub); font-size: 14px; }
 .notice li { margin: 6px 0; }
-.notice__link { display: inline-block; margin-top: 14px; font-weight: 700; color: var(--accent-orange-hover); }
+.notice__link {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 700;
+  color: var(--text-accent);
+}
 
-.footer { padding: 40px 24px; text-align: center; border-top: 1px solid var(--border); background: var(--bg-soft); color: var(--text-sub); font-size: 13px; }
+/* ===== Footer ===== */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text-sub);
+  font-size: 13px;
+}
 .footer a { font-weight: 700; }
 
 @media (max-width: 720px) {
   .cycle-map { grid-template-columns: 1fr; gap: 16px; }
 }
 @media (max-width: 640px) {
-  .agenda__item { grid-template-columns: 60px 1fr; padding: 14px 16px; }
+  .agenda__item { padding: 14px 16px; }
   .section { padding: 48px 20px; }
   .hero { padding: 56px 20px 40px; }
 }
@@ -172,33 +604,101 @@ a:hover { color: var(--accent-orange); }
 </head>
 <body>
 
+<!-- ===== SVG Icon Sprite (custom, no emoji) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-cal" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="5" width="17" height="15" rx="2.5"/>
+        <path d="M8 3v4M16 3v4M3.5 10h17"/>
+      </g>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8.5"/>
+        <path d="M12 7v5l3.2 2"/>
+      </g>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s7-6.2 7-11.2A7 7 0 1 0 5 9.8C5 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="10" r="2.6"/>
+      </g>
+    </symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20h4l10.5-10.5a2.6 2.6 0 0 0-3.7-3.7L4.3 16.3V20z"/>
+        <path d="M13.5 7.5l3.7 3.7"/>
+      </g>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8.6"/>
+        <path d="M12 7.5v5.5M12 16v.6"/>
+      </g>
+    </symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18h6M10 21h4"/>
+        <path d="M8 14.5a5.5 5.5 0 1 1 8 0c-.8.9-1.4 1.7-1.5 3.5h-5c-.1-1.8-.7-2.6-1.5-3.5z"/>
+      </g>
+    </symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.5 5.5a4 4 0 0 0 5 5l-2 2-5-5 2-2z"/>
+        <path d="M12.5 7.5L4 16v4h4l8.5-8.5"/>
+      </g>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.5l4.5 4.5L19 7.5"/>
+      </g>
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="12" y1="2.5" x2="12" y2="21.5"/>
+        <line x1="2.5" y1="12" x2="21.5" y2="12"/>
+        <line x1="5.3" y1="5.3" x2="18.7" y2="18.7"/>
+        <line x1="18.7" y1="5.3" x2="5.3" y2="18.7"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- Nav -->
 <nav class="nav">
   <div class="nav__inner">
-    <div class="nav__brand">Lesson 04 <small>Claude Codeマスターゼミ</small></div>
+    <div class="nav__brand">
+      Lesson 04 <small>Claude Codeマスターゼミ</small>
+    </div>
     <div class="nav__menu">
       <a href="#cycle-map" class="nav__link">サイクル位置</a>
       <a href="#agenda" class="nav__link">アジェンダ</a>
       <a href="#eps" class="nav__link">対象EP</a>
       <a href="#points" class="nav__link">要点</a>
+      <a href="#setup" class="nav__link">事前準備</a>
       <a href="#homework" class="nav__link">事前課題</a>
       <a href="#stuck" class="nav__link">困ったら</a>
-      <a href="../../index.html" class="nav__back">← メインサイト</a>
+      <a href="../lesson03/index.html" class="nav__back">← Lesson 03</a>
+      <a href="../../index.html" class="nav__back">← Home</a>
     </div>
   </div>
 </nav>
 
 <!-- Hero -->
 <header class="hero">
-  <span class="hero__badge">DMM 生成AI CAMP 学び放題 ／［1期］Claude Codeマスターゼミ</span>
+  <span class="hero__badge">DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ</span>
   <p class="hero__lesson">LESSON 04</p>
-  <h1 class="hero__title">会社HPの仕上げ → 生成AIアプリ開発の入口</h1>
-  <p style="color: var(--text-sub); max-width: 760px; margin: 0 auto;">会社HPを仕上げつつ、生成AIアプリ開発の世界に踏み出します。</p>
+  <h1 class="hero__title">
+    <em>会社HP</em>を仕上げて公開し、<em>生成AIアプリ開発</em>へ踏み出す
+  </h1>
+  <p style="color: var(--text-sub); max-width: 760px; margin: 0 auto;">
+    EP15〜19 を扱います。前半は会社HPの<strong>デザイン仕上げ→公開</strong>（実践①）まで進め、後半から<strong>生成AIアプリ開発</strong>（実践②：Python / Streamlit / API の概要、Pythonのインストール、生成AIライティングツールの開発）の入口に踏み出します。
+  </p>
   <div class="hero__meta">
-    
-    
-    <span>📍 Google Meet</span>
+    <span class="hero__meta-item"><svg aria-hidden="true"><use href="#i-pin"/></svg>Google Meet</span>
   </div>
+  <img src="../../assets/penguins/penguin_teaching.png" alt="ペンギン先生" class="hero__mascot" loading="lazy">
 </header>
 
 <!-- サイクル位置 -->
@@ -207,8 +707,9 @@ a:hover { color: var(--accent-orange); }
     <p class="section__kicker">Cycle Position</p>
     <h2 class="section__title">この回の<em>サイクル位置</em></h2>
     <p class="section__lead">
-      毎週のサイクル（事前準備 → LIVE講義）の中で、Lesson 04 がどの位置にあたるかを示します。
+      毎週のサイクル（事前準備 → LIVE講義）の中で、Lesson 04 がどの位置にあたるかを示します。前回（EP07〜09）で環境構築は完了済み。今回は <strong>実際に手を動かした成果物が初めて出そろう回</strong>で、冒頭にその公開添削が入ります。
     </p>
+
     <div class="cycle-map">
       <div class="cycle-map__phase">
         <span class="cycle-map__label">PHASE 1</span>
@@ -224,12 +725,17 @@ a:hover { color: var(--accent-orange); }
           <li class="cycle-map__step">
             <span class="cycle-map__num">2</span>
             <span class="cycle-map__step-text">
-              <a href="#homework">プラスアルファの課題を提出</a>
-              <span class="cycle-map__step-meta">／開催3日前まで</span>
+              <a href="#homework">プラスアルファの課題を提出（A:公開サイトURL / B:Python等の説明）</a>
+              <span class="cycle-map__step-meta">／開催3日前まで 締切</span>
             </span>
           </li>
         </ol>
+        <p class="cycle-map__note">
+          ※自習対象は EP15・EP16（実践①：会社HPの仕上げ→公開）と EP17〜EP19（実践②：生成AIアプリ開発の入口）の5本です。
+        </p>
+        <img src="../../assets/penguins/penguin_holding_book.png" alt="" class="cycle-map__mascot" loading="lazy" aria-hidden="true">
       </div>
+
       <div class="cycle-map__phase cycle-map__phase--live">
         <span class="cycle-map__label">PHASE 2</span>
         <h3 class="cycle-map__title">週次LIVE講義<small>3パート構成</small></h3>
@@ -237,25 +743,23 @@ a:hover { color: var(--accent-orange); }
           <li class="cycle-map__step">
             <span class="cycle-map__num">1</span>
             <span class="cycle-map__step-text">
-              <a href="#agenda">提出課題のピックアップ＆講評</a>
-              
+              <a href="#agenda">提出課題のピックアップ＆講評（公開添削）</a>
             </span>
           </li>
           <li class="cycle-map__step">
             <span class="cycle-map__num">2</span>
             <span class="cycle-map__step-text">
-              <a href="#agenda">自習内容の補足説明</a>
-              
+              <a href="#agenda">自習内容の補足説明（EP15〜EP19）</a>
             </span>
           </li>
           <li class="cycle-map__step">
             <span class="cycle-map__num">3</span>
             <span class="cycle-map__step-text">
               <a href="#agenda">次回課題・自習の確認 ／ Q&A</a>
-              
             </span>
           </li>
         </ol>
+        <img src="../../assets/penguins/penguin_teaching.png" alt="" class="cycle-map__mascot" loading="lazy" aria-hidden="true">
       </div>
     </div>
   </div>
@@ -266,31 +770,38 @@ a:hover { color: var(--accent-orange); }
   <div class="section__inner">
     <p class="section__kicker">Agenda</p>
     <h2 class="section__title">当日の<em>アジェンダ</em></h2>
-    <p class="section__lead">①講評 → ②補足説明 → ③次回案内の順で進めます。進行状況により前後する可能性があります。</p>
+    <p class="section__lead">
+      <strong>①提出課題の講評 → ②自習内容の補足 → ③次回案内</strong>の順で進めます。各項目のバッジは <a href="#cycle-map">サイクル位置</a> に対応しています。
+    </p>
+
     <div class="agenda">
       <div class="agenda__item">
-        <div>
-          <p class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--open">OPEN</span>オープニング・前回の振り返り</p>
-          <p class="agenda__desc">前回の振り返りと、今回の進め方・ゴールを共有します。</p>
-        </div>
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--open">OPEN</span>オープニング・前回の振り返り</h3>
+        <p class="agenda__desc">前回（EP07〜09）で完了した環境構築（Node.js / Claude Code のインストール → 初めての体験）をおさらいし、本日のゴールを共有。ここから「Claude Code を自分仕様に整える＆実際に作る」フェーズに入ります。</p>
       </div>
       <div class="agenda__item agenda__item--review">
-        <div>
-          <p class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--review">PHASE 2.1</span>提出課題のピックアップ＆講評</p>
-          <p class="agenda__desc">提出いただいた事前課題をピックアップし、良かった点と「あと一歩」をその場で講評します（匿名）。</p>
-        </div>
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--review">PHASE 2.1</span>公開添削＆講評：「Claude Codeで作った会社HP」</h3>
+        <p class="agenda__desc">Lesson 03 からの事前課題（作り始めた会社HP）から数本ピックアップして公開添削。匿名化のうえ、良かった点・伸ばしどころを共有し、お互いの作り方からヒントを持ち帰ります。</p>
       </div>
       <div class="agenda__item agenda__item--lecture">
-        <div>
-          <p class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>自習内容の補足解説</p>
-          <p class="agenda__desc">会社HPの仕上げ・公開のコツ、そして生成AIアプリ開発（Python / Streamlit / API）の概要を、自習内容に沿って補足解説します。</p>
-        </div>
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP15・16 会社HPの仕上げ → 公開</h3>
+        <p class="agenda__desc">作りかけの会社HPを、配色・余白・文字組み・スマホ表示まで<strong>デザインのブラッシュアップ</strong>で整え（EP15）、最後に<strong>Webへ公開</strong>してURLで共有できる状態にする（EP16）。実践①の総仕上げです。</p>
+      </div>
+      <div class="agenda__item agenda__item--lecture">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP17 生成AIアプリ開発：Python / Streamlit / API の概要</h3>
+        <p class="agenda__desc">実践②の入口。<strong>Python＝処理を書く言語</strong>／<strong>Streamlit＝画面を手軽に作る道具</strong>／<strong>API＝生成AI（Claude等）を呼び出す窓口</strong>。3つの役割の関係をつかみます（文法は覚えなくてOK）。</p>
+      </div>
+      <div class="agenda__item agenda__item--lecture">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP18 Python のインストール</h3>
+        <p class="agenda__desc">開発環境として Python を準備します。バージョン確認（<code>python --version</code> / <code>python3 --version</code>）まで。詰まりやすい所は当日まとめて解消します。</p>
+      </div>
+      <div class="agenda__item agenda__item--lecture">
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP19 生成AIライティングツールの開発</h3>
+        <p class="agenda__desc">Python＋Streamlit＋API を組み合わせて、<strong>生成AIを使ったライティングツール</strong>を実際に作ってみます。「動くものが手元にできる」最初の生成AIアプリです。</p>
       </div>
       <div class="agenda__item agenda__item--next">
-        <div>
-          <p class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--next">PHASE 2.3</span>次回案内＆Q&A</p>
-          <p class="agenda__desc">次回の自習対象・事前課題を確認し、質疑応答を行います。</p>
-        </div>
+        <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--next">PHASE 2.3</span>次回案内＆Q&A</h3>
+        <p class="agenda__desc">次回（作ったコードを GitHub に上げて公開：EP15〜16 / GitHub）の自習対象と事前課題の案内、本日の質問対応。</p>
       </div>
     </div>
   </div>
@@ -301,39 +812,46 @@ a:hover { color: var(--accent-orange); }
   <div class="section__inner">
     <p class="section__kicker">Episodes</p>
     <h2 class="section__title">今回の<em>自習対象エピソード</em></h2>
-    <p class="section__lead">LIVE講義までに、以下のエピソードを「ツール別コース ＞ Claude Code」から視聴してください。</p>
+    <p class="section__lead">
+      LIVE講義までに、以下のエピソードを「ツール別コース ＞ Claude Code」から視聴してください。手を動かしながら見るとそのまま事前準備になります。
+    </p>
+
     <div class="ep-grid">
       <div class="ep-card">
         <p class="ep-card__num">EP15</p>
         <h3 class="ep-card__title">【実践①：会社HP制作】デザインのブラッシュアップ</h3>
-        <p class="ep-card__desc">作った会社HPの見た目・デザインを磨き込みます。</p>
-        <span class="ep-card__tag">実践①</span>
+        <p class="ep-card__desc">作りかけの会社HPを、配色・余白・文字組み・スマホ表示まで整えて「公開できる見栄え」に引き上げる。</p>
+        <span class="ep-card__tag">実践① HP</span>
       </div>
       <div class="ep-card">
         <p class="ep-card__num">EP16</p>
         <h3 class="ep-card__title">【実践①：会社HP制作】公開</h3>
-        <p class="ep-card__desc">仕上げた会社HPをWebに公開するところまで進めます。</p>
-        <span class="ep-card__tag">実践①</span>
+        <p class="ep-card__desc">仕上げた会社HPを Web に公開し、URLで共有できる状態にする。実践①のゴール。</p>
+        <span class="ep-card__tag">実践① HP</span>
       </div>
       <div class="ep-card">
         <p class="ep-card__num">EP17</p>
         <h3 class="ep-card__title">【実践②：生成AIアプリ開発】Python / Streamlit / API の概要</h3>
-        <p class="ep-card__desc">生成AIアプリ開発で使う3つの基礎（Python・Streamlit・API）の概要をつかみます。</p>
-        <span class="ep-card__tag">実践②</span>
+        <p class="ep-card__desc">生成AIアプリ開発で使う3つの基礎の“役割”を理解（Python＝処理／Streamlit＝画面／API＝生成AIの呼び出し）。</p>
+        <span class="ep-card__tag">実践② アプリ</span>
       </div>
       <div class="ep-card">
         <p class="ep-card__num">EP18</p>
         <h3 class="ep-card__title">【実践②：生成AIアプリ開発】Python のインストール</h3>
-        <p class="ep-card__desc">開発環境として Python を準備（インストール）します。</p>
-        <span class="ep-card__tag">実践②</span>
+        <p class="ep-card__desc">開発環境として Python を準備（インストール）。バージョン確認まで。</p>
+        <span class="ep-card__tag">実践② アプリ</span>
       </div>
       <div class="ep-card">
         <p class="ep-card__num">EP19</p>
         <h3 class="ep-card__title">【実践②：生成AIアプリ開発】生成AIライティングツールの開発</h3>
-        <p class="ep-card__desc">生成AIを使ったライティングツールを実際に作ってみます。</p>
-        <span class="ep-card__tag">実践②</span>
+        <p class="ep-card__desc">Python＋Streamlit＋API で、生成AIを使ったライティングツールを実際に作ってみる。</p>
+        <span class="ep-card__tag">実践② アプリ</span>
       </div>
     </div>
+
+    <p style="margin: 18px 0 0; font-size: 13px; color: var(--text-mute);">
+      ※ <strong>EP18「Pythonのインストール」</strong> は環境によって詰まりやすいポイントです。うまくいかない場合も、当日のLIVEでまとめてフォローしますので、できる所までで大丈夫です。
+    </p>
   </div>
 </section>
 
@@ -342,34 +860,118 @@ a:hover { color: var(--accent-orange); }
   <div class="section__inner">
     <p class="section__kicker">Key Points</p>
     <h2 class="section__title">今回押さえる<em>3つのポイント</em></h2>
-    <p class="section__lead">LIVE講義でも重点的に解説する観点です。</p>
+    <p class="section__lead">LIVE講義でも重点的に解説する観点です。自習時の視聴メモの目安にもどうぞ。</p>
+
     <div class="points">
-      <div class="point"><div class="point__badge">1</div><div><p class="point__title">デザインを仕上げて「公開できる状態」にする</p><p class="point__body">色・余白・文字組みやスマホ表示など、会社HPの「あと一歩」を整えて、実際に公開できるクオリティに引き上げます。</p></div></div>
-      <div class="point"><div class="point__badge">2</div><div><p class="point__title">Webサイトを「公開」する流れをつかむ</p><p class="point__body">作ったHPをインターネット上に公開し、URLで共有できるようにする一連の手順を体験します。</p></div></div>
-      <div class="point"><div class="point__badge">3</div><div><p class="point__title">生成AIアプリ開発の全体像（Python / Streamlit / API）</p><p class="point__body">次の実践②に向けて、Python・Streamlit・API の役割と関係を俯瞰し、開発環境（Python）を準備します。</p></div></div>
+      <div class="point">
+        <div class="point__badge">1</div>
+        <div>
+          <p class="point__title">会社HPは「仕上げ」と「公開」で<em>ひとまず完成</em>させる</p>
+          <p class="point__body">作りかけのHPは、配色・余白・文字の大きさ・スマホ表示を整えるだけで一気に“それっぽく”なります。Claude Code に「ここをこう直して」と日本語で頼めばOK。仕上げたら<strong>Webに公開してURLで共有できる状態</strong>まで持っていくのが実践①のゴールです。</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point__badge">2</div>
+        <div>
+          <p class="point__title">生成AIアプリは <strong>Python / Streamlit / API</strong> の<em>3つの役割</em>でできている</p>
+          <p class="point__body"><strong>Python＝処理を書く言語</strong>、<strong>Streamlit＝画面を手軽に作る道具</strong>、<strong>API＝生成AI（Claude等）を呼び出す窓口</strong>。この3つが組み合わさって「入力→生成AIが処理→画面に表示」というアプリになります。文法は覚えなくてOK、コードは Claude Code が書きます。</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point__badge">3</div>
+        <div>
+          <p class="point__title">まずは <em>Python を入れて、動くツールを1つ</em>作ってみる</p>
+          <p class="point__body">実践②の最初の山は<strong>Pythonのインストール</strong>。ここを越えれば、Streamlit＋API を使って生成AIライティングツールのような「動くアプリ」を Claude Code と一緒に作れます。今回は“入口を体験する”ところまでで十分です。</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 事前課題 -->
+<!-- 事前準備チェックリスト -->
+<section class="section" id="setup" style="background: var(--bg-soft);">
+  <div class="section__inner">
+    <p class="section__kicker">Pre-Live Setup</p>
+    <h2 class="section__title">LIVE当日までに<em>済ませておく</em>こと</h2>
+    <p class="section__lead">LIVE中は<strong>つまずきポイントの解説とQ&A</strong>に時間を使いたいので、一通り手は動かしておくのがおすすめです。</p>
+
+    <div class="checklist">
+      <h3><svg aria-hidden="true"><use href="#i-tool"/></svg>事前セットアップ チェックリスト</h3>
+      <ol>
+        <li>
+          <strong>EP15 を視聴：会社HPの「デザインの仕上げ」のイメージを掴んだ</strong>
+          <small>配色・余白・文字の大きさ・スマホ表示などを Claude Code に頼んで整えるイメージ。「ここをこう直して」と日本語で指示できればOK。</small>
+        </li>
+        <li>
+          <strong>EP16 を視聴：作ったHPを「公開」する流れを理解した</strong>
+          <small>仕上げたHPをWebに公開してURLで共有できる状態にするところまで。<a href="../../netlify-guide/" target="_blank" rel="noopener">Netlify 利用ガイド</a>も参考に。</small>
+        </li>
+        <li>
+          <strong>EP17 を視聴：Python / Streamlit / API の“役割”をざっくり理解した</strong>
+          <small>Python＝処理／Streamlit＝画面／API＝生成AIの呼び出し。3つの関係が分かればOK（文法は覚えなくて大丈夫）。</small>
+        </li>
+        <li>
+          <strong>EP18 を参考に、Python をインストールしてみた</strong>
+          <small><code>python --version</code>（または <code>python3 --version</code>）でバージョンが表示されればOK。詰まっても当日フォローします。</small>
+        </li>
+        <li>
+          <strong>EP19 を参考に、生成AIライティングツールを触ってみた</strong>
+          <small>Python＋Streamlit＋API で「動くもの」を作る最初の体験。できる所まででOK。</small>
+        </li>
+        <li>
+          <strong>Lesson 03 の事前課題（作り始めた会社HP）を提出済み</strong>
+          <small>開催3日前まで が締切。詳細は下の <a href="#homework">事前課題セクション</a> を参照。</small>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Lesson 01 からの事前課題（再掲） -->
+<section class="section">
+  <div class="section__inner">
+    <p class="section__kicker">Homework from Lesson 03</p>
+    <h2 class="section__title">Lesson 03からの<em>事前課題（再掲）</em></h2>
+    <p class="section__lead">
+      Lesson 03 のLIVEで出題した「会社HPを作り始めて提出」を、Lesson 04 開催3日前までに提出してください。LIVE冒頭の <strong>PHASE 2.1 公開添削＆講評</strong> で対象になる可能性があります（匿名化のうえ）。
+    </p>
+
+    <div class="homework-recap">
+      <img src="../../assets/penguins/penguin_pointing.png" alt="" class="homework__mascot" loading="lazy" aria-hidden="true">
+      <p class="homework-recap__label">実践課題</p>
+      <h3 class="homework-recap__title">「Claude Codeで作り始めた会社HP」を提出</h3>
+      <p class="homework-recap__body">
+        EP13・14 で学んだ流れ（プロジェクトフォルダを切る → 要件を伝える → 生成 → ブラウザで確認）で、<strong>会社HPを作り始めて</strong>提出してください。完成していなくてOK、テーマ・題材は自由です。
+      </p>
+      <ol class="homework-recap__list">
+        <li><strong>例</strong> 自社・架空の会社・お店・自分の活動などの紹介サイト（1ページでOK）</li>
+        <li><strong>提出</strong> 「作ったもの」が分かる形で：公開URL（Netlify 等）／ファイル／スクリーンショット のいずれか</li>
+        <li><strong>ポイント</strong> うまく動かなくてもOK。「どこで詰まったか」も含めて共有歓迎です</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 事前課題（締切再掲） -->
 <section class="section" id="homework" style="background: var(--bg-soft);">
   <div class="section__inner">
-    <p class="section__kicker">Homework</p>
-    <span class="homework-phase">PHASE 1.2 ／ プラスアルファ課題（次回LIVEまでに提出）</span>
-    <h2 class="section__title">今回の<em>事前課題</em></h2>
+    <p class="section__kicker">Submission</p>
+    <span class="homework-phase">PHASE 1.2 ／ プラスアルファ課題（LIVE前までに提出）</span>
+    <h2 class="section__title">提出方法と<em>締切</em></h2>
     <p class="section__lead">
       「【共通】ゼミ参加者向け 事前課題提出・質問受付フォーム」から提出してください。
       これは <a href="#cycle-map">サイクル位置</a> の <strong>PHASE 1.2 「プラスアルファの課題を提出」</strong> にあたります。
     </p>
+
     <div class="homework">
-      <p class="homework__title">いずれか1つを提出（A / B の選択式）</p>
+      <p class="homework__title"><svg aria-hidden="true"><use href="#i-pencil"/></svg>A / B のいずれかを提出（選択式）</p>
       <p class="homework__body">
         <strong>A.</strong> EP15・16 を視聴して、<strong>公開したWebサイトのURL</strong> を提出<br>
         <strong>― または ―</strong><br>
         <strong>B.</strong> EP17 を視聴し、<strong>Python / Streamlit / API それぞれを説明したテキストファイル</strong> を提出<br>
-        <small>※ ファイル・テキストの構造は自由です。</small>
+        <small>※ ファイル・テキストの構造は自由です。匿名化のうえ、LIVEで公開添削の対象になる可能性があります。</small>
       </p>
-      <span class="homework__deadline">提出：開催3日前まで</span>
+      <span class="homework__deadline">締切：開催3日前まで</span>
     </div>
   </div>
 </section>
@@ -379,38 +981,52 @@ a:hover { color: var(--accent-orange); }
   <div class="section__inner">
     <p class="section__kicker">When You're Stuck</p>
     <h2 class="section__title">分からないことが出てきたら<em>この順番</em>で</h2>
-    <p class="section__lead">学習中・課題実施中に詰まったら、以下のフローで進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。</p>
+    <p class="section__lead">
+      学習中・課題実施中に詰まったら、以下のフローで進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。今回はHPの公開や Python のインストールなど環境まわりで詰まりやすいので、気軽に投げてください。
+    </p>
+
     <div class="stuck">
       <div class="stuck__step stuck__step--primary">
         <p class="stuck__num"><span>1</span>STEP 1</p>
         <h3 class="stuck__title">まずは<br>スクショしてAIに聞く</h3>
-        <p class="stuck__body">エラー画面・つまずいた画面を <strong>スクリーンショット</strong> で撮り、Claude／ChatGPT／Gemini など普段使っている生成AIに貼り付けて質問してみてください。</p>
+        <p class="stuck__body">
+          エラー画面・つまずいた画面を <strong>スクリーンショット</strong> で撮り、Claude／ChatGPT／Gemini など普段使っている生成AIに貼り付けて質問してみてください。
+        </p>
         <div class="stuck__tips">
           <strong>精度を上げるコツ：</strong>
-          <ul><li>何をしようとしていたか</li><li>どうなる予定だったか</li><li>実際にどうなったか</li></ul>
+          <ul>
+            <li>何をしようとしていたか</li>
+            <li>どうなる予定だったか</li>
+            <li>実際にどうなったか</li>
+          </ul>
           をスクショに添えて投げる。
         </div>
       </div>
+
       <div class="stuck__step stuck__step--secondary">
         <p class="stuck__num"><span>2</span>STEP 2</p>
         <h3 class="stuck__title">それでも解決しなければ<br>ゼミ掲示板へ</h3>
-        <p class="stuck__body">AIに聞いても解決しない／そもそも何を聞けばいいか分からない場合は、<strong>DMM 生成AI CAMP 学び放題</strong> の上部ナビゲーション <strong>「ゼミ掲示板」</strong> から投稿してください。</p>
+        <p class="stuck__body">
+          AIに聞いても解決しない／そもそも何を聞けばいいか分からない場合は、<strong>DMM 生成AI CAMP 学び放題</strong> の上部ナビゲーション
+          <strong>「ゼミ掲示板」</strong> から投稿してください。他の受講生・運営・講師が回答できます。
+        </p>
         <div class="stuck__tips">
           <strong>投稿テンプレ：</strong>
-          <ul><li>実現したかったこと</li><li>試したこと（STEP 1 のAIとのやり取りも含めるとなお良い）</li><li>つまずきポイント（スクショ歓迎）</li><li>環境（OS／ツール／バージョン）</li></ul>
+          <ul>
+            <li>実現したかったこと</li>
+            <li>試したこと（STEP 1 のAIとのやり取りも含めるとなお良い）</li>
+            <li>つまずきポイント（スクショ歓迎）</li>
+            <li>環境（OS／ツール／バージョン）</li>
+          </ul>
         </div>
       </div>
-      <div class="stuck__step stuck__step--tertiary">
-        <p class="stuck__num"><span>3</span>STEP 3</p>
-        <h3 class="stuck__title">共通課題は<br>LIVE講義内で回答</h3>
-        <p class="stuck__body">掲示板・事前提出フォームに集まったお困りごとのうち、<strong>共通的な内容・クリティカルな内容</strong> は、講師側で拾わせていただきLIVE講義内で取り上げます。</p>
-        <div class="stuck__tips">
-          <strong>受付チャネル：</strong>
-          <ul><li>事前課題提出・質問受付フォーム</li><li>ゼミ掲示板（DMM 生成AI CAMP 学び放題内）</li></ul>
-        </div>
-      </div>
+
     </div>
-    <p class="stuck__quote">📝 「これは聞いていいレベルか…」と迷う必要はありません。<strong>STEP 1 → STEP 2 の順番で気軽に出してください。</strong></p>
+
+    <p class="stuck__quote">
+      <img src="../../assets/penguins/penguin_thumbs_up.png" alt="ペンギン先生" loading="lazy">
+      <span>「これは聞いていいレベルか…」と迷う必要はありません。<strong>STEP 1 → STEP 2 の順番で気軽に出してください。</strong></span>
+    </p>
   </div>
 </section>
 
@@ -420,6 +1036,7 @@ a:hover { color: var(--accent-orange); }
     <p class="section__kicker">Common Notes</p>
     <h2 class="section__title">共通の<em>注意事項</em></h2>
     <p class="section__lead">全Lesson共通の運営ルールです。詳細は <a href="../../guide.html">共通事項</a> を参照ください。</p>
+
     <div class="notice">
       <h3>LIVE参加・配布物まわり</h3>
       <ul>
@@ -440,16 +1057,16 @@ a:hover { color: var(--accent-orange); }
   <div class="section__inner">
     <p class="section__kicker">Next</p>
     <h2 class="section__title">次回<em>予告</em></h2>
+
     <div class="next">
       <div>
         <p class="next__label">LESSON 05</p>
-        <p class="next__title">作ったHPをGitHubで公開する</p>
-        <p class="next__date">自習対象：EP15〜EP16</p>
+        <p class="next__title">作ったコードを GitHub に上げて公開する</p>
       </div>
       <div>
         <p style="color: var(--text-sub); font-size: 14px; margin: 0;">
-          自習対象：…<br>
-          事前課題：…
+          自習対象：EP15〜EP16（GitHub）<br>
+          事前課題：作成したソースコードを GitHub に上げて URL を提出
         </p>
       </div>
     </div>
@@ -458,8 +1075,8 @@ a:hover { color: var(--accent-orange); }
 
 <!-- Footer -->
 <footer class="footer">
-  <p>DMM 生成AI CAMP 学び放題 ／［1期］Claude Codeマスターゼミ ／ Lesson 04</p>
-  <p><a href="../../index.html">← メインサイトに戻る</a></p>
+  <p>DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ Lesson 04</p>
+  <p><a href="../../index.html">← Home に戻る</a></p>
 </footer>
 
 </body>
