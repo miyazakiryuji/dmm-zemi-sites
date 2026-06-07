@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>共通事項 ｜ Claude Code入門ゼミ</title>
+<meta name="description" content="DMM 生成AI CAMP 学び放題 Claude Code入門ゼミ の全Lesson共通の参加ガイド・注意事項・スケジュール・困ったときの対処フローをまとめたページです。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-zemi/guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Claude Code入門ゼミ">
+<meta property="og:title" content="共通事項 ｜ Claude Code入門ゼミ">
+<meta property="og:description" content="Claude Code入門ゼミ 全Lesson共通の参加ガイド。基本情報・修了要件・LIVE参加方法・困ったときの対処フロー・開催スケジュールをまとめています。">
+<meta property="og:url" content="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-zemi/guide.html">
+<meta property="og:image" content="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-zemi/assets/images/face_icon.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<style>
+:root {
+  --bg-main: #FFF9F0;
+  --bg-soft: #FFF3E6;
+  --bg-card: #FFFFFF;
+  --text-main: #2A2F45;
+  --text-sub: #5A6178;
+  --text-mute: #646B82;
+  --accent-orange: #FF8C42;
+  --accent-orange-hover: #FF7424;
+  --text-accent: #B84A00;
+  --accent-blue: #4DA8FF;
+  --accent-pink: #FF9EC3;
+  --accent-green: #6FD49D;
+  --border: #FFE2C7;
+  --shadow-sm: 0 4px 16px rgba(255, 140, 66, 0.08);
+  --radius: 18px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 920px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-main);
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--text-accent); text-decoration: none; transition: color .2s var(--ease); }
+a:hover { color: var(--accent-orange); }
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: 0; z-index: 100;
+  background: rgba(255, 249, 240, 0.92);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.nav__brand { font-weight: 800; font-size: 15px; }
+.nav__brand small { font-size: 12px; color: var(--text-sub); font-weight: 600; margin-left: 8px; }
+.nav__back {
+  font-size: 12px; font-weight: 700;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-sub);
+}
+.nav__back:hover { background: var(--bg-soft); color: var(--accent-orange); }
+
+/* Hero */
+.hero {
+  padding: 72px 24px 48px;
+  text-align: center;
+  background: radial-gradient(circle at 30% 0%, rgba(255, 209, 102, 0.25), transparent 60%);
+}
+.hero__badge {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--accent-orange);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 18px;
+}
+.hero__title {
+  font-size: clamp(26px, 4.5vw, 38px);
+  font-weight: 900;
+  margin: 0 0 12px;
+}
+.hero__title em { font-style: normal; color: var(--text-accent); }
+.hero__lead {
+  color: var(--text-sub);
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 14.5px;
+}
+
+/* Main content */
+.main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 32px 24px 72px;
+}
+.section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin: 0 0 18px;
+  box-shadow: var(--shadow-sm);
+}
+.section h2 {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--bg-soft);
+  display: flex; align-items: center; gap: 10px;
+}
+.section h2 span.num {
+  display: inline-grid; place-items: center;
+  width: 28px; height: 28px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 900;
+}
+.section h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 18px 0 8px;
+  color: var(--text-main);
+}
+.section p, .section li { font-size: 14.5px; color: var(--text-sub); }
+.section p strong, .section li strong { color: var(--text-main); }
+.section ul, .section ol { padding-left: 22px; margin: 8px 0; }
+.section li { margin: 4px 0; }
+
+/* Table */
+.table-wrap {
+  overflow-x: auto;
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--bg-card);
+}
+th, td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-sub);
+}
+th {
+  background: var(--bg-soft);
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+td:first-child { font-weight: 700; color: var(--text-main); white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+
+/* Schedule emphasis */
+tr.is-special td { background: rgba(255, 158, 195, 0.08); }
+tr.is-special td:nth-child(3),
+tr.is-special td:nth-child(4) { font-weight: 800; color: var(--text-accent); }
+
+/* Stuck flow */
+.stuck-flow {
+  display: grid; gap: 14px;
+}
+.stuck-flow__step {
+  border-left: 4px solid var(--accent-orange);
+  background: var(--bg-soft);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+.stuck-flow__step:nth-child(2) { border-left-color: var(--accent-blue); }
+.stuck-flow__step:nth-child(3) { border-left-color: var(--accent-pink); }
+.stuck-flow__label {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--text-accent);
+  margin: 0 0 4px;
+}
+.stuck-flow__step:nth-child(2) .stuck-flow__label { color: var(--accent-blue); }
+.stuck-flow__step:nth-child(3) .stuck-flow__label { color: var(--accent-pink); }
+.stuck-flow__title {
+  font-size: 15px; font-weight: 800; margin: 0 0 6px; color: var(--text-main);
+}
+.stuck-flow__step p { margin: 0; font-size: 14px; }
+
+.quote {
+  margin: 16px 0 0;
+  padding: 14px 18px;
+  background: var(--bg-soft);
+  border-left: 4px solid var(--accent-orange);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+/* TOC */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow-sm);
+}
+.toc h2 { font-size: 13px; font-weight: 800; letter-spacing: .12em; color: var(--text-accent); margin: 0 0 10px; text-transform: uppercase; }
+.toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  column-gap: 24px;
+  font-size: 13.5px;
+}
+.toc li { margin: 3px 0; }
+.toc a { color: var(--text-sub); }
+.toc a:hover { color: var(--accent-orange); }
+
+@media (max-width: 640px) {
+  .section { padding: 22px 20px; }
+  .toc ol { columns: 1; }
+}
+
+.footer {
+  padding: 28px 24px 48px;
+  text-align: center;
+  color: var(--text-mute);
+  font-size: 12.5px;
+}
+.footer a { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__brand">共通事項 <small>Claude Code入門ゼミ</small></div>
+    <a href="index.html" class="nav__back">← メインサイト</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <span class="hero__badge">DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ</span>
+  <h1 class="hero__title">全Lesson共通の<em>参加ガイド</em></h1>
+  <p class="hero__lead">
+    各回（Lesson 01〜13）で参照する共通の運営ルール・スケジュール・困ったときの対処フローをまとめています。各回の資料ページにも要点は転載していますが、最新版・全文は本ページをご確認ください。
+  </p>
+</header>
+
+<main class="main">
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="目次">
+    <h2>目次</h2>
+    <ol>
+      <li><a href="#sec-basic">ゼミの基本情報</a></li>
+      <li><a href="#sec-instructor">講師紹介</a></li>
+      <li><a href="#sec-cycle">学習サイクル</a></li>
+      <li><a href="#sec-cert">修了要件</a></li>
+      <li><a href="#sec-homework">事前課題・質問</a></li>
+      <li><a href="#sec-live">LIVE講義への参加方法</a></li>
+      <li><a href="#sec-archive">欠席・アーカイブ</a></li>
+      <li><a href="#sec-copy">配布物・著作権</a></li>
+      <li><a href="#sec-community">コミュニケーション</a></li>
+      <li><a href="#sec-stuck">分からないときの対処フロー</a></li>
+      <li><a href="#sec-schedule">開催スケジュール</a></li>
+      <li><a href="#sec-others">その他の注意</a></li>
+    </ol>
+  </nav>
+
+  <section class="section" id="sec-basic">
+    <h2><span class="num">1</span>ゼミの基本情報</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><td>名称</td><td>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ</td></tr>
+          <tr><td>期間</td><td>調整中（全13回）</td></tr>
+          <tr><td>開催曜日・時間</td><td>調整中</td></tr>
+          <tr><td>開催形式</td><td>Google Meet によるオンラインLIVE</td></tr>
+          <tr><td>講師</td><td>宮﨑 竜治（Miyazaki Ryuji）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="sec-instructor">
+    <h2><span class="num">2</span>講師紹介（短縮版）</h2>
+    <ul>
+      <li><strong>宮﨑 竜治</strong> — DMM 生成AI CAMP 講師。富士ソフト株式会社 エンジニア。</li>
+      <li>営業職からエンジニアへキャリアチェンジ。組み込み／モバイル／Web／AI領域で開発に従事。</li>
+      <li>iOSアプリを3本App Storeにリリース、Claude Codeプラグイン <code>cc-DevelopmentTeam</code> をOSSとして公開。</li>
+      <li>GitHub: <a href="https://github.com/miyazakiryuji" target="_blank" rel="noopener">@miyazakiryuji</a></li>
+    </ul>
+    <p style="margin-top: 12px; font-size: 13.5px;">※ 詳細な経歴・実績は <a href="index.html">メインサイト</a> の「講師紹介」セクションを参照。</p>
+  </section>
+
+  <section class="section" id="sec-cycle">
+    <h2><span class="num">3</span>学習サイクル（毎週繰り返す4ステップ）</h2>
+    <ol>
+      <li><strong>Lesson自習</strong> — 講師指定の既存Lessonを、週次LIVE前までに視聴・実践</li>
+      <li><strong>課題提出</strong> — Lessonに対応した事前提出課題を、専用フォームから提出</li>
+      <li><strong>週次LIVE講義</strong> — インプット解説、提出課題の公開添削・Q&A など</li>
+      <li><strong>次週課題の確認</strong> — LIVE講義内で次週のLessonと事前提出課題を確認</li>
+    </ol>
+  </section>
+
+  <section class="section" id="sec-cert">
+    <h2><span class="num">4</span>修了要件</h2>
+    <p>修了証の発行には、以下の <strong>両方</strong> を満たす必要があります。</p>
+    <ul>
+      <li>① 全13回中、<strong>規定回数以上の事前課題提出</strong>（必要回数は <strong>要確定</strong>。提出締切：各ゼミの <strong>開催3日前まで</strong>）</li>
+      <li>② <strong>修了制作の提出</strong>（要否・内容は <strong>要確定</strong>）</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sec-homework">
+    <h2><span class="num">5</span>事前課題・質問の受付</h2>
+    <ul>
+      <li>事前課題・質問は <strong>ゼミ参加者向けの事前課題提出・質問受付フォーム</strong> から受け付けています（フォームの案内は招待メール等でご確認ください）。</li>
+      <li>期日：各ゼミの <strong>開催3日前まで</strong></li>
+      <li>いただいたご質問のうち、<strong>共通的な質問・クリティカルな内容</strong> については、講師側で拾わせていただきLIVE講義内などで回答します。</li>
+      <li>個別の全ての質問への返信は保証されません（共通課題化してLIVE内で取り上げる方針）。</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sec-live">
+    <h2><span class="num">6</span>LIVE講義への参加方法</h2>
+    <ul>
+      <li>ゼミお申し込み時にご記入いただいたメールアドレス宛に、各ライブ講義の <strong>Google Meet招待</strong> と <strong>各回のカレンダー招待</strong> を送付しています。</li>
+      <li>迷惑メールBoxに入っている可能性もあるためご注意ください。</li>
+    </ul>
+    <h3>Google Meet 入室リンク（共通）</h3>
+    <ul>
+      <li>（調整中：招待メール記載のリンクをご利用ください）</li>
+      <li>招待メールが見つからない場合は、運営までお問い合わせください。</li>
+    </ul>
+    <h3>入室時の注意</h3>
+    <ul>
+      <li>リンクを選択した際にアプリのダウンロードページに飛ぶ場合は、お手数ですがダウンロード後に改めてリンクからご入室ください。</li>
+      <li>画面にぐるぐると回る円が表示され入室できない場合は、ブラウザのキャッシュクリアと再起動をお試しください。</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sec-archive">
+    <h2><span class="num">7</span>欠席・アーカイブ視聴について</h2>
+    <ul>
+      <li>事前の欠席連絡等は <strong>不要</strong> です。</li>
+      <li>LIVE講義アーカイブ動画は、<strong>DMM 生成AI CAMP 学び放題「ツール別コース ＞ ゼミアーカイブ動画」</strong> から後日視聴できます。</li>
+      <li>ご参加が難しい回は、アーカイブ動画にてキャッチアップしてください。</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sec-copy">
+    <h2><span class="num">8</span>配布物・著作権に関する注意</h2>
+    <ul>
+      <li>LIVE講義で配布した <strong>資料・リンク・プロンプト等の再配布は原則行っておりません</strong>。</li>
+      <li>ゼミ内で共有された内容のSNS等への転載は、講師・運営の許可なく行わないでください。</li>
+      <li>受講生個人の学習用途を超えた利用については、事前にご相談ください。</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sec-community">
+    <h2><span class="num">9</span>ゼミ内コミュニケーション</h2>
+    <ul>
+      <li>わからないことがあれば <strong>スレッドのコミュニティなど</strong> で、受講生同士で助け合っていきましょう。</li>
+      <li>運営側の不手際があるかもしれません。気づいた点は遠慮なくフィードバックをお願いします（運営側で改善に活かします）。</li>
+    </ul>
+  </section>
+
+  <section class="section" id="sec-stuck">
+    <h2><span class="num">10</span>分からないことが出てきたときの対処フロー</h2>
+    <p>学習中・課題実施中に「分からない」「動かない」が出てきた場合は、以下の順番で進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。</p>
+
+    <div class="stuck-flow">
+      <div class="stuck-flow__step">
+        <p class="stuck-flow__label">STEP 1</p>
+        <p class="stuck-flow__title">まずは「スクショしてAIに聞く」</p>
+        <p>
+          エラーメッセージ・つまずいた画面を <strong>スクリーンショット</strong> で撮り、Claude／ChatGPT／Gemini など普段使っている生成AIに貼り付けて質問してください。
+          <br><br>
+          <strong>精度を上げるコツ：</strong>「何をしようとしていたか」「どうなる予定だったか」「実際にどうなったか」をスクショに添えて投げる。多くの環境構築・コマンドのエラー・UI迷子はここで解決します。
+        </p>
+      </div>
+      <div class="stuck-flow__step">
+        <p class="stuck-flow__label">STEP 2</p>
+        <p class="stuck-flow__title">それでも解決しなければ「ゼミ掲示板」へ</p>
+        <p>
+          AIに聞いても解決しない／そもそも何を聞けばいいか分からない場合は、<strong>DMM 生成AI CAMP 学び放題</strong> 上部ナビゲーションの <strong>「ゼミ掲示板」</strong> タブから投稿してください。他の受講生・運営・講師が回答できます。
+          <br><br>
+          <strong>投稿テンプレ：</strong>実現したかったこと／試したこと（STEP 1 のAIとのやり取りを含めるとなお良い）／つまずきポイント（スクショ歓迎）／環境（OS・ツール・バージョン）
+        </p>
+      </div>
+      <div class="stuck-flow__step">
+        <p class="stuck-flow__label">STEP 3</p>
+        <p class="stuck-flow__title">共通課題はLIVE講義内で回答</p>
+        <p>掲示板・事前提出フォームに集まったお困りごとのうち、<strong>共通的な内容・クリティカルな内容</strong>は、講師側で拾わせていただきLIVE講義内で取り上げます（<a href="#sec-homework">5. 事前課題・質問の受付</a> も参照）。</p>
+      </div>
+    </div>
+
+    <p class="quote">📝 「これは聞いていいレベルか…」と迷う必要はありません。<strong>STEP 1 → STEP 2 の順番で気軽に出してください。</strong></p>
+  </section>
+
+  <section class="section" id="sec-schedule">
+    <h2><span class="num">11</span>開催スケジュール（全13回）</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>回</th><th>日付</th><th>曜日</th><th>時間</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lesson 01</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 02</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 03</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 04</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 05</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 06</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 07</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 08</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 09</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 10</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 11</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 12</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+          <tr><td>Lesson 13</td><td>調整中</td><td>調整中</td><td>調整中</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top: 10px; font-size: 13.5px;">
+      ※ 開催日程・曜日・開始時刻は現在調整中です。確定次第、本ページおよびメインサイトで案内します。<br>
+      ※ 期間・回数・LIVE講義日時・必要なツール等は変更される場合があります。
+    </p>
+  </section>
+
+  <section class="section" id="sec-others">
+    <h2><span class="num">12</span>その他の注意</h2>
+    <ul>
+      <li>期間・回数・LIVE講義日時・必要なツール等は、運営判断で変更される場合があります。最新情報はメインサイトでご確認ください。</li>
+      <li>ゼミの自習対象Lessonは、各回のLIVE講義内で案内されます（「ツール別コース ＞ Claude Code」全42エピソードのうち、全てを扱うかは未定です）。</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 共通事項</p>
+  <p><a href="index.html">← メインサイトに戻る</a></p>
+</footer>
+
+</body>
+</html>
