@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python / Streamlit / API 入門 ｜ 生成AIアプリ開発の3つの土台 ｜ Claude Codeマスターゼミ</title>
+<meta name="description" content="生成AIアプリ開発で使う Python・Streamlit・API の役割を、EP17の内容に補足を加えてやさしく整理。技術スタックの3層構造（フロントエンド／バックエンド／データ層）まで図解します。">
+<style>
+:root{
+  --bg-main:#FFF9F0; --bg-soft:#FFF3E6; --bg-card:#FFFFFF;
+  --text-main:#2A2F45; --text-sub:#5A6178; --text-mute:#8A91A8;
+  --orange:#FF8C42; --orange-d:#FF7424; --blue:#4DA8FF; --green:#5BC48B; --pink:#FF9EC3; --yellow:#FFD166;
+  --border:#FFE2C7; --shadow:0 4px 16px rgba(255,140,66,.08); --shadow-m:0 12px 32px rgba(255,140,66,.12);
+  --radius:18px; --container:980px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}
+a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.86em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:13px 22px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:15px}
+.nav__menu{display:flex;gap:14px;flex-wrap:wrap}
+.nav__menu a{font-size:13px;font-weight:600;color:var(--text-sub)}
+.nav__menu a:hover{color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:74px 22px 48px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.14),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(26px,5vw,40px);font-weight:900;line-height:1.4;margin:22px 0 14px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15.5px}
+.sec{padding:52px 0}
+.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(22px,4vw,30px);font-weight:900;margin:0 0 6px;line-height:1.4}
+.h2 em{font-style:normal;color:var(--orange)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 26px}
+.badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 10px;border-radius:999px;vertical-align:middle;margin-left:8px}
+.badge--ep{background:#e9f3ff;color:#1f7ae0;border:1px solid #bcdcff}
+.badge--note{background:#e7f7ee;color:#2a9d63;border:1px solid #bce8cf}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow);margin:0 0 22px}
+.card__head{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.card__ico{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:24px;flex-shrink:0;background:var(--bg-soft)}
+.card__title{font-size:19px;font-weight:900;margin:0}
+.card__sub{font-size:13px;color:var(--text-sub);font-weight:600;margin:2px 0 0}
+ul.tight{margin:6px 0 0;padding-left:20px}
+ul.tight li{margin:6px 0;font-size:14.5px}
+.note{margin-top:16px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:14px 18px}
+.note__t{font-weight:800;font-size:13.5px;color:#2a9d63;margin:0 0 6px;display:flex;align-items:center;gap:6px}
+.note ul{margin:4px 0 0;padding-left:20px}
+.note li{font-size:13.5px;color:var(--text-sub);margin:4px 0}
+pre{background:#1f2333;color:#e8ecf5;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13px;line-height:1.7;margin:14px 0 0;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+pre .c{color:#7d8bb0}
+pre .s{color:#9ee493}
+pre .k{color:#ff9ec3}
+/* diagram */
+.stack{display:grid;gap:0;max-width:560px;margin:6px auto 0}
+.layer{background:var(--bg-card);border:2px solid var(--border);border-radius:14px;padding:16px 20px;text-align:center;box-shadow:var(--shadow)}
+.layer__role{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--text-mute)}
+.layer__tech{font-size:16px;font-weight:900;margin:3px 0 0}
+.layer__tech small{display:block;font-size:12px;font-weight:600;color:var(--text-sub);margin-top:3px}
+.layer--front{border-color:var(--blue)}
+.layer--back{border-color:var(--orange)}
+.layer--api{border-color:var(--green)}
+.arrow{text-align:center;color:var(--text-mute);font-size:13px;font-weight:700;padding:8px 0;line-height:1.4}
+.arrow span{display:block;font-size:18px;color:var(--orange)}
+.tldr{background:var(--bg-card);border:2px dashed var(--orange);border-radius:var(--radius);padding:22px 26px}
+.tldr p{margin:0 0 10px;font-size:15px}
+.tldr p:last-child{margin:0}
+.glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.term{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.term b{display:block;color:var(--orange-d);font-size:14px;margin-bottom:3px}
+.term span{font-size:13px;color:var(--text-sub)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:14px 30px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:38px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.card{padding:20px 18px}.sec{padding:40px 0}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__in">
+    <div class="nav__brand">Python / Streamlit / API 入門</div>
+    <div class="nav__menu">
+      <a href="#why">なぜ3つ</a>
+      <a href="#python">Python</a>
+      <a href="#streamlit">Streamlit</a>
+      <a href="#api">API</a>
+      <a href="#stack">3層構造</a>
+      <a href="#glossary">用語集</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="hero__badge">DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ EP17 解説</span>
+  <h1><em>Python</em> / <em>Streamlit</em> / <em>API</em><br>生成AIアプリ開発の「3つの土台」</h1>
+  <p>生成AIアプリは、この3つの技術の組み合わせでできています。EP17 の内容をベースに、<strong>補足</strong>を加えて役割と関係をやさしく整理します。<span class="badge badge--ep">EP17</span>＝教材の内容／<span class="badge badge--note">補足</span>＝発展メモ。</p>
+</header>
+
+<!-- なぜ -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <p class="kicker">Overview</p>
+    <h2 class="h2">なぜ <em>この3つ</em> なのか<span class="badge badge--ep">EP17</span></h2>
+    <p class="lead">生成AIアプリ＝<strong>AI自体を作る</strong>のではなく、すでに提供されている <strong>AI（API）を「呼び出して」使う</strong>アプリです。それを組み立てるのが次の3つ。</p>
+    <div class="card">
+      <ul class="tight">
+        <li>🐍 <strong>Python</strong>＝アプリを動かす「処理を書く言語」</li>
+        <li>🎨 <strong>Streamlit</strong>＝Pythonだけで「画面（UI）」まで作れる道具</li>
+        <li>🔌 <strong>API</strong>＝外部のAI（Claude / Gemini / ChatGPT）を「呼び出す窓口」</li>
+      </ul>
+      <div class="note">
+        <p class="note__t">💡 補足</p>
+        <ul>
+          <li>文法を覚える必要はありません。<strong>コードは Claude Code が書きます</strong>。大事なのは「どれが何の役割か」を頭に描けること。</li>
+          <li>この回（EP17）は“概要をつかむ”回。実際のインストールは EP18、最初のアプリ作りは EP19 で扱います。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Python -->
+<section class="sec sec--soft" id="python">
+  <div class="wrap">
+    <div class="card">
+      <div class="card__head">
+        <div class="card__ico">🐍</div>
+        <div><h3 class="card__title">Python <span class="badge badge--ep">EP17</span></h3>
+        <p class="card__sub">アプリの「処理」を書くプログラミング言語</p></div>
+      </div>
+      <ul class="tight">
+        <li>AI開発で<strong>最もよく使われる言語の1つ</strong>。</li>
+        <li>Gemini / ChatGPT / Claude などのAIを開発者が使うための <strong>Pythonモジュールが必ず配布される</strong>ため、AI開発全般で使われています。</li>
+        <li>特徴：<strong>シンプルで読みやすい文法</strong> → プログラミング初心者に人気。</li>
+        <li>強み：AI／機械学習の<strong>ライブラリが豊富</strong>で、コミュニティも活発。</li>
+        <li>JavaScript などでも生成AIアプリは作れますが、<strong>Python が最もメジャー</strong>です。</li>
+      </ul>
+      <div class="note">
+        <p class="note__t">💡 補足</p>
+        <ul>
+          <li>各AIを呼ぶ代表的なライブラリ：<code>openai</code>（ChatGPT）／<code>anthropic</code>（Claude）／<code>google-generativeai</code>（Gemini）。</li>
+          <li>ライブラリの追加は <code>pip install ライブラリ名</code>。Claude Code が必要なものを判断して入れてくれます。</li>
+          <li>本ゼミでは Python の文法学習は目的ではありません。<strong>「何をするものか」が分かれば十分</strong>です。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Streamlit -->
+<section class="sec" id="streamlit">
+  <div class="wrap">
+    <div class="card">
+      <div class="card__head">
+        <div class="card__ico">🎨</div>
+        <div><h3 class="card__title">Streamlit <span class="badge badge--ep">EP17</span></h3>
+        <p class="card__sub">Pythonだけで「画面（UI）」まで作れるフレームワーク</p></div>
+      </div>
+      <ul class="tight">
+        <li>「<strong>Python だけで UI もロジックも書ける</strong> AIアプリ開発フレームワーク」。</li>
+        <li>Python のみだとロジックしか書けない → <strong>Streamlit で UI も同じファイルに</strong>書けます。</li>
+        <li><strong>HTML / CSS の知識がなくても</strong>、一定品質のデザインが作れます。</li>
+        <li>UIの<strong>ボタンを押すたびに、裏で書いた Python のロジックが実行</strong>されます。</li>
+        <li><strong>デモ・社内ツール・プロトタイプ</strong>開発に最適。</li>
+        <li>一方、ユーザー認証など<strong>複雑な機能は苦手</strong>（そこは別の言語／フレームワークで扱います）。</li>
+      </ul>
+      <pre><span class="k">import</span> streamlit <span class="k">as</span> st
+
+text = st.text_input(<span class="s">"入力"</span>)
+<span class="k">if</span> st.button(<span class="s">"送信"</span>):
+    st.write(<span class="s">f"あなたは {text} と書きました"</span>)</pre>
+      <div class="note">
+        <p class="note__t">💡 補足</p>
+        <ul>
+          <li>起動は <code>streamlit run app.py</code>。実行するとブラウザが自動で開いて画面が表示されます。</li>
+          <li>よく使う部品：<code>st.title</code>（見出し）／<code>st.text_input</code>（入力欄）／<code>st.button</code>（ボタン）／<code>st.write</code>（表示）／<code>st.sidebar</code>（サイドメニュー）。</li>
+          <li>本格的なWebサービス（ログイン・複雑な画面遷移）に育てたくなったら、<strong>React / Next.js</strong> などへ移行します。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API -->
+<section class="sec sec--soft" id="api">
+  <div class="wrap">
+    <div class="card">
+      <div class="card__head">
+        <div class="card__ico">🔌</div>
+        <div><h3 class="card__title">AI API <span class="badge badge--ep">EP17</span></h3>
+        <p class="card__sub">AIの頭脳を「外部から呼び出す」仕組み</p></div>
+      </div>
+      <ul class="tight">
+        <li>ChatGPT / Gemini / Claude などのAI機能を、<strong>自分のアプリの中で使う</strong>ために利用します。</li>
+        <li><strong>無料枠ありの Gemini</strong> から、<strong>従量課金の OpenAI / Claude</strong> まで様々。</li>
+        <li>生成AIアプリ＝AI自体を作っているのではなく、<strong>提供されている API を「呼び出している」だけ</strong>。</li>
+        <li>API は AI 以外にも <strong>YouTube API・X API</strong> などがあり、駆使すれば開発の幅が大きく広がります。</li>
+      </ul>
+      <div class="note">
+        <p class="note__t">💡 補足</p>
+        <ul>
+          <li><strong>APIキー</strong>＝そのサービスを使うための「自分専用の鍵」。リクエストに付けて本人確認します（取得は EP21 で扱います）。</li>
+          <li><strong>従量課金に注意</strong>：使った分だけ料金がかかります。無料枠や<strong>利用上限の設定</strong>を活用しましょう。</li>
+          <li><strong>APIキーは秘密に</strong>：他人に見せない・<strong>GitHubに上げない</strong>（<code>.env</code> などで管理）。</li>
+          <li>短時間に呼べる回数の上限（<strong>レート制限</strong>）がある点も覚えておくと安心です。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3層構造 -->
+<section class="sec" id="stack">
+  <div class="wrap">
+    <p class="kicker">Architecture</p>
+    <h2 class="h2">技術スタック<em>全体図</em>（3層構造）<span class="badge badge--ep">EP17</span></h2>
+    <p class="lead">ユーザーの操作から AI の応答までを「層（レイヤー）」で整理した設計図です。</p>
+    <div class="stack">
+      <div class="arrow">👤 ユーザー<span>↓ 操作</span></div>
+      <div class="layer layer--front"><div class="layer__role">フロントエンド（UI）</div><div class="layer__tech">Streamlit<small>画面・入力・ボタン</small></div></div>
+      <div class="arrow"><span>↓ 呼び出し</span></div>
+      <div class="layer layer--back"><div class="layer__role">バックエンド（ロジック層）</div><div class="layer__tech">Python ＋ Streamlit<small>処理を書く</small></div></div>
+      <div class="arrow"><span>↓ API 呼び出し</span></div>
+      <div class="layer layer--api"><div class="layer__role">AI API</div><div class="layer__tech">Gemini / OpenAI / Claude<small>AIの頭脳</small></div></div>
+      <div class="arrow"><span>↑ 応答</span>ユーザーへ表示</div>
+    </div>
+    <div class="note" style="max-width:560px;margin:22px auto 0">
+      <p class="note__t">💡 補足</p>
+      <ul>
+        <li>これを <strong>3層構造（フロントエンド／バックエンド／データ層）</strong> と呼びます。AIが発達しても、<strong>この設計図を頭に描けないと意図通りのアプリは作れません</strong>。</li>
+        <li>Python → JavaScript、Streamlit → React / Next.js などに置き換えても、<strong>考え方は同じ</strong>です。</li>
+        <li>「データ層（データベース）」は本ゼミの後半（EP31〜32あたり）で登場します。今は2層（UI＋ロジック）＋API、と捉えてOK。</li>
+        <li>この設計図を持っておくと、<strong>Claude Code への指示も的確</strong>になります（「Streamlitの画面に入力欄を足して、送信したら Claude API を呼んで結果を表示」など）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="sec sec--soft">
+  <div class="wrap">
+    <p class="kicker">Summary</p>
+    <h2 class="h2">ひとことで<em>まとめ</em></h2>
+    <div class="tldr">
+      <p>🐍 <strong>Python</strong> で処理を書き、🎨 <strong>Streamlit</strong> で画面を作り、🔌 <strong>API</strong> で外部のAIを呼ぶ。</p>
+      <p>この3つを組み合わせると「<strong>入力 → AIが処理 → 画面に表示</strong>」という生成AIアプリになります。</p>
+      <p style="color:var(--text-sub);font-size:14px">文法は覚えなくてOK。役割と <a href="#stack">3層構造</a> のイメージさえ持てれば、あとは Claude Code が形にしてくれます。次は <strong>EP18（Pythonのインストール）</strong> → <strong>EP19（最初のアプリ作り）</strong> へ。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 用語集 -->
+<section class="sec" id="glossary">
+  <div class="wrap">
+    <p class="kicker">Glossary</p>
+    <h2 class="h2">ミニ<em>用語集</em></h2>
+    <div class="glossary">
+      <div class="term"><b>Python</b><span>AI開発で最もよく使われる言語の1つ。処理（ロジック）を書く。</span></div>
+      <div class="term"><b>Streamlit</b><span>Pythonだけで画面（UI）まで作れるフレームワーク。デモ・ツール向き。</span></div>
+      <div class="term"><b>API</b><span>外部の機能を呼び出す窓口。AI API は AI の頭脳を借りる仕組み。</span></div>
+      <div class="term"><b>APIキー</b><span>サービスを使うための自分専用の鍵。秘密にして GitHub に上げない。</span></div>
+      <div class="term"><b>フレームワーク</b><span>アプリ作りの“土台・枠組み”。よく使う機能が最初から用意されている。</span></div>
+      <div class="term"><b>従量課金</b><span>使った分だけ料金が発生する仕組み。上限設定で使いすぎを防ぐ。</span></div>
+      <div class="term"><b>レート制限</b><span>短時間に呼び出せる回数の上限。超えると一時的にエラーになる。</span></div>
+      <div class="term"><b>3層構造</b><span>フロントエンド／バックエンド／データ層 でアプリを整理する設計の考え方。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- アンケート -->
+<section class="sec sec--soft">
+  <div class="wrap survey">
+    <p class="kicker">Survey</p>
+    <h2 class="h2">授業<em>アンケート</em></h2>
+    <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+    <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ Python・Streamlit・API 解説</p>
+  <p class="src">本資料は EP17「Python / Streamlit / API の概要」の内容を講師がやさしく整理し、補足を加えた学習用資料です（教材本文の転載ではありません）。</p>
+</footer>
+
+</body>
+</html>
