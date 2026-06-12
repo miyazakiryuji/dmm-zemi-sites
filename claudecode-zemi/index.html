@@ -452,6 +452,27 @@ a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
   .character__mascot { width: 64px; top: 12px; right: 12px; opacity: 0.85; }
   .cycle-phase__mascot { width: 48px; }
 }
+/* セクション見出し横のアクセント・マスコット */
+.section__head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0 0 48px;
+}
+.section__mascot {
+  width: 96px;
+  height: auto;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 8px 20px rgba(255, 140, 66, 0.18));
+}
+@media (max-width: 720px) {
+  .section__mascot { width: 68px; }
+}
 
 /* ===== Character (ゼミの位置づけ) ===== */
 .character {
@@ -1772,11 +1793,16 @@ a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
 <!-- 修了要件 -->
 <section class="section section--rules" id="rules">
   <div class="section__inner">
-    <p class="section__kicker reveal" data-reveal>Rules</p>
-    <h2 class="section__title reveal" data-reveal>ゼミのルール・<em>修了要件</em></h2>
-    <p class="section__lead reveal" data-reveal>
-      以下を満たさない場合は、修了証の発行ができません。
-    </p>
+    <div class="section__head-row">
+      <div>
+        <p class="section__kicker reveal" data-reveal>Rules</p>
+        <h2 class="section__title reveal" data-reveal>ゼミのルール・<em>修了要件</em></h2>
+        <p class="section__lead reveal" data-reveal style="margin-bottom:0;">
+          以下を満たさない場合は、修了証の発行ができません。
+        </p>
+      </div>
+      <img src="./assets/penguins/penguin_holding_diploma.png" alt="" class="section__mascot reveal" data-reveal loading="lazy" aria-hidden="true">
+    </div>
 
     <div class="rules">
       <div class="rule reveal" data-reveal>
@@ -1805,11 +1831,16 @@ a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
 <!-- スケジュール -->
 <section class="section section--schedule" id="schedule">
   <div class="section__inner">
-    <p class="section__kicker reveal" data-reveal>Schedule</p>
-    <h2 class="section__title reveal" data-reveal>開催<em>スケジュール</em></h2>
-    <p class="section__lead reveal" data-reveal>
-      全13回。基本は毎週水曜 20:30〜22:00、7/4（土）のみ19:00〜20:30で開催されます。
-    </p>
+    <div class="section__head-row">
+      <div>
+        <p class="section__kicker reveal" data-reveal>Schedule</p>
+        <h2 class="section__title reveal" data-reveal>開催<em>スケジュール</em></h2>
+        <p class="section__lead reveal" data-reveal style="margin-bottom:0;">
+          全13回。基本は毎週水曜 20:30〜22:00、7/4（土）のみ19:00〜20:30で開催されます。
+        </p>
+      </div>
+      <img src="./assets/penguins/penguin_chart_presentation.png" alt="" class="section__mascot reveal" data-reveal loading="lazy" aria-hidden="true">
+    </div>
 
     <div class="schedule__filter reveal" data-reveal>
       <button class="chip is-active" data-filter="all">全13回</button>
@@ -1956,11 +1987,16 @@ a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
 <!-- 補足資料サイト -->
 <section class="section section--cycle" id="refs">
   <div class="section__inner">
-    <p class="section__kicker reveal" data-reveal>References</p>
-    <h2 class="section__title reveal" data-reveal>各回の<em>補足資料サイト</em></h2>
-    <p class="section__lead reveal" data-reveal>
-      各回のテーマをかみ砕いた、講師作成の補足説明サイトです。該当する回の自習・復習の補助にどうぞ（いずれも別タブで開きます）。
-    </p>
+    <div class="section__head-row">
+      <div>
+        <p class="section__kicker reveal" data-reveal>References</p>
+        <h2 class="section__title reveal" data-reveal>各回の<em>補足資料サイト</em></h2>
+        <p class="section__lead reveal" data-reveal style="margin-bottom:0;">
+          各回のテーマをかみ砕いた、講師作成の補足説明サイトです。該当する回の自習・復習の補助にどうぞ（いずれも別タブで開きます）。
+        </p>
+      </div>
+      <img src="./assets/penguins/penguin_idea_lightbulb.png" alt="" class="section__mascot reveal" data-reveal loading="lazy" aria-hidden="true">
+    </div>
     <div class="reveal" data-reveal style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;">
 
       <a href="https://miyazakiryuji.github.io/dmm-zemi-sites/skills/" target="_blank" rel="noopener" style="display:block; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; box-shadow:var(--shadow-sm); color:inherit;">
