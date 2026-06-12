@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⑤ 業務効率化 ｜ 教材構成 ｜ Claude Code入門ゼミ</title><meta name="description" content="Claude Code は開発専用の道具ではなく、毎日のくり返し作業や事務仕事を任せられる「仕事の相棒」にもなります。このパートでは、ファイル整理・資料修正・コンテンツ生成という身近な3つの自動化を、初学者でも手を動かせ">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:12px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14.5px}
+.nav__menu{display:flex;gap:10px;flex-wrap:wrap}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg-card);color:var(--text-sub)}
+.nav__back:hover{background:var(--bg-soft);color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:64px 22px 44px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;line-height:1.4;margin:20px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px}.h2 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 24px}
+/* topic */
+.topic{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px 24px 66px;box-shadow:var(--shadow);margin:0 0 18px}
+.topic__n{position:absolute;left:18px;top:24px;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center}
+.topic__t{font-size:17.5px;font-weight:900;margin:0 0 8px;line-height:1.45}
+.topic__lead{font-size:14.5px;color:var(--text-main);margin:0 0 12px}
+.pts{margin:0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{margin-top:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:14px 18px 14px 20px}
+.steps__h{font-weight:800;font-size:13px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:6px 0;font-size:14px;color:var(--text-sub)}
+.note{margin-top:14px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.note__t{font-weight:800;font-size:13px;color:#2a9d63;margin:0 0 6px}
+.note ul{margin:4px 0 0;padding-left:18px}.note li{font-size:13px;color:var(--text-sub);margin:4px 0}
+/* hub cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pcard{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--orange)}
+.plabel{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--orange);color:#fff;font-weight:900;font-size:15px}
+.pcard h2{font-size:18px;font-weight:900;margin:12px 0 4px;color:var(--text-main)}
+.pcard p{font-size:13px;color:var(--text-sub);margin:0 0 12px;line-height:1.7}
+.pmeta{font-size:12.5px;font-weight:800;color:var(--accent)}
+.partnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.partnav a{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+.partnav small{display:block;font-size:11px;color:var(--text-mute);font-weight:700}
+.partnav b{font-size:14.5px;color:var(--text-main)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:36px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.topic{padding:18px 18px 18px 18px}.topic__n{position:static;margin:0 0 10px}.sec{padding:34px 0}}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">教材構成 ｜ ⑤ 業務効率化</div><div class="nav__menu"><a href="../" class="nav__back">← 教材構成トップ</a><a href="../../" class="nav__back">← 入門ゼミ Home</a></div></div></nav><header class="hero"><span class="hero__badge">Claude Code入門ゼミ ／ 教材構成 PART ⑤</span>
+  <h1>業務効率化 ― Claude Code を「仕事の相棒」にする</h1><p>Claude Code は開発専用の道具ではなく、毎日のくり返し作業や事務仕事を任せられる「仕事の相棒」にもなります。このパートでは、ファイル整理・資料修正・コンテンツ生成という身近な3つの自動化を、初学者でも手を動かせる形で体験します。</p></header><section class="sec"><div class="wrap">  <div class="topic">
+    <span class="topic__n">1</span>
+    <h3 class="topic__t">Claude Code による業務効率化の事例</h3>
+    <p class="topic__lead">Claude Code は<strong>プログラミング開発のためだけの道具</strong>ではありません。毎日のくり返し作業や事務仕事を「お願いするだけ」で自動化できる、頼れる仕事のパートナーにもなります。まずはどんなことができるのか、イメージをふくらませましょう。</p>
+    <ul class="pts"><li>Claude Code は<strong>パソコンの中のファイル操作・文章作成・データ整理</strong>まで任せられる。開発以外の「業務効率化・自動化」にこそ大きな効果がある</li><li>代表的な活用例：毎朝のリサーチ（最新ニュースや調べもの）、メールの返信下書き作成、予定表への入力、報告書・議事録づくり、表計算データの変換など</li><li>一度きりの作業なら<strong>その場でお願いするだけ</strong>でよいが、毎回くり返す作業は<code>スキル（Skills）</code>として登録しておくと、次からは何度でも同じ品質で再現できる</li><li>うまくいくコツは「すごいもの」を目指さず、<strong>自分が一番時間を取られている小さな作業を1つ</strong>選ぶこと。請求書づくり・議事録・メール返信などが定番</li><li>機密情報（顧客名簿・社員情報など）を含む業務は、<strong>架空のデータに置きかえてから</strong>試すか、AIに渡さない判断も大切。安全第一で進める</li></ul>
+    
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>どんな作業を任せられるか思いつかないときは、直近2〜3日の自分の行動を30分単位でメモに書き出し、それを Claude Code に渡して「ここから自動化できそうな作業を提案して」と聞くのが近道です。</li><li>「2回以上くり返している作業」は自動化の有力候補。1つ作って効果を実感してから、次の作業へ少しずつ広げていきましょう。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">2</span>
+    <h3 class="topic__t">ファイル整理を自動化してみよう</h3>
+    <p class="topic__lead">バラバラに散らかったファイルを、<strong>名前を変えるだけ</strong>でなく「中身まで読んで」フォルダ分け・整理してもらいましょう。さらに「どんな基準で整理したか」「各ファイルに何が書かれていたか」をまとめた<strong>作業報告書</strong>まで出してもらえます。請求書や領収書の仕分けを例に体験します。</p>
+    <ul class="pts"><li>ふつうのファイル整理ツールは「ファイル名」しか見ないが、Claude Code は<strong>中身（PDFや画像の文字）まで読み取って</strong>判断できるので、人がやるような整理が可能</li><li>たとえば請求書・領収書を<strong>取引先ごと・月ごとのフォルダに自動で仕分け</strong>し、わかりやすいファイル名（例：<code>2026-04_〇〇商事_請求書.pdf</code>）に付け替えられる</li><li>整理して終わりではなく、<strong>作業報告書</strong>として「どんな観点で分けたか」「各ファイルの取引先名・金額・科目」を一覧にまとめて出力できるのが大きな価値</li><li>実行前に必ず<strong>整理対象のファイルをコピーしてバックアップ</strong>を取り、まずは少数のファイルで試してから本番に広げると安心</li><li>確定申告の領収書まとめ、写真フォルダの仕分け、ダウンロードフォルダの片づけなど、応用範囲は広い</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>整理したいファイル（請求書・領収書など）を1つのフォルダにまとめ、<strong>必ずコピーしてバックアップ</strong>を取っておく。</li><li>そのフォルダで Claude Code を起動し、何をしてほしいかを言葉で伝える。例：「このフォルダの請求書・領収書を中身まで見て、<strong>取引先ごと・月ごと</strong>のフォルダに仕分けして、わかりやすい名前に変更してください」。</li><li>あわせて報告書も依頼する。例：「どんな観点で整理したか、各ファイルの<strong>取引先名・金額・科目</strong>を一覧にした作業報告書も出力してください」。</li><li>Claude Code が提案する整理プランを確認し、問題なければ実行してもらう。意図と違えば「月別ではなく取引先別を優先して」など言葉で修正する。</li><li>できあがったフォルダ構成と報告書を見て確認する。よく使う整理なら、最後に「この手順を<strong>スキルにして</strong>次から再利用できるようにして」と頼んでおく。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>最初は5〜10ファイルなど少量で試し、整理の基準が自分の思った通りかを確かめてから全件に広げると失敗しにくいです。</li><li>「フォルダ分けの基準（取引先別／月別／勘定科目別）」を最初にはっきり伝えると、思い通りの結果になりやすくなります。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">3</span>
+    <h3 class="topic__t">資料修正を自動化してみよう</h3>
+    <p class="topic__lead">すでにある資料を、Claude Code に<strong>言葉で指示するだけ</strong>で修正・整形してもらいましょう。表記ゆれの統一や体裁そろえなど、地味だけれど時間のかかる「直し作業」こそAIの得意分野です。</p>
+    <ul class="pts"><li>既存のテキスト・原稿・一覧表などを開いた状態で、「<strong>ここをこう直して</strong>」と日本語で伝えるだけで一括修正できる</li><li>得意なのは、<strong>表記ゆれの統一</strong>（例：「Cloud Code」を「Claude Code」に直す）、見出しや箇条書きの体裁そろえ、誤字脱字チェック、文体の統一など</li><li>「すべてのファイルにまとめて適用」もできるので、<strong>何十か所もある同じ直し</strong>を一度のお願いで終わらせられる</li><li>修正の前に<strong>元ファイルのコピー（バックアップ）</strong>を取っておけば、気に入らなければいつでも元に戻せて安心</li><li>修正後は必ず<strong>変更箇所を自分の目で確認</strong>する。AIは便利だが、固有名詞や数字など重要な部分は人がチェックするのが原則</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>修正したい資料ファイルがある場所で Claude Code を起動する。可能なら<strong>元ファイルをコピー</strong>して控えを残す。</li><li>どこをどう直したいかを具体的に伝える。例：「この資料の中の『Cloud Code』をすべて『Claude Code』に直してください」「見出しの大きさをそろえてください」。</li><li>Claude Code が提案する修正内容を確認する。意図と違えば「箇条書きはそのままで、本文だけ直して」のように言葉で調整する。</li><li>修正を反映してもらい、<strong>変更された箇所を自分の目で確認</strong>する。固有名詞・数字・日付は特に念入りに見る。</li><li>同じ直しを今後もくり返すなら、「この修正ルールを<strong>スキルにして</strong>」と頼み、次回から呼び出せるようにしておく。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>「どう直すか」をできるだけ具体的に伝えるほど、思い通りの結果になります。あいまいな指示よりも実例を1つ示すのが効果的です。</li><li>大きく直したいときは、一度に全部ではなく「まず見出しだけ」「次に本文」のように段階的に頼むと、確認しながら安全に進められます。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">4</span>
+    <h3 class="topic__t">コンテンツ生成を自動化してみよう</h3>
+    <p class="topic__lead">ここまでは「整理・修正」でしたが、最後は<strong>新しく作り出す</strong>自動化です。複数の画像をまとめて生成する流れを通して、AIに制作作業を任せるイメージをつかみましょう。</p>
+    <ul class="pts"><li>1枚ずつ手作業で作るのではなく、<strong>作りたい内容のリストを渡して一括で生成</strong>すれば、同じ作業を何度もくり返す手間がなくなる</li><li>たとえば「商品名と説明の一覧表」から、各商品ぶんの画像をまとめて作る、といった<strong>『リスト → 大量生成』の流れ</strong>が組める</li><li>ポイントは<strong>テイスト（色味・サイズ・雰囲気）を指示でそろえる</strong>こと。条件を最初に決めておくと、何枚作っても統一感のある仕上がりになる</li><li>うまくいった生成の手順は<strong>スキルとして登録</strong>しておくと、次からは新しいリストを渡すだけで同じ品質のコンテンツを量産できる</li><li>画像生成には専用のAIサービス（画像生成API）が必要になる場合がある。利用には<strong>利用規約と権利関係の確認</strong>を忘れずに、安心して使える範囲で活用する</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>生成したいコンテンツの<strong>一覧（リスト）</strong>を用意する。例：商品名・説明・希望する雰囲気を並べた表やメモ。</li><li>仕上がりの条件をそろえて伝える。例：「すべて<strong>正方形・同じ色調</strong>で、明るく清潔感のある雰囲気にしてください」。</li><li>Claude Code に「このリストの内容に沿って、画像を<strong>まとめて生成</strong>してください」と依頼する。必要なサービスやキーの準備はその場で案内してもらう。</li><li>できあがったコンテンツを確認し、気になる点は「もう少し明るく」「背景は白に」など言葉で調整して作り直してもらう。</li><li>満足できる流れができたら「この生成の手順を<strong>スキルにして</strong>」と頼み、次回からはリストを差し替えるだけで再利用できるようにする。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>最初は1〜2枚だけ試し、テイストが思い通りか確認してから本数を増やすと、無駄なやり直しを減らせます。</li><li>生成したコンテンツを仕事で使う場合は、画像生成サービスの利用規約や商用利用の可否を必ず確認しましょう。</li></ul></div>
+  </div></div></section><section class="sec sec--soft"><div class="wrap"><div class="partnav"><a href="../part4/"><small>← 前のパート</small><b>④ Web開発②</b></a><a href="../appendix/" style="text-align:right"><small>次のパート →</small><b>付録 付録</b></a></div></div></section><section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section><footer class="footer"><p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 教材構成 ⑤ 業務効率化</p><p class="src">本資料は教材構成に沿って初学者向けに整理した学習用資料です（教材本文・動画の転載ではありません）。</p></footer>
+</body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>④ Web開発② ｜ 教材構成 ｜ Claude Code入門ゼミ</title><meta name="description" content="このパートでは、入力したセリフやシーンから漫画風の画像をつくる「漫画制作アプリ」を、Claude Code と一緒に開発します。まず見た目だけの試作品（モックアップ）を作り、そこに OpenAI の API をつないで実">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:12px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14.5px}
+.nav__menu{display:flex;gap:10px;flex-wrap:wrap}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg-card);color:var(--text-sub)}
+.nav__back:hover{background:var(--bg-soft);color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:64px 22px 44px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;line-height:1.4;margin:20px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px}.h2 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 24px}
+/* topic */
+.topic{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px 24px 66px;box-shadow:var(--shadow);margin:0 0 18px}
+.topic__n{position:absolute;left:18px;top:24px;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center}
+.topic__t{font-size:17.5px;font-weight:900;margin:0 0 8px;line-height:1.45}
+.topic__lead{font-size:14.5px;color:var(--text-main);margin:0 0 12px}
+.pts{margin:0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{margin-top:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:14px 18px 14px 20px}
+.steps__h{font-weight:800;font-size:13px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:6px 0;font-size:14px;color:var(--text-sub)}
+.note{margin-top:14px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.note__t{font-weight:800;font-size:13px;color:#2a9d63;margin:0 0 6px}
+.note ul{margin:4px 0 0;padding-left:18px}.note li{font-size:13px;color:var(--text-sub);margin:4px 0}
+/* hub cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pcard{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--orange)}
+.plabel{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--orange);color:#fff;font-weight:900;font-size:15px}
+.pcard h2{font-size:18px;font-weight:900;margin:12px 0 4px;color:var(--text-main)}
+.pcard p{font-size:13px;color:var(--text-sub);margin:0 0 12px;line-height:1.7}
+.pmeta{font-size:12.5px;font-weight:800;color:var(--accent)}
+.partnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.partnav a{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+.partnav small{display:block;font-size:11px;color:var(--text-mute);font-weight:700}
+.partnav b{font-size:14.5px;color:var(--text-main)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:36px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.topic{padding:18px 18px 18px 18px}.topic__n{position:static;margin:0 0 10px}.sec{padding:34px 0}}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">教材構成 ｜ ④ Web開発②</div><div class="nav__menu"><a href="../" class="nav__back">← 教材構成トップ</a><a href="../../" class="nav__back">← 入門ゼミ Home</a></div></div></nav><header class="hero"><span class="hero__badge">Claude Code入門ゼミ ／ 教材構成 PART ④</span>
+  <h1>Web開発②：漫画制作アプリをつくる（OpenAI API連携）</h1><p>このパートでは、入力したセリフやシーンから漫画風の画像をつくる「漫画制作アプリ」を、Claude Code と一緒に開発します。まず見た目だけの試作品（モックアップ）を作り、そこに OpenAI の API をつないで実際に動かし、最後は自分だけがアクセスできる形でこっそりWeb公開するところまでを体験します。コードは書けなくて大丈夫です。「何を作りたいか」を日本語で伝えるのがあなたの仕事です。</p></header><section class="sec"><div class="wrap">  <div class="topic">
+    <span class="topic__n">1</span>
+    <h3 class="topic__t">漫画制作アプリの動作イメージ</h3>
+    <p class="topic__lead">まずは完成形を見ます。「これから自分はこんなものを作るんだ」というゴールが頭にあると、途中の作業がぐっと分かりやすくなります。</p>
+    <ul class="pts"><li>完成した漫画制作アプリは、ユーザーがセリフや場面の説明を入力すると、それをもとに漫画風のコマ（画像）を生成して画面に表示する、というのが基本の動きです。</li><li>裏側では、入力された文章を <strong>OpenAI の API</strong> に送り、返ってきた画像を画面に並べる、という流れが動いています。仕組みの詳細は後のトピックで扱うので、今は「入力 → AIが生成 → 表示」の3ステップだけ覚えれば十分です。</li><li>完成デモを見るときは、細かいコードではなく<strong>「画面のどこに何があるか」「ボタンを押すと何が起きるか」</strong>に注目してください。これがそのまま、Claude Code に伝える指示の材料になります。</li><li>「自分ならこういう機能が欲しい」と感じたら、メモしておきましょう。後でアプリをブラッシュアップする際の改善アイデアになります。</li><li>完璧な作品を作るのが目的ではありません。<strong>「AIと対話するだけでアプリが形になる」体験</strong>そのものが、このパートのいちばんの学びです。</li></ul>
+    
+    
+  </div>
+  <div class="topic">
+    <span class="topic__n">2</span>
+    <h3 class="topic__t">漫画制作アプリ開発の全体像</h3>
+    <p class="topic__lead">いきなり完成品を作ろうとせず、小さなステップに分けて進めます。全体の地図を先に持っておくと、今どこにいるのか迷わなくなります。</p>
+    <ul class="pts"><li>開発は大きく<strong>「①見た目だけの試作品（モックアップ）を作る → ②OpenAI API をつないで本物の生成を動かす → ③使い勝手を磨く → ④自分だけ見られる形で公開する」</strong>という順番で進みます。</li><li>最初から API をつながないのには理由があります。<strong>まず見た目を固めてから中身（AI処理）を入れる</strong>と、問題が起きたときに「見た目の問題」か「API の問題」かを切り分けやすく、つまずきにくくなります。</li><li>それぞれの工程で、あなたがやることは「Claude Code に日本語で要望を伝える」「動かして確認する」「気になった点を再度伝える」の繰り返しです。コードを直接書く必要はありません。</li><li>API をつなぐ工程では<strong>料金とセキュリティ</strong>の話が出てきます（トピック5・8・10）。お金が絡む部分なので、ここだけは少していねいに進めます。</li><li>全体を通して、<strong>一度に完璧を目指さず「動く小さな状態」を積み上げる</strong>のがコツです。Claude Code は何度でも修正に付き合ってくれます。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>完成イメージ（ゴール）を確認する</li><li>API連携前のモックアップを作る</li><li>OpenAI API の契約と設定を済ませる</li><li>モックアップに OpenAI API を連携して実際に動かす</li><li>動作と使い勝手をブラッシュアップする</li><li>自分だけがアクセスできる形でWeb公開する</li></ol></div>
+    
+  </div>
+  <div class="topic">
+    <span class="topic__n">3</span>
+    <h3 class="topic__t">使用する技術の説明</h3>
+    <p class="topic__lead">このアプリで登場する技術を、ごく簡単に言葉だけ押さえておきます。仕組みを丸暗記する必要はなく、「こういう役割の道具がある」とイメージできればOKです。</p>
+    <ul class="pts"><li><strong>API（エーピーアイ）</strong>とは、外部のサービスの機能を「呼び出して使わせてもらう窓口」のことです。今回は OpenAI が用意した画像生成・文章生成の機能を、自分のアプリから呼び出して使います。</li><li><strong>OpenAI API</strong>は、ChatGPT を提供している OpenAI 社が公開している窓口です。自分のアプリから文章や画像を生成してもらえます。利用には後述の<strong>APIキー</strong>（合言葉のような鍵）が必要です。</li><li><strong>APIキー</strong>は、あなた専用のパスワードのようなものです。これを使った分だけ料金が発生するため、<strong>他人に絶対に見せない・コードに直書きしない</strong>のが鉄則です（詳しくはトピック5・10で扱います）。</li><li>アプリの画面そのものは、Claude Code が <code>HTML</code> / <code>CSS</code> / <code>JavaScript</code> といったWebの基本技術や、開発を助けるフレームワークを使って組み立ててくれます。あなたが用語を覚える必要はありません。</li><li>用語が難しく感じても止まらなくて大丈夫です。<strong>分からない言葉が出てきたら、その場で Claude Code に「〜って何？初心者向けに教えて」と聞く</strong>のがいちばんの近道です。</li></ul>
+    
+    
+  </div>
+  <div class="topic">
+    <span class="topic__n">4</span>
+    <h3 class="topic__t">モックアップを開発してみよう</h3>
+    <p class="topic__lead">まずは API をつなぐ前の「見た目だけの試作品（モックアップ）」を Claude Code に作ってもらいます。中身はまだ空っぽでも、画面の形が見えると一気に開発が進みます。</p>
+    <ul class="pts"><li><strong>モックアップ</strong>とは、本物の機能はまだ入っていない「見た目とボタンだけのお試し版」です。家を建てる前の間取り図のようなもので、完成像を全員で確認するために作ります。</li><li>Claude Code には<strong>「どんな画面が欲しいか」を具体的に伝える</strong>のがポイントです。たとえば「セリフを入力する欄」「シーンを説明する欄」「生成ボタン」「結果を並べる場所」のように要素を挙げると、意図通りの画面になりやすいです。</li><li>この段階では、生成ボタンを押しても<strong>仮の画像やサンプル文が出る</strong>状態でかまいません。API はまだつないでいないので、本物のAI生成は次以降のトピックで行います。</li><li>出来上がった画面を見て「ボタンの位置を変えたい」「入力欄を増やしたい」と思ったら、そのまま日本語で伝えれば直してくれます。<strong>気軽に何度も注文を出す</strong>のがコツです。</li><li>ローカルサーバーを起動すると、自分のパソコンのブラウザで試作品を確認できます。起動コマンドが分からなければ Claude Code に「このアプリを起動して確認させて」と頼めばOKです。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>Claude Code に「漫画制作アプリのモックアップを作りたい」と伝える</li><li>欲しい画面の要素（入力欄・ボタン・結果表示エリアなど）を具体的に列挙する</li><li>ローカルサーバーを起動してブラウザで見た目を確認する</li><li>気になった点を日本語で伝えて修正してもらう</li><li>画面の形に納得できたら、次の API 連携へ進む</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>うまく伝わらないときは、参考にしたいアプリやサイトのイメージを言葉で説明すると精度が上がります。</li><li>完璧を目指さず「だいたいこの形」まで来たら先に進みましょう。後からいくらでも調整できます。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">5</span>
+    <h3 class="topic__t">OpenAI API の契約と設定</h3>
+    <p class="topic__lead">ここからは本物のAI生成を動かすための準備です。OpenAI のアカウントを作り、APIキーを発行し、使いすぎを防ぐ上限設定までを行います。お金が関わる工程なので、ていねいに進めましょう。</p>
+    <ul class="pts"><li>OpenAI API は基本的に<strong>従量課金（使った分だけ支払う）</strong>です。生成のたびにわずかな料金がかかるため、最初に<strong>支払い情報の登録と利用上限の設定</strong>をセットで済ませておくと安心です。</li><li><strong>APIキーは発行時にしか全体を表示できない</strong>ことが多いので、表示されたら安全な場所に控えておきます。万一見失っても、新しいキーを発行し直せば大丈夫です。</li><li>最大の注意点は<strong>APIキーの漏洩</strong>です。キーは「あなたの財布の鍵」と同じで、他人に渡ると勝手に使われ、その分の料金があなたに請求されます。<strong>画面共有・スクショ・チャット貼り付け・SNS投稿で映り込ませない</strong>よう徹底してください。</li><li>使いすぎへの備えとして、OpenAI の管理画面で<strong>月ごとの利用上限（リミット）</strong>を設定できます。学習用なら低めの上限にしておくと、想定外の高額請求を防げます。</li><li>もし<strong>キーをうっかり外部に出してしまったら、ためらわず即座にそのキーを無効化（削除）して、新しいキーを発行</strong>します。「たぶん大丈夫」と放置しないことが、いちばんのセキュリティ対策です。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>OpenAI のアカウントを作成し、ログインする</li><li>支払い情報を登録する（従量課金のため）</li><li>月ごとの利用上限（リミット）を学習用に低めで設定する</li><li>APIキーを発行し、表示された鍵を安全な場所に控える</li><li>発行したキーはコードに直書きせず、後の連携工程で安全な方法で渡す（トピック6・10参照）</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>APIキーは <code>sk-</code> のような決まった形式で始まる長い文字列です。コピーするときは前後に余計な空白や改行が混ざらないよう注意しましょう。</li><li>利用上限の設定は「保険」です。少額でも設定しておくと、初めての従量課金でも落ち着いて学べます。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">6</span>
+    <h3 class="topic__t">モックアップに OpenAI API を連携してみよう</h3>
+    <p class="topic__lead">いよいよ試作品に「本物の頭脳」を入れます。発行したAPIキーを安全に渡し、Claude Code に連携処理を実装してもらって、実際に漫画が生成される瞬間を目指します。</p>
+    <ul class="pts"><li>APIキーは<strong>コードに直接書き込まず、<code>.env</code> という専用の設定ファイルに入れて読み込ませる</strong>のが基本です。こうすると、キーをコード本体やGitHubに載せずに済み、漏洩リスクを大きく下げられます。</li><li>Claude Code には<strong>「モックアップに OpenAI API を連携して、入力内容から実際に画像を生成するようにして」</strong>のように依頼します。どのファイルを直すかまで自分で把握する必要はありません。</li><li>生成ボタンを押すと、入力した内容が OpenAI に送られ、返ってきた結果が画面に表示されます。<strong>仮の画像が本物の生成結果に置き換わったら連携成功</strong>です。</li><li>エラーが出ても慌てないでください。<strong>エラーメッセージをそのまま Claude Code に貼り付けて「これを直して」と頼む</strong>のが、いちばん早い解決法です。料金不足・キーの誤り・モデル指定ミスなどはよくあるつまずきです。</li><li>生成には数秒〜数十秒かかることがあります。ボタンを連打すると<strong>その回数だけ料金がかかる</strong>ので、結果が出るまで落ち着いて待ちましょう。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>プロジェクト内に <code>.env</code> ファイルを用意し、APIキーを記入する</li><li>Claude Code に「.env のキーを使って OpenAI API を連携して」と依頼する</li><li>ローカルで起動し、実際に入力して生成ボタンを押す</li><li>本物の生成結果が表示されるか確認する</li><li>エラーが出たらメッセージをそのまま Claude Code に渡して直してもらう</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>うまく動かないときは「キーは正しいか」「利用上限や残高は足りているか」「.env を正しく読めているか」の3点をまず疑いましょう。</li><li><code>.env</code> は次のトピック以降で <code>.gitignore</code> によりGitHubから除外します。今のうちから「キーは .env、公開しない」とセットで覚えておきましょう。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">7</span>
+    <h3 class="topic__t">モックアップをブラッシュアップしてみよう</h3>
+    <p class="topic__lead">基本の生成が動いたら、使い勝手や見た目を磨いていきます。ここで Claude Code を効率よく動かすための便利機能（CLAUDE.md や Skills）も活用します。</p>
+    <ul class="pts"><li>ブラッシュアップは「機能追加」と「使いやすさ改善」の両面で進めます。<strong>「複数コマをまとめて生成」「生成中の待機表示を出す」「結果を保存できるようにする」</strong>など、欲しい動きを日本語で伝えていきます。</li><li><strong>CLAUDE.md</strong>は、Claude Code への「業務マニュアル」のようなファイルです。プロジェクトのルールやよく使う指示を書いておくと、毎回説明し直さなくても意図通りに動いてくれます（詳しくはトピック8）。</li><li><strong>Skills（スキル）</strong>は Claude Code の機能を拡張する仕組みです。たとえば<strong><code>find-skills</code></strong>（必要なスキルを探してくれるスキル）や<strong><code>skill-creator</code></strong>（スキル自体を作るスキル）を使うと、デザイン改善やコードレビューなどを得意な道具に任せられます。</li><li>改善は<strong>一度に1つずつ</strong>頼むのがコツです。まとめて大量に注文すると、どこで問題が起きたか分かりにくくなります。小さく直して、動作確認して、また次へ、を繰り返しましょう。</li><li>「もっと良くしたい」と思ったら、完成済みのアプリでも遠慮なく注文を続けて構いません。<strong>対話しながら育てていける</strong>のが、Claude Code を使った開発のいちばんの強みです。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>改善したい点を1つに絞って Claude Code に伝える</li><li>修正後、ローカルで動かして結果を確認する</li><li>必要に応じて find-skills で便利なスキルを探し、導入する</li><li>繰り返し使う指示やルールは CLAUDE.md にまとめておく</li><li>満足できる仕上がりになるまで、小さな改善を積み重ねる</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>スキルを入れても呼び出せないときは、Claude Code をいったん終了して再起動すると認識されることがあります。</li><li>改善案が思いつかないときは「初心者が使いやすくなる改善を提案して」と聞くと、Claude Code がアイデアを出してくれます。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">8</span>
+    <h3 class="topic__t">Claude Code の応用設定（CLAUDE.md・Skills・Rules）</h3>
+    <p class="topic__lead">ここでは Claude Code をもっと賢く・安全に使うための3つの仕組みを整理します。特に Rules は、これからGitHubなど外部サービスを触る前に入れておきたいセキュリティの土台になります。</p>
+    <ul class="pts"><li><strong>CLAUDE.md</strong>は、プロジェクトごとのルールを書いておくファイルです。「コメントは日本語で」「<code>.env</code> は触らない」「ファイル削除前に必ず確認する」のような決まりを書くと、Claude Code が毎回それに従ってくれます。</li><li>中身を自分でゼロから書くのが難しければ、<strong><code>/init</code> コマンド</strong>を使うと、プロジェクトを自動で分析して CLAUDE.md のたたき台を作ってくれます。最初は空のままでも問題ありません。</li><li><strong>Skills</strong>は、特定の作業が得意な「拡張パーツ」です。デザイン改善・セキュリティチェック・コードレビューなど、目的に合ったスキルを <code>find-skills</code> で探したり、<code>skill-creator</code> で自作したりできます。</li><li><strong>Rules（ルール設定）</strong>は、Claude Code に「やってはいけないこと」を前もって定めておく安全装置です。<strong>GitHubなど外部サービスを操作し始める前に、危険な操作を勝手に実行させないテンプレ的な設定を入れておく</strong>と安心です。</li><li>これらはすべて<strong>「意図通りに・安全に動いてもらうための準備」</strong>です。設定は一度入れれば以降のセッションでも効くので、面倒に感じても最初に整えておく価値があります。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li><code>/init</code> でCLAUDE.mdのたたき台を作る、または必要なルールを手書きで足す</li><li>「.env は触らない」「削除前に確認」など、安全に関わるルールを CLAUDE.md に明記する</li><li>find-skills で目的に合うスキルを探し、必要なものを導入する</li><li>GitHubなど外部を触る前に、危険操作を防ぐ Rules を設定しておく</li><li>設定後は Claude Code を再起動して反映を確認する</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>CLAUDE.md のファイル名は大文字小文字まで正確に。<code>claude.md</code> のように小文字だと読み込まれません。</li><li>「何を禁止すべきか分からない」ときは、Claude Code に「初心者が安全に使うための推奨ルールを提案して」と聞くのが手早いです。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">9</span>
+    <h3 class="topic__t">サイトにアクセス制限をかける方法</h3>
+    <p class="topic__lead">作ったアプリを「自分だけ」「決まった人だけ」が使える状態にする方法を学びます。全世界に公開する前に、まずは限定的に使えるようにするのが安全です。</p>
+    <ul class="pts"><li>アクセス制限が役立つ場面はいくつもあります。<strong>毎回ローカルサーバーを起動するのが面倒/スマホや外出先からも使いたい/まずは限られた人にだけテスト公開したい</strong>——こうしたときに「限定公開」が便利です。</li><li>代表的な制限方法は2つあります。<strong>①認証（パスワードやログインを要求する）</strong>と<strong>②IP制限（特定のネットワークからのアクセスだけ許可する）</strong>です。それぞれ仕組みが違うので、用途に合わせて選びます。</li><li><strong>認証</strong>は「合言葉を知っている人だけ入れる」イメージです。どこからアクセスしても、正しいパスワードやログインができれば使えるので、外出先やスマホからの利用に向いています。</li><li><strong>IP制限</strong>は「この場所（ネットワーク）からだけ入れる」イメージです。自宅や会社など決まった回線からのアクセスに限定でき、それ以外は弾けます。</li><li>OpenAI API を使うアプリは、<strong>誰でもアクセスできる状態にすると他人にAPIを使われ、その分の料金があなたに請求される</strong>恐れがあります。だからこそ、公開前のアクセス制限はお金を守るうえでも重要です。</li></ul>
+    
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>「自分だけ使えればいい」なら、認証とIP制限を組み合わせると安心感が高まります（次のトピックで実践します）。</li><li>設定方法が分からなければ、用途を伝えて Claude Code に「このアプリに認証をかけたい」「特定の人だけ使えるようにしたい」と相談しましょう。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">10</span>
+    <h3 class="topic__t">漫画制作アプリをウェブに限定公開してみよう</h3>
+    <p class="topic__lead">最後に、二重のアクセス制限（認証＋IP制限）をかけたうえで、作った漫画制作アプリをWebに限定公開します。APIキーを扱うアプリの公開なので、機密情報の取り扱いがいちばんの肝です。</p>
+    <ul class="pts"><li>公開前の最重要チェックは<strong>APIキーを絶対に外部へ出さないこと</strong>です。キーは <code>.env</code> に入れ、その <code>.env</code> を <code>.gitignore</code> に書いて<strong>GitHubへアップロードされないよう除外</strong>します。これを忘れるとキーが世界中に公開されてしまいます。</li><li>万一<strong>キーがGitHubなどに載ってしまったら、流出した前提で即座にそのキーを無効化し、新しいキーを発行</strong>します。一度ネットに出たキーは「もう漏れたもの」として扱うのが鉄則です。</li><li>限定公開では<strong>認証（パスワード等）とIP制限を二重にかける</strong>ことで、「自分や許可した人だけが使える」状態を作ります。これにより、勝手にAPIを使われて料金が膨らむリスクを大きく減らせます。</li><li>公開作業そのものは Claude Code に手伝ってもらえます。<strong>「.env と .gitignore の設定を確認して、APIキーが公開されない状態でデプロイしたい」</strong>のように、安全面を明示して依頼するのがポイントです。</li><li>公開できたら、必ず<strong>自分以外からはアクセスできないか/APIキーがソースコードに含まれていないか</strong>を確認しましょう。「動いた」だけで満足せず、「安全に動いているか」までチェックして完成です。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>APIキーが <code>.env</code> に入っていることを確認する</li><li><code>.gitignore</code> に <code>.env</code> を記載し、GitHubへ載らないよう除外する</li><li>認証（パスワード等）とIP制限の二重のアクセス制限を設定する</li><li>Claude Code に「APIキーが公開されない状態でデプロイして」と依頼する</li><li>公開後、許可した人以外がアクセスできないこと・キーが漏れていないことを確認する</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>公開前に Skills のセキュリティチェック系スキルを回すと、見落としやすい漏洩リスクを洗い出せます。</li><li>心配なときは、テスト用に低めの利用上限を設定したままにしておくと、万一の際も被害を最小限に抑えられます。</li></ul></div>
+  </div></div></section><section class="sec sec--soft"><div class="wrap"><div class="partnav"><a href="../part3/"><small>← 前のパート</small><b>③ Web開発①</b></a><a href="../part5/" style="text-align:right"><small>次のパート →</small><b>⑤ 業務効率化</b></a></div></div></section><section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section><footer class="footer"><p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 教材構成 ④ Web開発②</p><p class="src">本資料は教材構成に沿って初学者向けに整理した学習用資料です（教材本文・動画の転載ではありません）。</p></footer>
+</body></html>

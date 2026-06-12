@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教材構成（カリキュラム）｜ Claude Code入門ゼミ</title><meta name="description" content="Claude Code入門ゼミの教材構成。導入・Web制作・Web開発①②・業務効率化・付録の全5パートを初学者向けに整理。">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:12px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14.5px}
+.nav__menu{display:flex;gap:10px;flex-wrap:wrap}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg-card);color:var(--text-sub)}
+.nav__back:hover{background:var(--bg-soft);color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:64px 22px 44px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;line-height:1.4;margin:20px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px}.h2 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 24px}
+/* topic */
+.topic{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px 24px 66px;box-shadow:var(--shadow);margin:0 0 18px}
+.topic__n{position:absolute;left:18px;top:24px;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center}
+.topic__t{font-size:17.5px;font-weight:900;margin:0 0 8px;line-height:1.45}
+.topic__lead{font-size:14.5px;color:var(--text-main);margin:0 0 12px}
+.pts{margin:0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{margin-top:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:14px 18px 14px 20px}
+.steps__h{font-weight:800;font-size:13px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:6px 0;font-size:14px;color:var(--text-sub)}
+.note{margin-top:14px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.note__t{font-weight:800;font-size:13px;color:#2a9d63;margin:0 0 6px}
+.note ul{margin:4px 0 0;padding-left:18px}.note li{font-size:13px;color:var(--text-sub);margin:4px 0}
+/* hub cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pcard{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--orange)}
+.plabel{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--orange);color:#fff;font-weight:900;font-size:15px}
+.pcard h2{font-size:18px;font-weight:900;margin:12px 0 4px;color:var(--text-main)}
+.pcard p{font-size:13px;color:var(--text-sub);margin:0 0 12px;line-height:1.7}
+.pmeta{font-size:12.5px;font-weight:800;color:var(--accent)}
+.partnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.partnav a{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+.partnav small{display:block;font-size:11px;color:var(--text-mute);font-weight:700}
+.partnav b{font-size:14.5px;color:var(--text-main)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:36px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.topic{padding:18px 18px 18px 18px}.topic__n{position:static;margin:0 0 10px}.sec{padding:34px 0}}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門ゼミ ｜ 教材構成</div><div class="nav__menu"><a href="../" class="nav__back">← 入門ゼミ Home</a></div></div></nav><header class="hero"><span class="hero__badge">Claude Code入門ゼミ ／ 教材構成（カリキュラム）</span>
+  <h1>Claude Code入門ゼミ <em>教材構成</em></h1>
+  <p>完全な初学者・非エンジニア向けに、Claude Code を「知る → 作る → 仕事に活かす」順で学べる全5パート＋付録の教材です。各パートをクリックすると、トピックごとの要点・手順が見られます。</p></header><section class="sec"><div class="wrap"><div class="grid">    <a class="pcard" href="part1/">
+      <span class="plabel">①</span>
+      <h2>導入</h2>
+      <p>Claude Code を知り、安全に始める</p>
+      <span class="pmeta">8 トピック →</span>
+    </a>
+    <a class="pcard" href="part2/">
+      <span class="plabel">②</span>
+      <h2>Web制作</h2>
+      <p>会社ホームページを作って公開する</p>
+      <span class="pmeta">5 トピック →</span>
+    </a>
+    <a class="pcard" href="part3/">
+      <span class="plabel">③</span>
+      <h2>Web開発①</h2>
+      <p>秘書アプリを開発し GitHub で公開する（API不使用）</p>
+      <span class="pmeta">10 トピック →</span>
+    </a>
+    <a class="pcard" href="part4/">
+      <span class="plabel">④</span>
+      <h2>Web開発②</h2>
+      <p>漫画制作アプリを作る（OpenAI API連携）</p>
+      <span class="pmeta">10 トピック →</span>
+    </a>
+    <a class="pcard" href="part5/">
+      <span class="plabel">⑤</span>
+      <h2>業務効率化</h2>
+      <p>Claude Code を「仕事の相棒」にする</p>
+      <span class="pmeta">4 トピック →</span>
+    </a>
+    <a class="pcard" href="appendix/">
+      <span class="plabel">付録</span>
+      <h2>付録</h2>
+      <p>ウェブの先へ／今後の学習</p>
+      <span class="pmeta">2 トピック →</span>
+    </a>
+</div></div></section><section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section><footer class="footer"><p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 教材構成</p></footer>
+</body></html>

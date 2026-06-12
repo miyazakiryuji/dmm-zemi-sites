@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>② Web制作 ｜ 教材構成 ｜ Claude Code入門ゼミ</title><meta name="description" content="このパートでは、プログラミングの知識がなくても、Claude Code との会話だけで会社ホームページを一から作り、インターネットに公開するまでを体験します。ファイルの役割をざっくり理解するところから始め、制作・デザイン">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:12px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14.5px}
+.nav__menu{display:flex;gap:10px;flex-wrap:wrap}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg-card);color:var(--text-sub)}
+.nav__back:hover{background:var(--bg-soft);color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:64px 22px 44px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;line-height:1.4;margin:20px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px}.h2 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 24px}
+/* topic */
+.topic{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px 24px 66px;box-shadow:var(--shadow);margin:0 0 18px}
+.topic__n{position:absolute;left:18px;top:24px;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center}
+.topic__t{font-size:17.5px;font-weight:900;margin:0 0 8px;line-height:1.45}
+.topic__lead{font-size:14.5px;color:var(--text-main);margin:0 0 12px}
+.pts{margin:0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{margin-top:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:14px 18px 14px 20px}
+.steps__h{font-weight:800;font-size:13px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:6px 0;font-size:14px;color:var(--text-sub)}
+.note{margin-top:14px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.note__t{font-weight:800;font-size:13px;color:#2a9d63;margin:0 0 6px}
+.note ul{margin:4px 0 0;padding-left:18px}.note li{font-size:13px;color:var(--text-sub);margin:4px 0}
+/* hub cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pcard{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--orange)}
+.plabel{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--orange);color:#fff;font-weight:900;font-size:15px}
+.pcard h2{font-size:18px;font-weight:900;margin:12px 0 4px;color:var(--text-main)}
+.pcard p{font-size:13px;color:var(--text-sub);margin:0 0 12px;line-height:1.7}
+.pmeta{font-size:12.5px;font-weight:800;color:var(--accent)}
+.partnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.partnav a{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+.partnav small{display:block;font-size:11px;color:var(--text-mute);font-weight:700}
+.partnav b{font-size:14.5px;color:var(--text-main)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:36px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.topic{padding:18px 18px 18px 18px}.topic__n{position:static;margin:0 0 10px}.sec{padding:34px 0}}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">教材構成 ｜ ② Web制作</div><div class="nav__menu"><a href="../" class="nav__back">← 教材構成トップ</a><a href="../../" class="nav__back">← 入門ゼミ Home</a></div></div></nav><header class="hero"><span class="hero__badge">Claude Code入門ゼミ ／ 教材構成 PART ②</span>
+  <h1>Web制作 ― Claude Codeで会社ホームページを作って公開する</h1><p>このパートでは、プログラミングの知識がなくても、Claude Code との会話だけで会社ホームページを一から作り、インターネットに公開するまでを体験します。ファイルの役割をざっくり理解するところから始め、制作・デザイン調整・公開へと、ひとつずつ手を動かしながら進めましょう。</p></header><section class="sec"><div class="wrap">  <div class="topic">
+    <span class="topic__n">1</span>
+    <h3 class="topic__t">ホームページ制作の基礎知識</h3>
+    <p class="topic__lead">会社ホームページが、どんな部品（ファイル）の組み合わせでできているのかを、ざっくりイメージできるようにします。まずは最終的に作るサイトの完成形を見てから、その中身を分解して役割を覚えましょう。</p>
+    <ul class="pts"><li>最初に「これから作る会社ホームページ」の完成形を眺めると、ゴールが見えて学びやすい。難しい文法は覚えず、各部品の役割をつかむのが目的です</li><li>Webページは主に <code>HTML</code>・<code>CSS</code>・<code>JavaScript</code> の3種類のファイルでできています。家に例えると、<strong>HTML＝骨組み（柱・土台）</strong>、<strong>CSS＝見た目（壁や屋根の色・形）</strong>、<strong>JavaScript＝動き（押すと反応するスイッチ）</strong></li><li><strong>HTML</strong> は「何を表示するか」を決める部分。見出し・段落・画像・リンクなどを <code>&lt;h1&gt;</code> や <code>&lt;p&gt;</code> といった「タグ」で囲んで意味づけします。CSSなしのHTMLだけだと、装飾のない黒い文字が縦に並ぶだけの素朴な見た目になります</li><li><strong>CSS</strong> は「見た目」を整える部分。色・文字の大きさ・余白・配置などを指定します。同じHTMLでもCSSを当てると、一気にきれいなホームページらしい見た目に変わります</li><li><strong>JavaScript</strong> は「動き」を担当。スマホで開いたときのメニュー開閉や、ボタンを押したときの反応など、クリックに応じた動作を作ります。静的なホームページなら必須ではありませんが、あると便利です</li></ul>
+    
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>細かい書き方は一切覚えなくて大丈夫です。コードはすべて Claude Code が書いてくれます。皆さんは「色を変えたい→CSS」「動きを変えたい→JavaScript」という<strong>役割の対応だけ</strong>頭に入れておけば、修正の指示が的確に出せます</li><li>HTMLとCSSは「マークアップ言語」と呼ばれ、計算や条件分岐をするプログラミング言語（JavaScriptなど）とは少し性質が違います。区別がつかなくなったら Claude Code に「これはHTML・CSS・JavaScriptのどれの担当？」と聞けば即答してくれます</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">2</span>
+    <h3 class="topic__t">会社ホームページを制作してみよう</h3>
+    <p class="topic__lead">いよいよ Claude Code に会社ホームページを作ってもらいます。最初はごく簡単な指示だけで、たった数分で土台となるサイトが出来上がる体験をしてみましょう。</p>
+    <ul class="pts"><li>まずサイト用の<strong>新しいフォルダ</strong>を1つ用意します。フォルダ名は <code>company-homepage</code> のように英数字にしておくと、あとで公開するときにトラブルが起きにくくなります</li><li>Claude Code には専門用語を使わず、自然な日本語で頼んでOK。たとえば「Claude Codeを使ったホームページ制作の会社を始めます。HTML・CSS・JavaScriptの3つのファイルで、会社ホームページを作ってください」程度で十分です</li><li>Claude Code が <code>index.html</code>（トップページ）をはじめ、見た目用の <code>style.css</code>、動き用の <code>script.js</code> などのファイルを自動で作ってくれます。承認を求められたら許可して進めます</li><li>出来上がったファイルは、<strong>ブラウザで開けば</strong>そのまま見た目を確認できます。フォルダ内の <code>index.html</code> をダブルクリック、またはエディタから開くだけです</li><li>スマホ表示の確認は、ブラウザの<strong>開発者ツール</strong>を使います。Windowsは <code>F12</code>、Macは <code>Cmd + Option + I</code> で開き、画面上部のスマホ表示アイコンに切り替えると、メニュー開閉などの動きも試せます</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>サイト専用の新しいフォルダ（例: <code>company-homepage</code>）を英数字の名前で作る</li><li>そのフォルダをエディタで開き、Claude Code を起動する</li><li>「HTML・CSS・JavaScriptの3ファイルで会社ホームページを作って」と自然な日本語で依頼する</li><li>ファイル作成や編集の確認を求められたら許可して、生成が終わるまで数分待つ</li><li>出来上がった <code>index.html</code> をブラウザで開き、見た目を確認する</li><li>開発者ツール（Win: <code>F12</code> / Mac: <code>Cmd + Option + I</code>）でスマホ表示や動きもチェックする</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>指示を送ったつもりが途中で改行できずに送信されてしまうことがあります。<strong>改行は <code>Shift + Enter</code> または <code>Alt + Enter</code></strong>、送信は <code>Enter</code> だけ、と覚えておくと長い指示も書きやすくなります</li><li>もしCSSやJavaScriptが作られず素朴な見た目のままだったら、「見た目を整えるCSSと、動きをつけるJavaScriptのファイルも作ってください」と追加で頼めば補ってくれます</li><li>この段階の見た目は「とりあえず形になった」レベルで構いません。デザインを整えるのは次のトピックで行います</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">3</span>
+    <h3 class="topic__t">会社ホームページをブラッシュアップしてみよう</h3>
+    <p class="topic__lead">最初に出てきたサイトは、どこか「AIが作った感」のある素朴なデザインになりがちです。ここでは具体的な指示を重ねて、自分の会社らしい洗練された見た目へと肉付けしていきます。</p>
+    <ul class="pts"><li><strong>デザインの雰囲気を言葉で伝える</strong>のが一番手軽です。「ミニマルな感じで」「上品で落ち着いた印象で」「ポップで親しみやすく」など、イメージを伝えるだけで方向性が変わります。用語が思いつかなければ「このサイトに合うデザインの方向性をいくつか提案して」と聞けばOK</li><li><strong>内容（コンテンツ）を増やす</strong>指示も有効です。「会社概要・サービス紹介・料金プラン・よくある質問・お問い合わせのセクションを追加して」のように、欲しい項目を具体的に挙げると一気に充実します</li><li><strong>細部の調整</strong>もお願いできます。「日本語が読みやすいフォントにして」「マウスを乗せたときに軽くアニメーションする程度の動きを、派手すぎない範囲で加えて」など、ピンポイントの注文に応えてくれます</li><li>複数のデザイン案を<strong>見比べたい</strong>ときは、「ミニマル案とカード分割（ベントーグリッド）案を、ボタンで切り替えて比較できるようにして」と頼めば、同じページ上で見くらべて選べます</li><li>採用するデザインが決まったら、「比較用のボタンは消して、ミニマル案を正式採用してください」と伝えて仕上げます</li></ul>
+    
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>より洗練されたデザインを最初から狙うなら、<strong>フロントエンドデザイン用の Skill</strong> を活用する方法があります。Skill は Claude Code に専門的な作法を覚えさせる仕組みで、これを使うと「AIっぽさ」の少ない、モダンで完成度の高い見た目を生成しやすくなります（Skill の詳しい仕組みは別のパートで扱います）</li><li>他社サイトを参考にするときは、<strong>そっくりそのまま真似るのは著作権上NG</strong>です。色味・余白・全体の構成といった「雰囲気」だけを参考にしましょう。参考にしたい見た目はスクリーンショットを貼ると伝わりやすいです</li><li>気に入った配色やフォントの設定は、メモ（Markdownファイル）に残しておくと、次に別のサイトを作るときに「前回のこの設定で」と再利用できて便利です</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">4</span>
+    <h3 class="topic__t">ホームページ公開の基礎知識</h3>
+    <p class="topic__lead">作ったサイトは、そのままでは自分のパソコンの中でしか見られません。世界中の人に見てもらうには「公開（デプロイ）」が必要です。その前に、ドメインとサーバーという2つの言葉をやさしく整理しておきます。</p>
+    <ul class="pts"><li>パソコンの中だけにあるサイトは、自分しか見られない「下書き」状態です。誰でもアクセスできるようにする作業を<strong>公開（デプロイ）</strong>と呼びます</li><li><strong>サーバー</strong>は、サイトのファイルを置いておき、いつでも訪問者に届けてくれる「土地・置き場所」のようなものです。インターネット上に常に立っていて、アクセスがあるとページを返してくれます</li><li><strong>ドメイン</strong>は、そのサイトの「住所」にあたる文字列です（例: <code>example.com</code>）。訪問者はこの住所をブラウザに入力することで、サーバー上のサイトにたどり着けます</li><li>昔は「レンタルサーバーを契約して、専用ソフトでファイルを送り込む」という手間のかかる方法が主流でした。費用もかかり、設定も初心者には難しいものでした</li><li>今は<strong>ホスティングサービス</strong>を使えば、ファイルをアップロードするだけで、サーバーの用意も住所の発行も自動でやってくれます。初学者はまずこの簡単な方法から始めるのがおすすめです</li></ul>
+    
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>最初は専用ドメイン（独自の住所）を買う必要はありません。ホスティングサービスが <code>あなたのサイト名.pages.dev</code> のような無料の住所を自動で用意してくれるので、それで十分に公開できます</li><li>独自ドメインは、サイトを本格運用したくなってから後付けで設定できます。まずは無料の住所で「公開できた」という体験を優先しましょう</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">5</span>
+    <h3 class="topic__t">会社ホームページをウェブで公開してみよう</h3>
+    <p class="topic__lead">いよいよ作ったサイトをインターネットに公開します。ここでは Cloudflare Pages という無料のホスティングサービスを使い、ファイルをドラッグ＆ドロップするだけの一番かんたんな方法で公開します。</p>
+    <ul class="pts"><li><strong>Cloudflare Pages</strong> は、静的なホームページを無料で公開できるサービスです。難しいサーバー契約や専用ソフトは不要で、ファイルをアップロードするだけで世界中からアクセスできるURLが発行されます</li><li>公開には Cloudflare の<strong>無料アカウント</strong>が必要です。メールアドレスで登録でき、料金プランの入力なしで始められます</li><li>ダッシュボードから新しいプロジェクトを作り、<strong>「ファイルをドラッグ＆ドロップ（Direct Upload）」</strong>を選択。サイトのフォルダ（または ZIP にまとめたもの）をそのまま枠に放り込んでアップロードします</li><li>アップロードが終わって公開すると、<code>あなたのプロジェクト名.pages.dev</code> という形のURLが自動で発行されます。このURLを共有すれば、誰でもサイトを見られます</li><li>サイトを直したくなったら、Claude Code でファイルを修正し、<strong>同じプロジェクトに新しいファイルを再アップロードするだけ</strong>で更新が反映されます</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>公開したいサイトのフォルダの中に、トップページが必ず <code>index.html</code> という名前で入っているか確認する</li><li>Cloudflare の無料アカウントを作成し、ログインする</li><li>ダッシュボードで「Pages（Workers &amp; Pages）」から新規プロジェクトを作成し、ドラッグ＆ドロップ方式を選ぶ</li><li>プロジェクト名を入力し、サイトのフォルダ（または ZIP）を枠にドラッグ＆ドロップしてアップロードする</li><li>アップロード完了後「保存して公開（Save and Deploy）」を実行し、発行された <code>～.pages.dev</code> のURLにアクセスして表示を確認する</li><li>内容を修正したら、Claude Code で直したファイルを同じプロジェクトに再アップロードして更新する</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li><strong>トップページのファイル名は必ず <code>index.html</code> に</strong>。<code>top.html</code> や <code>homepage.html</code> だと、URLを開いても「ページが見つかりません」になってしまいます</li><li>公開後にデザインが崩れたり画像が出ない場合、ファイルの場所の指定（パス）がパソコン内の特定の場所を指していることが原因のことが多いです。Claude Code に「公開先でも正しく表示されるよう、ファイルの参照を相対パスに直して」と頼めば直せます</li><li>お問い合わせフォームは「見た目」だけだと送信してもメールは届きません。実際に受け取れるようにするには、フォーム送信を受け付ける別の仕組み（フォーム用サービスや送信先の設定）が必要になります。まずは見た目だけ用意しておき、必要になったら Claude Code に相談しながら追加するのがおすすめです</li></ul></div>
+  </div></div></section><section class="sec sec--soft"><div class="wrap"><div class="partnav"><a href="../part1/"><small>← 前のパート</small><b>① 導入</b></a><a href="../part3/" style="text-align:right"><small>次のパート →</small><b>③ Web開発①</b></a></div></div></section><section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section><footer class="footer"><p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 教材構成 ② Web制作</p><p class="src">本資料は教材構成に沿って初学者向けに整理した学習用資料です（教材本文・動画の転載ではありません）。</p></footer>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>付録 付録 ｜ 教材構成 ｜ Claude Code入門ゼミ</title><meta name="description" content="ここまでのゼミでは、おもにウェブサイトやウェブアプリを作ってきました。この付録では「ウェブ以外」の開発に一歩踏み出す例として、スマホアプリ作りを体験します。あわせて、ゼミを終えたあとに何をどう学んでいくか、これからの道筋">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:12px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14.5px}
+.nav__menu{display:flex;gap:10px;flex-wrap:wrap}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg-card);color:var(--text-sub)}
+.nav__back:hover{background:var(--bg-soft);color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:64px 22px 44px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;line-height:1.4;margin:20px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px}.h2 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 24px}
+/* topic */
+.topic{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px 24px 66px;box-shadow:var(--shadow);margin:0 0 18px}
+.topic__n{position:absolute;left:18px;top:24px;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center}
+.topic__t{font-size:17.5px;font-weight:900;margin:0 0 8px;line-height:1.45}
+.topic__lead{font-size:14.5px;color:var(--text-main);margin:0 0 12px}
+.pts{margin:0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{margin-top:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:14px 18px 14px 20px}
+.steps__h{font-weight:800;font-size:13px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:6px 0;font-size:14px;color:var(--text-sub)}
+.note{margin-top:14px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.note__t{font-weight:800;font-size:13px;color:#2a9d63;margin:0 0 6px}
+.note ul{margin:4px 0 0;padding-left:18px}.note li{font-size:13px;color:var(--text-sub);margin:4px 0}
+/* hub cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pcard{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--orange)}
+.plabel{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--orange);color:#fff;font-weight:900;font-size:15px}
+.pcard h2{font-size:18px;font-weight:900;margin:12px 0 4px;color:var(--text-main)}
+.pcard p{font-size:13px;color:var(--text-sub);margin:0 0 12px;line-height:1.7}
+.pmeta{font-size:12.5px;font-weight:800;color:var(--accent)}
+.partnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.partnav a{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+.partnav small{display:block;font-size:11px;color:var(--text-mute);font-weight:700}
+.partnav b{font-size:14.5px;color:var(--text-main)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:36px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.topic{padding:18px 18px 18px 18px}.topic__n{position:static;margin:0 0 10px}.sec{padding:34px 0}}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">教材構成 ｜ 付録 付録</div><div class="nav__menu"><a href="../" class="nav__back">← 教材構成トップ</a><a href="../../" class="nav__back">← 入門ゼミ Home</a></div></div></nav><header class="hero"><span class="hero__badge">Claude Code入門ゼミ ／ 教材構成 PART 付録</span>
+  <h1>付録：ウェブの先へ ― さらに広がる Claude Code の世界</h1><p>ここまでのゼミでは、おもにウェブサイトやウェブアプリを作ってきました。この付録では「ウェブ以外」の開発に一歩踏み出す例として、スマホアプリ作りを体験します。あわせて、ゼミを終えたあとに何をどう学んでいくか、これからの道筋を整理します。手を動かす内容と、これからの方針を、どちらもやさしく押さえていきましょう。</p></header><section class="sec"><div class="wrap">  <div class="topic">
+    <span class="topic__n">1</span>
+    <h3 class="topic__t">ウェブ以外の Claude Code 開発（スマホアプリを体験する）</h3>
+    <p class="topic__lead">Claude Code が作れるのはウェブサイトだけではありません。ここでは「スマホアプリ」を題材に、ウェブ以外の開発がどんな雰囲気かを体験します。むずかしい専用環境（Flutter や Apple の開発ツール）は使わず、Expo という手軽なしくみと、スマホに入れた Expo Go アプリでその場で動きを確かめます。</p>
+    <ul class="pts"><li>Claude Code はウェブ以外も作れる。今回の題材は「英単語クイズアプリ」のようなスマホアプリで、ウェブで学んだ感覚をそのままモバイルに広げられる。</li><li>今回は <code>Expo</code>（エクスポ）というしくみを使う。Expo は iPhone と Android の両方に対応した（クロスプラットフォームな）アプリを、手軽に作れるのが特長。</li><li>あえて使わないものもある。<code>Flutter</code> や Apple の開発ツール（Swift・Xcode など）は今回は使わない。これらは高機能だが準備が重く、Mac が必須になる場面もあるため、入門ではより手軽な Expo を選ぶ。</li><li>動作確認はスマホの <code>Expo Go</code> アプリで行う。パソコンで作ったアプリを、画面に出る QR コードで読み込むと、自分のスマホ実機ですぐに動かして確かめられる。</li><li>作るときは Claude Code に「やりたいこと」を言葉で伝えるだけ。たとえば『Expo で英単語クイズアプリを作りたい。認証もデータベースも不要で、データは端末内に保存、Expo Go でテストできる構成で』のように、欲しい形を素直に頼めばよい。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>Cursor で新しいフォルダ（例：<code>English-Quiz-App</code>）を開き、ターミナルで <code>claude</code> と入力して Claude Code を起動する。</li><li>Claude Code に「Expo を使ってスマホアプリを作りたい」と伝える。認証やデータベースは不要、データは端末内に保存、Expo Go でテストできる構成、と条件も一緒に書くとシンプルに仕上がる。</li><li>Claude Code が実装を進めるあいだ、確認を求められたら内容を見て進めてよければ Yes（許可）を返す。これを数回くり返すと、ひと通り完成する。</li><li>スマホ側に App Store / Google Play から「Expo Go」アプリを先にインストールしておく（ここを忘れると QR を読んでも何も起こらない）。</li><li>パソコンの新しいターミナルで <code>npx expo start</code> を実行すると QR コードが表示される。iPhone は標準カメラ、Android は Expo Go の「Scan QR code」で読み取ると、自分のスマホでアプリが立ち上がる。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>エラーが出たら、エラー文（スマホの画面やターミナルのログ）をそのままコピーして Claude Code に貼り付け、修正をお願いするのが基本の流れ。慌てず1つずつ直していけばよい。</li><li>QR でうまく繋がらないときは、パソコンとスマホが同じ Wi-Fi にいるかを確認。社内やカフェの Wi-Fi で繋がらない場合は、スマホのテザリングに切り替えると解決することが多い。</li><li>うまく実機で動かないときの代わりに、パソコン上の Android エミュレーター（仮想スマホ）で確認する方法もある。実機が手元になくても試せる。</li><li>今回のアプリはデータを端末内（Async Storage と呼ばれるスマホ内の保存場所）に持つので、外部のデータベースは不要。まずは「自分のスマホで動く」体験を目的にしよう。</li><li>App Store や Google Play への正式公開は、別途 Apple や Google への開発者登録（有料）が必要。まずは Expo Go で身近な人に試してもらうだけでも、十分に手ごたえを感じられる。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">2</span>
+    <h3 class="topic__t">今後の学習に向けて（これからの道筋）</h3>
+    <p class="topic__lead">ゼミをひと通り終えたあなたは、もう Claude Code を「自分のやりたいことに使える」段階に立っています。ここでは、学びを止めずに伸ばしていくための道筋を、無理のない順番で示します。背伸びしすぎず、まずは身近なことから一歩ずつで大丈夫です。</p>
+    <ul class="pts"><li>まずは「作りたいものリスト」に戻る。ゼミの中で出した『やりたいこと』『効率化できそうな業務』のアイデアを開き直し、未着手のものから1つ選んで作ってみるのが、いちばん続けやすい次の一歩。</li><li>学んだことは、自分の仕事や生活に組み込むと定着する。ウェブサイト、ちょっとした業務ツール、スマホアプリなど、身近な課題を Claude Code で1つ解決してみよう。</li><li>余裕が出てきたら、発展的なテーマに少しずつ触れる。たとえばサブエージェントの活用、ハーネス（指示や道具立て）の工夫、コンテキスト（文脈・会話の窓）の管理など。ただし最初は「Claude Code にやりたいことを伝える」だけでも十分。</li><li>公開・運用するなら安全面を意識する。とくに <code>API</code> キーのような秘密の情報を外部に漏らさないこと。<code>.gitignore</code> で除外し、もし誤って公開してしまったら、まずキーを無効化（再発行）するのが最優先。</li><li>わからないことは Claude Code 自身に聞ける。『サブエージェントの使い方を教えて』『セキュリティで気をつけることは？』のように質問すれば、学びながら進められる。公式ドキュメントの確認とあわせて活用しよう。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>ゼミで書きためた「やりたいこと」「効率化アイデア」を見返し、いま一番作りたい・役立ちそうなものを1つだけ選ぶ。</li><li>選んだものを Claude Code で実際に作ってみる。小さく始めて、動いたら少しずつ機能を足していく。</li><li>作ったものを公開・共有する前に、Claude Code にセキュリティチェックを依頼し、API キーなどの秘密情報が含まれていないか確認する。</li><li>慣れてきたら、サブエージェントやコンテキスト管理などの発展トピックに、興味のあるものから1つずつ触れていく。</li><li>学んだことを定期的に「自分の業務・生活」に当てはめて使い続ける。使う中で出た疑問は Claude Code や公式情報で解消していく。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>本格的な公開・商用利用や個人情報を扱う場合は、自動チェックだけに頼らず、必要に応じて専門家のレビューも検討する。セキュリティは「ここで終わり」がない領域なので、公開後も定期チェックを習慣にしよう。</li><li>作るより「知ってもらう」ほうが大変なこともある。アプリやサイトを公開したら、誰にどう届けるか（紹介・告知の工夫）まで考えると、せっかくの成果が活きる。</li><li>最新情報は公式ドキュメントや Anthropic の公式発信を時々のぞくと、新機能やコツに気づける。一度に追い切ろうとせず、気になったときに見るくらいで十分。</li><li>学びの区切りに「修了の達成感」を持つのも大切。やり切った課題やリリースを1つの節目として、次のテーマへ気持ちよく進もう。</li></ul></div>
+  </div></div></section><section class="sec sec--soft"><div class="wrap"><div class="partnav"><a href="../part5/"><small>← 前のパート</small><b>⑤ 業務効率化</b></a><a href="../" style="text-align:right"><small>→</small><b>教材構成トップ</b></a></div></div></section><section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section><footer class="footer"><p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 教材構成 付録 付録</p><p class="src">本資料は教材構成に沿って初学者向けに整理した学習用資料です（教材本文・動画の転載ではありません）。</p></footer>
+</body></html>

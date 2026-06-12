@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>③ Web開発① ｜ 教材構成 ｜ Claude Code入門ゼミ</title><meta name="description" content="日本語で指示するだけで、自分専用の秘書アプリをゼロから作り、デザインや機能を整え、最終的にインターネット上へ公開するまでを体験します。外部APIは使わないので料金や難しい契約の心配はなく、Claude Code・GitH">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:12px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14.5px}
+.nav__menu{display:flex;gap:10px;flex-wrap:wrap}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg-card);color:var(--text-sub)}
+.nav__back:hover{background:var(--bg-soft);color:var(--orange)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:64px 22px 44px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;line-height:1.4;margin:20px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px}.h2 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 24px}
+/* topic */
+.topic{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px 24px 66px;box-shadow:var(--shadow);margin:0 0 18px}
+.topic__n{position:absolute;left:18px;top:24px;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center}
+.topic__t{font-size:17.5px;font-weight:900;margin:0 0 8px;line-height:1.45}
+.topic__lead{font-size:14.5px;color:var(--text-main);margin:0 0 12px}
+.pts{margin:0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{margin-top:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:14px 18px 14px 20px}
+.steps__h{font-weight:800;font-size:13px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:6px 0;font-size:14px;color:var(--text-sub)}
+.note{margin-top:14px;background:#F4FBF6;border:1px solid #cdeedd;border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.note__t{font-weight:800;font-size:13px;color:#2a9d63;margin:0 0 6px}
+.note ul{margin:4px 0 0;padding-left:18px}.note li{font-size:13px;color:var(--text-sub);margin:4px 0}
+/* hub cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pcard{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--orange)}
+.plabel{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--orange);color:#fff;font-weight:900;font-size:15px}
+.pcard h2{font-size:18px;font-weight:900;margin:12px 0 4px;color:var(--text-main)}
+.pcard p{font-size:13px;color:var(--text-sub);margin:0 0 12px;line-height:1.7}
+.pmeta{font-size:12.5px;font-weight:800;color:var(--accent)}
+.partnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.partnav a{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+.partnav small{display:block;font-size:11px;color:var(--text-mute);font-weight:700}
+.partnav b{font-size:14.5px;color:var(--text-main)}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:36px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.topic{padding:18px 18px 18px 18px}.topic__n{position:static;margin:0 0 10px}.sec{padding:34px 0}}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">教材構成 ｜ ③ Web開発①</div><div class="nav__menu"><a href="../" class="nav__back">← 教材構成トップ</a><a href="../../" class="nav__back">← 入門ゼミ Home</a></div></div></nav><header class="hero"><span class="hero__badge">Claude Code入門ゼミ ／ 教材構成 PART ③</span>
+  <h1>Web開発①：自分専用の秘書アプリを作って公開しよう（API不使用）</h1><p>日本語で指示するだけで、自分専用の秘書アプリをゼロから作り、デザインや機能を整え、最終的にインターネット上へ公開するまでを体験します。外部APIは使わないので料金や難しい契約の心配はなく、Claude Code・GitHub・Cloudflare Pages を使った「作る→直す→自動で公開する」という現代的な開発の流れを、入門者でも一周できるように構成しています。</p></header><section class="sec"><div class="wrap">  <div class="topic">
+    <span class="topic__n">1</span>
+    <h3 class="topic__t">アプリ開発の基礎知識</h3>
+    <p class="topic__lead">まずは「アプリがどんなファイルでできているのか」をざっくりイメージしましょう。仕組みを完全に理解する必要はありません。完成形を先に見てから、その中身を軽く眺めるだけで十分です。</p>
+    <ul class="pts"><li>今回作る<strong>秘書アプリ</strong>は、ブラウザで動くシンプルなWebアプリです。外部の<code>API</code>（他社サービスとの連携）は使わないので、難しい契約や料金の心配なく作れます。</li><li>Webアプリは主に3種類のファイルでできています。骨組みを書く<code>HTML</code>、見た目を整える<code>CSS</code>、動きをつける<code>JavaScript</code>の3つです。今回はこの組み合わせで作ります。</li><li>トップページのファイルは必ず<code>index.html</code>という名前にします。公開サービスはこの名前を「入口」として自動で認識するためです。</li><li>メモやタスクなどのデータは、ブラウザ内の保存領域（<code>localStorage</code>）にためる作りにできます。サーバーやデータベースが不要なので、入門者でも完結しやすいのが利点です。</li><li>コードの中身を1行ずつ理解する必要はありません。<strong>「何を作りたいか」を日本語で伝えれば、Claude Code がファイルを用意してくれる</strong>——この感覚をつかむのがこのパートのゴールです。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>完成イメージを先に持つ：「メモを追加・削除できる」「やることリストを管理できる」など、欲しい機能を一言で書き出してみる。</li><li>プロジェクト用のフォルダを1つ用意する（フォルダ名は<code>secretary-app</code>のように半角英語にする）。</li><li>そのフォルダをエディタ（Cursor など）で開き、ターミナルで<code>claude</code>と打って Claude Code を起動する。</li><li>この後の手順で、Claude Code が<code>index.html</code>・<code>style.css</code>・<code>script.js</code>などを自動で作ってくれることを確認する。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>フォルダ名・ファイル名は<strong>半角英数字</strong>で。日本語名はトラブルの元になりやすいです。</li><li>最初は仕組みが分からなくて当然です。「動くものを先に作る→あとで中身を眺める」の順番でOKです。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">2</span>
+    <h3 class="topic__t">自分専用の秘書アプリを開発してみよう</h3>
+    <p class="topic__lead">いよいよ開発です。ごく簡単な日本語の指示だけで、Claude Code が秘書アプリを作ってくれます。入門者は「一気に全部任せる」より、提案を1つずつ承認しながら進めるのが安全です。</p>
+    <ul class="pts"><li>指示は<strong>そうむずかしく考えなくて大丈夫</strong>です。「自分専用の秘書アプリを作って」と日本語で伝えるだけで、Claude Code が必要なファイルを提案してくれます。</li><li>Claude Code はファイルを作る前に「これを作っていいですか？」と確認してきます。入門者は<strong>1つずつ内容を見て承認する</strong>のがおすすめ。すべて自動で進める Auto Mode はこのパートの後半で紹介します。</li><li>作りたい機能は具体的に伝えるほど良い結果になります。例：「メモを追加・削除できる」「やることリストにチェックを付けられる」「今日の日付を表示する」など。</li><li>改行したいときは<code>Enter</code>ではなく<code>Shift+Enter</code>（または<code>Alt+Enter</code>）を使います。<code>Enter</code>単独だと指示が送信されてしまいます。</li><li><strong>想定通り動かないのは普通のこと</strong>です。あわてず、起きている状況をそのまま日本語で伝えれば、Claude Code が直してくれます。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>Claude Code に作りたいものを伝える。例：「自分専用の秘書アプリをHTML・CSS・JavaScriptの3つのファイルで作ってください。メモとやることリストを管理できるようにしてください。」</li><li>Claude Code が作るファイルの提案を1つずつ確認し、問題なければ承認して進める。</li><li>ファイルができたら、<code>index.html</code>をブラウザで開いて見た目と動きを確認する（ファイルを右クリック→ブラウザで開く）。</li><li>うまく表示・動作しない場合は、状況を伝えて修正してもらう（下の対処例を参照）。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>うまく開けない・全部は動かないときの依頼例：<strong>「正常にアクセスできないので、全機能が正常に動作するように直してください」</strong>。</li><li>エラー画面が出たときの依頼例：<strong>「このエラーを修正してください」</strong>と書き、<strong>エラー画面のスクリーンショットや文章を一緒に貼り付ける</strong>と、原因が特定されやすくなります。</li><li>1回でうまくいかなくても落ち込まないこと。AIとの開発は「直して」「もう少しこうして」を何度か繰り返すのが普通の進め方です。</li><li>承認を1つずつ行うのは「Claudeが何をしようとしているか」を見る練習にもなります。慣れてきたら範囲を広げていけば大丈夫です。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">3</span>
+    <h3 class="topic__t">秘書アプリにデザインを当ててみよう</h3>
+    <p class="topic__lead">最初のアプリは機能は動くものの、見た目はやや素っ気ないことが多いです。ここでは日本語の指示だけで、見た目を一気に整えていきます。デザインの知識は不要です。</p>
+    <ul class="pts"><li>「とりあえず作る」だけだと、いわゆる<strong>「AIっぽい少し地味なデザイン」</strong>になりがちです。ここから指示で印象を大きく変えられます。</li><li>デザインの指示は<strong>イメージを言葉で伝える</strong>のがコツです。「落ち着いた色」「やさしい雰囲気」「スマホでも見やすく」など、感覚的な言葉でかまいません。</li><li>色・余白・文字の大きさ・角の丸みなどをまとめて整えてもらえます。具体的な参考（例：好きなサービスの雰囲気）を伝えるとさらに精度が上がります。</li><li>スマホ表示への対応（<strong>レスポンシブ</strong>）も依頼できます。「スマホでも崩れず見やすくして」と一言添えるだけでOKです。</li><li>気に入ったデザインの方向性（色やフォントの決まりごと）は、メモに残しておくと次回以降の指示が楽になります。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>見た目の希望を日本語で伝える。例：「全体のデザインを整えてください。落ち着いた配色で、余白を広めに、スマホでも見やすいレイアウトにしてください。」</li><li>Claude Code が<code>CSS</code>を更新したら、ブラウザを再読み込みして変化を確認する。</li><li>気になる部分があれば部分的に修正を依頼する。例：「ボタンの色をもう少し優しいトーンにして」「見出しを大きくして」。</li><li>スマホ表示を確認する。ブラウザの開発者ツール（Macは<code>Cmd+Option+I</code>）でスマホ幅に切り替えてチェックする。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>「ダサい」「なんか違う」だけでも案外伝わりますが、<strong>「どう変えたいか」を一言添える</strong>と直しが早くなります（例：明るく／落ち着いた／余白多め）。</li><li>ブラウザに変更が反映されないときは、<strong>強制再読み込み</strong>（Mac: <code>Cmd+Shift+R</code> / Win: <code>Ctrl+F5</code>）を試してください。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">4</span>
+    <h3 class="topic__t">秘書アプリに機能を追加してみよう</h3>
+    <p class="topic__lead">見た目が整ったら、便利な機能を足していきましょう。アプリは「少しずつ育てていく」もの。一度に全部ではなく、1機能ずつ追加するとトラブルを切り分けやすくなります。</p>
+    <ul class="pts"><li>機能追加も日本語の指示でできます。例：「やることリストに『完了』チェックを付けられるようにして」「メモを後から編集できるようにして」。</li><li><strong>1回の指示で1機能ずつ</strong>追加するのがおすすめです。まとめて頼むより、動作確認しながら進める方が、どこで問題が起きたか分かりやすくなります。</li><li>API不使用でも実用的な機能は十分作れます。例：メモの並べ替え、検索、入力した内容の自動保存（ブラウザ内保存）、ダークモード切り替えなど。</li><li>追加した機能が既存の動きを壊していないか、毎回ブラウザで軽く確認する習慣をつけると安心です。</li><li>うまくいかない機能は、<strong>状況を具体的に伝えて修正</strong>してもらいます。「追加したが動かない」より「保存ボタンを押しても一覧に出てこない」のように書くと直りが早いです。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>追加したい機能を1つ決めて伝える。例：「メモを保存できるようにして、ページを再読み込みしても消えないようにしてください。」</li><li>Claude Code の変更を承認し、ブラウザで動作を確認する。</li><li>問題なければ次の機能へ。問題があれば状況を具体的に伝えて修正してもらう。</li><li>ひと区切りついたら、現在の動きを一通り触ってみて「壊れていないか」を全体確認する。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>便利な「ブラウザ内保存」を頼むときは、<strong>「再読み込みしてもデータが消えないようにして」</strong>と伝えると意図が正確に届きます。</li><li>機能を盛り込みすぎると複雑になります。<strong>まずは自分が毎日使う機能だけ</strong>に絞ると、完成度が上がります。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">5</span>
+    <h3 class="topic__t">秘書アプリをウェブで公開してみよう</h3>
+    <p class="topic__lead">手元（ローカル）で動くアプリを、インターネット上に公開してみましょう。今回は無料で手軽な<strong>Cloudflare Pages</strong>を使い、まずはファイルをアップロードする最もシンプルな方法で公開します。</p>
+    <ul class="pts"><li>今のアプリは自分のパソコンの中でしか開けません。<strong>公開（デプロイ）</strong>すると専用のURLが発行され、誰でもアクセスできるようになります。</li><li><strong>Cloudflare Pages</strong>は、静的なWebサイト（HTML・CSS・JavaScript）を無料で公開できるホスティングサービスです。サーバーの契約や難しい設定は不要です。</li><li>公開にはCloudflareの無料アカウントが必要です。メールアドレスで登録できます。</li><li>トップページのファイル名は必ず<code>index.html</code>に。これがないと「ページが見つかりません」と表示されてしまいます。</li><li>公開後にアプリを直したら、再度アップロードすれば内容が更新されます。次のトピック以降では、これを<strong>もっと自動化する方法</strong>も学びます。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>Cloudflare の無料アカウントを作成し、ダッシュボードにログインする。</li><li>メニューから「Workers & Pages」を開き、新しい Pages プロジェクトを作成する。</li><li>「Direct Upload（直接アップロード）」を選び、秘書アプリのフォルダ（<code>index.html</code>を含む）をアップロードする。</li><li>アップロードが完了すると公開用のURL（<code>https://〇〇.pages.dev</code>）が発行される。ブラウザで開いて動作を確認する。</li><li>他の人にそのURLを共有して、ちゃんと開けるか確かめる。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li><code>.pages.dev</code>のURLはそのまま共有できます。独自のドメイン名を割り当てたい場合は、あとから設定で追加できます。</li><li>公開後にCSSや画像が読み込まれない場合は、<strong>ファイルの読み込みパスが絶対パス（自分のPC上の場所）になっていないか</strong>を確認し、相対パスに直すよう Claude Code に依頼してください。</li><li>公開するファイルに、自分だけのメモやテスト用のデータが残っていないか確認してから上げましょう。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">6</span>
+    <h3 class="topic__t">GitHub とは</h3>
+    <p class="topic__lead">ここからは公開をもっと便利にするための土台、GitHub を学びます。最初は名前を聞いても何のことか分からなくて当然です。たとえ話で、その役割をやさしくつかみましょう。</p>
+    <ul class="pts"><li><strong>GitHub（ギットハブ）</strong>は、ソースコードをインターネット上に保存・管理できるサービスです。エンジニアにとっての「クラウド保管庫＋作業履歴ノート」のような存在です。</li><li>大きな役割は3つ。<strong>コードの保存</strong>（バックアップ）、<strong>バージョン管理</strong>（いつ・何を変えたかの履歴）、<strong>公開・共有</strong>（他のサービスとつなぐ土台）です。</li><li><strong>バージョン管理</strong>とは、文章で言う「上書き保存の履歴が全部残る」イメージです。間違えても過去の状態に戻せるので安心して試せます。</li><li>コードを置く場所の単位を<strong>リポジトリ（repository）</strong>と呼びます。プロジェクト1つにつきリポジトリ1つ、と考えると分かりやすいです。</li><li>リポジトリには<strong>公開（Public）</strong>と<strong>非公開（Private）</strong>があります。Public は誰でも中身を見られ、Private は自分（と許可した人）だけが見られます。個人の作品は基本<strong>Private</strong>が安全です。</li></ul>
+    
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>今は「コードを保存して、変更履歴を残し、公開サービスとつなぐための土台」とだけ覚えておけば十分です。</li><li>GitHub に置くと、Cloudflare Pages のような公開サービスと連携でき、<strong>更新が自動で反映される</strong>仕組みが作れます（このパートの最後で扱います）。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">7</span>
+    <h3 class="topic__t">Claude Code にルールを設定してみよう</h3>
+    <p class="topic__lead">GitHub に公開する前に、必ず通っておきたい「安全の関所」がルール設定です。Claude Code には<strong>Rules（ルール）</strong>を設定でき、特にセキュリティのルールはコードを外に出す前に固めておきます。</p>
+    <ul class="pts"><li>Claude Code は、プロジェクト内の<code>CLAUDE.md</code>というファイルに書いたルールを毎回読んでくれます。これが<strong>Rules（ルール）</strong>の正体で、「毎回説明しなくていい」状態を作れます。</li><li>GitHub にコードを上げる前に、<strong>セキュリティのルールをテンプレとして設定</strong>しておくのが重要です。うっかり秘密情報を公開してしまう事故を防げます。</li><li><code>.gitignore</code>というファイルに名前を書いておくと、そのファイルは<strong>GitHubにアップロードされません</strong>。<code>.env</code>（秘密情報を入れるファイル）などをここで除外します。</li><li><code>.env</code>には<strong>APIキーやパスワードなどの秘密情報</strong>を入れます（今回のアプリでは使いませんが、扱い方は今のうちに覚えておきましょう）。<strong>絶対に公開してはいけません</strong>。</li><li>ルールは<strong>具体的に書く</strong>のがコツです。「気をつけて」ではなく「<code>.env</code>は絶対に編集・公開しないこと」「秘密情報をコードに直接書かないこと」のように明確に書きます。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>Claude Code で<code>/init</code>コマンドを実行し、プロジェクトを分析した<code>CLAUDE.md</code>を自動生成する。</li><li>生成された<code>CLAUDE.md</code>に、セキュリティのルールを追記してもらう。例：「<code>.env</code>やAPIキーは絶対に公開しないルール、<code>.gitignore</code>の使い方を<code>CLAUDE.md</code>に追記してください。」</li><li><code>.gitignore</code>に<code>.env</code>や<code>.env.*</code>などの秘密情報ファイルが含まれているか確認する。</li><li>ルールを更新したら、Claude Code を一度終了（<code>Ctrl+C</code>を2回）して<code>claude</code>で再起動し、新しいルールを読み込ませる。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>厳格なセキュリティのルール例を1つ作っておくと、次のプロジェクトでも使い回せて便利です。「秘密情報は<code>.env</code>に置く」「<code>.env</code>は<code>.gitignore</code>で除外する」「公開前に秘密情報の混入を確認する」をセットで覚えましょう。</li><li>重要なルールは<code>CLAUDE.md</code>の<strong>冒頭</strong>に置くと、より守られやすくなります。</li><li>万一<code>.env</code>やAPIキーを公開してしまったら、<strong>そのキーは流出した前提で即座に無効化し、新しいキーを発行</strong>してください。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">8</span>
+    <h3 class="topic__t">GitHub の使い方</h3>
+    <p class="topic__lead">ここで実際に GitHub のアカウントを作り、基本操作に触れます。難しい設定はなく、Googleアカウントなどで数分で登録できます。</p>
+    <ul class="pts"><li>公式サイトから<strong>無料アカウント</strong>を作成します。Googleアカウントでの登録が一番スムーズです。</li><li>登録時に<strong>ユーザーネーム</strong>を決めます。これは世界共通のIDで、自分のページのURLにもなります。覚えやすく、ググりやすい名前にしましょう。</li><li>登録の最後に、ロボットでないことを確認する<strong>画像認証（CAPTCHA）</strong>があります。指示に従ってパズルを解けば完了です。</li><li>ログイン後の<strong>「Repositories」</strong>タブが、自分のコードを保管していく場所です。プロジェクトごとにリポジトリが並びます。</li><li>個人の作品は<strong>Private（非公開）</strong>で作るのが基本です。公開が必要になったら、あとから設定で切り替えられます。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>GitHub公式サイトにアクセスし、「Sign up（登録）」を開く。</li><li>Googleアカウント、またはメールアドレスとパスワードで登録する。</li><li>ユーザーネームを決め、国（Japan）を選んで「Create a free account」をクリックする。</li><li>画像認証（CAPTCHA）を完了し、確認メールが届いたら認証してアカウント作成を終える。</li><li>ログイン後、プロフィールの「Repositories」タブを開いて、コードの保管場所を確認する。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>ユーザーネームが「既に使われています」と出たら、数字やハイフンを足して差別化しましょう（例：<code>tanaka-dev</code>）。</li><li>画像認証が何度も通らないときは、VPNをオフにする・別のブラウザで試す・シークレットウィンドウで開く、を試してください。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">9</span>
+    <h3 class="topic__t">GitHub にソースコードをプッシュしてみよう</h3>
+    <p class="topic__lead">作った秘書アプリのコードを GitHub に保存（プッシュ）します。難しいコマンドは Claude Code に任せられますが、最初の「認証」だけは自分の手で行う場面があります。</p>
+    <ul class="pts"><li>コードを GitHub に送ることを<strong>プッシュ（push）</strong>と呼びます。これでクラウドに保存され、変更履歴も残るようになります。</li><li>プッシュの前に、自分のパソコンと GitHub を<strong>認証（連携）</strong>でつなぎます。<strong>GitHub CLI</strong>という公式ツールを使うのが一番簡単です。</li><li>認証コマンド<code>gh auth login</code>は対話形式（質問に答える形）のため、Claude Code から直接実行するとうまくいきません。<strong>コマンドの先頭に<code>!</code>を付けて</strong>実行します（<code>!gh auth login</code>）。<code>!</code>は「ターミナルで直接実行」の合図です。</li><li>認証が済めば、あとは<strong>日本語の依頼でプッシュできます</strong>。「この秘書アプリを GitHub のリポジトリにアップロードしてください」と伝えるだけです。</li><li>アップロード前に必ず<code>.gitignore</code>を確認し、<strong>秘密情報（<code>.env</code>など）が一緒に上がらない</strong>ことを確かめます。これがトピック7のルール設定が効いてくる場面です。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>GitHub CLI をインストールし、エディタを再起動してから<code>gh --version</code>で動作を確認する。</li><li>Claude Code に「GitHubアカウントを認証してください」と依頼すると、<code>!gh auth login</code>を案内されるので、それをターミナルで実行する。</li><li>表示されたリンクを開いてGitHubにログインし、画面のコードを貼り付けて「Authorize（認証）」する。</li><li>Claude Code に「この秘書アプリを<strong>Privateで</strong>GitHubのリポジトリにアップロードしてください」と依頼する。</li><li>GitHubのリポジトリページを開き、コードが上がっていること、<code>.env</code>などの秘密情報が含まれていないことを確認する。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>プッシュ時は<strong>「Privateで」と明示</strong>しましょう。何も言わないと公開（Public）で作られることがあります。</li><li>もし<code>.env</code>を誤って上げてしまったら、まず<code>.gitignore</code>に追加し、Claude Code に履歴からの削除を依頼。<strong>該当のAPIキーは無効化して作り直す</strong>のが鉄則です。</li><li><code>!</code>付きで実行するのは「認証など対話が必要なコマンド」のときだけ、と覚えておけば十分です。</li></ul></div>
+  </div>
+  <div class="topic">
+    <span class="topic__n">10</span>
+    <h3 class="topic__t">アプリのウェブ公開を自動化してみよう</h3>
+    <p class="topic__lead">最後に、GitHub と Cloudflare Pages をつないで「公開の自動化」を体験します。これができると、コードを直して GitHub に送るだけで、公開中のアプリが自動で最新版に更新されます。</p>
+    <ul class="pts"><li>トピック5では手動でファイルをアップロードしましたが、ここでは<strong>GitHub と Cloudflare Pages を連携</strong>させます。手動アップロードはもう不要になります。</li><li>一度連携すれば、コードを更新して GitHub に<strong>プッシュするだけ</strong>で、Cloudflare Pages が自動で受け取り、公開サイトを更新してくれます。</li><li>この「保存したら自動で公開される」流れは、プロのソフトウェア開発でも標準的な仕組みです。難しい設定なしに、その入口を体験できます。</li><li>連携時に「どのリポジトリを使うか」を選ぶだけで、ビルド（公開準備）の設定はシンプルな静的サイトならほぼ初期値のままでOKです。</li><li>公開URLは引き続き<code>https://〇〇.pages.dev</code>。中身が変わってもURLは変わらないので、共有先に再連絡する手間もありません。</li></ul>
+    <div class="steps"><p class="steps__h">手順</p><ol><li>Cloudflare のダッシュボードで「Workers & Pages」から新しい Pages プロジェクトを作成し、今度は<strong>「Connect to Git（GitHub連携）」</strong>を選ぶ。</li><li>GitHubアカウントへのアクセスを許可し、秘書アプリのリポジトリを選択する。</li><li>ビルド設定を確認する（HTML・CSS・JavaScriptだけの静的サイトなら、特別なビルドコマンドは不要なことが多い）。「Save and Deploy」で公開する。</li><li>発行されたURLでアプリが表示されることを確認する。</li><li>試しにアプリを少し直し、GitHubへプッシュして、しばらく待つと公開サイトが自動で更新されることを確認する。</li></ol></div>
+    <div class="note"><p class="note__t">💡 補足・コツ</p><ul><li>更新がすぐ反映されないように見えるときは、少し待ってから<strong>強制再読み込み</strong>（Mac: <code>Cmd+Shift+R</code>）を試してください。反映には少し時間がかかることがあります。</li><li>もし公開がうまくいかない（白い画面・崩れなど）ときは、Cloudflareの「デプロイ（Deployments）」のログを見て、その内容を Claude Code に貼り付けて相談しましょう。</li><li>ここまで来れば、<strong>「直す→GitHubに送る→自動で公開される」</strong>という、現代的な開発の一連の流れを一周したことになります。自分だけの秘書アプリを、これからも気軽に育てていけます。</li></ul></div>
+  </div></div></section><section class="sec sec--soft"><div class="wrap"><div class="partnav"><a href="../part2/"><small>← 前のパート</small><b>② Web制作</b></a><a href="../part4/" style="text-align:right"><small>次のパート →</small><b>④ Web開発②</b></a></div></div></section><section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section><footer class="footer"><p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ 教材構成 ③ Web開発①</p><p class="src">本資料は教材構成に沿って初学者向けに整理した学習用資料です（教材本文・動画の転載ではありません）。</p></footer>
+</body></html>

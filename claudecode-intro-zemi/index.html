@@ -1487,6 +1487,7 @@ a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
       <a href="#cycle" class="nav__link">学習サイクル</a>
       <a href="#rules" class="nav__link">修了要件</a>
       <a href="#schedule" class="nav__link">スケジュール</a>
+      <a href="#curriculum" class="nav__link">教材構成</a>
       <a href="#access" class="nav__link">参加方法</a>
       <a href="#stuck" class="nav__link">困ったら</a>
       <a href="#course" class="nav__link">コース内容</a>
@@ -1930,6 +1931,58 @@ a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
     <p class="stuck__quote reveal" data-reveal>
       <img src="./assets/penguins/penguin_thumbs_up.png" alt="ペンギン先生" loading="lazy">
       <span>「これは聞いていいレベルか…」と迷う必要はありません。<strong>STEP 1 → STEP 2 の順番で気軽に出してください。</strong></span>
+    </p>
+  </div>
+</section>
+
+<!-- 教材構成（カリキュラム） -->
+<section class="section" id="curriculum" style="background:var(--bg-soft)">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>Curriculum</p>
+    <h2 class="section__title reveal" data-reveal>このゼミの<em>教材構成</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      初学者向けに「<strong>知る → 作る → 仕事に活かす</strong>」順で学べる、全5パート＋付録の教材です。各パートの要点・手順は教材ページにまとめています。
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:8px">
+      <a href="./curriculum/part1/" style="display:block;background:#fff;border:1px solid #FFE2C7;border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(255,140,66,.08);text-decoration:none;color:#2A2F45;transition:transform .15s ease,border-color .15s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='#FF8C42'" onmouseout="this.style.transform='';this.style.borderColor='#FFE2C7'">
+        <span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#FF8C42;color:#fff;font-weight:900;font-size:15px">①</span>
+        <h3 style="font-size:17px;font-weight:900;margin:12px 0 4px">導入</h3>
+        <p style="font-size:13px;color:#5A6178;margin:0 0 12px;line-height:1.7">Claude Code を知り、安全に始める</p>
+        <span style="font-size:12.5px;font-weight:800;color:#B84A00">8 トピック →</span>
+      </a>
+      <a href="./curriculum/part2/" style="display:block;background:#fff;border:1px solid #FFE2C7;border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(255,140,66,.08);text-decoration:none;color:#2A2F45;transition:transform .15s ease,border-color .15s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='#FF8C42'" onmouseout="this.style.transform='';this.style.borderColor='#FFE2C7'">
+        <span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#FF8C42;color:#fff;font-weight:900;font-size:15px">②</span>
+        <h3 style="font-size:17px;font-weight:900;margin:12px 0 4px">Web制作</h3>
+        <p style="font-size:13px;color:#5A6178;margin:0 0 12px;line-height:1.7">会社ホームページを作って公開する</p>
+        <span style="font-size:12.5px;font-weight:800;color:#B84A00">5 トピック →</span>
+      </a>
+      <a href="./curriculum/part3/" style="display:block;background:#fff;border:1px solid #FFE2C7;border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(255,140,66,.08);text-decoration:none;color:#2A2F45;transition:transform .15s ease,border-color .15s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='#FF8C42'" onmouseout="this.style.transform='';this.style.borderColor='#FFE2C7'">
+        <span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#FF8C42;color:#fff;font-weight:900;font-size:15px">③</span>
+        <h3 style="font-size:17px;font-weight:900;margin:12px 0 4px">Web開発①</h3>
+        <p style="font-size:13px;color:#5A6178;margin:0 0 12px;line-height:1.7">秘書アプリ開発〜GitHub公開（API不使用）</p>
+        <span style="font-size:12.5px;font-weight:800;color:#B84A00">10 トピック →</span>
+      </a>
+      <a href="./curriculum/part4/" style="display:block;background:#fff;border:1px solid #FFE2C7;border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(255,140,66,.08);text-decoration:none;color:#2A2F45;transition:transform .15s ease,border-color .15s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='#FF8C42'" onmouseout="this.style.transform='';this.style.borderColor='#FFE2C7'">
+        <span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#FF8C42;color:#fff;font-weight:900;font-size:15px">④</span>
+        <h3 style="font-size:17px;font-weight:900;margin:12px 0 4px">Web開発②</h3>
+        <p style="font-size:13px;color:#5A6178;margin:0 0 12px;line-height:1.7">漫画制作アプリを作る（OpenAI API連携）</p>
+        <span style="font-size:12.5px;font-weight:800;color:#B84A00">10 トピック →</span>
+      </a>
+      <a href="./curriculum/part5/" style="display:block;background:#fff;border:1px solid #FFE2C7;border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(255,140,66,.08);text-decoration:none;color:#2A2F45;transition:transform .15s ease,border-color .15s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='#FF8C42'" onmouseout="this.style.transform='';this.style.borderColor='#FFE2C7'">
+        <span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#FF8C42;color:#fff;font-weight:900;font-size:15px">⑤</span>
+        <h3 style="font-size:17px;font-weight:900;margin:12px 0 4px">業務効率化</h3>
+        <p style="font-size:13px;color:#5A6178;margin:0 0 12px;line-height:1.7">Claude Code を「仕事の相棒」にする</p>
+        <span style="font-size:12.5px;font-weight:800;color:#B84A00">4 トピック →</span>
+      </a>
+      <a href="./curriculum/appendix/" style="display:block;background:#fff;border:1px solid #FFE2C7;border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(255,140,66,.08);text-decoration:none;color:#2A2F45;transition:transform .15s ease,border-color .15s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='#FF8C42'" onmouseout="this.style.transform='';this.style.borderColor='#FFE2C7'">
+        <span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#FF8C42;color:#fff;font-weight:900;font-size:15px">付録</span>
+        <h3 style="font-size:17px;font-weight:900;margin:12px 0 4px">付録</h3>
+        <p style="font-size:13px;color:#5A6178;margin:0 0 12px;line-height:1.7">ウェブの先へ／今後の学習</p>
+        <span style="font-size:12.5px;font-weight:800;color:#B84A00">2 トピック →</span>
+      </a>
+    </div>
+    <p style="text-align:center;margin:24px 0 0">
+      <a href="./curriculum/" style="display:inline-block;padding:12px 26px;background:#FF7424;color:#fff;font-weight:800;border-radius:999px;text-decoration:none">教材構成の全体を見る →</a>
     </p>
   </div>
 </section>
