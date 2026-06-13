@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code入門ゼミ 収録プラン（構成案）</title>
+<style>
+:root{--bg:#0f1320;--panel:#1a2032;--card:#212a40;--ink:#eef1f8;--sub:#aab3cc;--mute:#7d87a3;--orange:#FF9E5B;--blue:#6CB8FF;--green:#67D6A0;--line:#2c3550;--radius:14px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;-webkit-font-smoothing:antialiased}
+code{background:#0c1020;color:#ffd9b8;padding:2px 6px;border-radius:5px;font-size:.86em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+strong{color:#fff}
+.bar{background:#3a2a14;border-bottom:1px solid #5a4220;color:#ffcf9a;text-align:center;padding:9px 16px;font-weight:800;font-size:13px;letter-spacing:.02em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:230px 1fr;gap:30px}
+.hero{padding:46px 22px 18px;max-width:1180px;margin:0 auto}
+.hero h1{font-size:clamp(22px,4vw,30px);font-weight:900;margin:0 0 8px}
+.hero p{color:var(--sub);font-size:14px;margin:0;max-width:760px}
+.toc{position:sticky;top:14px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;max-height:calc(100vh - 28px);overflow:auto}
+.toc__t{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mute);text-transform:uppercase;margin:0 0 8px}
+.toc__i{display:block;padding:8px 11px;border-radius:9px;color:var(--sub);font-size:13.5px;font-weight:600;text-decoration:none}
+.toc__i:hover{background:var(--card);color:#fff}
+.main{min-width:0;padding-bottom:60px}
+.sum{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:14px}
+.sum th{background:#161c2c;color:var(--sub);font-weight:700;text-align:left;padding:11px 14px;font-size:12.5px}
+.sum td{padding:11px 14px;border-top:1px solid var(--line)}
+.sec-title{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--orange);text-transform:uppercase;margin:0 0 12px}
+.part{margin-top:38px;scroll-margin-top:14px}
+.part__head{display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:2px solid var(--line);margin-bottom:18px}
+.part__label{display:grid;place-items:center;min-width:46px;height:46px;border-radius:12px;background:var(--orange);color:#1a1206;font-weight:900;font-size:20px}
+.part__cat{font-size:21px;font-weight:900;margin:0}
+.part__meta{font-size:12.5px;color:var(--mute);margin:2px 0 0;font-weight:600}
+.part__note{background:var(--panel);border-left:3px solid var(--orange);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--sub);margin:0 0 16px}
+.grp{font-size:13px;font-weight:800;color:var(--orange);margin:22px 0 10px;letter-spacing:.04em}
+.topic{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:0 0 14px}
+.topic__h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.topic__n{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:#33405e;color:#cdd6ee;font-weight:900;font-size:13px}
+.topic__t{font-size:16px;font-weight:800;margin:0;flex:1;min-width:0}
+.tbadge{font-size:11px;font-weight:700;color:#cdd6ee;background:#161c2c;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tnote{font-size:12.5px;color:var(--mute);font-style:italic;margin:0 0 10px}
+.ov{font-size:14px;color:var(--ink);margin:0 0 12px}
+.ov p{margin:0}.ov ul{margin:6px 0 0;padding-left:20px}.ov li{margin:4px 0}
+.box{border-radius:10px;padding:12px 15px;margin:10px 0 0;font-size:13.5px}
+.box__lbl{display:inline-block;font-weight:800;font-size:12px;margin-bottom:6px;letter-spacing:.02em}
+.box p{margin:0 0 6px}.box p:last-child{margin:0}.box ul{margin:6px 0 0;padding-left:20px}.box li{margin:5px 0;color:var(--sub)}
+.box--memo{background:rgba(108,184,255,.08);border:1px solid rgba(108,184,255,.25)}
+.box--memo .box__lbl{color:var(--blue)}
+.box--matsui{background:rgba(103,214,160,.08);border:1px solid rgba(103,214,160,.25)}
+.box--matsui .box__lbl{color:var(--green)}
+.foot{max-width:1180px;margin:0 auto;padding:30px 22px;color:var(--mute);font-size:12.5px;border-top:1px solid var(--line)}
+@media(max-width:820px){.wrap{grid-template-columns:1fr}.toc{position:static;max-height:none}}
+</style></head>
+<body>
+<div class="bar">📋 Claude Code入門ゼミ ｜ 収録プラン（構成案・検討メモ込み）</div>
+<header class="hero">
+  <h1>Claude Code入門ゼミ ｜ 教材構成（収録プラン）</h1>
+  <p>内部用の収録プラン。各パートの公開日・動画本数・各回の想定時間と、検討メモ（米メモ／松井回答）をまとめたもの。 出所：<code>教材構成.md</code> を見やすく整理した収録プラン（構成案）です。</p>
+</header>
+<div class="wrap">
+  <nav class="toc"><p class="toc__t">目次</p><a href="#summary" class="toc__i">全体サマリー</a><a href="#part-①" class="toc__i">① 導入</a><a href="#part-②" class="toc__i">② Web制作</a><a href="#part-③" class="toc__i">③ Web開発①</a><a href="#part-④" class="toc__i">④ Web開発②</a><a href="#part-⑤" class="toc__i">⑤ 業務効率化</a><a href="#part-apx" class="toc__i">付録 付録</a></nav>
+  <main class="main">
+    <section id="summary" style="scroll-margin-top:14px"><p class="sec-title">全体サマリー</p><table class="sum"><thead><tr><th>パート</th><th>カテゴリ</th><th>公開日</th><th>本数</th></tr></thead><tbody><tr><td><b>①</b></td><td>導入</td><td>6/15</td><td>8</td></tr><tr><td><b>②</b></td><td>Web制作</td><td>6/22</td><td>5</td></tr><tr><td><b>③</b></td><td>Web開発①</td><td>6/29</td><td>10</td></tr><tr><td><b>④</b></td><td>Web開発②（前半／後半）</td><td>7/06</td><td>8 ＋ 2</td></tr><tr><td><b>⑤</b></td><td>業務効率化</td><td>7/13</td><td>4</td></tr><tr><td><b>付録</b></td><td>付録</td><td>（パート⑤に同梱）</td><td>2</td></tr></tbody></table></section>
+    <section class="part" id="part-①"><div class="part__head"><span class="part__label">①</span><div><h2 class="part__cat">導入</h2><p class="part__meta">公開 6/15 ／ 8 本</p></div></div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">コースの全体像とゴール</h4><span class="tbadge">想定10分</span></div>
+    <div class="ov"><p>コースの概要、講座の進め方、目標の共有</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>一本目は「コースの全体像とゴール」とする</li><li>本来、最初の動画で「当コースでこんなものが作れる！」という一覧を見せたいが、パート①の収録段階ではまだ未作成のため、不要</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">Claude Codeとは</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>Claude Codeの説明、Claudeとの違いについて</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>Xなどであれだけ「Claude Code VS Codex」が話題になっているので、入門コースとはいえ、Codexとの違いにも簡単に触れる</li><li>（追記）デスクトップアプリが「Chat / Cowork / Code」のタブとなっていることもあり、Coworkとの違いにも簡単に触れてほしい → そもそも「業務効率化に興味がある非エンジニアのITリテラシーが低い人」は、Claude CodeよりもCoworkを選ぶこともあり、Coworkを知っている人も結構いそうなので</li><li>「そもそもClaudeとは？」というところから伝える</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">3</span><h4 class="topic__t">Claude Codeでできること</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>Claude Codeの活用例</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>スライドや口頭説明だけだと「Claude Codeとは何か、何ができるか」がしっかり伝わらない気がするので、実際にデモを動かしながら「こんなことができる！」とイメージを持たせる</li><li>制作・開発に加え、業務効率化にも触れる</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">4</span><h4 class="topic__t">料金プランについて</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>料金プランの説明と本講義で契約するプランの説明</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>「Pro」プランで案内。課金しないと手元で動かせないが、どうしても課金が厳しい場合、まずは動画を見て「どんなことができるか」のイメージを持ってから、課金を検討するでもOKな旨を伝える</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">5</span><h4 class="topic__t">アカウント作成と機能紹介</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>アカウント作成とプラン契約、簡単なクイックツアー</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>プラン契約の際、従量課金にも触れる</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">6</span><h4 class="topic__t">ビジネス利用における注意点</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>Claude Code利用時の注意点</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>学習設定オフ</li><li>機密情報の扱いに注意</li><li>何でもかんでもPC操作させることの危険性 など</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">7</span><h4 class="topic__t">Claude Codeの使い方</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>Claude Codeの操作方法</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>一つ、簡易プロンプトを投げてアウトプットを出してみる</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">8</span><h4 class="topic__t">バイブコーディングの基本</h4><span class="tbadge">想定8分</span></div>
+    <div class="ov"><p>バイブコーディングを実践するにあたっての基礎知識や注意点など</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>効果的な指示の仕方は、「ポートフォリオサイトのブラッシュアップ」のところでOK</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><ul><li>タイトルが分かりにくく失礼しました。応用的な指示の出し方というより、<strong>バイブコーディング基礎</strong>という位置付けです。不明点やエラー、つまづいたときにどうすべきか、プロンプトの書き方や開発の進め方など、バイブコーディング指南のような講義です。</li><li>※ ここで受講生がスタックしそうな事項について網羅的にお伝えし、基本的にはClaudeに聞く形で解決しましょう、といったトラブルシューティングについても案内します。</li><li>Claude Codeの実践（サイト制作）に入る前に、レクチャーしておきたい。Web制作の題材を通じて随時レクチャーしつつ、難易度が上がるWeb開発①でしっかりレクチャーする想定でしたが、「今後、エラーが発生したり、分からないことがあったら、この動画を見返してね」のマニュアル的な位置づけで用意し、一本の動画にまとまっていることで学習の参照性も高いため、良いと思いました。</li><li>特に入門者は、重要なことは何度も伝えないと伝わらない・忘れる・身につかないと思うので、Web制作・Web開発の題材を通じて、「何度も何度も」エラー・不明点解消の方法・コツについて刷り込みをお願いします。</li></ul></div>
+  </div></section><section class="part" id="part-②"><div class="part__head"><span class="part__label">②</span><div><h2 class="part__cat">Web制作</h2><p class="part__meta">公開 6/22 ／ 5 本</p></div></div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">ホームページ制作の基礎知識</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>プロジェクトを構成するファイルのごく簡単な説明</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>最初に、これからどんなWebサイトを作るか、最終アウトプットを見せてイメージを持ってもらう</li><li>HTML/CSS/JSについて、マスターコースの説明だと伝わらないかもしれないので、学び放題のWebページを開き、「CSSが適用されてないHTMLのみの状態だとどうなるか」「CSSを適用するとどうなるか」「JSがどこで使われているか」といったことを紹介し、視覚的に分かるようにする → もちろん、HTML/CSS/JSについて受講生自身での手動カスタマイズは想定していないため、細かい話はせず、ざっくりのイメージを持てればOK</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">会社ホームページを制作してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>ごく簡単な指示で会社ホームページを作成</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>「ポートフォリオサイト」よりも「会社ホームページ」のほうが汎用的に興味を持ってもらえそう</li><li>生成されたファイルの確認方法も紹介</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">3</span><h4 class="topic__t">会社ホームページをブラッシュアップしてみよう</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>具体的な指示で会社ホームページを肉付け</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>ブラッシュアップの後に、最初から「frontend-design」といったskillを使えば、モダンで洗練されたデザインで作れるという旨も軽く紹介（skillの詳細説明は後述）</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">4</span><h4 class="topic__t">ホームページ公開の基礎知識</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>ドメインやサーバーといった基礎知識</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>ドメインとサーバーは、知らない人からするとイメージをつかむのが難しいため、イメージだけ持ってもらえればOK（よくある「ドメインは住所、サーバーは土地」みたいなイメージだけ）</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">5</span><h4 class="topic__t">会社ホームページをウェブで公開してみよう</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>Cloudflare Pagesによる公開方法（簡単なファイルアップ方式）</p></div>
+  </div></section><section class="part" id="part-③"><div class="part__head"><span class="part__label">③</span><div><h2 class="part__cat">Web開発①</h2><p class="part__meta">公開 6/29 ／ 10 本</p></div></div><p class="part__note">題材：自分専用の秘書アプリ（API不使用のシンプル題材）</p>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">アプリ開発の基礎知識</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>プロジェクトを構成するファイルのごく簡単な説明</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>一本目のアプリの動作イメージを最初に見せる</li><li>スライドだけだとしっかり伝わらない可能性もあるので、必要に応じてデモを操作しながら伝える</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">自分専用の秘書アプリを開発してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>ごく簡単な指示で自分専用の秘書アプリを開発</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><ul><li>アプリ開発から、指示送信後に何度も確認を求められるので Auto Mode を紹介 → でも入門者向けに最初から Auto Mode を紹介すると、Claude Codeのリスクについての考えが甘くなるかもしれない。入門コースだからこそ「承認をしながら順次進めるのが安全」ということを、何度も承認しながら体験してもらったほうがよく、Auto Mode の紹介は二本目から、なんなら付録として最後に紹介するでもよさそう</li><li>（Planモードは、コースのどこかで必ず触れたい。ここで使うのがよいとも思ったが、一本目のアプリ開発で受講生が動画と同じ手順で進められず、同じようなアプリが作れず問い合わせに繋がる可能性もあるため、Planモードの紹介は最後の業務効率化や付録あたりでよいかも）</li><li>「想定通りに動作しない場合の対処方法」を入念にレクチャーする（受講生は自走できない前提で考える） → 例えば以下のように具体的にどこを直してほしいかをClaude Codeに指示すれば、大抵直してくれるという旨を伝える</li><li>（例）「正常アクセスできないため、アクセスできるよう、全ての機能が正常動作するようにして」</li><li>（例）「以下のエラーメッセージが表示されたので、修正して」 → エラー画面をキャプチャして添付するとか</li></ul></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし（Auto Modeは後半に紹介）</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">3</span><h4 class="topic__t">秘書アプリにデザインを当ててみよう</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>秘書アプリにデザインを当てる指示</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><ul><li>ルーレットアプリより診断メーカーの方が確かに魅力的。ただ Web開発① はAPIを使わないシンプルな題材にしたい。ルーレットアプリより良い題材があるはずなので、いったん保留としたい。</li><li>論点「所詮はAPIを連携するだけ」について：個人的には、ここがどうしても初心者にはハードル高いのでは、と当初思ったものの、APIでつまずく箇所は概ね想定でき（API設定ミスがほとんど）、かつエラーが出ても今のモデルは優秀なため1〜2回の指示で修正されるはず。そう考えると Web開発① で「秘書アプリ」を採用するのもありかもしれない。ワークショップで扱われた題材を確認し、難易度を当講座に合わせてアレンジする方向で検討。</li><li>前提として、入門者にとってAPI連携が「簡単」だとは全く思わないが、それを理由に漫画制作アプリを諦めるほどの難易度か？というと疑問。「APIの概念を自分で調べて理解し、自分で調べながらAPIキーを取得・設定して、実行時のエラーを自力で解決」だとかなり難しいが、すべてレクチャーするわけなので、ほぼクリアできそう。（n8nコースでもAPI設定＆呼び出しをしているが、そこまで難易度高いかな？と思う）</li><li>マスターコースのAIチューターの質問履歴に、APIキーの無料枠超過に関する質問が2件あったが、APIキー関連の問い合わせは見た覚えがない。APIキーの取得・設定は基本的に動画の手順通りに進めればいいだけでは、ということを考えると、漫画制作アプリを諦めるほどの難易度でもない気がする。「手順通りにAPIキーを取得＆設定して、APIキーが何かはよく分からないが、とりあえず動画の手順通りに動かしてみる」ぐらいはできそうで、そこまでいければ正確かつ深い理解はいらないのでOKな気もする（APIキーが何かよくわからず日常的に使っている非エンジニアも結構いそう）</li></ul></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">4</span><h4 class="topic__t">秘書アプリに機能を追加してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>秘書アプリに機能追加する指示</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">5</span><h4 class="topic__t">秘書アプリをウェブで公開してみよう</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>Cloudflare Pagesによる公開方法（簡単なファイルアップ方式）</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">6</span><h4 class="topic__t">GitHubとは</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>GitHubの説明</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">7</span><h4 class="topic__t">Claude Codeにルールを設定してみよう</h4><span class="tbadge">時間未記入</span></div>
+    <p class="tnote">※ 講義タイトルは仮（いまいちなので後ほど修正）</p><div class="ov"><p>Rulesの解説。GitHubへのプッシュに備え、<code>.gitignore</code> や <code>.env</code>・APIキーの取り扱いなどを記した厳格なセキュリティテンプレを Rules に設定させておく</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>ご指摘のあったセキュリティ上大事な箇所（<code>.gitignore</code>・<code>.env</code> の扱い）について、受講生がGitHubにプッシュする前に、厳格なセキュリティ要件を記したテンプレ指示を Rules に設定させておく</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">8</span><h4 class="topic__t">GitHubの使い方</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>GitHubのアカウント作成と使い方</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">9</span><h4 class="topic__t">GitHubにソースコードをプッシュしてみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>GitHubのプッシュ手順</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">10</span><h4 class="topic__t">アプリのウェブ公開を自動化してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>GitHub × Cloudflare Pages による公開方法</p></div>
+  </div></section><section class="part" id="part-④"><div class="part__head"><span class="part__label">④</span><div><h2 class="part__cat">Web開発②</h2><p class="part__meta">公開 7/06 ／ 10 本</p></div></div><p class="part__note">題材：漫画制作アプリ（OpenAI API連携あり）</p><h3 class="grp">前半</h3>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">漫画制作アプリの動作イメージ</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>完成した漫画制作アプリの動作デモを見せて全体像をつかむ</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">漫画制作アプリ開発の全体像</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>開発の流れと作るものの全体像を共有</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>開発の流れや使用技術については、一本目のアプリでも最初に伝える</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">3</span><h4 class="topic__t">使用する技術の説明</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>漫画制作アプリで使う技術をごく簡単に説明</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">4</span><h4 class="topic__t">モックアップを開発してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>API連携前のモックアップをClaude Codeで作る</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">5</span><h4 class="topic__t">OpenAI APIの契約と設定</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>OpenAIアカウント作成・APIキー発行・上限設定まで</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>API漏洩に注意の話も</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">6</span><h4 class="topic__t">モックアップにOpenAI APIを連携してみよう</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>モックアップにOpenAI APIを実装して動かす</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">7</span><h4 class="topic__t">モックアップをブラッシュアップしてみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>モックアップの動作を実装する</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>CLAUDE.md と Skills（skill-creator や find-skills など）の紹介＆利用は、このあたりでよさそう → 入門コースとはいえ、skill化の方法は伝えるべき</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし（Rules のみ GitHub を触る前に解説＆セキュリティルールを設定させる）</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">8</span><h4 class="topic__t">Claude Codeの応用設定</h4><span class="tbadge">想定6分</span></div>
+    <div class="ov"><p>CLAUDE.md・Skills などの説明</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>Rules はマスターコースでも触れていないため、不要な気がする</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>CLAUDE.md・Skills を扱う以上、Rules も解説したい。特にセキュリティ上大事な箇所（<code>.gitignore</code>・<code>.env</code> の扱い）について、受講生がGitHubにプッシュする前に、厳格なセキュリティ要件を記したテンプレ指示を Rules に設定させておきたい。※ 当講義の位置も GitHub を触る講義の前に移動させる。入門者的に難易度高くなさそうであれば伝える。</p></div>
+  </div><h3 class="grp">後半</h3>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">サイトにアクセス制限をかける方法</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>自分だけがアクセスできるようにする設定方法（認証・IP制限）</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>Cloudflareで手軽に「認証・IP制限」の設定ができる前提で入れてもよいと思うが、「自分だけがアクセスできるようにする」というのは用途として少ない気がするので、不要では？</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>「自分だけアクセス可」のニーズ想定としては、開発したアプリについていちいちローカルサーバーを起動したくない／PCからだけでなくスマホないし外出先から利用したい／テスト公開したい、など。設定が手軽にできる前提で、入門者向けに用途がしっかり伝わるようであれば含めてほしい。</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">漫画制作アプリをウェブに限定公開してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>二重のアクセス制限（認証・IP制限）をかけて限定公開する手順</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>API連携を伴うアプリ公開について、<code>.gitignore</code>・<code>.env</code> などの話も</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div></section><section class="part" id="part-⑤"><div class="part__head"><span class="part__label">⑤</span><div><h2 class="part__cat">業務効率化</h2><p class="part__meta">公開 7/13 ／ 4 本</p></div></div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">Claude Codeによる業務効率化の事例</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>業務にClaude Codeを活かす事例紹介</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">ファイル整理を自動化してみよう</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>ファイルの整理・リネームをClaude Codeで実行</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>業務効率化の具体的な題材は追って検討でよいが、「Claude Codeだからこそできることで、かつ汎用的にニーズがある便利なもの」を題材とする。└ ファイルの整理・リネームは、若干インパクト弱いかも</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>確かにタイトルから想像される自動化はインパクト弱いものの、単純な整理・リネームではなく、<strong>ファイルの中身まで見たうえでフォルダ作成・リネーム・整理を行い、さらに作業報告書（どういった観点で整理したか、各ファイルがどのような内容であったかなど）も出力する</strong>という実務的な内容を扱う予定。例えば請求書・領収書の自動仕分けなど。仕分け後に取引先名・金額・科目などについてまとめた報告書を出力。題材は一旦仮とし、追って検討・確定とする。</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">3</span><h4 class="topic__t">資料修正を自動化してみよう</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>既存資料の修正・整形をClaude Codeで実行</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>題材は一旦仮。資料修正はインパクト強そう</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">4</span><h4 class="topic__t">コンテンツ生成を自動化してみよう</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>複数の画像を一括で生成する方法</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>題材は一旦仮</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div></section><section class="part" id="part-apx"><div class="part__head"><span class="part__label">付録</span><div><h2 class="part__cat">付録</h2><p class="part__meta">2 本</p></div></div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">1</span><h4 class="topic__t">ウェブ以外のClaude Code開発</h4><span class="tbadge">想定4分</span></div>
+    <div class="ov"><p>スマホアプリなどウェブ以外の開発の可能性を紹介</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>スマホアプリは、実際に生成する（マスターコースの内容を踏襲）</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><ul><li>ローカル開発して <strong>Expo Go でテスト確認する方法</strong>。マスターコースの内容を踏襲でお願いします。FlutterもApple Developer toolも使わない。</li><li>成果物のデモ紹介程度なら、そもそもこの付録はいらない気がする（最初の「Claude Codeでできること」のところで触れればOK）。受講生に実際に自分の環境で指示して動作するスマホアプリを作ってもらうことで、「こんな感じでスマホアプリを作れる」というのを<strong>体感</strong>してもらいたい。</li><li>「その先のやり方が知りたい」的なクレームは気にしなくてよいと思う。</li></ul></div>
+  </div>  <div class="topic" id="">
+    <div class="topic__h"><span class="topic__n">2</span><h4 class="topic__t">今後の学習に向けて</h4><span class="tbadge">想定5分</span></div>
+    <div class="ov"><p>今後の学習ステップを網羅的に提示</p></div><div class="box box--memo"><span class="box__lbl">📝 米メモ</span><p>今後、マスターコース以外で「Claude Code × 〇〇」のコースを作る可能性を考慮して、マスターコースへの誘導は不要（保守性を考慮して、別コースへの誘導はテキストコンテンツとしたほうがよさそう）</p></div><div class="box box--matsui"><span class="box__lbl">💬 松井回答</span><p>異論なし</p></div>
+  </div></section>
+  </main>
+</div>
+<footer class="foot">Claude Code入門ゼミ 収録プラン（構成案）。元ファイル：教材構成.md。</footer>
+</body></html>
