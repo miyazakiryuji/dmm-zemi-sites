@@ -359,7 +359,7 @@ code, kbd { font-family: "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberati
       文法を覚える必要はありません（コードは Claude Code が書いてくれます）。大事なのは「どれが何の担当か」だけ。この3つの“役割”を押さえておきましょう。
     </p>
     <img src="assets/penguins/penguin_puzzle.png" alt="" aria-hidden="true" loading="lazy"
-         style="float:right; width:96px; height:auto; max-width:30%; margin:-8px 0 12px 18px;">
+         style="display:block; width:96px; height:auto; margin:0 0 8px auto;">
     <div class="triad">
       <div class="triad__card triad__card--html">
         <div class="triad__ico"><svg aria-hidden="true"><use href="#i-structure"/></svg></div>
@@ -392,7 +392,7 @@ code, kbd { font-family: "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberati
       下のボタンで、同じ1枚のページに <b>CSS</b> と <b>JS</b> を一枚ずつ重ねていきます。<strong>中身（HTML）は3つとも全く同じ</strong>。何が変わるかに注目してください。
     </p>
     <img src="assets/penguins/penguin_idea_lightbulb.png" alt="" aria-hidden="true" loading="lazy"
-         style="float:right; width:88px; height:auto; max-width:28%; margin:-6px 0 10px 18px;">
+         style="display:block; width:88px; height:auto; margin:0 0 8px auto;">
 
     <div class="switch-head" role="group" aria-label="表示する層を切り替え">
       <button class="switch-btn switch-btn--1 is-active" data-layer="1"><span class="dot"></span>① HTMLだけ</button>
@@ -558,6 +558,17 @@ code, kbd { font-family: "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberati
 </section>
 
 <!-- Footer -->
+<!-- 授業アンケート -->
+<section class="section section--soft" id="survey">
+  <div class="section__inner" style="text-align:center;">
+    <div style="max-width:720px;margin:0 auto;padding:26px 28px;border:2px dashed #FF8C42;border-radius:18px;background:#FFF3E6;color:#2A2F45;">
+      <p style="font-weight:900;font-size:18px;margin:0 0 8px;">📋 授業アンケートのお願い</p>
+      <p style="margin:0 0 18px;color:#5A6178;font-size:14px;line-height:1.7;">この授業（ゼミ）の感想・ご要望をぜひお聞かせください。いただいた声は今後の運営に活かします。</p>
+      <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener" style="display:inline-block;padding:12px 26px;background:#FF7424;color:#fff;font-weight:800;border-radius:999px;text-decoration:none;">アンケートに回答する</a>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <p>DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ EP13「HTML / CSS / JavaScriptの概要」補助資料</p>
   <p>サンプルの「ペンギン商会」は説明用の架空のお店です。</p>
@@ -642,14 +653,7 @@ code, kbd { font-family: "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberati
   const CT = '<' + '/script>';
 
   function buildLayer(n) {
-    if (n === 1) return HEAD + '</head><body>' + DEMO_HTML + `<section style="padding:48px 24px;text-align:center;">
-  <div style="max-width:720px;margin:0 auto;padding:26px 28px;border:2px dashed #FF8C42;border-radius:18px;background:#FFF3E6;color:#2A2F45;font-family:-apple-system,'Hiragino Sans',sans-serif;">
-    <p style="font-weight:900;font-size:18px;margin:0 0 8px;">📋 授業アンケートのお願い</p>
-    <p style="margin:0 0 18px;color:#5A6178;font-size:14px;line-height:1.7;">この授業（ゼミ）の感想・ご要望をぜひお聞かせください。いただいた声は今後の運営に活かします。</p>
-    <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener" style="display:inline-block;padding:12px 26px;background:#FF7424;color:#fff;font-weight:800;border-radius:999px;text-decoration:none;">アンケートに回答する</a>
-  </div>
-</section>
-</body></html>`;
+    if (n === 1) return HEAD + '</head><body>' + DEMO_HTML + '</body></html>';
     if (n === 2) return HEAD + '<style>' + DEMO_CSS + '</style></head><body>' + DEMO_HTML + '</body></html>';
     return HEAD + '<style>' + DEMO_CSS + '</style></head><body>' + DEMO_HTML + '<script>' + DEMO_JS + CT + '</body></html>';
   }
