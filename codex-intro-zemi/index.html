@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex入門ゼミ | DMM 生成AI CAMP 学び放題</title>
+<meta name="description" content="DMM 生成AI CAMP 学び放題 Codex入門ゼミ 講義資料サイト。全13回・Google Meet開催。初学者向けに、学習サイクル、修了要件、困ったときの対処フロー、教材構成などをまとめています。開催スケジュールは調整中です。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/codex-intro-zemi/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Codex入門ゼミ">
+<meta property="og:title" content="Codex入門ゼミ | DMM 生成AI CAMP 学び放題">
+<meta property="og:description" content="DMM 生成AI CAMP 学び放題 Codex入門ゼミ 講義資料サイト。全13回。初学者向けに、学習サイクル、修了要件、教材構成、困ったときの対処フローをまとめています。開催スケジュールは調整中です。">
+<meta property="og:url" content="https://miyazakiryuji.github.io/dmm-zemi-sites/codex-intro-zemi/">
+<meta property="og:image" content="https://miyazakiryuji.github.io/dmm-zemi-sites/codex-intro-zemi/assets/images/face_icon.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<style>
+:root {
+  --bg-main: #FFF9F0;
+  --bg-soft: #FFF3E6;
+  --bg-card: #FFFFFF;
+  --text-main: #2A2F45;
+  --text-sub: #5A6178;
+  --text-mute: #646B82;
+  --accent-orange: #FF8C42;
+  --accent-orange-hover: #FF7424;
+  --text-accent: #B84A00;
+  --accent-blue: #4DA8FF;
+  --accent-pink: #FF9EC3;
+  --accent-green: #6FD49D;
+  --accent-yellow: #FFD166;
+  --border: #FFE2C7;
+  --shadow-sm: 0 4px 16px rgba(255, 140, 66, 0.08);
+  --shadow-md: 0 12px 32px rgba(255, 140, 66, 0.12);
+  --shadow-lg: 0 20px 60px rgba(255, 140, 66, 0.18);
+  --radius: 18px;
+  --radius-lg: 28px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-main);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ===== Nav ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 0;
+  transition: all .3s var(--ease);
+}
+.nav.is-scrolled {
+  background: rgba(255, 249, 240, 0.85);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  padding: 12px 0;
+  box-shadow: 0 4px 24px rgba(255, 140, 66, 0.08);
+}
+.nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav__brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: .02em; }
+.logo {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 10px rgba(255, 140, 66, 0.25));
+}
+.brand__text { display: flex; flex-direction: column; line-height: 1.2; white-space: nowrap; }
+.brand__text strong { font-size: 15px; font-weight: 900; white-space: nowrap; }
+.brand__text small { font-size: 10.5px; font-weight: 600; opacity: .65; letter-spacing: .04em; margin-top: 2px; white-space: nowrap; }
+
+.nav__menu { display: flex; gap: 24px; align-items: center; }
+.nav__link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-sub);
+  position: relative;
+}
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -6px;
+  width: 0; height: 2px;
+  background: var(--accent-orange);
+  transition: all .3s var(--ease);
+  transform: translateX(-50%);
+}
+.nav__link:hover, .nav__link.is-active { color: var(--accent-orange); }
+.nav__link:hover::after, .nav__link.is-active::after { width: 100%; }
+
+.nav__toggle {
+  display: none;
+  background: none;
+  border: 0;
+  width: 36px; height: 36px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+}
+.nav__toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: transform .3s var(--ease), opacity .3s var(--ease);
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: 140px 24px 80px;
+  background:
+    radial-gradient(900px 600px at 80% -10%, rgba(255, 158, 195, 0.30), transparent 60%),
+    radial-gradient(700px 500px at -10% 30%, rgba(77, 168, 255, 0.20), transparent 60%),
+    radial-gradient(800px 500px at 50% 100%, rgba(255, 209, 102, 0.22), transparent 60%),
+    var(--bg-main);
+}
+.hero__inner { max-width: 980px; text-align: center; }
+.hero__logo {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 24px;
+  filter: drop-shadow(0 12px 32px rgba(255, 140, 66, 0.30));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.badge__dot {
+  width: 8px; height: 8px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: .4; }
+}
+
+.hero__title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  line-height: 1.4;
+  margin: 0 0 24px;
+  letter-spacing: .01em;
+  color: var(--text-main);
+}
+.hero__title .title__line { display: block; }
+.hero__title em {
+  font-style: normal;
+  color: var(--text-accent);
+  position: relative;
+  display: inline-block;
+}
+.hero__title em::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -4px 0;
+  height: 8px;
+  background: rgba(255, 209, 102, 0.55);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.hero__main {
+  font-size: clamp(30px, 6.4vw, 72px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  background: linear-gradient(135deg, #FF8C42 0%, #FF6B9D 50%, #4DA8FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -.01em;
+  animation: gradient-shift 6s ease-in-out infinite;
+  background-size: 200% 200%;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .hero__main { white-space: normal; word-break: keep-all; }
+}
+.hero__main-sub {
+  font-size: clamp(17px, 2.4vw, 22px);
+  font-weight: 800;
+  color: var(--text-sub);
+  margin: 0 0 28px;
+  letter-spacing: .04em;
+}
+.hero__main-sub .term { color: var(--text-accent); }
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero__sub {
+  font-size: 15px;
+  color: var(--text-sub);
+  max-width: 720px;
+  margin: 0 auto 36px;
+  line-height: 1.95;
+}
+
+.hero__cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all .25s var(--ease);
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn--primary {
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-pink) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+.btn--primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-main);
+  border-color: var(--border);
+}
+.btn--ghost:hover {
+  background: #fff;
+  border-color: var(--accent-orange);
+  color: var(--text-accent);
+  transform: translateY(-2px);
+}
+.btn--lg { padding: 20px 40px; font-size: 17px; }
+.btn span[aria-hidden] { transition: transform .2s var(--ease); }
+.btn:hover span[aria-hidden] { transform: translateX(4px); }
+
+.hero__stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.stat { display: flex; flex-direction: column; align-items: center; }
+.stat__num {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+}
+.stat__unit { font-size: 18px; font-weight: 700; color: var(--text-sub); margin-left: 4px; }
+.stat__text {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+.stat__label { font-size: 13px; color: var(--text-mute); font-weight: 600; margin-top: 6px; letter-spacing: .04em; }
+
+/* ===== Section base ===== */
+.section { padding: 100px 24px; position: relative; }
+.section--cycle { background: var(--bg-soft); }
+.section--rules { background: var(--bg-main); }
+.section--schedule { background: var(--bg-soft); }
+.section--access { background: var(--bg-main); }
+.section--course { background: var(--bg-soft); }
+.section--instructor { background: var(--bg-main); }
+.section--message { background: var(--bg-soft); }
+
+.section__inner { max-width: var(--container); margin: 0 auto; }
+.section__kicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .3em;
+  color: var(--text-accent);
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  background: rgba(255, 140, 66, 0.12);
+  border-radius: 100px;
+}
+.section__title {
+  font-size: clamp(26px, 4.2vw, 40px);
+  font-weight: 800;
+  margin: 0 0 16px;
+  line-height: 1.35;
+}
+.section__title em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-pink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.section__lead {
+  font-size: 15.5px;
+  color: var(--text-sub);
+  max-width: 760px;
+  margin: 0 0 48px;
+  line-height: 1.95;
+}
+.section__note {
+  margin-top: 24px;
+  padding: 14px 18px;
+  background: rgba(255, 209, 102, 0.18);
+  border-left: 4px solid var(--accent-orange);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+
+/* ===== Common icon (SVG) ===== */
+.cycle__icon svg {
+  width: 26px;
+  height: 26px;
+  color: #fff;
+  display: block;
+}
+.note-ico {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: -3px;
+  color: var(--text-accent);
+  margin-right: 4px;
+}
+.h3-ico {
+  width: 22px;
+  height: 22px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+/* ===== Search box ===== */
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-ico {
+  position: absolute;
+  left: 22px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-mute);
+  pointer-events: none;
+}
+.search-wrap input {
+  padding-left: 52px !important;
+}
+
+/* ===== Penguin mascots ===== */
+.hero__mascot,
+.message__mascot,
+.character__mascot,
+.cycle-phase__mascot {
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.hero__mascot {
+  width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto 28px;
+}
+@media (max-width: 720px) {
+  .hero__mascot { width: 140px; margin-bottom: 20px; }
+}
+.message__mascot {
+  width: 140px;
+  display: block;
+  margin: 0 auto 8px;
+}
+.character__mascot {
+  width: 84px;
+  height: auto;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  opacity: 0.95;
+}
+.character__card { position: relative; }
+.cycle-phase__head { position: relative; }
+.cycle-phase__mascot {
+  width: 64px;
+  height: auto;
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+}
+.section__inner { position: relative; }
+.section__mascot {
+  width: 88px;
+  height: auto;
+  position: absolute;
+  top: 4px;
+  right: 0;
+  opacity: 0.95;
+  pointer-events: none;
+  user-select: none;
+}
+@media (max-width: 720px) {
+  .message__mascot { width: 110px; }
+  .character__mascot { width: 64px; top: 12px; right: 12px; opacity: 0.85; }
+  .cycle-phase__mascot { width: 48px; }
+  .section__mascot { width: 60px; top: 0; opacity: 0.85; }
+}
+
+/* ===== Character (ゼミの位置づけ) ===== */
+.character {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 0 0 24px;
+}
+.character__card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.character__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.character__card--no { border-top: 4px solid var(--text-mute); }
+.character__card--yes { border-top: 4px solid var(--accent-orange); }
+.character__label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 0 14px;
+}
+.character__card--no .character__label { background: rgba(138, 145, 168, 0.18); color: var(--text-mute); }
+.character__card--yes .character__label { background: var(--accent-orange); color: #fff; }
+.character__title { font-size: 18px; font-weight: 900; margin: 0 0 14px; line-height: 1.5; }
+.character__card--no .character__title { color: var(--text-sub); }
+.character ul { margin: 0; padding-left: 20px; color: var(--text-sub); font-size: 14px; }
+.character li { margin: 6px 0; line-height: 1.75; }
+.character__note {
+  background: var(--bg-card);
+  border-left: 4px solid var(--accent-orange);
+  border-radius: 10px;
+  padding: 18px 22px;
+  font-size: 14px;
+  color: var(--text-sub);
+  margin: 0;
+  line-height: 1.85;
+  box-shadow: var(--shadow-sm);
+}
+.character__note strong { color: var(--text-main); }
+
+/* ===== Cycle (2 phases / 5 steps) ===== */
+.cycle-phases {
+  counter-reset: step;
+  display: grid;
+  gap: 40px;
+}
+.cycle-phase {
+  position: relative;
+}
+.cycle-phase__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 0 0 12px;
+  border-bottom: 1px dashed var(--border);
+}
+.cycle-phase__label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  padding: 5px 12px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 999px;
+}
+.cycle-phase--live .cycle-phase__label { background: var(--accent-blue); }
+.cycle-phase__title {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0;
+  color: var(--text-main);
+}
+.cycle-phase__title small {
+  font-size: 13px;
+  color: var(--text-sub);
+  font-weight: 600;
+  margin-left: 8px;
+}
+.cycle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+.cycle__item {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 32px 28px 28px;
+  border: 1px solid rgba(255, 226, 199, 0.7);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: all .3s var(--ease);
+  overflow: hidden;
+}
+.cycle__item::before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  font-size: 64px;
+  font-weight: 900;
+  color: rgba(255, 140, 66, 0.10);
+  line-height: 1;
+}
+.cycle__item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.cycle__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+  transition: transform .3s var(--ease);
+}
+.cycle__item:hover .cycle__icon { transform: scale(1.1) rotate(-4deg); }
+.cycle__item:nth-child(1) .cycle__icon { background: linear-gradient(135deg, #BAE0FF, #7CC4FF); }
+.cycle__item:nth-child(2) .cycle__icon { background: linear-gradient(135deg, #FFD6B5, #FFB078); }
+.cycle__item:nth-child(3) .cycle__icon { background: linear-gradient(135deg, #FFD0E2, #FFA8C9); }
+.cycle__item:nth-child(4) .cycle__icon { background: linear-gradient(135deg, #BDEDD0, #88D7AC); }
+
+.cycle__title { font-size: 17px; font-weight: 800; margin: 0 0 10px; line-height: 1.45; position: relative; }
+.cycle__body { font-size: 14px; color: var(--text-sub); margin: 0; line-height: 1.85; position: relative; }
+
+/* ===== Rules (修了要件) ===== */
+.rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.rule {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  border: 1px solid rgba(255, 226, 199, 0.7);
+  box-shadow: var(--shadow-sm);
+  transition: all .3s var(--ease);
+}
+.rule:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-orange);
+  box-shadow: var(--shadow-md);
+}
+.rule__head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.rule__badge {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+.rule__title { font-size: 17px; font-weight: 800; margin: 0; line-height: 1.4; }
+.rule__body { font-size: 14.5px; color: var(--text-sub); margin: 0; line-height: 1.85; }
+.rule__note { font-size: 12px; color: var(--text-mute); margin: 12px 0 0; padding: 8px 12px; background: rgba(255, 209, 102, 0.18); border-radius: 8px; }
+
+/* ===== Schedule ===== */
+.schedule__filter {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.chip {
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+.chip:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+.chip.is-active {
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  color: #fff;
+  border-color: transparent;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.schedule-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid rgba(255, 226, 199, 0.7);
+  box-shadow: var(--shadow-sm);
+  transition: all .3s var(--ease);
+  position: relative;
+  overflow: hidden;
+  display: block;
+  color: var(--text-main);
+  text-decoration: none;
+}
+.schedule-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-orange);
+  color: var(--text-main);
+}
+.schedule-card__link {
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-accent);
+  letter-spacing: .02em;
+}
+.schedule-card.no-page { cursor: default; }
+.schedule-card.no-page:hover { transform: none; box-shadow: var(--shadow-sm); border-color: rgba(255, 226, 199, 0.7); }
+.schedule-card.is-special {
+  background: linear-gradient(135deg, #FFF9F0, rgba(255, 209, 102, 0.22));
+  border-color: var(--accent-yellow);
+}
+.schedule-card.is-special::after {
+  content: "土曜開催";
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--accent-orange);
+  color: #fff;
+  letter-spacing: .04em;
+}
+.schedule-card__num {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-accent);
+  letter-spacing: .12em;
+  margin-bottom: 8px;
+}
+.schedule-card__date {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.schedule-card__date small { font-size: 13px; font-weight: 700; color: var(--text-sub); margin-left: 6px; }
+.schedule-card__time {
+  font-size: 14px;
+  color: var(--text-sub);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.schedule-card__time svg {
+  width: 16px; height: 16px;
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+
+/* ===== Access ===== */
+.access {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+.access__card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  border: 1px solid rgba(255, 226, 199, 0.7);
+  box-shadow: var(--shadow-md);
+}
+.access__card h3 {
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.access__meet h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.access__card h3 .ico {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+.access__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.access__list li { font-size: 14.5px; color: var(--text-sub); padding-left: 24px; position: relative; line-height: 1.7; }
+.access__list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--text-accent);
+  font-weight: 800;
+}
+.access__meet {
+  background: linear-gradient(135deg, rgba(255, 209, 102, 0.18), rgba(255, 158, 195, 0.18));
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.access__meet h3 { font-size: 19px; font-weight: 800; margin: 0 0 12px; }
+.access__meet p { margin: 0 0 20px; color: var(--text-sub); font-size: 14px; line-height: 1.85; }
+.access__meet a.meet-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  background: #fff;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-main);
+  border: 2px solid var(--accent-orange);
+  transition: all .25s var(--ease);
+  word-break: break-all;
+}
+.access__meet a.meet-link:hover {
+  background: var(--accent-orange);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.access__meet .meet-link--pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  background: #fff;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-mute);
+  border: 2px dashed var(--border);
+  word-break: break-all;
+}
+.access__meet small {
+  display: block;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-mute);
+  line-height: 1.7;
+}
+
+/* ===== Course list (EP01〜EP42) ===== */
+.course__filter {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.course__search {
+  margin: 0 0 24px;
+}
+.course__search input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-main);
+  outline: none;
+  transition: all .2s var(--ease);
+}
+.course__search input:focus {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.12);
+}
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.course-card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 226, 199, 0.7);
+  box-shadow: var(--shadow-sm);
+  transition: all .25s var(--ease);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.course-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-orange);
+  box-shadow: var(--shadow-md);
+}
+.course-card__ep {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: .02em;
+  line-height: 1.1;
+}
+.cat-intro    { background: linear-gradient(135deg, #4DA8FF, #7CC4FF); }
+.cat-setup    { background: linear-gradient(135deg, #6FD49D, #88D7AC); }
+.cat-basic    { background: linear-gradient(135deg, #FFD166, #FFB95C); }
+.cat-hp       { background: linear-gradient(135deg, #FF8C42, #FFA567); }
+.cat-app      { background: linear-gradient(135deg, #FF9EC3, #FFC4D9); color: #fff; }
+.cat-platform { background: linear-gradient(135deg, #B488FF, #C9A3FF); }
+.cat-extra    { background: linear-gradient(135deg, #5A6178, #8A91A8); }
+.cat-wrap     { background: linear-gradient(135deg, #2A2F45, #5A6178); }
+
+.course-card__body { min-width: 0; }
+.course-card__title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text-main);
+  word-break: break-word;
+}
+.course-card__tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--text-accent);
+  background: rgba(255, 140, 66, 0.12);
+  padding: 3px 8px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+
+/* ===== Instructor ===== */
+.instructor {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  align-items: start;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 226, 199, 0.7);
+}
+.instructor__avatar {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: grid;
+  place-items: center;
+}
+.avatar__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-orange), var(--accent-pink), var(--accent-blue), var(--accent-yellow), var(--accent-orange));
+  padding: 6px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.avatar__initial {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-pink) 100%);
+  display: grid;
+  place-items: center;
+  font-size: 84px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -.04em;
+}
+.avatar__photo {
+  width: 204px;
+  height: 204px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 24px rgba(255, 140, 66, 0.20);
+  background: var(--bg-soft);
+}
+.instructor__role {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-accent);
+  margin: 0 0 8px;
+  letter-spacing: .04em;
+}
+.instructor__name {
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.instructor__name small { font-size: 13px; font-weight: 600; color: var(--text-mute); letter-spacing: .08em; }
+.instructor__sns {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 18px;
+  flex-wrap: wrap;
+}
+.instructor__sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 100px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+  transition: all .2s var(--ease);
+}
+.instructor__sns a:hover {
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.instructor__lead {
+  font-size: 15px;
+  color: var(--text-sub);
+  line-height: 1.95;
+  margin: 0 0 24px;
+}
+
+.instructor__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 0 0 28px;
+}
+.meta-card {
+  background: var(--bg-soft);
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+}
+.meta-card__label {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--text-accent);
+  letter-spacing: .08em;
+  margin: 0 0 4px;
+}
+.meta-card__value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.instructor__h4 {
+  font-size: 13px;
+  font-weight: 800;
+  margin: 24px 0 12px;
+  color: var(--text-main);
+  letter-spacing: .04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.instructor__h4::before {
+  content: "";
+  width: 4px; height: 16px;
+  background: linear-gradient(180deg, var(--accent-orange), var(--accent-pink));
+  border-radius: 4px;
+}
+
+.apps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 0 0 8px;
+}
+.app-card {
+  background: var(--bg-soft);
+  border-radius: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  transition: all .25s var(--ease);
+}
+.app-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-orange);
+  box-shadow: var(--shadow-sm);
+}
+.app-card__name { font-size: 14px; font-weight: 800; margin: 0 0 4px; }
+.app-card__desc { font-size: 12px; color: var(--text-sub); margin: 0; line-height: 1.65; }
+.app-card__store {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: rgba(77, 168, 255, 0.15);
+  color: var(--accent-blue);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stack li {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  transition: all .2s var(--ease);
+}
+.stack li:hover {
+  background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+.stack li small {
+  font-weight: 600;
+  color: var(--text-mute);
+  margin-left: 6px;
+  font-size: 10px;
+}
+.stack li:hover small { color: rgba(255,255,255,0.85); }
+
+.career {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.career li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.career li:last-child { border-bottom: 0; }
+.career__when {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-accent);
+  letter-spacing: .04em;
+  padding-top: 2px;
+}
+.career__what {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin: 0;
+  line-height: 1.75;
+}
+.career__what strong { color: var(--text-main); display: block; margin-bottom: 2px; }
+
+/* ===== Message (はじめに) ===== */
+.message {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 56px 56px 48px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 226, 199, 0.7);
+  overflow: hidden;
+}
+.message::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink), var(--accent-blue), var(--accent-yellow));
+}
+.message__quote {
+  position: absolute;
+  top: 28px;
+  right: 40px;
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(255, 140, 66, 0.12);
+  line-height: 1;
+  font-family: Georgia, serif;
+  pointer-events: none;
+}
+.message__body {
+  position: relative;
+  font-size: 16px;
+  line-height: 2.05;
+  color: var(--text-main);
+  margin: 0;
+}
+.message__body + .message__body { margin-top: 18px; }
+.message__body em {
+  font-style: normal;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.message__note {
+  margin-top: 32px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(255, 209, 102, 0.16), rgba(255, 158, 195, 0.14));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--accent-orange);
+}
+.message__note-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 12px;
+}
+.message__note-title .note-ico {
+  width: 18px; height: 18px;
+  margin: 0;
+  vertical-align: 0;
+}
+.message__note-body {
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: var(--text-sub);
+  margin: 0;
+}
+.message__note-body + .message__note-body { margin-top: 10px; }
+.message__note-body strong {
+  color: var(--text-main);
+  font-weight: 800;
+}
+.message__note-body em {
+  font-style: normal;
+  font-weight: 800;
+  color: var(--text-accent);
+}
+@media (max-width: 720px) {
+  .message { padding: 36px 24px 32px; }
+  .message__quote { font-size: 80px; right: 16px; top: 12px; }
+  .message__body { font-size: 15px; line-height: 1.95; }
+}
+
+/* ===== Footer ===== */
+.footer { padding: 48px 24px; background: #2A2F45; color: #fff; text-align: center; }
+.footer__inner { max-width: var(--container); margin: 0 auto; }
+.footer__brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.footer__brand svg { width: 32px; height: 32px; }
+.footer__brand span {
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.footer__sub { font-size: 13px; margin: 0 0 20px; opacity: .7; }
+.footer__copy { font-size: 11px; opacity: .5; margin: 0; letter-spacing: .04em; }
+
+/* ===== Reveal animation ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Stuck flow ===== */
+.stuck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.stuck__step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
+.stuck__step--primary { border-top: 4px solid var(--accent-orange); }
+.stuck__step--secondary { border-top: 4px solid var(--accent-blue); }
+.stuck__step--tertiary { border-top: 4px solid var(--accent-pink); }
+.stuck__num {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--text-accent);
+  margin: 0 0 10px;
+}
+.stuck__num span {
+  display: grid; place-items: center;
+  width: 28px; height: 28px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+}
+.stuck__step--secondary .stuck__num { color: var(--accent-blue); }
+.stuck__step--secondary .stuck__num span { background: var(--accent-blue); }
+.stuck__step--tertiary .stuck__num { color: var(--accent-pink); }
+.stuck__step--tertiary .stuck__num span { background: var(--accent-pink); }
+.stuck__title { font-size: 17px; font-weight: 900; margin: 0 0 8px; line-height: 1.5; }
+.stuck__body { font-size: 14px; color: var(--text-sub); margin: 0 0 12px; }
+.stuck__tips {
+  background: var(--bg-soft, #FFF3E6);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  margin: 0;
+}
+.stuck__tips strong { color: var(--text-main); }
+.stuck__tips ul { margin: 4px 0 0; padding-left: 18px; }
+.stuck__tips li { margin: 2px 0; }
+.stuck__quote {
+  background: var(--bg-soft, #FFF3E6);
+  border-left: 4px solid var(--accent-orange);
+  padding: 18px 20px 18px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-main);
+  margin: 24px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stuck__quote img { width: 72px; height: auto; flex-shrink: 0; }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .access { grid-template-columns: 1fr; }
+  .instructor { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+  .instructor__avatar { margin: 0 auto; width: 180px; height: 180px; }
+  .avatar__initial { width: 150px; height: 150px; font-size: 64px; }
+  .avatar__photo { width: 156px; height: 156px; }
+  .career li { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 720px) {
+  .nav__menu {
+    display: none;
+    position: absolute;
+    top: 100%; left: 12px; right: 12px;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 12px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+  }
+  .nav__menu.is-open { display: flex; }
+  .nav__menu .nav__link {
+    padding: 14px 16px;
+    width: 100%;
+    border-radius: 12px;
+  }
+  .nav__menu .nav__link:hover { background: var(--bg-soft); }
+  .nav__menu .nav__link::after { display: none; }
+  .nav__toggle { display: flex; }
+  .nav__toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__toggle.is-open span:nth-child(2) { opacity: 0; }
+  .nav__toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .section { padding: 72px 20px; }
+  .hero { padding: 130px 20px 64px; }
+  .hero__stats { gap: 28px; }
+  .hero__cta .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG アイコンセット（オリジナル） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8C42"/>
+      <stop offset="50%" stop-color="#FF6B9D"/>
+      <stop offset="100%" stop-color="#4DA8FF"/>
+    </linearGradient>
+    <linearGradient id="lgrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD166"/>
+      <stop offset="100%" stop-color="#FF8C42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ブランドロゴ -->
+  <symbol id="cxlogo" viewBox="0 0 100 100">
+    <rect x="6" y="6" width="88" height="88" rx="22" fill="url(#lgrad1)"/>
+    <path d="M50 22 L72 36 L72 64 L50 78 L28 64 L28 36 Z" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>
+    <text x="50" y="58" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="26" font-weight="900" fill="#fff" text-anchor="middle">CX</text>
+    <circle cx="78" cy="22" r="6" fill="url(#lgrad2)"/>
+  </symbol>
+
+  <!-- 本（Lesson自習） -->
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 4a2 2 0 0 1 2-2h12v17H7a2 2 0 0 0-2 2V4z"/>
+    <path d="M5 19a2 2 0 0 0 2 2h12"/>
+    <line x1="9" y1="7" x2="15" y2="7"/>
+    <line x1="9" y1="11" x2="14" y2="11"/>
+  </symbol>
+
+  <!-- 鉛筆（課題提出） -->
+  <symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20h4l11-11-4-4L4 16v4z"/>
+    <path d="M14 6l4 4"/>
+    <line x1="4" y1="20" x2="20" y2="20"/>
+  </symbol>
+
+  <!-- ビデオ（LIVE講義 / Meet） -->
+  <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="6" width="14" height="12" rx="2.5"/>
+    <path d="M16 10l5-3v10l-5-3z"/>
+  </symbol>
+
+  <!-- ターゲット（次週課題） -->
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="12" cy="12" r="5.5"/>
+    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+  </symbol>
+
+  <!-- 時計（スケジュール） -->
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/>
+    <polyline points="12 7 12 12 15.5 13.8"/>
+  </symbol>
+
+  <!-- ピン（注意） -->
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 3h6v2l-1 1.2v5L17 14v2H7v-2l3-2.8v-5L9 5V3z"/>
+    <line x1="12" y1="16.5" x2="12" y2="21.5"/>
+  </symbol>
+
+  <!-- 虫眼鏡（検索） -->
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="6.5"/>
+    <line x1="20" y1="20" x2="16" y2="16"/>
+  </symbol>
+
+  <!-- リスト（コース内容） -->
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="9" y1="6" x2="20" y2="6"/>
+    <line x1="9" y1="12" x2="20" y2="12"/>
+    <line x1="9" y1="18" x2="20" y2="18"/>
+    <circle cx="4.5" cy="6" r="1.4" fill="currentColor"/>
+    <circle cx="4.5" cy="12" r="1.4" fill="currentColor"/>
+    <circle cx="4.5" cy="18" r="1.4" fill="currentColor"/>
+  </symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="5" width="17" height="15" rx="2.5"/>
+    <path d="M8 3v4M16 3v4M3.5 10h17"/>
+  </symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.6"/>
+    <path d="M12 7.5v5.5M12 16v.6"/>
+  </symbol>
+</svg>
+
+<canvas id="bg-canvas"></canvas>
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#hero" class="nav__brand">
+      <svg class="logo"><use href="#cxlogo"/></svg>
+      <span class="brand__text">
+        <strong>Codex<br>入門ゼミ</strong>
+        <small>DMM 生成AI CAMP</small>
+      </span>
+    </a>
+    <nav class="nav__menu" id="navMenu">
+      <a href="#instructor" class="nav__link">講師</a>
+      <a href="#character" class="nav__link">ゼミの特性</a>
+      <a href="#cycle" class="nav__link">学習サイクル</a>
+      <a href="#rules" class="nav__link">修了要件</a>
+      <a href="#schedule" class="nav__link">スケジュール</a>
+      <a href="#curriculum" class="nav__link">教材構成</a>
+      <a href="#access" class="nav__link">参加方法</a>
+      <a href="#stuck" class="nav__link">困ったら</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero" id="hero">
+  <div class="hero__inner">
+    <svg class="hero__logo" aria-hidden="true"><use href="#cxlogo"/></svg>
+    <div class="hero__badge reveal" data-reveal>
+      <span class="badge__dot"></span>DMM 生成AI CAMP 学び放題
+    </div>
+    <h1 class="hero__title reveal" data-reveal>
+      <span class="title__line">はじめてのCodexを</span>
+      <span class="title__line"><em>ゼロから一緒に</em>、つまずかず進める</span>
+    </h1>
+    <p class="hero__main reveal" data-reveal>Codex入門ゼミ</p>
+    <p class="hero__main-sub reveal" data-reveal>
+      全<span class="term">13回</span> ／ 日程は調整中
+    </p>
+    <p class="hero__sub reveal" data-reveal>
+      プログラミングや開発がはじめての方も歓迎の、初学者向け入門ゼミです。「事前準備（指定Lessonの自習＋事前課題の提出）」と「週次LIVE講義（提出課題の講評 → 自習内容の補足 → 次回案内）」の2フェーズを、毎週ゆっくりまわしていきます。
+    </p>
+    <img src="./assets/penguins/penguin_teaching.png" alt="ペンギン先生" class="hero__mascot reveal" data-reveal loading="lazy">
+    <div class="hero__cta reveal" data-reveal>
+      <a href="#schedule" class="btn btn--primary">スケジュールを見る<span aria-hidden="true">→</span></a>
+    </div>
+    <div class="hero__stats reveal" data-reveal>
+      <div class="stat">
+        <span><span class="stat__num" data-count="13">0</span><span class="stat__unit">回</span></span>
+        <span class="stat__label">LIVE講義</span>
+      </div>
+      <div class="stat">
+        <span class="stat__text">初学者</span>
+        <span class="stat__label">歓迎・向け</span>
+      </div>
+      <div class="stat">
+        <span class="stat__text">調整中</span>
+        <span class="stat__label">開催日程</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 講師紹介 -->
+<section class="section section--instructor" id="instructor">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>Instructor</p>
+    <h2 class="section__title reveal" data-reveal>講師<em>紹介</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      Codex入門ゼミの講師を担当します、宮﨑です。
+    </p>
+
+    <div class="instructor reveal" data-reveal>
+      <div class="instructor__avatar">
+        <div class="avatar__ring"></div>
+        <img class="avatar__photo" src="assets/images/face_icon.png" alt="講師 宮﨑 竜治">
+      </div>
+      <div class="instructor__body">
+        <p class="instructor__role">DMM 生成AI CAMP 講師</p>
+        <h3 class="instructor__name">宮﨑 竜治 <small>Miyazaki Ryuji</small></h3>
+        <div class="instructor__sns">
+          <a href="https://github.com/miyazakiryuji" target="_blank" rel="noopener">GitHub @miyazakiryuji ↗</a>
+        </div>
+
+        <p class="instructor__lead">
+          営業職からエンジニアへキャリアチェンジ。組み込み・モバイル・Web・AIまで、案件ごとに異なる技術スタックで開発に従事してきました。
+          業務外ではSwift/SwiftUIでiOSアプリを3本App Storeにリリースし、Claude Code向けプラグイン「cc-DevelopmentTeam」をOSSとしてGitHubで公開しています。
+        </p>
+
+        <div class="instructor__meta">
+          <div class="meta-card">
+            <p class="meta-card__label">CURRENT</p>
+            <p class="meta-card__value">富士ソフト株式会社<br>エンジニア</p>
+          </div>
+          <div class="meta-card">
+            <p class="meta-card__label">PREVIOUS</p>
+            <p class="meta-card__value">三菱電機ITソリューションズ<br>コンサルティング営業</p>
+          </div>
+          <div class="meta-card">
+            <p class="meta-card__label">RELEASED</p>
+            <p class="meta-card__value">iOS App<br>3本リリース</p>
+          </div>
+          <div class="meta-card">
+            <p class="meta-card__label">OSS</p>
+            <p class="meta-card__value">cc-DevelopmentTeam<br>個人開発・公開</p>
+          </div>
+        </div>
+
+        <h4 class="instructor__h4">リリース済みアプリ</h4>
+        <div class="apps">
+          <div class="app-card">
+            <p class="app-card__name">PetTrack</p>
+            <p class="app-card__desc">ペット管理アプリ。Swift / SwiftUI、Firebase Authentication / Cloud Firestore、MVVM設計。</p>
+            <span class="app-card__store">App Store</span>
+          </div>
+          <div class="app-card">
+            <p class="app-card__name">ScanGuard</p>
+            <p class="app-card__desc">スキャン・セキュリティアプリ。</p>
+            <span class="app-card__store">App Store</span>
+          </div>
+          <div class="app-card">
+            <p class="app-card__name">－AIカメと遊ぶ－水平思考ゲーム</p>
+            <p class="app-card__desc">ChatGPT API を活用したAIアプリ。</p>
+            <span class="app-card__store">App Store</span>
+          </div>
+        </div>
+
+        <h4 class="instructor__h4">主な技術スタック</h4>
+        <ul class="stack">
+          <li>Swift / SwiftUI <small>2年以上</small></li>
+          <li>Dart / Flutter <small>1年以上</small></li>
+          <li>C++ / Arduino <small>約半年</small></li>
+          <li>Go / Echo <small>約半年</small></li>
+          <li>Python <small>2年</small></li>
+          <li>Java <small>約半年</small></li>
+          <li>Codex</li>
+          <li>Claude Code</li>
+          <li>Dify</li>
+        </ul>
+
+        <h4 class="instructor__h4">これまでの主な業務</h4>
+        <ul class="career">
+          <li>
+            <span class="career__when">2022.09〜</span>
+            <p class="career__what">
+              <strong>富士ソフト株式会社</strong>
+              組み込み／業務系エンジニア。ドライブレコーダー用ソフトウェアのテスト、Go/EchoでのWebサイト開発、C++/Arduinoによる電子タグ開発（要件定義・仕様書作成〜実装・テスト）、Flutterでのセルフレジシステム開発などに従事。
+            </p>
+          </li>
+          <li>
+            <span class="career__when">2025.07〜</span>
+            <p class="career__what">
+              <strong>DMM Difyマスターコース メンター</strong>
+              受講生のメンター業務に従事。
+            </p>
+          </li>
+          <li>
+            <span class="career__when">2026.03〜</span>
+            <p class="career__what">
+              <strong>DMM AI関連Workshop 担当</strong>
+              Difyメンター業務からWorkshop設計・開催へ移行。Claude CodeをテーマにしたWorkshopも開催。
+            </p>
+          </li>
+          <li>
+            <span class="career__when">2026.04〜</span>
+            <p class="career__what">
+              <strong>UNIT BASE株式会社 デジハク 専属メンター</strong>
+              AIスクール「デジハク」生成AI PROコース受講生へのキャリアメンタリングを担当（教材作成・カリキュラム設計には関与せず、キャリア面の伴走支援を専任）。
+            </p>
+          </li>
+          <li>
+            <span class="career__when">2026.05〜</span>
+            <p class="career__what">
+              <strong>DMM ゼミ 講師</strong>
+              「Codex入門ゼミ」「Claude Codeマスターゼミ」「Difyマスターゼミ」の講師・登壇者として、毎週の定例講義による学習支援を担当。
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- はじめに（講師メッセージ） -->
+<section class="section section--message" id="message">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>Message</p>
+    <h2 class="section__title reveal" data-reveal>はじめに <em>― ゼミの開幕にあたって</em></h2>
+
+    <div class="message reveal" data-reveal>
+      <img src="./assets/penguins/penguin_bowing.png" alt="ペンギン先生" class="message__mascot" loading="lazy">
+      <span class="message__quote" aria-hidden="true">"</span>
+
+      <p class="message__body">
+        この入門ゼミは、<em>はじめてのCodex</em>を、つまずかずにゼロから進められることを目指して開催します。「ついていけるかな」と不安な方こそ大歓迎です。
+      </p>
+      <p class="message__body">
+        運営側の不手際があるかもしれませんが、このゼミ自体を<em>もっと良くしていきたい</em>し、<em>盛り上げていきたい</em>と考えています。
+      </p>
+      <p class="message__body">
+        皆さんも、わからないことがあればスレッドのコミュニティなどで助け合うような形をとっていければと思っていますので、よろしくお願いします。
+      </p>
+
+      <div class="message__note">
+        <h4 class="message__note-title">
+          <svg class="note-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pencil"/></svg>
+          本件に関するご質問について
+        </h4>
+        <p class="message__note-body">
+          本ゼミに関するご質問は、原則として<strong>ゼミ参加者向けの事前課題提出・質問受付フォーム</strong>からお送りください。
+        </p>
+        <p class="message__note-body">
+          いただいたご質問のうち、<em>できる限り共通的な質問や、クリティカルな内容</em>については、こちらで拾わせていただき、LIVE講義内などで回答させていただきます。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ゼミの特性 -->
+<section class="section" id="character">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>Character</p>
+    <h2 class="section__title reveal" data-reveal>このゼミは<em>「学習の場」</em>です</h2>
+    <p class="section__lead reveal" data-reveal>
+      ワークショップ感覚で参加される方が多いので、最初に位置づけをお伝えしておきます。<br>
+      <strong>本ゼミはハンズオン形式のワークショップではなく、自習を前提とした学習の場</strong>です。
+    </p>
+
+    <div class="character">
+      <div class="character__card character__card--no reveal" data-reveal>
+        <img src="./assets/penguins/penguin_warning.png" alt="" class="character__mascot" loading="lazy" aria-hidden="true">
+        <span class="character__label">こうではありません</span>
+        <h3 class="character__title">ハンズオン形式のワークショップ</h3>
+        <ul>
+          <li>講師と一緒に、1行ずつコードを書き進めていく</li>
+          <li>「次はここをクリック」「次はこう入力」と1ステップずつ全員で操作をなぞる</li>
+          <li>その場で全員が同じ画面・同じ成果物を完成させて終わる</li>
+        </ul>
+      </div>
+      <div class="character__card character__card--yes reveal" data-reveal>
+        <img src="./assets/penguins/penguin_pointing.png" alt="" class="character__mascot" loading="lazy" aria-hidden="true">
+        <span class="character__label">こういう場です</span>
+        <h3 class="character__title">自習を前提とした「学習の場」</h3>
+        <ul>
+          <li>事前に指定 Lesson を視聴・実践してきていただく</li>
+          <li>LIVE は提出課題の講評＋自習内容の補足＋次回案内が中心</li>
+          <li>「ここを手元で実際にやってみてください」とお声がけはする</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="character__note reveal" data-reveal>
+      LIVE 中に「ここを手元で実際にやってみてください」と促す場面はありますが、ワークショップのように1つ1つの手順を全員で揃って進める運用はしません。<br>
+      Codex を <strong>自分で扱えるようになる</strong> ためには、結局のところ自分で手を動かす経験が一番効きます。 LIVE は <strong>「自習してきた内容を深める場」「詰まったところをほぐす場」</strong> として活用してください。初学者向けですので、わからないことを持ち寄っていただいて大丈夫です。
+    </p>
+  </div>
+</section>
+
+<!-- 学習サイクル -->
+<section class="section section--cycle" id="cycle">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>Learning Cycle</p>
+    <h2 class="section__title reveal" data-reveal>ゼミの<em>学習サイクル</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      毎週「事前準備（各自で）」と「LIVE講義」の流れを繰り返します。
+    </p>
+
+    <div class="cycle-phases">
+
+      <!-- Phase 1: 事前準備 -->
+      <div class="cycle-phase reveal" data-reveal>
+        <div class="cycle-phase__head">
+          <span class="cycle-phase__label">PHASE 1</span>
+          <h3 class="cycle-phase__title">事前準備<small>LIVE講義の前までに、各自で進める</small></h3>
+          <img src="./assets/penguins/penguin_holding_book.png" alt="" class="cycle-phase__mascot" loading="lazy" aria-hidden="true">
+        </div>
+        <ol class="cycle">
+          <li class="cycle__item">
+            <div class="cycle__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-book"/></svg></div>
+            <h4 class="cycle__title">指定Lessonを自習</h4>
+            <p class="cycle__body">こちら側で指定する DMM 生成AI CAMP の Lesson を、LIVE前までに視聴・実践してきていただきます。</p>
+          </li>
+          <li class="cycle__item">
+            <div class="cycle__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pencil"/></svg></div>
+            <h4 class="cycle__title">事前課題を提出</h4>
+            <p class="cycle__body">自習だけでは深まらない部分を扱う課題を、専用フォームから提出していただきます。</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Phase 2: LIVE講義 -->
+      <div class="cycle-phase cycle-phase--live reveal" data-reveal>
+        <div class="cycle-phase__head">
+          <span class="cycle-phase__label">PHASE 2</span>
+          <h3 class="cycle-phase__title">週次LIVE講義<small>3パート構成</small></h3>
+          <img src="./assets/penguins/penguin_teaching.png" alt="" class="cycle-phase__mascot" loading="lazy" aria-hidden="true">
+        </div>
+        <ol class="cycle">
+          <li class="cycle__item">
+            <div class="cycle__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-search"/></svg></div>
+            <h4 class="cycle__title">提出課題のピックアップ＆講評</h4>
+            <p class="cycle__body">提出された課題から、皆が引っかかる点・改善点・良かった点をピックアップして共有します。</p>
+          </li>
+          <li class="cycle__item">
+            <div class="cycle__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-video"/></svg></div>
+            <h4 class="cycle__title">自習内容の補足説明</h4>
+            <p class="cycle__body">自習で扱った内容のうち、補強しておきたいポイントや実演で見せたい部分を、講師から解説します。</p>
+          </li>
+          <li class="cycle__item">
+            <div class="cycle__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-target"/></svg></div>
+            <h4 class="cycle__title">次回課題・自習の確認</h4>
+            <p class="cycle__body">次回までの自習対象Lessonと、事前提出課題の内容を共有して、次のサイクルへつなぎます。</p>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 修了要件 -->
+<section class="section section--rules" id="rules">
+  <div class="section__inner">
+    <img src="./assets/penguins/penguin_cheering_both_wings.png" alt="" class="section__mascot" loading="lazy" aria-hidden="true" style="max-width:100%;height:auto;">
+    <p class="section__kicker reveal" data-reveal>Rules</p>
+    <h2 class="section__title reveal" data-reveal>ゼミのルール・<em>修了要件</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      修了証の発行には、以下を満たしていただく必要があります（具体的な要件は調整中です）。
+    </p>
+
+    <div class="rules">
+      <div class="rule reveal" data-reveal>
+        <div class="rule__head">
+          <div class="rule__badge">①</div>
+          <h3 class="rule__title">事前課題の提出（規定回数以上）</h3>
+        </div>
+        <p class="rule__body">全13回のうち、規定回数以上の事前課題提出を修了要件のひとつとする予定です。事前課題の提出締切は、各ゼミの<strong>開催3日前まで</strong>を想定しています。</p>
+        <p class="rule__note">必要な提出回数は <strong>要確定</strong>（調整中）。</p>
+      </div>
+      <div class="rule reveal" data-reveal>
+        <div class="rule__head">
+          <div class="rule__badge">②</div>
+          <h3 class="rule__title">最終成果物の提出</h3>
+        </div>
+        <p class="rule__body">学んだ内容を活かした最終成果物の提出を、修了要件のひとつとする予定です。</p>
+        <p class="rule__note">成果物の形式・条件は <strong>要確定</strong>（調整中）。</p>
+      </div>
+    </div>
+
+    <p class="section__note reveal" data-reveal>
+      <svg class="note-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>
+      事前課題・質問は、ゼミ参加者向けの事前課題提出・質問受付フォームから受け付けます（期日：各ゼミの開催3日前までを想定）。<strong>修了要件の具体的な数値・条件は調整中です。</strong>
+    </p>
+  </div>
+</section>
+
+<!-- スケジュール -->
+<section class="section section--schedule" id="schedule">
+  <div class="section__inner">
+    <img src="./assets/penguins/penguin_waving_hello.png" alt="" class="section__mascot" loading="lazy" aria-hidden="true" style="max-width:100%;height:auto;">
+    <p class="section__kicker reveal" data-reveal>Schedule</p>
+    <h2 class="section__title reveal" data-reveal>開催<em>スケジュール</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      全13回。<strong>開催日程・曜日・開始時刻は調整中です。</strong>確定し次第こちらに掲載するとともに、お申し込み時のメールアドレス宛にご案内します。
+    </p>
+
+    <div class="schedule__filter reveal" data-reveal>
+      <button class="chip is-active" data-filter="all">全13回</button>
+    </div>
+
+    <div class="schedule-grid" id="scheduleGrid"></div>
+
+    <p class="section__note reveal" data-reveal>
+      ※開催日程・曜日・開始時刻は調整中です。期間・回数・LIVE講義日時・必要なツール等は変更される場合があります。<br>
+      ※ご参加が難しい回は、後日公開されるアーカイブ動画を視聴ください（事前の欠席連絡等は必要ありません）。
+    </p>
+  </div>
+</section>
+
+<!-- 教材構成（対象コース・教材は確認中／たたき台） -->
+<section class="section" id="curriculum" style="background:var(--bg-soft)">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>Curriculum</p>
+    <h2 class="section__title reveal" data-reveal>このゼミの<em>教材構成</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      本ゼミは、DMM 生成AI CAMP 学び放題の <strong>Codex 関連教材</strong> を題材に、毎週の自習＋LIVE講義で進めます。「<strong>知る → 作る → 仕事に活かす</strong>」の順で、初学者がつまずかず学べる構成を予定しています。
+    </p>
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:var(--bg-card);border:2px dashed var(--accent-orange);border-radius:var(--radius);padding:28px 30px;box-shadow:var(--shadow-sm)">
+      <img src="./assets/penguins/penguin_thinking.png" alt="" loading="lazy" style="width:96px;height:auto;flex-shrink:0" aria-hidden="true">
+      <div style="flex:1;min-width:240px">
+        <p style="font-weight:900;font-size:17px;margin:0 0 8px;color:var(--text-main)">教材構成・対象エピソードは<span style="color:var(--text-accent)">確認中</span>です</p>
+        <p style="margin:0;font-size:14px;color:var(--text-sub);line-height:1.85">対象コース・パート構成・各回の自習対象エピソードが確定し次第、ここに一覧（検索・絞り込み付き）を掲載します。各回の割り当ては、各回のLIVE講義内でも案内します。</p>
+      </div>
+    </div>
+    <p class="section__note reveal" data-reveal>
+      <svg class="note-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-book"/></svg>
+      ※ 本サイトはたたき台（ドラフト）です。出典・対象コース・各回の割り当ては確認中で、確定情報が入り次第このサイトで更新します。
+    </p>
+  </div>
+</section>
+
+<!-- 参加方法 -->
+<section class="section section--access" id="access">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>How to join</p>
+    <h2 class="section__title reveal" data-reveal>LIVE講義への<em>参加方法</em></h2>
+    <p class="section__lead reveal" data-reveal>
+      ゼミお申し込み時にご記入いただいたメールアドレス宛に、各ライブ講義にご参加いただくためのGoogle Meetの招待および各回のカレンダー招待をお送りします（迷惑メールboxに入っている可能性もあるためご注意ください）。
+    </p>
+
+    <div class="access">
+      <div class="access__card reveal" data-reveal>
+        <h3><span class="ico">!</span>注意事項</h3>
+        <ul class="access__list">
+          <li>リンクを選択した際、アプリのダウンロードページに飛ぶ場合、お手数ですがダウンロードしたうえで改めてリンクからご入室ください。</li>
+          <li>画面にぐるぐると回る円が表示され入室できない場合、ブラウザのキャッシュクリアと再起動をお試しください。</li>
+          <li>LIVE講義アーカイブ動画は「ツール別コース ＞ ゼミアーカイブ動画」から視聴できます。</li>
+          <li>LIVE講義で配布した資料・リンク・プロンプト等の再配布は原則行っておりません。</li>
+        </ul>
+      </div>
+
+      <div class="access__meet reveal" data-reveal>
+        <h3><svg class="h3-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-video"/></svg>Google Meet 入室リンク</h3>
+        <p>LIVE講義へは、お申し込み時のメールアドレス宛にお送りする招待メール記載のGoogle Meetリンクからご入室ください。</p>
+        <span class="meet-link--pending">招待メール記載のリンク（調整中）</span>
+        <small>※ 入室用リンクは調整中です。確定後、招待メール・カレンダー招待にてご案内します。</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 困ったら -->
+<section class="section" id="stuck">
+  <div class="section__inner">
+    <p class="section__kicker reveal" data-reveal>When You're Stuck</p>
+    <h2 class="section__title reveal" data-reveal>分からないことが出てきたら<em>この順番</em>で</h2>
+    <p class="section__lead reveal" data-reveal>
+      学習中・課題実施中に詰まったら、以下のフローで進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。初学者向けのゼミですので、わからなくて当たり前という前提で大丈夫です。
+    </p>
+
+    <div class="stuck reveal" data-reveal>
+      <div class="stuck__step stuck__step--primary">
+        <p class="stuck__num"><span>1</span>STEP 1</p>
+        <h3 class="stuck__title">まずは<br>スクショしてAIに聞く</h3>
+        <p class="stuck__body">
+          エラー画面・つまずいた画面を <strong>スクリーンショット</strong> で撮り、ChatGPT／Claude／Gemini など普段使っている生成AIに貼り付けて質問してみてください。
+        </p>
+        <div class="stuck__tips">
+          <strong>精度を上げるコツ：</strong>
+          <ul>
+            <li>何をしようとしていたか</li>
+            <li>どうなる予定だったか</li>
+            <li>実際にどうなったか</li>
+          </ul>
+          をスクショに添えて投げる。
+        </div>
+      </div>
+
+      <div class="stuck__step stuck__step--secondary">
+        <p class="stuck__num"><span>2</span>STEP 2</p>
+        <h3 class="stuck__title">それでも解決しなければ<br>ゼミ掲示板へ</h3>
+        <p class="stuck__body">
+          AIに聞いても解決しない／そもそも何を聞けばいいか分からない場合は、<strong>DMM 生成AI CAMP 学び放題</strong> の上部ナビゲーション
+          <strong>「ゼミ掲示板」</strong> から投稿してください。他の受講生・運営・講師が回答できます。
+        </p>
+        <div class="stuck__tips">
+          <strong>投稿テンプレ：</strong>
+          <ul>
+            <li>実現したかったこと</li>
+            <li>試したこと（STEP 1 のAIとのやり取りも含めるとなお良い）</li>
+            <li>つまずきポイント（スクショ歓迎）</li>
+            <li>環境（OS／ツール／バージョン）</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="stuck__quote reveal" data-reveal>
+      <img src="./assets/penguins/penguin_thumbs_up.png" alt="ペンギン先生" loading="lazy">
+      <span>「これは聞いていいレベルか…」と迷う必要はありません。<strong>STEP 1 → STEP 2 の順番で気軽に出してください。</strong></span>
+    </p>
+  </div>
+</section>
+
+<section style="padding:48px 24px;text-align:center;">
+  <div style="max-width:720px;margin:0 auto;padding:26px 28px;border:2px dashed #FF8C42;border-radius:18px;background:#FFF3E6;color:#2A2F45;">
+    <p style="font-weight:900;font-size:18px;margin:0 0 8px;">📋 アンケートのお願い</p>
+    <p style="margin:0 0 18px;color:#5A6178;font-size:14px;line-height:1.7;">各回の感想・ご要望をぜひお聞かせください。いただいた声は今後の運営に活かします。</p>
+    <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener" style="display:inline-block;padding:12px 26px;background:#FF7424;color:#fff;font-weight:800;border-radius:999px;text-decoration:none;">アンケートに回答する</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <svg><use href="#cxlogo"/></svg>
+      <span>Codex入門ゼミ</span>
+    </div>
+    <p class="footer__sub">DMM 生成AI CAMP 学び放題</p>
+    <p class="footer__copy">This page summarizes the official zemi announcement for class use.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------- Schedule data（全13回。日程・曜日・時刻は調整中） ----------
+  const schedule = [
+    { n: 1,  hasPage: true },
+    { n: 2,  hasPage: true },
+    { n: 3,  hasPage: true },
+    { n: 4,  hasPage: true },
+    { n: 5,  hasPage: true },
+    { n: 6,  hasPage: true },
+    { n: 7,  hasPage: true },
+    { n: 8,  hasPage: true },
+    { n: 9,  hasPage: true },
+    { n: 10, hasPage: true },
+    { n: 11, hasPage: true },
+    { n: 12, hasPage: true },
+    { n: 13, hasPage: true },
+  ];
+  const grid = document.getElementById('scheduleGrid');
+  const renderSchedule = (filter = 'all') => {
+    grid.innerHTML = '';
+    schedule
+      .filter(() => filter === 'all')
+      .forEach((s, i) => {
+        const nn = String(s.n).padStart(2, '0');
+        const el = document.createElement(s.hasPage ? 'a' : 'div');
+        if (s.hasPage) el.href = `./lessons/lesson${nn}/index.html`;
+        el.className = 'schedule-card' + (s.hasPage ? ' has-page' : ' no-page');
+        el.style.animation = `bubble-in .4s var(--ease) ${i * 40}ms backwards`;
+        const linkLine = s.hasPage ? '<div class="schedule-card__link">資料を見る →</div>' : '';
+        // 開催日・曜日・時刻は調整中のため、日付欄は「調整中」とし、時刻行は表示しない
+        el.innerHTML = `
+          <div class="schedule-card__num">Lesson ${nn}</div>
+          <div class="schedule-card__date">第${s.n}回<small>（日程調整中）</small></div>
+          ${linkLine}
+        `;
+        grid.appendChild(el);
+      });
+  };
+  renderSchedule();
+  document.querySelectorAll('.schedule__filter .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.schedule__filter .chip').forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      renderSchedule(chip.dataset.filter);
+    });
+  });
+
+
+  // ---------- Navbar scroll ----------
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- Mobile menu ----------
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('is-open');
+    navMenu.classList.toggle('is-open');
+  });
+  navMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navToggle.classList.remove('is-open');
+      navMenu.classList.remove('is-open');
+    });
+  });
+
+  // ---------- Reveal ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const siblings = Array.from(el.parentElement.querySelectorAll('[data-reveal]'));
+        const idx = siblings.indexOf(el);
+        el.style.transitionDelay = `${Math.min(idx, 6) * 80}ms`;
+        el.classList.add('is-visible');
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  // ---------- Count up ----------
+  const countUp = (el) => {
+    const target = parseInt(el.dataset.count, 10) || 0;
+    const duration = 1400;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * eased).toString();
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toString();
+    };
+    requestAnimationFrame(step);
+  };
+  const statIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        countUp(e.target);
+        statIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => statIO.observe(el));
+
+  // ---------- Smooth scroll ----------
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+
+  // ---------- Particle background ----------
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const resize = () => {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  };
+  const colors = [
+    'rgba(255, 140, 66, 0.45)',
+    'rgba(255, 158, 195, 0.45)',
+    'rgba(77, 168, 255, 0.40)',
+    'rgba(255, 209, 102, 0.55)',
+    'rgba(111, 212, 157, 0.40)',
+  ];
+  const initParticles = () => {
+    const count = window.innerWidth < 720 ? 22 : 42;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 4 + 2,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      c: colors[Math.floor(Math.random() * colors.length)],
+      pulse: Math.random() * Math.PI * 2,
+    }));
+  };
+  const draw = () => {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -10) p.x = window.innerWidth + 10;
+      if (p.x > window.innerWidth + 10) p.x = -10;
+      if (p.y < -10) p.y = window.innerHeight + 10;
+      if (p.y > window.innerHeight + 10) p.y = -10;
+      p.pulse += 0.02;
+      const r = p.r + Math.sin(p.pulse) * 0.8;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = p.c;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  };
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.addEventListener('resize', () => { resize(); initParticles(); });
+    resize();
+    initParticles();
+    requestAnimationFrame(draw);
+  }
+
+  // ---------- Active nav highlight ----------
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav__link');
+  const navIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(l => {
+          l.classList.toggle('is-active', l.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => navIO.observe(s));
+})();
+</script>
+</body>
+</html>
