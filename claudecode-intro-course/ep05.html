@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EP05 アカウント作成とプラン契約｜Claude Code入門コース 自習ガイド</title>
+<meta name="description" content="Windows を例に、デスクトップアプリの導入からアカウント作成、プラン選択、最初の安全設定までを一気に通します。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/ep05.html">
+<meta property="og:title" content="EP05 アカウント作成とプラン契約｜Claude Code入門コース 自習ガイド"><meta property="og:description" content="Windows を例に、デスクトップアプリの導入からアカウント作成、プラン選択、最初の安全設定までを一気に通します。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">← 自習ガイド一覧</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">EP05 ／ 自習ガイド</span>
+  <h1>EP05<br><em>アカウント作成とプラン契約</em></h1>
+  <p class="hero__lead">Windows を例に、デスクトップアプリの導入からアカウント作成、プラン選択、最初の安全設定までを一気に通します。</p>
+</header>
+<div class="wrap">
+  <section class="section"><div class="lead-card">Claude Code をいよいよ自分のパソコンで動かすための、最初のセットアップ回です。Claude のデスクトップアプリを入れ、その延長でアカウントを用意し、プランを決めて、初回チャット前の安全設定まで終わらせます。題材は Windows ですが、引っかかりやすい箇所と考え方そのものは、環境が違っても同じように効きます。</div></section>
+  <section class="section"><p class="kicker">Learn</p><h2 class="h2">この回の<em>学習ノート</em></h2><section class="lesson-sec"><h2><span class="num">1</span>セットアップ前に知っておきたい前提</h2><p>この回でやることは大きく4つです。(1) デスクトップアプリのインストール、(2) アカウント作成、(3) プランの選択、(4) 初回チャット前の安全設定。アカウントは単独で登録するわけではなく、アプリの初期設定を進める中で自然に出来上がる流れになっています。</p><div class="callout callout--warn">Claude のアプリやサイトの見た目は、アップデートのたびにどんどん変わります。ボタンの場所、ページの作り、料金の出方などが、この解説と食い違って見えることはよくあります。</div><p>解説と画面がずれていても、慌てないことが肝心です。「自分で調べて先へ進む」練習だと割り切って、次のような手を一つずつ試してみてください。</p><ul><li>名前や意味の近そうなボタンを探してみる</li><li>そのページ全体にざっと目を通し、目的の項目が隠れていないか見る</li><li>ChatGPT や Claude（無料版でも構いません）に今の状況を伝えて尋ねる</li><li>Google 検索で最新のやり方を調べる</li></ul><div class="callout callout--note">アプリの入れ方は、お使いの OS（Windows / Mac などパソコンを動かす土台のソフト）ごとに違ってきます。この回で扱うのは Windows 版です。Mac の方は、ここで示す流れを下敷きにしつつ、ご自身の環境に置き換えて読み進めてください。</div></section><section class="lesson-sec"><h2><span class="num">2</span>デスクトップアプリをインストールする（CPU の種類に注意）</h2><p>ブラウザ（Chrome でも Edge でも、普段使いのもので大丈夫です）を開いて「Claude デスクトップアプリ」と検索し、上位に並ぶ公式サイト（claude.com）のダウンロードページへ進みます。検索結果には公式でないものが混ざる場合もあるため、配布元が公式かどうかは必ず見極めてください。</p><p>Windows 向けのダウンロードボタンには、通常版と Arm64 版の2つが用意されています。どちらを押すかは、自分のパソコンに入っている CPU（処理の中心を担う部品）の種類によって決まります。CPU の種類はおおむね X64 か Arm64 のいずれかで、世の中の Windows PC の大半は X64、ごく一部の新しい機種だけが Arm64 です。</p><p>どちらの CPU かは、Windows の設定画面からたどれます。確認の流れは以下のとおりです。</p><ul><li>画面下のスタートを右クリックして、設定のメニューを表示する</li><li>「システム」を選ぶ</li><li>「バージョン情報」の「デバイスの仕様」にある「システムの種類」を見る</li><li>そこに出ている値（たとえば x64 ベース）が、自分の CPU の種類</li></ul><div class="callout callout--tip">「システムの種類」の見方は、Claude だけでなく他のアプリを導入するときにも繰り返し使う、土台になる操作です。Windows を使う方は一度押さえておくと何かと役立ちます。</div><p>自分の CPU が分かったら、それに対応するインストーラーを落とします（X64 なら通常版、Arm64 なら Arm64 版）。落としたインストーラーをダブルクリックするとセットアップ画面が開くので、表示される案内のとおりに進めていきます。</p></section><section class="lesson-sec"><h2><span class="num">3</span>アカウント作成と、必ず確認したい規約・初期設定</h2><p>セットアップを進めていくと、サインインの画面が現れます。アカウントをまだ持っていなければ、ここでメールアドレスを打ち込んで進むと、そのままアカウントが用意されます。Google（Gmail）でのログインを選んだ場合は、Google 側の認証画面でアカウントを指定してから先へ進む形になります。</p><div class="callout callout--warn">アカウント作成の画面に出てくる利用規約とプライバシーポリシーは、リンクを開いて必ず中身に目を通してください。年齢の条件（18歳以上など）やデータの扱い方など、見落とせない事項が記載されています。</div><p>プロモーションメール（不定期のお知らせ）を受け取るかどうかは自由です。登録してもしなくても支障はありません。規約への同意を済ませた時点でアカウントが作られます。</p><p>アカウントが用意できると、最初のチャットに入る前に「AI モデルへの協力」を確認する画面が表示されます。これは、自分が交わしたチャットの内容を Anthropic 社の AI モデルの学習に役立ててよいか、を決める設定です。オンのままにしておくと、自分の会話が学習データとして使われることがあります。</p><div class="callout callout--tip">プライバシーが気になるなら、この AI 学習への協力はオフにしておくと安心です。無料プランでもオフへ切り替えられるので、最初の段階でオフにしておくのがおすすめです。</div><p>続いてユーザー名を決め、何に使うか（仕事で使うかなど）を尋ねられます。利用目的は「後で設定する」で先送りにしても差し支えありません。これでアカウントの登録と最初の設定はひと通り終わりです。</p></section><section class="lesson-sec"><h2><span class="num">4</span>プランの選び方と、利用枠・従量課金の考え方</h2><p>セットアップの途中でプランを選ぶ画面が出てきます。お金をかけずに始めたいなら Free を、はじめから有料で使いたいなら Pro などの有料プランを選びます。有料を選んだ場合は、月額か年額かを決め、クレジットカードを登録して契約を仕上げる流れになります。</p><p>プランは後から変更も可能です。デスクトップアプリの左下にあるアカウント表示や、上部に出る「アップグレード」の案内をたどれば、無料から有料へ乗り換えられます。</p><div class="callout callout--warn">この講座の中心である Claude Code（と Cowork）は、無料プランでは動きません。実際に自分の手で試すには、有料プランの契約が前提になります。</div><p>有料プランだからといって青天井で使えるわけではない、という点には気をつけてください。各プランには「どのくらい使えるか」を表す利用枠が設けられていて、Claude Code を動かした分もここに数えられます。短い時間に集中して使いすぎると一時的に止まることがあり、Claude Code には週ごとの上限も別途あります（仕様は今後変わる可能性があります）。</p><p>利用枠を使い切ってもなお使いたいときの受け皿が「従量課金」です。これは月額プランに付いてくる枠とは切り離して、実際に使った分だけ料金が乗っていく方式です。押さえておきたいのは、上限に届いたからといって勝手に従量課金へ移るわけではない、という点です。あくまで自分が選んだぶんだけ上乗せで使える仕組みなので、気づかないうちに請求が膨らむ心配はありません。</p><div class="callout callout--note">有料プランは無理に入るものではありません。まずは講座をひと通り眺めてみて、「やはり自分の手で動かしてみたい」と思えたら、そのときに自分なりに納得して契約を考えれば十分です。</div></section></section>
+  <section class="section"><p class="kicker">Key Points</p><h2 class="h2">この回の<em>ポイント</em></h2><div class="card"><ul class="points"><li>アカウントはデスクトップアプリのセットアップ中に出来上がる。入れ方は OS ごとに異なり、この回の題材は Windows 版</li><li>画面はアップデートでしばしば姿を変える。違っていても、近い名前のボタンを探す・ページ全体を見る・AIや検索に尋ねる、で自力解決を試す</li><li>ダウンロード前に Windows の「システムの種類」で CPU が X64 か Arm64 かを見極め、それに合うインストーラーを選ぶ（たいていは X64）</li><li>アカウントを作るときは、利用規約とプライバシーポリシーを必ず開いて中身を確かめる</li><li>最初のチャットの前に、Anthropic の AI モデル学習へのチャット提供は（無料プランでも）オフにしておくと安心</li><li>Claude Code と Cowork は無料プランでは動かず有料プランが要る。利用枠には上限があり、超えた分は自動ではなく任意の従量課金で使える</li></ul></div></section>
+  <section class="section"><p class="kicker">Glossary</p><h2 class="h2">用語<em>メモ</em></h2><div class="terms"><div class="term"><b>OS</b><span>Operating System の略。Windows や Mac など、パソコンを動かす土台のソフトを指す。アプリの入れ方は OS ごとに変わる。</span></div><div class="term"><b>CPU（X64 / Arm64）</b><span>CPU は処理の中心を担う部品で、X64 と Arm64 はその種類。Windows PC の多くは X64、新しい一部機種が Arm64。種類に合うインストーラーを選ぶ。</span></div><div class="term"><b>AI 学習への協力（オフ設定）</b><span>自分のチャット内容を Anthropic 社の AI モデルの学習に役立てるかを決める設定。最初のチャットの前に出てきて、無料プランでもオフにできる。</span></div><div class="term"><b>プラン（Free / Pro / Max）</b><span>Claude の料金プラン。Free は無料、Pro・Max は有料。Claude Code と Cowork は無料プランでは動かず、有料プランの契約が要る。</span></div><div class="term"><b>従量課金</b><span>月額プランの利用枠とは別枠で、実際に使った分だけ料金が乗っていく方式。上限を超えて使うための受け皿で、勝手に課金されることはない。</span></div></div></section>
+  <nav class="epnav"><a class="prev" href="ep04.html"><small>← EP04</small>料金プランの選び方</a><a class="next" href="ep06.html"><small>EP06 →</small>Claude Codeの体験</a></nav>
+</div>
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>

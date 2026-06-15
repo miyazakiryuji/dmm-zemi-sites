@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EP02 Claude Codeとは｜Claude Code入門コース 自習ガイド</title>
+<meta name="description" content="言葉で頼むだけでプログラムを組み立ててくれる「AIエンジニア」の正体を、Claudeの3モードと他社ツールとの違いから読み解きます。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/ep02.html">
+<meta property="og:title" content="EP02 Claude Codeとは｜Claude Code入門コース 自習ガイド"><meta property="og:description" content="言葉で頼むだけでプログラムを組み立ててくれる「AIエンジニア」の正体を、Claudeの3モードと他社ツールとの違いから読み解きます。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">← 自習ガイド一覧</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">EP02 ／ 自習ガイド</span>
+  <h1>EP02<br><em>Claude Codeとは</em></h1>
+  <p class="hero__lead">言葉で頼むだけでプログラムを組み立ててくれる「AIエンジニア」の正体を、Claudeの3モードと他社ツールとの違いから読み解きます。</p>
+</header>
+<div class="wrap">
+  <section class="section"><div class="lead-card">この回では、本コースを通じて使い続ける Claude Code が結局どういうものなのかを、まったく初めての方にも届くようにかみ砕いていきます。AI でコードを書く、と聞くと身構えてしまいがちですが、根っこにある発想さえ腑に落ちれば心配いりません。Claude Code がどこに位置づくのか、Claude に用意された3つのモード、そして似た役割を持つ他社ツールとの差を、ひとつずつたどっていきましょう。</div></section>
+  <section class="section"><p class="kicker">Learn</p><h2 class="h2">この回の<em>学習ノート</em></h2><section class="lesson-sec"><h2><span class="num">1</span>Claude Codeは「AIエンジニア」のような存在</h2><p>Claude Code を一言で表すなら、普段づかいの日本語で頼むだけでプログラムを組み立ててくれる、まるで AI のエンジニアです。専門的なプログラミングの素養がなくても、やりたいことを言葉にして伝えるだけで、アプリやツールの形に落とし込めるのが何よりの持ち味です。</p><p>進め方はいたって素直で、ざっくり3段階に分かれます。込み入ったコマンドを暗記する必要はなく、人に相談するのと変わらない感覚で開発を前に進められます。</p><ul><li>1. あなた自身が「こんなアプリが欲しい」「ここをこう変えたい」と日本語で依頼する</li><li>2. Claude がその依頼を受け取り、必要なプログラム（コード）を書き起こす</li><li>3. アプリやツール、Webサイトとして仕上がる</li></ul><div class="callout callout--tip">ネットで検索すると一見ハードルが高そうに映りますが、初学者でも順を追って取り組めば十分に手なずけられます。気負わず、まずは「AI にお願いして作ってもらう」という発想に体を慣らしていきましょう。</div></section><section class="lesson-sec"><h2><span class="num">2</span>Claudeの3つのモード（Chat / Cowork / Code）</h2><p>意外かもしれませんが、Claude Code はそれ単体で完結する独立アプリではありません。ChatGPT や Gemini と並ぶよく知られた生成 AI アプリが Claude で、その中に目的別の3つのモードが用意されており、その一角を担うのが Claude Code です。</p><ul><li>Claude Chat … おしゃべり・質問・相談ごとが得意なモード。発想の整理や下調べを助けてくれる</li><li>Claude Cowork … 手作業の肩代わりが得意なモード。資料づくりやファイルの整頓などを、まるで人が代行するように片付けてくれる</li><li>Claude Code … コーディングに振り切ったモード。Webサイトやアプリの制作に向く（本コースの主役）</li></ul><p>じつは Claude Code と Cowork は、やっていることがほぼ地続きの間柄です。Claude Code はもともと、ターミナルと呼ばれる黒い操作画面（文字でコマンドを打って動かす、プログラマー向けの画面）で立ち上げて使うものでした。その同じ仕組みを、誰もが見慣れた画面のクリック操作からでも扱えるよう敷居を下げたのが Cowork、と捉えると分かりやすいでしょう。</p><div class="callout callout--note">本コースでは Claude Desktop アプリを入口に Claude Code を動かしていきます。黒い画面（ターミナル）と格闘する必要はなく、画面上の選択肢から呼び出せるので構えなくて大丈夫です。</div></section><section class="lesson-sec"><h2><span class="num">3</span>他のAIコーディングツールとの比較</h2><p>AI とやり取りしながらコードを書かせていく開発のやり方は、Vibe Coding（バイブコーディング）と呼ばれます。この路線のツールは Claude Code だけではなく、よく名前が挙がるものに Codex と Antigravity があります。提供している会社、入口の作り、振る舞いの個性がそれぞれ違います。</p><ul><li>Claude Code（Anthropic／Claude）… 入口はターミナルが基本だが IDE やクラウドからも使える。Claude の延長線上で気軽に呼び出せるのが強み。依頼の狙いを読んで自分から動く反面、頼んでいないことまで手を伸ばすこともある</li><li>Codex（OpenAI／ChatGPT）… ターミナル中心で IDE などからも扱える。指示には律儀だが慎重派で、細かく説明しないと意図を取りこぼすことも。エンジニアに支持されている印象</li><li>Antigravity（Google／Gemini）… 専用のエディタ（IDE）の上で動かすタイプ。無料の枠があるので試しやすく、Gemini だけでなく Claude も呼び出せる</li></ul><div class="callout callout--warn">ここでの良し悪しはあくまで個人的な所感で、各社のアップデートでころころ入れ替わります。一方が新機能を出せばすぐ他方も追いかける、そんな競り合いの真っ最中なので、この比較は「いま時点の目安」くらいに受け取ってください。</div></section><section class="lesson-sec"><h2><span class="num">4</span>なぜ本コースはClaude Codeを選ぶのか</h2><p>数あるツールの中からあえて Claude Code を教材の中心に据えるのは、初学者にとって学びのとっかかりが多いから、というはっきりした理由があります。</p><ul><li>出来上がるコードの質と動きの安定感が高いと感じられること</li><li>入門者向けの解説や日本語の作例にたどり着きやすく、つまずいても抜け出しやすいこと</li><li>Cowork と同様、Claude の画面から選ぶだけで気軽に立ち上げられること</li></ul><p>そして見落としてはいけないのは、この回で身につくのは Claude Code という一つの道具の操作法だけでなく、その一段上にある Vibe Coding（AI コーディング）という考え方そのものだという点です。だからこそ、ここで育てた発想は Codex や Antigravity といった別のツールにもそのまま効いてきます。</p><div class="callout callout--tip">ツール自体はこの先も変わり続けます。個々の手順を丸ごと覚え込むより、「AI に何を、どんな伝え方で頼めば狙い通りに動くか」という勘どころを養うほうが、どのツールでも持ち越せる地力になります。</div></section></section>
+  <section class="section"><p class="kicker">Key Points</p><h2 class="h2">この回の<em>ポイント</em></h2><div class="card"><ul class="points"><li>Claude Code は、日本語で頼むだけでコードを書き起こしてくれる「AIエンジニア」のような道具で、プログラミングの知識がなくてもアプリやサイトを形にできる</li><li>Claude Code は独立したアプリではなく、Claude アプリに備わる3モード（Chat=対話・相談／Cowork=手作業の代行／Code=コーディング）のひとつ</li><li>Claude Code はもとはターミナル（黒い画面）で動かす道具で、それを画面のクリック操作で扱えるよう易しくしたのが Cowork というイメージ</li><li>本コースでは Claude Desktop アプリを入口に Claude Code を使う</li><li>他の Vibe Coding ツールには Codex（OpenAI）・Antigravity（Google）があり、提供元・入口・個性が異なる（評価は時期によって動く目安）</li><li>本コースが Claude Code を選ぶ理由は、質と安定感、日本語情報の多さ、Claude から手軽に呼べる点。学びの核は Vibe Coding の考え方で、他ツールにも転用できる</li></ul></div></section>
+  <section class="section"><p class="kicker">Glossary</p><h2 class="h2">用語<em>メモ</em></h2><div class="terms"><div class="term"><b>Claude Code</b><span>Anthropic が提供する、日本語などの指示からコードを書き起こすAIツール。Claude アプリに備わるコーディング向けのモードで、Webサイトやアプリの制作に向く。</span></div><div class="term"><b>Claudeの3つのモード</b><span>Claude Chat（対話・質問・相談）、Claude Cowork（手作業の代行）、Claude Code（コーディング）の3つ。Claude Code はそのひとつで、本コースの主役となるモード。</span></div><div class="term"><b>Vibe Coding（バイブコーディング）</b><span>AI とやり取りしながらコードを書かせていく開発スタイルの呼び名。Claude Code・Codex・Antigravity などがこの仲間にあたる。</span></div><div class="term"><b>ターミナル</b><span>文字でコマンドを打ち込んで操作する黒い画面のこと。プログラマーがよく使う。Claude Code はもともとこの画面から起動・操作する道具だった。</span></div><div class="term"><b>IDE（統合開発環境）</b><span>プログラマー向けのエディター。VS Code などが代表で、コードを書く作業に特化した環境を指す。</span></div><div class="term"><b>Codex / Antigravity</b><span>Claude Code 以外の AI コーディングツール。Codex は OpenAI（ChatGPT）、Antigravity は Google（Gemini）が提供し、Antigravity では Claude も使える。</span></div></div></section>
+  <nav class="epnav"><a class="prev" href="ep01.html"><small>← EP01</small>コースの全体像とゴール</a><a class="next" href="ep03.html"><small>EP03 →</small>Claude Codeでできること</a></nav>
+</div>
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>

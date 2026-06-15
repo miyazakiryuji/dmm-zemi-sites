@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EP01 コースの全体像とゴール｜Claude Code入門コース 自習ガイド</title>
+<meta name="description" content="むずかしいコードは書かず、ふだんの日本語で頼みながらアプリやサイトを少しずつ仕上げていく——この入門コースが向かう先と全体像を、まずは最初に整理します。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/ep01.html">
+<meta property="og:title" content="EP01 コースの全体像とゴール｜Claude Code入門コース 自習ガイド"><meta property="og:description" content="むずかしいコードは書かず、ふだんの日本語で頼みながらアプリやサイトを少しずつ仕上げていく——この入門コースが向かう先と全体像を、まずは最初に整理します。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">← 自習ガイド一覧</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">EP01 ／ 自習ガイド</span>
+  <h1>EP01<br><em>コースの全体像とゴール</em></h1>
+  <p class="hero__lead">むずかしいコードは書かず、ふだんの日本語で頼みながらアプリやサイトを少しずつ仕上げていく——この入門コースが向かう先と全体像を、まずは最初に整理します。</p>
+</header>
+<div class="wrap">
+  <section class="section"><div class="lead-card">このコースは、Claude Code をこれから触る人や、以前の学習で行き詰まった経験がある人でも無理なく進められるように組み立てています。いきなり専門的なコードを打ち込むのではなく、Claude Code に向かって「こういうものを作りたい」と日本語で相談し、AI とやり取りしながら手頃なアプリやサイトを一緒に組み上げていく、というやり方です。この第1回では、今後どんな内容を扱い、どこを目的地とするのか、その全体マップを先に頭へ入れておきましょう。</div></section>
+  <section class="section"><p class="kicker">Learn</p><h2 class="h2">この回の<em>学習ノート</em></h2><section class="lesson-sec"><h2><span class="num">1</span>このコースが目指していること</h2><p>このコースの根っこにあるのは、「自分でも作れるかもしれない」という手応えを持ってもらうことです。プログラミングの経験がなくても、Claude Code へ日本語で頼めば、AI と相談しながら思いついたことを少しずつ形にしていけます。最初から完成度の高いものを目指す必要はありません。まず相談して動かし、自分の目で確かめ、気になったところを少し手直しする——この往復のリズムに慣れることが第一のねらいです。</p><ul><li>Web サイトや Web アプリ、ふだんの作業がラクになる小さな道具を、実際に手を動かしながら作る</li><li>むずかしいコードを丸暗記するのではなく、まずは口頭の指示で動かしてみる体験から入る</li><li>途中で詰まる場面が出ても、ひとつずつ確かめながら進めれば十分、という構えで臨む</li></ul><div class="callout callout--tip">最初から何もかも自力で書けるようになる必要はありません。「相談する → 動かす → 確かめる → 少し直す」をぐるぐる回しているうちに、自然と扱える範囲が広がっていきます。</div></section><section class="lesson-sec"><h2><span class="num">2</span>何を作りながら学ぶのか</h2><p>このコースは説明をただ聞くだけでは終わりません。回ごとに、実際に一つずつ仕上げていく題材が用意されています。題材はどれも生活や仕事に近い具体的なもので、作ったものが画面で実際に動くと、もの作りの面白さや「これは使えそうだ」という実感がわいてきます。</p><ul><li>会社案内のような Web サイトの制作</li><li>自分専用の秘書アプリ</li><li>日々の作業を支える業務効率化ツール</li><li>漫画制作アプリ</li></ul><div class="callout callout--note">説明を聞くだけの座学にとどまらず、自分の手で実際に操作するハンズオン形式も組み込まれています。読み流して終わりにせず、同じ手順をぜひ自分でもなぞってみてください。</div></section><section class="lesson-sec"><h2><span class="num">3</span>学習の進み方（ロードマップ）</h2><p>学習は、いきなり高い壁に挑むのではなく、できることを一段ずつ積み上げていく流れになっています。はじめに土台を整え、そこからサイト作り、Web 開発、業務効率化へと、扱う範囲を順々に広げていきます。</p><ul><li>Claude Code の基本を学ぶ</li><li>ホームページを作って公開する</li><li>Web 開発（前半）：秘書アプリ作りを通じて、サービスやアプリ同士をつなぐ仕掛けである API に触れる</li><li>Web 開発（後半）：入力・出力のできるアプリを作りつつ、API を使ったつなぎ込みをさらに掘り下げる</li><li>業務効率化：作業の自動化や、毎日の手間を減らす仕組み作りへと踏み込む</li></ul><div class="callout callout--tip">「API」という言葉にとっつきにくさを感じても問題ありません。今は『サービスやアプリ同士を橋渡しする仕掛け』というざっくりしたイメージさえ持っておけば十分で、手を動かしていくうちに少しずつ腑に落ちていきます。</div></section><section class="lesson-sec"><h2><span class="num">4</span>このコースの2つのゴール</h2><p>コース全体の到達点は、ざっくり2つにまとめられます。ひとつは「自分で作れるようになること」、もうひとつは「公開や連携までの一連の流れをつかめるようになること」です。この2点を頭の片隅に置いておくと、各回が全体のどのあたりに当たるのかが見通しやすくなります。</p><ul><li>ゴール1：日本語で Claude Code に指示しながら、Web サイトやアプリを自分の力で作れるようになる</li><li>ゴール2：作ったものを公開する・API でつなぐ・自動化へ広げる、という流れの全体像をひととおり把握できるようになる</li></ul><div class="callout callout--note">ゴールはあくまで目的地です。途中でつまずいても慌てる必要はなく、ひとつずつ確かめながら進めば大丈夫です。よく分からなかった点は、後の回で実際に手を動かしながら埋めていけます。</div></section></section>
+  <section class="section"><p class="kicker">Key Points</p><h2 class="h2">この回の<em>ポイント</em></h2><div class="card"><ul class="points"><li>はじめての人や挫折した経験のある人でも進めやすいよう、コードの暗記からではなく日本語で頼むアプリ作りから入る入門コース</li><li>会社案内サイト・秘書アプリ・業務効率化ツール・漫画制作アプリといった、具体的な題材を一つずつ仕上げながら学ぶ</li><li>座学だけで終わらせず、自分の手で操作するハンズオン形式も組み込まれている</li><li>学習は『基本 → ホームページの作成と公開 → Web 開発 → 業務効率化』の順に一段ずつ積み上がる</li><li>Web 開発を進める中で、サービスやアプリ同士を橋渡しする API の仕掛けにも触れる</li><li>到達点は2つ：日本語の指示でサイトやアプリを自力で作れること／公開・API 連携・自動化までの流れをつかめること</li></ul></div></section>
+  <section class="section"><p class="kicker">Glossary</p><h2 class="h2">用語<em>メモ</em></h2><div class="terms"><div class="term"><b>Claude Code</b><span>日本語などのふだんの言葉で頼むと、AI が相談相手になりながらコードを書いてくれるツール。このコースの主役となる道具。</span></div><div class="term"><b>API</b><span>サービスやアプリ同士を橋渡しするための仕掛け。このコースでは秘書アプリや漫画制作アプリを作る中で少しずつ慣れていく。</span></div><div class="term"><b>ハンズオン</b><span>説明を聞くだけの座学ではなく、自分の手を実際に動かしながら身につけていく学び方のこと。</span></div><div class="term"><b>業務効率化</b><span>毎日の作業を自動化したり手間を減らしたりして、仕事をラクにすること。このコースの最終ステップで扱う。</span></div></div></section>
+  <nav class="epnav"><a class="prev" href="index.html"><small>←</small>自習ガイド一覧</a><a class="next" href="ep02.html"><small>EP02 →</small>Claude Codeとは</a></nav>
+</div>
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>

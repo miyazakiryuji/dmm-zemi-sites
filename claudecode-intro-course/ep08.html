@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EP08 Claude Codeの基本操作｜Claude Code入門コース 自習ガイド</title>
+<meta name="description" content="デスクトップアプリの画面を一周しながら、よく使うボタンと「指示→生成→確認」の流れを体で覚える回です。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/ep08.html">
+<meta property="og:title" content="EP08 Claude Codeの基本操作｜Claude Code入門コース 自習ガイド"><meta property="og:description" content="デスクトップアプリの画面を一周しながら、よく使うボタンと「指示→生成→確認」の流れを体で覚える回です。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">← 自習ガイド一覧</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">EP08 ／ 自習ガイド</span>
+  <h1>EP08<br><em>Claude Codeの基本操作</em></h1>
+  <p class="hero__lead">デスクトップアプリの画面を一周しながら、よく使うボタンと「指示→生成→確認」の流れを体で覚える回です。</p>
+</header>
+<div class="wrap">
+  <section class="section"><div class="lead-card">Claude Codeを起動すると、ボタンやメニューがたくさん並んでいて少し身構えてしまうかもしれません。でも大丈夫です。最初から全部を覚える必要はなく、よく使うものから少しずつ慣れていけば十分です。この回では、画面に並ぶ主要な機能をざっと見渡したうえで、実際に小さなファイルを作ってもらう簡単なハンズオンに挑戦します。</div></section>
+  <section class="section"><p class="kicker">Learn</p><h2 class="h2">この回の<em>学習ノート</em></h2><section class="lesson-sec"><h2><span class="num">1</span>まずは画面を一周する（全部は覚えなくていい）</h2><p>Claudeデスクトップアプリの「Claude」タブを開くと、Claude Codeを使える状態になります。画面にはいろいろなボタンが並んでいますが、一気に頭に入れようとしなくて大丈夫です。手を動かしているうちに、よく触る機能から自然と覚えていきます。</p><ul><li>新しい会話を始める：いまから取り組みたいタスクのために、まっさらなセッションを開始できます。</li><li>履歴：過去のやりとりが蓄積され、あとから見返せます。</li><li>入力欄と送信ボタン：AIへの指示（プロンプト）をここに書いて送ります。</li><li>ダッシュボード：使用状況などの全体像を確認できる領域です。</li></ul><div class="callout callout--note">Claude Codeは新機能の追加や表示の変更が多く、ボタンの位置や呼び名が入れ替わることもあります。視聴のタイミングで画面が少し違っていても慌てず、似た役割の場所を探してみてください。</div></section><section class="lesson-sec"><h2><span class="num">2</span>実行場所と作業フォルダを決める</h2><p>Claude Codeはファイルを読んだり書いたりして作業します。そのとき「どこで実行するか」と「どのフォルダを対象にするか」を最初に決めておくと、迷わずに済みます。</p><ul><li>実行場所：生成する環境はいくつか選べますが、最初は「ローカル」（自分のPC上）のままで問題ありません。他の環境は事前の準備に少し手間がかかるので、まずはローカルで慣れていきましょう。</li><li>作業フォルダ：「フォルダを開く」から、自分のPC内の好きなフォルダを指定します。たとえばデスクトップに「テスト」フォルダを作っておき、それを選ぶといった使い方です。</li></ul><div class="callout callout--tip">作業用のフォルダは、練習で作ったファイルが散らからないように、専用の空フォルダを1つ用意しておくのがおすすめです。名前は何でも構いません。</div></section><section class="lesson-sec"><h2><span class="num">3</span>「編集を承認」モードでツール実行の確認レベルを決める</h2><p>Claude Codeはファイルの作成や編集など、たくさんの「ツール」を呼び出して動きます。それぞれの実行について、本当に進めてよいかを人間側にどこまで尋ねるか。そのレベル感を切り替えられるのが「編集を承認」のメニューです。複数のモードが用意されているので、まずは「こういう段階があるんだな」と把握しておけば十分です。</p><div class="callout callout--warn">「許可をバイパス」を選ぶと、どんなツールの実行も人間に尋ねずそのまま進むようになります。場合によっては意図しないファイルを消してしまうこともあるため、慣れないうちは有効にしないのが無難です。状況を見極められる上級者向けの設定だと考えてください。</div></section><section class="lesson-sec"><h2><span class="num">4</span>モデルと思考レベル、使用量ゲージ</h2><p>ここはぜひ覚えておきたいポイントです。タスクの重さに合わせて、AIモデルと「どれくらい考えさせるか」を選べます。</p><ul><li>モデル選択：基本はバランス型のSonnetでOK。込み入った重いタスクを任せたいときはOpus、簡単な計算や一言で片づくやりとりならさらに軽快なHaiku、というように使い分けます。</li><li>思考レベル（低／中）：Claudeは自分で思考するように訓練された推論モデルで、その考える深さを調整できます。速さを優先したいなら「低」、もう少しじっくり考えてほしいときは「中」。最初はこの2つを場面で切り替えれば十分です。</li><li>使用量ゲージ：利用制限に対して自分がどれだけ消費したかを確認できます。5時間ごとに使える量の枠が決まっていて、そこを使い切ると次の枠が来るまでClaude Codeが動かせなくなります。残量はこまめに気にしておきましょう。</li></ul><div class="callout callout--tip">迷ったら「Sonnet＋思考レベルは低か中」から始めるのがおすすめ。手応えを見ながら、重い作業のときだけOpusに上げるくらいの感覚で十分です。</div></section><section class="lesson-sec"><h2><span class="num">5</span>ハンズオン：ファイルを作って、内蔵ビューアで確認する</h2><p>画面を一周したら、実際に指示を出してみましょう。ここでは2つの小さな指示を通して、「プロンプトを送る→生成される→その場で確認する」という流れを体験します。設定はSonnet・思考レベルは低・編集の承認モードのまま進めます。</p><ul><li>1つ目：テキストファイル「hello.txt」を作り、その中に自己紹介を3行で書いてもらうよう指示します。名前・趣味・好きなツールなど、中身は自由でOK。ごく短いファイルなので一瞬で出来上がります。</li><li>確認：「View」を開き「ファイル」を選ぶと、アプリに組み込まれたフォルダ表示が使えます。生成された hello.txt をクリックすれば中身まで読め、アプリの中だけで一通り確認できます。</li><li>2つ目：続けて、半角の「@」で先ほどのファイルを指定し、その内容をもとに自分の名前を大きく出すだけの簡単なHTMLファイルを作ってブラウザで開いてもらいます。HTMLは画面に何かを表示するためのマークアップ言語で、内蔵のブラウザプレビューでそのまま見た目を確認できます。</li></ul><div class="callout callout--tip">便利な操作を2つ。Shift＋Enterを押すと入力欄で改行できます。さらに行頭に半角の「@」を打つとファイルを選べて、「このファイルを見て」と参照させられます。@でのファイル指定はとてもよく使うので、ぜひ覚えておきましょう。</div><p>このように、短い日本語の指示を送るだけで、テキストファイルを作ったり、その内容を読み取ってHTMLを生成したりできます。まずは色々な指示を試して、画面の操作に慣れていきましょう。</p></section></section>
+  <section class="section"><p class="kicker">Key Points</p><h2 class="h2">この回の<em>ポイント</em></h2><div class="card"><ul class="points"><li>画面の機能は全部覚えなくてよい。よく使うものから慣れればOK（アップデートで配置が変わる点にも注意）。</li><li>実行場所はまずローカルのまま。作業フォルダは「フォルダを開く」で自分のPCの任意フォルダを指定する。</li><li>「編集を承認」でツール実行の確認レベルを設定できる。「許可をバイパス」は危険なので初心者は使わない。</li><li>モデルは基本Sonnet、複雑ならOpus、軽い処理はHaiku。思考レベルは低／中で調整する。</li><li>使用量ゲージで5時間ごとの枠の残量を確認できる（使い切ると次の枠まで動かせない）。</li><li>Shift＋Enterの改行と半角@でのファイル指定が便利。成果物は内蔵のファイルビューア／ブラウザプレビューで確認する。</li></ul></div></section>
+  <section class="section"><p class="kicker">Glossary</p><h2 class="h2">用語<em>メモ</em></h2><div class="terms"><div class="term"><b>作業フォルダ</b><span>Claude Codeがファイルを読み書きする対象のフォルダ。「フォルダを開く」から自分のPC内の任意のフォルダを指定する。</span></div><div class="term"><b>許可をバイパス</b><span>ツールの実行を一つずつ人間に確認せず自動で進めるモード。誤ってファイルを消すなどのリスクがあり、初心者はオフのままが推奨。</span></div><div class="term"><b>Sonnet / Opus / Haiku</b><span>AnthropicのClaude AIモデル。基本はバランス型のSonnet、込み入ったタスクはOpus、軽い処理は高速なHaikuと使い分ける。</span></div><div class="term"><b>思考レベル（低／中）</b><span>推論モデルが考える深さの設定。速さ重視なら「低」、じっくり考えさせたいなら「中」を選ぶ。</span></div><div class="term"><b>@でのファイル指定</b><span>プロンプト内で半角の@を付けてファイルを選ぶと、そのファイルを参照対象として指示に含められる便利な書き方。</span></div><div class="term"><b>HTML</b><span>Webページなど画面表示のためのマークアップ言語。Claude Codeに作らせ、内蔵のブラウザプレビューで表示を確認できる。</span></div></div></section>
+  <nav class="epnav"><a class="prev" href="ep07.html"><small>← EP07</small>ビジネス利用における注意点</a><a class="next" href="ep09.html"><small>EP09 →</small>バイブコーディングの基本</a></nav>
+</div>
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>

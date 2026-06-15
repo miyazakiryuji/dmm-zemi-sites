@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claude Code入門コース 自習ガイド｜Claude Code入門ゼミ</title>
+<meta name="description" content="DMM 生成AI CAMP「Claude Code入門コース」EP01〜09の要点を初学者向けにまとめた自習ガイド。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/">
+<meta property="og:title" content="Claude Code入門コース 自習ガイド｜Claude Code入門ゼミ"><meta property="og:description" content="DMM 生成AI CAMP「Claude Code入門コース」EP01〜09の要点を初学者向けにまとめた自習ガイド。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">↑ トップ</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">Claude Code入門ゼミ ／ 自習ガイド</span>
+  <img class="hero__mascot" src="assets/penguins/teaching.png" alt="" aria-hidden="true">
+  <h1>Claude Code<br><em>入門コース</em> 自習ガイド</h1>
+  <p class="hero__lead">DMM 生成AI CAMP「ツール別コース ＞ Claude Code入門コース」の各回（EP01〜EP09）について、要点を初学者向けにまとめた自習ガイドです。コース本編とあわせて、復習・整理にお使いください。</p>
+  <div class="hero__meta"><span>📚 EP01〜EP09</span><span>🐧 Claude Code入門ゼミ</span></div>
+</header>
+<div class="note">※ コース本編で EP10 以降が公開され次第、本ガイドも順次追加していきます。</div>
+<div class="wrap"><section class="section"><p class="kicker">Episodes</p><h2 class="h2">各回の<em>自習ガイド</em></h2><div class="ep-grid"><a class="ep-card" href="ep01.html"><div class="ep-card__n">EP01</div><div class="ep-card__t">コースの全体像とゴール</div><p class="ep-card__d">むずかしいコードは書かず、ふだんの日本語で頼みながらアプリやサイトを少しずつ仕上げていく——この入門コースが向かう先と全体像を、まずは最初に整理します。</p></a><a class="ep-card" href="ep02.html"><div class="ep-card__n">EP02</div><div class="ep-card__t">Claude Codeとは</div><p class="ep-card__d">言葉で頼むだけでプログラムを組み立ててくれる「AIエンジニア」の正体を、Claudeの3モードと他社ツールとの違いから読み解きます。</p></a><a class="ep-card" href="ep03.html"><div class="ep-card__n">EP03</div><div class="ep-card__t">Claude Codeでできること</div><p class="ep-card__d">Claude Codeの使いどころは「ウェブ制作」「アプリ開発」「業務効率化」の3つ。日本語で頼むだけでLPが組み上がる様子をデモで体感します。</p></a><a class="ep-card" href="ep04.html"><div class="ep-card__n">EP04</div><div class="ep-card__t">料金プランの選び方</div><p class="ep-card__d">無料・個人向け・法人向けの違いを整理して、自分に合ったプランの判断材料をそろえます。</p></a><a class="ep-card" href="ep05.html"><div class="ep-card__n">EP05</div><div class="ep-card__t">アカウント作成とプラン契約</div><p class="ep-card__d">Windows を例に、デスクトップアプリの導入からアカウント作成、プラン選択、最初の安全設定までを一気に通します。</p></a><a class="ep-card" href="ep06.html"><div class="ep-card__n">EP06</div><div class="ep-card__t">Claude Codeの体験</div><p class="ep-card__d">「Hello world」を題材に、日本語で頼んで結果を受け取り、もう一度直してもらう——Claude Codeの基本の流れを手を動かして体感します。</p></a><a class="ep-card" href="ep07.html"><div class="ep-card__n">EP07</div><div class="ep-card__t">ビジネス利用における注意点</div><p class="ep-card__d">Claude Code を仕事で安心して使うコツは、大きく2つ。秘密の情報を外へ出さないこと、そして判断を AI に丸投げしないことです。日々の作業で見返せる確認の視点までまとめました。</p></a><a class="ep-card" href="ep08.html"><div class="ep-card__n">EP08</div><div class="ep-card__t">Claude Codeの基本操作</div><p class="ep-card__d">デスクトップアプリの画面を一周しながら、よく使うボタンと「指示→生成→確認」の流れを体で覚える回です。</p></a><a class="ep-card" href="ep09.html"><div class="ep-card__n">EP09</div><div class="ep-card__t">バイブコーディングの基本</div><p class="ep-card__d">AIに日本語で話しかけながら開発を進める「バイブコーディング」の考え方と、つまずかないためのコツをやさしく整理します。</p></a></div></section></div>
+
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>

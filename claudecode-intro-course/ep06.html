@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EP06 Claude Codeの体験｜Claude Code入門コース 自習ガイド</title>
+<meta name="description" content="「Hello world」を題材に、日本語で頼んで結果を受け取り、もう一度直してもらう——Claude Codeの基本の流れを手を動かして体感します。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/ep06.html">
+<meta property="og:title" content="EP06 Claude Codeの体験｜Claude Code入門コース 自習ガイド"><meta property="og:description" content="「Hello world」を題材に、日本語で頼んで結果を受け取り、もう一度直してもらう——Claude Codeの基本の流れを手を動かして体感します。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">← 自習ガイド一覧</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">EP06 ／ 自習ガイド</span>
+  <h1>EP06<br><em>Claude Codeの体験</em></h1>
+  <p class="hero__lead">「Hello world」を題材に、日本語で頼んで結果を受け取り、もう一度直してもらう——Claude Codeの基本の流れを手を動かして体感します。</p>
+</header>
+<div class="wrap">
+  <section class="section"><div class="lead-card">ここまでで概要やプランの話が続きましたが、この回はいよいよ自分の手で動かしてみる時間です。むずかしいアプリやサイトはまだ作りません。画面に「Hello world」と表示するだけの、いちばんシンプルな題材で、Claude Codeとのやり取りの感覚をつかみます。うまくいかなくても大丈夫。まずは「日本語で頼む → 結果が返る → さらに直してもらう」というリズムを体に入れることがこの回のゴールです。</div></section>
+  <section class="section"><p class="kicker">Learn</p><h2 class="h2">この回の<em>学習ノート</em></h2><section class="lesson-sec"><h2><span class="num">1</span>クイックツアーで何をするのか</h2><p>クイックツアーとは、ごく短い操作をひとつずつ確かめながら、Claude Codeを扱うときのコツを身につけていく入り口の体験です。いきなり複雑なものを作ろうとすると、どこでつまずいているのか分からなくなりがちなので、まずは結果が一目で分かる最小の例から始めます。</p><p>今回の題材は「Hello world」。プログラミングを始めるときに、画面へ『こんにちは』にあたる文字を出してみる、おなじみの練習です。動作確認の入り口として世界中で使われていて、「とりあえず動いた」を確かめるのにちょうどよい題材です。</p><div class="callout callout--tip">同じ環境を用意できる人は、再生しながら自分でも同じ操作をなぞってみると、いちばん身につきます。途中で動画を止めて指示文を読み返したり、巻き戻したりしながら、自分のペースで進めて大丈夫です。</div></section><section class="lesson-sec"><h2><span class="num">2</span>作業フォルダを選んで「信頼」する</h2><p>Claude Codeを使い始めるには、まず「どこで作業するか」を決めます。デスクトップアプリの「Claude Code」タブを開いたら、「フォルダを選択」を押して、これから作業に使うフォルダを指定します。置き場所はどこでも構いません。動画ではデスクトップに置いた専用フォルダ（例として『クイックツアー』という名前のフォルダ）を選んでいます。</p><p>フォルダを決めると、「作業ディレクトリ（作業フォルダ）を信頼しますか？」という確認が出てきます。ここで「信頼する」を押せば、その場所での作業がスタートできます。これは、Claude Codeが読み書きしてよい範囲をあなた自身が認める手続き、と考えてください。</p><ul><li>「Claude Code」タブを開く（動画はProプランの画面で進行）</li><li>「フォルダを選択」を押して作業用フォルダを指定する（置き場所は自由）</li><li>「作業ディレクトリを信頼しますか？」に「信頼する」で許可する</li></ul><div class="callout callout--note">「作業フォルダ」は、Claude Codeがファイルを読み書きする“持ち場”です。最初にここを決めておくことで、関係ないファイルにまで手が及ばないようにできます。練習用には、空のフォルダを1つ用意しておくと安心です。</div></section><section class="lesson-sec"><h2><span class="num">3</span>日本語で頼んで結果を受け取る</h2><p>準備ができたら、入力欄にAIへの指示文（プロンプト）を日本語で打ち込みます。ここでは「Hello world と表示してください」とお願いすると、画面に「Hello world」が出てきます。とてもシンプルですが、ここで感じてほしいのは、頼みごとを日本語で投げると、その答えが手元に返ってくる、という土台となるやり取りそのものです。</p><p>ポイントは、自分でコードを打っているわけではない、というところです。あなたは普通の日本語でお願いしているだけで、その裏側ではClaude Codeが必要な処理を組み立て、結果を画面に映してくれています。プログラミングの知識がなくても、会話するように成果物へたどり着けるのがこのツールの面白さです。</p></section><section class="lesson-sec"><h2><span class="num">4</span>ツールの実行許可ポップアップに慣れる</h2><p>次は「これを立体的なテキストにしてください」と続けて頼んでみます。すると画面の下のほうに、Claudeがツール（ファイルの読み込みなど）を使ってよいか尋ねる確認が現れます。Claude Codeはさまざまなツールを操れるようになっていて、ファイルなどに手を入れる前に、いったん人間へお伺いを立てる仕組みがあらかじめ組み込まれているのです。</p><p>わざわざ確認をはさむ理由は、残しておきたいファイルや手を加えてほしくないファイルを、本人の知らないうちに動かされては困るからです。つまりこのポップアップは、あなたの大事なものを守るための“安全弁”です。意味を知っておけば、出てきても慌てずに対応できます。</p><ul><li>拒否：そのツールの使用を断る</li><li>一度だけ許可：今出ているこのポップアップ限りの許可。次にツールを使うと、また確認が出る</li><li>常に許可：最初に決めたフォルダ（ローカルプロジェクト）の中なら、そのツールの使用をこの先も認める</li></ul><p>今回はクイックツアーで、作業の範囲をローカルのフォルダだけに絞っているので、ここでは「常に許可」を選んで先へ進みます。このあと別の新しいツールについて同じように許可を求められることもありますが、考え方は変わりません。一つひとつ目で確かめたい人は「一度だけ許可」を、テンポよく試したい人は範囲を絞ったうえで「常に許可」を、というふうに使い分けられます。</p><div class="callout callout--warn">「常に許可」は便利な一方で、確認のステップを省く設定です。今回のように内容を把握した練習用フォルダなら問題ありませんが、大事なファイルが入っている場所では、まず「一度だけ許可」で様子を見るのが安全です。</div></section><section class="lesson-sec"><h2><span class="num">5</span>対話で見た目を変えていく</h2><p>許可を出すと、さきほどの「Hello world」が立体的に飾られた姿で表示されます。さらに「ネオン風のデザインにしてください」「未来的なデザインにしてください」などと声をかければ、その雰囲気に寄せて見た目を作り変えてくれます。誰かに口頭で要望を伝えるときと変わらない感覚で、Claude Codeがこちらの意図をくみ取り、結果を直してくれるのです。</p><p>ひとつ覚えておきたいのは、同じ頼み方をしても、毎回そっくり同じ仕上がりになるとは限らないことです。AIは『次に来そうな出力』を確率で選んで作る仕組みなので、表示は実行のたびに少しずつ揺れます。これはAIの性質であって不具合ではないので、気にしなくて大丈夫です。</p><p>今回はテキストだけを扱いましたが、これからの回では同じ要領で、Webページを組んだり、見た目を整え直したり、アプリを仕立てたりしていきます。大切なのは出来上がりそのものより、『日本語で伝える → 結果を確かめる → もう一度直してもらう』というやり取りを重ねながら、成果物を育てていく感覚のほうです。</p></section></section>
+  <section class="section"><p class="kicker">Key Points</p><h2 class="h2">この回の<em>ポイント</em></h2><div class="card"><ul class="points"><li>クイックツアーは「Hello world」表示という最小の例で、操作のコツを手を動かしてつかむ入り口の体験</li><li>まず「フォルダを選択」で作業フォルダを指定し、「作業ディレクトリを信頼しますか？」で信頼を許可する</li><li>コードを書かず、日本語で頼んで結果を受け取るのが基本の流れ</li><li>ツール実行前に許可を求めるポップアップは、ファイルを勝手に操作されないための安全のための確認</li><li>「常に許可」は設定フォルダ内でそのツールをこの先も認める、「一度だけ許可」は今回限り、「拒否」で断れる</li><li>会話のように頼めば見た目を変更でき、同じ指示でも結果は毎回そっくり同じとは限らない（AIの特徴）</li></ul></div></section>
+  <section class="section"><p class="kicker">Glossary</p><h2 class="h2">用語<em>メモ</em></h2><div class="terms"><div class="term"><b>クイックツアー</b><span>ごく短い操作を確かめながら、Claude Codeを扱うコツを身につけるための入り口の体験。</span></div><div class="term"><b>Hello world</b><span>画面に『こんにちは』にあたる文字を出す、プログラミングの定番練習。動作確認の入り口としてよく使われる。</span></div><div class="term"><b>作業フォルダ（作業ディレクトリ）</b><span>Claude Codeが読み書きの対象とするフォルダ。最初に指定し、信頼を許可すると、その場所での作業を始められる。</span></div><div class="term"><b>ツールの実行許可ポップアップ</b><span>Claude Codeがファイルなどに手を入れる前に人間へ確認を求める画面。意図しない変更を防ぐ仕組みで、「拒否／一度だけ許可／常に許可」を選べる。</span></div><div class="term"><b>Proプラン</b><span>Claude Codeを利用するための個人向け有料プラン。この回はProプランの画面で進めている。</span></div></div></section>
+  <nav class="epnav"><a class="prev" href="ep05.html"><small>← EP05</small>アカウント作成とプラン契約</a><a class="next" href="ep07.html"><small>EP07 →</small>ビジネス利用における注意点</a></nav>
+</div>
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>

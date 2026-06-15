@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EP03 Claude Codeでできること｜Claude Code入門コース 自習ガイド</title>
+<meta name="description" content="Claude Codeの使いどころは「ウェブ制作」「アプリ開発」「業務効率化」の3つ。日本語で頼むだけでLPが組み上がる様子をデモで体感します。">
+<link rel="canonical" href="https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-intro-course/ep03.html">
+<meta property="og:title" content="EP03 Claude Codeでできること｜Claude Code入門コース 自習ガイド"><meta property="og:description" content="Claude Codeの使いどころは「ウェブ制作」「アプリ開発」「業務効率化」の3つ。日本語で頼むだけでLPが組み上がる様子をデモで体感します。">
+<meta property="og:type" content="article"><meta property="og:locale" content="ja_JP">
+<style>
+:root{--bg:#FFF9F0;--soft:#FFF3E6;--card:#fff;--ink:#2A2F45;--sub:#5A6178;--mute:#8A91A8;
+--orange:#FF8C42;--orange2:#FF7424;--accent:#B84A00;--blue:#4DA8FF;--pink:#FF9EC3;--green:#6FD49D;--yellow:#FFD166;
+--border:#FFE2C7;--sh:0 4px 16px rgba(255,140,66,.08);--sh2:0 12px 32px rgba(255,140,66,.12);--r:18px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:var(--orange2);text-decoration:none;transition:color .2s}a:hover{color:var(--orange)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__brand{font-weight:900;font-size:15px}.nav__brand small{font-weight:600;color:var(--sub);font-size:11px;margin-left:6px}
+.nav__back{font-size:12px;font-weight:700;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--sub)}
+.nav__back:hover{background:var(--soft);color:var(--orange)}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 36px;text-align:center;background:radial-gradient(900px 480px at 50% -10%,rgba(255,209,102,.28),transparent 60%),radial-gradient(700px 420px at 85% 10%,rgba(255,158,195,.18),transparent 55%)}
+.hero__badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;box-shadow:var(--sh)}
+.hero__mascot{width:122px;margin:18px auto 6px}
+.hero h1{font-size:clamp(24px,4.4vw,40px);font-weight:900;margin:8px 0 12px;line-height:1.3}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__lead{color:var(--sub);max-width:740px;margin:0 auto;font-size:15px}
+.hero__meta{display:inline-flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding:12px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);font-size:13px;color:var(--sub);font-weight:700}
+.note{margin:22px auto;max-width:980px;padding:14px 18px;background:rgba(255,209,102,.16);border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:var(--sub)}
+.section{padding:30px 0}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:900;margin:0 0 18px}.h2 em{font-style:normal;color:var(--orange)}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.ep-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease);color:var(--ink)}
+.ep-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);color:var(--ink);border-color:var(--orange)}
+.ep-card__n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.06em}
+.ep-card__t{font-size:16px;font-weight:900;margin:5px 0 7px;line-height:1.45}
+.ep-card__d{font-size:13px;color:var(--sub);margin:0}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--sh);font-size:15.5px}
+.lesson-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;box-shadow:var(--sh);margin:0 0 16px}
+.lesson-sec>h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.lesson-sec>h2 .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;font-size:14px;font-weight:900;flex:0 0 auto}
+.lesson-sec p{margin:.5em 0;font-size:15px;color:var(--ink)}
+.lesson-sec ul{margin:.4em 0;padding-left:22px;color:var(--ink);font-size:15px}.lesson-sec li{margin:4px 0}
+.callout{margin:12px 0;padding:14px 16px 14px 44px;border-radius:12px;position:relative;font-size:14px;line-height:1.8}
+.callout::before{position:absolute;left:14px;top:13px;font-size:16px}
+.callout--tip{background:rgba(111,212,157,.14);border:1px solid rgba(111,212,157,.4)}.callout--tip::before{content:"💡"}
+.callout--note{background:rgba(77,168,255,.10);border:1px solid rgba(77,168,255,.35)}.callout--note::before{content:"📝"}
+.callout--warn{background:rgba(255,140,66,.12);border:1px solid rgba(255,140,66,.4)}.callout--warn::before{content:"⚠️"}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px}
+.points li::before{content:"";width:18px;height:18px;margin-top:5px;border-radius:6px;background:linear-gradient(135deg,var(--orange),var(--pink))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sh);margin:0 0 16px}
+.terms{display:grid;gap:10px}.term{background:var(--soft);border-radius:10px;padding:12px 16px}
+.term b{color:var(--accent)}.term span{display:block;color:var(--sub);font-size:13.5px;margin-top:2px}
+.epnav{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0}
+.epnav a{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);font-weight:800}
+.epnav a.next{text-align:right}.epnav a small{display:block;font-size:11px;color:var(--mute);font-weight:700}
+.footer{margin-top:40px;padding:30px 22px 50px;text-align:center;color:var(--mute);font-size:12.5px;border-top:1px solid var(--border);background:var(--soft)}
+</style></head><body>
+<nav class="nav"><div class="nav__in"><div class="nav__brand">Claude Code入門コース 自習ガイド <small>Claude Code入門ゼミ</small></div>
+<a class="nav__back" href="index.html">← 自習ガイド一覧</a></div></nav>
+
+<header class="hero">
+  <span class="hero__badge">EP03 ／ 自習ガイド</span>
+  <h1>EP03<br><em>Claude Codeでできること</em></h1>
+  <p class="hero__lead">Claude Codeの使いどころは「ウェブ制作」「アプリ開発」「業務効率化」の3つ。日本語で頼むだけでLPが組み上がる様子をデモで体感します。</p>
+</header>
+<div class="wrap">
+  <section class="section"><div class="lead-card">EP03では、Claude Codeが具体的に何に使えるのかを整理します。「コードを書くAI」と聞いても、自分の仕事にどう役立つかはイメージしづらいものです。そこで活用の幅を大きく3つに分けて押さえたうえで、実際にランディングページを作る短いデモで「日本語で頼む→できたものを見る→直したいところを伝える」という開発の流れをつかみます。</div></section>
+  <section class="section"><p class="kicker">Learn</p><h2 class="h2">この回の<em>学習ノート</em></h2><section class="lesson-sec"><h2><span class="num">1</span>活用は大きく3つに整理できる</h2><p>Claude Codeの用途は幅広いのですが、この回ではあえて「ウェブ制作」「アプリ開発」「業務効率化」の3本柱に整理します。最初にこの全体像を持っておくと、後の講義で具体的な機能を学ぶときも「これはどの柱の話か」と位置づけながら理解できます。</p><ul><li>ウェブ制作 … 会社やお店の「見てもらう」ためのページを作る</li><li>アプリ開発 … ユーザーが「操作して使う」仕組みを作る</li><li>業務効率化 … 毎日の面倒な作業を自動化する</li></ul><div class="callout callout--tip">「見てもらう」のがウェブサイト、「操作して使う」のがアプリ、と対比で覚えると、自分のやりたいことがどの柱に当てはまるか整理しやすくなります。</div></section><section class="lesson-sec"><h2><span class="num">2</span>ウェブ制作 ― 情報を見てもらうページを作る</h2><p>1つ目はウェブ制作です。会社やお店の情報を伝えるためのページ作りに使えます。代表的な成果物は次の3つです。</p><ul><li>ホームページ … 会社の情報をまとめて見てもらうためのページ</li><li>ランディングページ（LP） … サービスや商品の良さを1ページで紹介する集客向けのページ</li><li>モックアップ … 本番の制作に入る前に、見た目やレイアウトを試すための下書き的なデザイン</li></ul><p>たとえば「自社サイトを一枚作ってほしい」と頼めば、Claude Codeは表示に欠かせないファイル一式を揃え、仕上がりのプレビューまで添えてくれます。デザインの作法を一から学ばなくても、まず言葉で頼むところからスタートできるのが魅力です。</p></section><section class="lesson-sec"><h2><span class="num">3</span>アプリ開発 ― 操作して使う仕組みを作る</h2><p>2つ目はアプリ開発です。ブラウザで動くもの、スマートフォン向け、パソコンのデスクトップ向けと、いろいろな形のアプリ作りに対応できます。サイトが「眺めて情報を得る」ものだとすれば、アプリは「触って動かす」もの。入力された内容によって画面が切り替わったり、入れたデータがしまわれたり、裏で計算が走ったりと、何かしらの処理を経て答えが戻ってくる――そんなイメージです。</p><ul><li>予約システム</li><li>タスク管理ツール</li><li>診断ツール</li><li>チャットツール</li></ul><div class="callout callout--note">Claude Codeでのアプリ開発は、コードを一度書いてもらって完成、というものではありません。機能を足したい、この部分を直したい――そうした要望を伝えてやり取りを重ねるうちに、だんだん使えるアプリに育っていきます。</div></section><section class="lesson-sec"><h2><span class="num">4</span>業務効率化 ― 毎日の面倒な作業を自動化する</h2><p>3つ目は業務効率化です。わざわざアプリを仕立てるほどでもないけれど、コツコツと続けていてうんざりするような作業――その手伝い役としてClaude Codeが活躍します。</p><ul><li>ファイルやデータの分類・整理</li><li>複数ファイルの一括リネーム（名前の変更）</li><li>数値の集計やデータの転記</li><li>情報をまとめて整理する自分専用ツールの作成</li></ul><p>ExcelやGoogleスプレッドシートでの作業も、自動で片づけられます。これらの表計算ツールには以前から自動化の機能が備わっていて、Excel側は「マクロ」、Googleスプレッドシート側は「GAS」という名前で呼ばれます。決まった形の集計、レイアウトの整え、別の場所への書き写し、報告書づくりといった用途で重宝するものです。Claude Codeなら、この種の自動化スクリプトを書き起こしたり、手元の表とつなげたりしながら処理を進められます。</p><div class="callout callout--tip">「毎日の同じ作業が面倒だな」と感じている人ほど、業務効率化の柱は効果を実感しやすい入り口です。まずは身近な手作業を1つ思い浮かべてみましょう。</div></section><section class="lesson-sec"><h2><span class="num">5</span>デモ ― 日本語で頼んでLPを作り、色を変える</h2><p>ここからはClaude Codeが実際に手を動かす様子を見ていきます。題材は、会社を紹介するためのごく簡単なランディングページ。専門的な前提知識はいりませんので、ざっくり流れをつかむつもりで眺めてください。デモではメインで使っていくClaude Desktopアプリに対し、「シンプルな会社のランディングページを作ってください」と日本語でお願いします。</p><p>送信すると、Claude Codeがさっそくファイルを組み立て始めます。その途中で、書き込みの可否を尋ねる確認ポップアップが立ち上がります。これは画面を映し出すためのHTMLファイルを保存してよいかという確認なので、中身を見たうえで許可しましょう。一回ごとに聞かれると煩わしいため、今回のやり取り（セッション）はまとめて承認しておく、という選び方もできます。</p><p>承認するとHTMLファイルが書き出され、アプリに組み込まれたブラウザへページがそのまま映し出されます。社名やサービスの説明、強み、問い合わせ用のフォームに至るまで、ほんの一瞬で形になる手応えが味わえます。さらに「目を引くように青を基調にして」と続けて頼めば、配色がぐっと青へ切り替わります。</p><div class="callout callout--note">内蔵ブラウザに自動で映らないときは、「内蔵のブラウザを使って」とひとこと添えれば、ちゃんと表示してくれます。</div><p>このデモで覚えておきたいのは、欲しいものを日本語で頼み、仕上がりを見て、手を入れたい点を返す――という一連のサイクルです。このやり取りを何度も回しながら進めていくのが、Claude Codeの土台となる使い方になります。そして同じ進め方は、サイト制作に限らず、アプリづくりや作業を楽にするツール開発にもそのまま生きてきます。</p></section></section>
+  <section class="section"><p class="kicker">Key Points</p><h2 class="h2">この回の<em>ポイント</em></h2><div class="card"><ul class="points"><li>Claude Codeの活用は「ウェブ制作」「アプリ開発」「業務効率化」の3本柱で整理できる</li><li>ウェブ制作はホームページ・ランディングページ（LP）・モックアップなど「見てもらう」ページ作り</li><li>アプリ開発はウェブ・スマホ・デスクトップなど多様で、対話を重ねて実用的にしていける</li><li>業務効率化はファイル整理・一括リネーム・集計や、Excelマクロ・GASによる表作業の自動化に使える</li><li>デモではClaude Desktopアプリに日本語で指示し、会社紹介LPのHTMLを生成して内蔵ブラウザに表示</li><li>「日本語で伝える→確認する→改善を伝える」の対話で開発を進めるのが基本の流れ</li></ul></div></section>
+  <section class="section"><p class="kicker">Glossary</p><h2 class="h2">用語<em>メモ</em></h2><div class="terms"><div class="term"><b>ランディングページ（LP）</b><span>サービスや商品の良さを1ページにまとめて見せる紹介用ページ。本体のホームページとは分けて、集客や案内を狙って用意されることが多い。</span></div><div class="term"><b>モックアップ</b><span>本格的な制作に入る前に試しに作る下書きのデザインや画面のサンプル。仕上がりの見た目やレイアウトを事前に確かめる目的で使う。</span></div><div class="term"><b>Excelマクロ</b><span>Excelで決まった手順の作業を機械任せにできる機能。集計や表の整形のような繰り返し作業を、プログラムに代わりにこなしてもらえる。</span></div><div class="term"><b>GAS（Google Apps Script）</b><span>Googleスプレッドシートまわりの操作をプログラムで自動化できる仕組み。立ち位置としてはExcelのマクロのGoogle版にあたる。</span></div><div class="term"><b>HTML</b><span>ウェブページの画面を表示するためのマークアップ言語。デモではこのHTMLファイルが生成され、ブラウザに表示された。</span></div><div class="term"><b>内蔵ブラウザ</b><span>Claude Desktopアプリに備わっている、作った画面をその場で表示・確認できるブラウザ機能。</span></div></div></section>
+  <nav class="epnav"><a class="prev" href="ep02.html"><small>← EP02</small>Claude Codeとは</a><a class="next" href="ep04.html"><small>EP04 →</small>料金プランの選び方</a></nav>
+</div>
+<footer class="footer"><p>Claude Code入門ゼミ ／ DMM 生成AI CAMP 学び放題「ツール別コース ＞ Claude Code入門コース」EP01〜EP09 の自習ガイド。<br>
+本ページは各回の要点を講師がまとめた自習用サマリーです（動画・原文そのものではありません）。最新の内容は受講中のコース本編をご確認ください。</p></footer>
+</body></html>
