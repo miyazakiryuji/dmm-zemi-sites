@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git の基本操作ガイド ｜ Claude Codeマスターゼミ 補助教材</title>
+<meta name="description" content="Claude Codeマスターゼミの補助教材。Git とは／Git と GitHub の違い／基本サイクル(add・commit・push)／主要コマンド／GitHub連携／.gitignoreと機密情報／ブランチ／Claude Code に Git を任せる流れを、初学者向けにやさしくまとめたガイド。">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:11px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14px}
+.nav__menu{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.nav__menu a{font-size:12px;font-weight:700;padding:5px 9px;border-radius:999px;color:var(--text-sub)}
+.nav__menu a:hover{background:var(--bg-soft);color:var(--orange-d)}
+.nav__back{border:1px solid var(--border);background:var(--bg-card)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:58px 22px 38px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(23px,4.6vw,34px);font-weight:900;line-height:1.4;margin:18px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:700px;margin:0 auto;font-size:15px}
+.hero__jump{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.hero__jump a{background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:800;color:var(--accent);box-shadow:var(--shadow)}
+.hero__jump a:hover{border-color:var(--orange);transform:translateY(-2px)}
+.sec{padding:44px 0}.sec--soft{background:var(--bg-soft)}
+.topic{border-top:1px solid var(--border)}.topic:nth-child(even){background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 6px}
+.h2{font-size:clamp(20px,4vw,27px);font-weight:900;margin:0 0 6px;scroll-margin-top:64px}
+.tagline{font-size:14px;font-weight:800;color:var(--orange-d);margin:0 0 14px}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 22px}
+.blk{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);margin:0 0 16px}
+.blk--code{padding:0;overflow:hidden}
+.bh{font-size:16px;font-weight:900;margin:0 0 8px;color:var(--text-main)}
+.btag{font-size:13px;font-weight:800;color:var(--orange-d);margin:-2px 0 10px}
+.bp{font-size:14.5px;color:var(--text-main);margin:0 0 10px}.bp:last-child{margin-bottom:0}
+.pts{margin:6px 0 0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.pre{margin:0;background:#22283C;color:#e9eefb;padding:16px 18px;overflow-x:auto;font-size:13px;line-height:1.7}
+.pre code{background:none;color:#e9eefb;padding:0;font-size:13px;font-family:"SFMono-Regular",Consolas,Menlo,monospace;white-space:pre}
+.blk--code .cap{padding:10px 18px 14px}
+.cmd{display:flex;flex-direction:column;gap:8px}
+.cmd__row{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:8px 0;border-bottom:1px dashed var(--border)}
+.cmd__row:last-child{border-bottom:none}
+.cmd__c{background:#22283C;color:#ffe9d6;font-weight:700;white-space:nowrap;flex:0 0 auto}
+.cmd__d{font-size:13.8px;color:var(--text-sub);flex:1;min-width:200px}
+.flow{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
+.flow__box{flex:1;min-width:130px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.flow__box b{font-size:14px;color:var(--accent)}.flow__box span{font-size:12px;color:var(--text-sub)}
+.flow__arrow{display:flex;align-items:center;color:var(--orange);font-weight:900;font-size:18px}
+.tw{overflow-x:auto;margin-top:4px}
+.cmp,.cheat{width:100%;border-collapse:collapse;font-size:13.5px;min-width:440px}
+.cmp th,.cheat th{background:#FFF1E2;color:var(--accent);font-weight:800;text-align:left;padding:10px 13px;border-bottom:2px solid var(--border)}
+.cmp td,.cheat td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text-sub);vertical-align:top}
+.cmp td:first-child,.cheat td:first-child{font-weight:800;color:var(--text-main)}
+.cheat td:last-child{font-family:"SFMono-Regular",Consolas,Menlo,monospace;font-size:12.5px;color:#7a3a12}
+.cmp tbody tr:nth-child(even),.cheat tbody tr:nth-child(even){background:#FFFBF5}
+.cmp tbody tr:last-child td,.cheat tbody tr:last-child td{border-bottom:none}
+.cap{font-size:12px;color:var(--text-mute);margin:8px 2px 0}
+.note{border-radius:12px;padding:13px 17px;margin:0 0 16px;border:1px solid}
+.note ul{margin:2px 0 0;padding-left:18px}.note li{font-size:13.5px;margin:5px 0}
+.note__t{font-weight:800;font-size:13.5px;margin:0 0 6px}
+.note__solo{margin:0;font-size:13.8px}
+.note--tip{background:#FFF6EC;border-color:#FFD9B3}.note--tip .note__t{color:var(--orange-d)}.note--tip li,.note--tip .note__solo{color:#7a4a1a}
+.note--info{background:#F2F8FF;border-color:#cfe6ff}.note--info .note__t{color:#2c7bd6}.note--info li,.note--info .note__solo{color:#3a5a78}
+.note--warn{background:#FFF4F2;border-color:#ffd2c9}.note--warn .note__t{color:#d9533a}.note--warn li,.note--warn .note__solo{color:#7a3a2c}
+.q{margin:0 0 16px;background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:14px 18px;font-size:14.5px;color:var(--text-main);font-weight:600;box-shadow:var(--shadow)}
+.q cite{display:block;margin-top:8px;font-size:12px;color:var(--text-mute);font-style:normal;font-weight:700}
+.faq{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2px 18px;margin:0 0 10px;box-shadow:var(--shadow)}
+.faq summary{cursor:pointer;font-weight:800;font-size:14.5px;padding:14px 0;list-style:none;color:var(--text-main)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"＋";color:var(--orange-d);font-weight:900;margin-right:10px}
+.faq[open] summary::before{content:"−"}
+.faq__a{padding:0 0 16px;font-size:14px;color:var(--text-sub);line-height:1.9}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:34px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.footer .src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.sec{padding:32px 0}.blk{padding:16px 16px}.flow__arrow{transform:rotate(90deg)}}
+</style></head><body>
+<nav class="nav"><div class="nav__in">
+  <div class="nav__brand">Claude Codeマスターゼミ ｜ Git の基本操作</div>
+  <div class="nav__menu"><a href="#what">Git とは（バージョン管理）</a><a href="#vs-github">Git と GitHub の違い</a><a href="#terms">知っておく基本用語</a><a href="#setup">準備：インストールと初期設定</a><a href="#cycle">基本サイクル：status → add → commit → push</a><a href="#commands">もう少し詳しく：主要コマンド</a><a href="#github">GitHub と連携する</a><a href="#gitignore">.gitignore と機密情報</a><a href="#branch">ブランチの基礎</a><a href="#claude">Claude Code に Git を任せる（コースの流儀）</a><a href="../claudecode-zemi/" class="nav__back">← マスターゼミ Home</a></div>
+</div></nav>
+<header class="hero">
+  <span class="hero__badge">Claude Codeマスターゼミ ／ 補助教材</span>
+  <h1>Git の<em>基本操作</em>ガイド</h1>
+  <p>コードを記録・共有する <strong>Git / GitHub</strong> の基礎を、完全な初学者向けにまとめました。<strong>add → commit → push</strong> の流れから、<strong>Claude Code に Git を任せる</strong>コースの流儀まで。</p>
+  <div class="hero__jump"><a href="#what">Git とは（バージョン管理）</a><a href="#vs-github">Git と GitHub の違い</a><a href="#terms">知っておく基本用語</a><a href="#setup">準備：インストールと初期設定</a><a href="#cycle">基本サイクル：status → add → commit → push</a><a href="#commands">もう少し詳しく：主要コマンド</a><a href="#github">GitHub と連携する</a><a href="#gitignore">.gitignore と機密情報</a><a href="#branch">ブランチの基礎</a><a href="#claude">Claude Code に Git を任せる（コースの流儀）</a></div>
+</header>
+<section class="sec topic" id="what">
+  <div class="wrap">
+    <p class="kicker">STEP 1</p>
+    <h2 class="h2">Git とは（バージョン管理）</h2>
+    <p class="tagline">ファイルの変更履歴を記録し、いつでも戻せる・共同作業できる仕組み</p>
+    <p class="lead"><strong>Git（ギット）</strong> は、プログラムやファイルの <strong>変更履歴を記録する道具</strong>（バージョン管理システム）です。「いつ・誰が・どこを・なぜ変えたか」を残し、<strong>前の状態に戻したり</strong>、<strong>複数人で同じプロジェクトを安全に編集したり</strong> できます。</p>
+    <div class="blk"><h3 class="bh">そもそも、なぜ Git が必要？</h3><p class="bp">Git が無いと、変更を残すために <code>企画書_最新.txt</code>／<code>企画書_最新_v2.txt</code>／<code>企画書_本当に最終.txt</code> … とコピーを増やしがちです。これだと <strong>どれが最新か分からない・前の状態に戻せない・他の人と同時に直すと上書き事故</strong> が起きます。</p><p class="bp">Git は、この“手作業のコピー管理”を置き換えます。フォルダは1つのまま、節目ごとに記録（コミット）していくので、履歴が一本の線として残り、いつでも振り返れます。</p><ul class="pts"><li><strong>Git なし</strong>：ファイルを名前でコピー → 最新が不明・戻せない・上書き事故</li><li><strong>Git あり</strong>：1つのフォルダで履歴を記録 → 最新が明確・いつでも復元・安全に共同作業</li></ul></div><div class="blk"><h3 class="bh">ゲームの“セーブポイント”に近い</h3><p class="bp">編集の区切りごとに <strong>コミット（commit）</strong> という“セーブ”を作ります。失敗しても直前のコミットに戻せるので、安心して大胆に変更できます。</p><p class="bp">Git は <strong>分散型</strong>。手元のパソコンに履歴の“まるごとコピー”を持つので、ネットが無くても記録でき、後でまとめて共有できます。</p></div><div class="blk"><h3 class="bh">Git のメリット</h3><p class="bp">まとめると、こんな“うれしさ”があります。</p><ul class="pts"><li><strong>いつでも戻せる</strong>：壊しても前のコミットへ復帰できる。だから安心して大胆に試せる</li><li><strong>理由つきで履歴が残る</strong>：「いつ・誰が・なぜ変えたか」を後から追える</li><li><strong>安全に実験できる</strong>：ブランチで本線(main)を壊さずにお試しできる</li><li><strong>共同作業できる</strong>：複数人の変更を突き合わせて1つにまとめられる</li><li><strong>バックアップになる</strong>：GitHub に置けば、パソコンが壊れてもコードは無事</li><li><strong>公開・デプロイの土台</strong>：多くの公開サービスが Git / GitHub 連携を前提にしている（EP24）</li></ul></div><div class="note note--tip"><p class="note__solo">💡 本ゼミでは、こうした操作の多くを <strong>Claude Code に任せられます</strong>（最後の項目）。ただし“何が起きているか”を知っておくと、トラブル時に落ち着いて対処できます。</p></div>
+  </div>
+</section><section class="sec topic" id="vs-github">
+  <div class="wrap">
+    <p class="kicker">STEP 2</p>
+    <h2 class="h2">Git と GitHub の違い</h2>
+    <p class="tagline">Git＝手元で履歴を管理する“道具”／GitHub＝ネット上に置く“保管・共有の場所”</p>
+    <p class="lead">よく混同されますが、別物です。<strong>Git</strong> はあなたのパソコンの中で履歴を管理する <strong>ソフト</strong>。<strong>GitHub</strong> はその履歴（リポジトリ）を <strong>インターネット上に置いて共有・公開・バックアップ</strong> するための <strong>サービス（置き場所）</strong> です。</p>
+    <div class="blk"><h3 class="bh">ざっくり対比</h3><div class="tw"><table class="cmp"><thead><tr><th></th><th>Git</th><th>GitHub</th></tr></thead><tbody><tr><td>正体</td><td>バージョン管理ソフト</td><td>Git リポジトリのホスティングサービス</td></tr><tr><td>場所</td><td>手元のパソコン（ローカル）</td><td>インターネット上（リモート）</td></tr><tr><td>役割</td><td>変更を記録・管理する</td><td>共有・公開・バックアップ・共同作業</td></tr><tr><td>無くても</td><td>GitHub 無しでも Git は使える</td><td>GitHub は Git があって成り立つ</td></tr></tbody></table></div><p class="cap">GitHub の代わりに GitLab・Bitbucket などもありますが、本ゼミでは GitHub を使います。</p></div><div class="note note--info"><p class="note__solo">ℹ️ コースでは、作ったアプリの公開（Streamlit Community Cloud など）が <strong>GitHub 上のコードを読み込んでビルドする</strong> 仕組みのため、まず GitHub にコードを置きます。（EP24）</p></div>
+  </div>
+</section><section class="sec topic" id="terms">
+  <div class="wrap">
+    <p class="kicker">STEP 3</p>
+    <h2 class="h2">知っておく基本用語</h2>
+    <p class="tagline">この5語と“3つのエリア”が分かれば、ほぼ読めます</p>
+    <p class="lead">最初に、頻出する言葉だけ押さえましょう。</p>
+    <div class="blk"><h3 class="bh">基本の5語</h3><ul class="pts"><li><strong>リポジトリ（repository / repo）</strong>：プロジェクト1つ分の入れ物。履歴ぜんぶが入っているフォルダ</li><li><strong>コミット（commit）</strong>：ある時点の変更を1つの“記録”として確定したもの（＝セーブ）</li><li><strong>ブランチ（branch）</strong>：作業を枝分かれさせる線。ふつう本線は main</li><li><strong>リモート（remote）</strong>：ネット上のリポジトリ。GitHub 側のことを通常 origin と呼ぶ</li><li><strong>HEAD</strong>：いま自分がいるコミット／ブランチを指す“現在地”の目印</li></ul></div><div class="blk"><h3 class="bh">変更が記録されるまでの“3つのエリア”</h3><div class="flow"><div class="flow__box"><b>作業ツリー</b><span>編集中のファイル</span></div><div class="flow__arrow">→</div><div class="flow__box"><b>ステージ</b><span>git add で次のコミットに入れる候補へ</span></div><div class="flow__arrow">→</div><div class="flow__box"><b>ローカルリポジトリ</b><span>git commit で履歴に確定</span></div><div class="flow__arrow">→</div><div class="flow__box"><b>リモート(GitHub)</b><span>git push でネットへ共有</span></div></div></div><div class="note note--tip"><p class="note__solo">💡 <strong>add → commit → push</strong> の3手が基本の流れ。まず「ステージに載せて」「記録して」「ネットに上げる」と覚えればOKです。</p></div>
+  </div>
+</section><section class="sec topic" id="setup">
+  <div class="wrap">
+    <p class="kicker">STEP 4</p>
+    <h2 class="h2">準備：インストールと初期設定</h2>
+    <p class="tagline">Git を入れて、名前とメールを一度だけ設定する</p>
+    <p class="lead">Git 本体を用意し、コミットに残す名前・メールを設定します。Mac は標準で Git が入っていることが多く、Windows は別途インストールが必要です。（EP25）</p>
+    <div class="blk"><h3 class="bh">① Git があるか確認</h3><p class="bp">ターミナルで次を実行。バージョンが表示されれば入っています。</p></div><div class="blk blk--code"><pre class="pre"><code>git --version</code></pre></div><div class="note note--info"><ul><li><strong>Windows</strong> で「git が見つからない」と出たら、「Git for Windows」を公式サイトからインストール（エディタは閉じてから／終わったら再起動）。（EP25）</li><li><strong>Mac</strong> で無い場合は Homebrew で <code>brew install git</code>。（EP25）</li></ul></div><div class="blk"><h3 class="bh">② 名前とメールを設定（最初の一度だけ）</h3><p class="bp">コミットの“署名”になります。GitHub で使うメールにしておくと分かりやすいです。</p></div><div class="blk blk--code"><pre class="pre"><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre></div><div class="note note--info"><p class="note__solo">ℹ️ ここで設定したメールは、<strong>Public リポジトリではコミット履歴から第三者に見えます</strong>。公開したくない場合は、GitHub の <strong>noreply メール</strong>（Settings → Emails で確認できる <code>〇〇@users.noreply.github.com</code>）を <code>user.email</code> に設定してください。</p></div><div class="blk"><h3 class="bh">③ GitHub アカウントと gh CLI</h3><p class="bp">GitHub にコードを置くにはアカウントが必要です（Google 連携が手早い）。（EP24）</p><p class="bp">ターミナルから GitHub を操作するために <strong>GitHub CLI（gh）</strong> を入れて認証します。Claude Code 内では対話入力が必要なコマンドは先頭に <strong><code>!</code></strong> を付けて、ターミナルへ直接流します。（EP25）</p></div><div class="blk blk--code"><pre class="pre"><code>!gh auth login</code></pre><p class="cap"><code>!</code> は「Claude Code を介さず、ターミナルでそのまま実行」の意味。リンクを開いて認証→表示コードを貼り付け→Authorize で完了。</p></div>
+  </div>
+</section><section class="sec topic" id="cycle">
+  <div class="wrap">
+    <p class="kicker">STEP 5</p>
+    <h2 class="h2">基本サイクル：status → add → commit → push</h2>
+    <p class="tagline">毎回これの繰り返し。まず体で覚える4手</p>
+    <p class="lead">日々の作業は、ほぼこの流れの繰り返しです。</p>
+    <div class="blk"><h3 class="bh">基本の4手＋戻すための2手</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">git status</code><span class="cmd__d">いま何が変わっているか・ステージ済みかを確認（迷ったらまずこれ）</span></div><div class="cmd__row"><code class="cmd__c">git add &lt;ファイル&gt;</code><span class="cmd__d">変更をステージに載せる。全部なら git add . もよく使う</span></div><div class="cmd__row"><code class="cmd__c">git commit -m "変更内容の説明"</code><span class="cmd__d">ステージした変更を履歴に確定。メッセージは何をしたか短く</span></div><div class="cmd__row"><code class="cmd__c">git push</code><span class="cmd__d">ローカルのコミットを GitHub（リモート）へ送る</span></div><div class="cmd__row"><code class="cmd__c">git pull</code><span class="cmd__d">リモートの最新を取り込む（複数人・複数PCのとき）</span></div><div class="cmd__row"><code class="cmd__c">git log --oneline</code><span class="cmd__d">コミット履歴を1行ずつ一覧で見る</span></div></div></div><div class="blk"><h3 class="bh">はじめてのリポジトリを GitHub に上げる</h3><p class="bp">新規プロジェクトを GitHub に置く最短の流れです。</p></div><div class="blk blk--code"><pre class="pre"><code>git init -b main            # リポジトリを作成（最初のブランチ名を main に）
+# ← この時点で先に .gitignore を用意（.env など秘密ファイルを必ず書く）
+git add .                  # カレント配下の変更をまとめてステージ（削除も含む）
+git commit -m "first commit"
+gh repo create             # GitHub 側にリポジトリを作成（対話で名前・公開範囲を選ぶ）
+git push -u origin main    # 送信＋以後の push 先を main に紐付け</code></pre><p class="cap">本ゼミでは、この一連を Claude Code に「GitHub にアップして」と頼むだけで自動実行できます（裏でこれらが走る）。（EP25）</p></div><div class="note note--warn"><p class="note__t">⚠️ 先に .gitignore を作る（重要）</p><ul><li><code>git add .</code> / <code>git add -A</code> を <strong><code>.gitignore</code> を作る前に</strong> 使うと、<code>.env</code> などの秘密ファイルごとステージしてしまいます。新規プロジェクトでは <strong>必ず先に <code>.gitignore</code> を作成</strong> してください（一度 push すると履歴に残り、実質取り消せません）。詳しくは項目8へ。</li></ul></div><div class="note note--warn"><p class="note__solo">⚠️ <code>git push</code> が <strong>rejected（拒否）</strong> されたら、たいていリモートに自分の手元に無い変更があります。先に <code>git pull</code> で取り込んでから push し直します。</p></div>
+  </div>
+</section><section class="sec topic" id="commands">
+  <div class="wrap">
+    <p class="kicker">STEP 6</p>
+    <h2 class="h2">もう少し詳しく：主要コマンド</h2>
+    <p class="tagline">使う頻度の高いものだけ、目的とセットで</p>
+    <p class="lead">丸暗記は不要。「やりたいこと」から引けるように並べました。</p>
+    <div class="blk"><h3 class="bh">確認・記録</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">git status</code><span class="cmd__d">変更・ステージ状況の確認</span></div><div class="cmd__row"><code class="cmd__c">git diff</code><span class="cmd__d">まだステージしていない変更の中身を表示</span></div><div class="cmd__row"><code class="cmd__c">git diff --staged</code><span class="cmd__d">ステージ済みの変更の中身を表示</span></div><div class="cmd__row"><code class="cmd__c">git add -A</code><span class="cmd__d">リポジトリ全体（いま居る階層の外も含む）を対象に全変更をステージ</span></div><div class="cmd__row"><code class="cmd__c">git commit -m "..."</code><span class="cmd__d">履歴に確定</span></div><div class="cmd__row"><code class="cmd__c">git log --oneline --graph</code><span class="cmd__d">履歴を簡潔＋枝分かれ付きで表示</span></div></div></div><div class="blk"><h3 class="bh">取り消し・戻す（やさしめ）</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">git restore &lt;ファイル&gt;</code><span class="cmd__d">まだコミットしていない編集を捨てて、最後のコミット状態に戻す</span></div><div class="cmd__row"><code class="cmd__c">git restore --staged &lt;ファイル&gt;</code><span class="cmd__d">ステージから降ろす（変更自体は残す）</span></div><div class="cmd__row"><code class="cmd__c">git revert &lt;コミット&gt;</code><span class="cmd__d">指定コミットを“打ち消す”新しいコミットを作る（履歴は消さず安全）</span></div></div></div><div class="blk"><h3 class="bh">リモート</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">git remote -v</code><span class="cmd__d">連携先（origin など）のURLを確認</span></div><div class="cmd__row"><code class="cmd__c">git remote add origin &lt;URL&gt;</code><span class="cmd__d">リモートを手動で登録</span></div><div class="cmd__row"><code class="cmd__c">git clone &lt;URL&gt;</code><span class="cmd__d">GitHub 上のリポジトリを手元へ丸ごと複製</span></div><div class="cmd__row"><code class="cmd__c">git fetch</code><span class="cmd__d">リモートの更新を取得（まだ手元には反映しない）</span></div><div class="cmd__row"><code class="cmd__c">git pull</code><span class="cmd__d">取得＋手元へ反映（fetch + merge）</span></div></div></div><div class="note note--info"><p class="note__solo">ℹ️ <code>reset --hard</code> など“履歴ごと消す”系は強力な反面、戻せない事故になりがちです。まずは上の <code>restore</code> / <code>revert</code> を使い、迷ったら Claude Code に「安全に取り消したい」と相談しましょう。</p></div>
+  </div>
+</section><section class="sec topic" id="github">
+  <div class="wrap">
+    <p class="kicker">STEP 7</p>
+    <h2 class="h2">GitHub と連携する</h2>
+    <p class="tagline">リモート作成・push/pull・clone・Public/Private</p>
+    <p class="lead">手元のリポジトリを GitHub につなぎ、共有・公開します。</p>
+    <div class="blk"><h3 class="bh">GitHub 連携でよく使う</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">gh repo create</code><span class="cmd__d">GitHub 側に新しいリポジトリを作る（対話で公開範囲を選択）</span></div><div class="cmd__row"><code class="cmd__c">gh repo create --private</code><span class="cmd__d">最初から非公開（Private）で作成</span></div><div class="cmd__row"><code class="cmd__c">git push -u origin main</code><span class="cmd__d">初回の送信＋追跡ブランチを設定（次回以降は git push だけ）</span></div><div class="cmd__row"><code class="cmd__c">git pull</code><span class="cmd__d">GitHub 側の最新を取り込む</span></div></div></div><div class="blk"><h3 class="bh">Public と Private</h3><p class="bp"><strong>Public</strong> は誰でも閲覧可能、<strong>Private</strong> は自分（と許可した人）だけ。作成時に公開範囲を選びますが、<strong>初期選択が Public 寄りで見落としやすい</strong> ため、個人プロジェクトは <strong>Private を推奨</strong> します。（EP25）</p><ul class="pts"><li><strong>あとから変更</strong>：GitHub → リポジトリの Settings → 一番下の「Change repository visibility」で切替</li><li><strong>最初から非公開</strong>：<code>gh repo create --private</code>、または Claude Code に「Private でアップして」と頼む</li></ul></div><div class="note note--info"><p class="note__solo">ℹ️ 公開サービスによっては制約があります。例：Streamlit Community Cloud の無料プランは <strong>Public リポジトリのみ</strong> デプロイ可。（EP26）</p></div>
+  </div>
+</section><section class="sec topic" id="gitignore">
+  <div class="wrap">
+    <p class="kicker">STEP 8</p>
+    <h2 class="h2">.gitignore と機密情報</h2>
+    <p class="tagline">APIキーなどの“秘密”を、絶対に GitHub に上げない</p>
+    <p class="lead"><code>.gitignore</code> は「<strong>Git で追跡しない（アップしない）ファイル</strong>」を書いておく設定ファイルです。<strong>API キーやパスワードの流出を防ぐ最重要ポイント</strong> です。（EP25）</p>
+    <div class="blk"><h3 class="bh">.gitignore の書き方</h3><p class="bp">リポジトリのルートに <code>.gitignore</code> を置き、除外したいものを1行ずつ書きます。</p></div><div class="blk blk--code"><pre class="pre"><code>.env
+*.pyc
+__pycache__/
+node_modules/
+.DS_Store</code></pre><p class="cap"><code>.env</code> は API キーなどの秘密を入れるファイル。<code>.env.example</code>（中身は空のテンプレ）だけ共有するのが定番。</p></div><div class="note note--warn"><p class="note__t">⚠️ もし秘密を push してしまったら</p><ul><li>まず <code>.gitignore</code> に <code>.env</code> を追加し、追跡から外す：</li><li><strong>API キーは“流出した前提”で即無効化 → 新しいキーを再発行</strong>（最優先）。（EP25）</li></ul></div><div class="blk blk--code"><pre class="pre"><code>git rm --cached .env
+git commit -m "Remove .env from tracking"
+git push</code></pre><p class="cap"><code>--cached</code> は手元のファイルは消さず、Git の追跡からのみ外す指定。※過去のコミットにも残るため、本当に消すならキー無効化が必須。</p></div>
+  </div>
+</section><section class="sec topic" id="branch">
+  <div class="wrap">
+    <p class="kicker">STEP 9</p>
+    <h2 class="h2">ブランチの基礎</h2>
+    <p class="tagline">本線(main)を壊さずに、別の線で試す</p>
+    <p class="lead"><strong>ブランチ</strong> は作業を枝分かれさせる仕組み。新機能やお試しを <strong>main とは別の線</strong> で進め、うまくいったら main に合流（マージ）します。</p>
+    <div class="blk"><h3 class="bh">ブランチ操作</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">git branch</code><span class="cmd__d">ブランチ一覧と現在地を表示</span></div><div class="cmd__row"><code class="cmd__c">git switch -c feature</code><span class="cmd__d">feature という新ブランチを作って移動（旧: git checkout -b）</span></div><div class="cmd__row"><code class="cmd__c">git switch main</code><span class="cmd__d">main へ戻る</span></div><div class="cmd__row"><code class="cmd__c">git merge feature</code><span class="cmd__d">（main にいる状態で）feature の変更を取り込む</span></div></div></div><div class="note note--info"><ul><li>同じ箇所を別ブランチで違う内容に変えると <strong>コンフリクト（衝突）</strong> が起きることがあります。あわてず、残す内容を選んで解決します（Claude Code に解消を手伝ってもらうのも有効）。</li><li>最初のブランチ名が <code>master</code> になっていて GitHub の <code>main</code> と食い違うことがあります（EP26 でも、Deploy 時の URL のブランチが <code>main</code> でなく <code>master</code> の場合がある旨に触れています）。揃えるには <code>git branch -M main</code> が使えます。</li></ul></div>
+  </div>
+</section><section class="sec topic" id="claude">
+  <div class="wrap">
+    <p class="kicker">STEP 10</p>
+    <h2 class="h2">Claude Code に Git を任せる（コースの流儀）</h2>
+    <p class="tagline">「GitHubにアップして」で、裏側の git を自動実行</p>
+    <p class="lead">本ゼミの実践では、Git 操作の多くを <strong>日本語の指示で Claude Code に任せられます</strong>。コマンドを完璧に覚えていなくても進められるのが強みです。（EP25）</p>
+    <div class="blk"><h3 class="bh">たとえばこう頼む</h3><p class="bp">こう指示すると、裏で <code>git init</code>・<code>git add</code>・<code>git commit</code>・<code>gh repo create</code> などが実行されます。（EP25）</p></div><blockquote class="q">この生成 AI アプリケーションを GitHub のリポジトリにアップロードしてください<cite>— EP25 の指示例（Private にしたいときは「Private で」と添える）</cite></blockquote><div class="blk"><h3 class="bh">任せられること（例）</h3><div class="cmd"><div class="cmd__row"><code class="cmd__c">GitHubにアップして</code><span class="cmd__d">init〜commit〜リポジトリ作成〜push まで一括</span></div><div class="cmd__row"><code class="cmd__c">わかりやすいコミットメッセージで記録して</code><span class="cmd__d">変更内容を要約したメッセージで commit</span></div><div class="cmd__row"><code class="cmd__c">.gitignore に .env を追加して</code><span class="cmd__d">機密ファイルの除外設定を作成・修正</span></div><div class="cmd__row"><code class="cmd__c">安全に1つ前の状態へ戻したい</code><span class="cmd__d">restore / revert など安全な手段を提案・実行</span></div></div></div><div class="note note--warn"><p class="note__solo">⚠️ <code>gh auth login</code> のように <strong>対話入力が必要なコマンド</strong> は Claude Code 内だと固まることがあります。その場合は先頭に <strong><code>!</code></strong> を付けて <code>!gh auth login</code> のようにターミナルへ直接流します。（EP25）</p></div><div class="note note--tip"><p class="note__solo">💡 任せきりでも進みますが、<strong>status / log / push / pull / .gitignore の意味</strong> だけ分かっていれば、想定外の挙動にも落ち着いて対処できます。</p></div>
+  </div>
+</section>
+<section class="sec sec--soft"><div class="wrap">
+  <p class="kicker">Cheat Sheet</p><h2 class="h2">コマンド早見表（チートシート）</h2>
+  <p class="lead">手が止まったら、ここだけ見ればOK。</p>
+  <div class="blk"><h3 class="bh">コマンド早見表（チートシート）</h3><div class="tw"><table class="cheat"><thead><tr><th>やりたいこと</th><th>コマンド</th></tr></thead><tbody><tr><td>状況を確認</td><td>git status</td></tr><tr><td>変更をステージ</td><td>git add . ／ git add &lt;file&gt;</td></tr><tr><td>記録（コミット）</td><td>git commit -m "..."</td></tr><tr><td>GitHub へ送る</td><td>git push（初回 git push -u origin main）</td></tr><tr><td>GitHub から取り込む</td><td>git pull</td></tr><tr><td>履歴を見る</td><td>git log --oneline</td></tr><tr><td>変更の中身を見る</td><td>git diff</td></tr><tr><td>編集を取り消す（未コミット）</td><td>git restore &lt;file&gt;</td></tr><tr><td>コミットを安全に打ち消す</td><td>git revert &lt;commit&gt;</td></tr><tr><td>複製を手元に作る</td><td>git clone &lt;URL&gt;</td></tr><tr><td>新ブランチで作業</td><td>git switch -c &lt;name&gt;</td></tr><tr><td>ブランチを合流</td><td>git merge &lt;name&gt;</td></tr><tr><td>GitHub にリポジトリ作成</td><td>gh repo create（非公開は --private）</td></tr><tr><td>追跡から外す（機密）</td><td>git rm --cached &lt;file&gt;</td></tr></tbody></table></div><p class="cap">困ったら、まず git status。迷ったら Claude Code に状況ごと相談するのが安全です。</p></div>
+</div></section>
+<section class="sec"><div class="wrap">
+  <p class="kicker">FAQ</p><h2 class="h2">よくある質問・トラブル</h2>
+  <p class="lead">つまずきやすいポイントと対処法。</p>
+  <details class="faq"><summary>Windows で「git が見つからない」と出ます</summary><div class="faq__a">Windows は Git が標準で入っていません。公式サイトから「Git for Windows」をインストールし（エディタは閉じてから／終わったら再起動）、<code>git --version</code> で確認してください。Mac は標準で入っていることが多く、無ければ <code>brew install git</code>。（EP25）</div></details><details class="faq"><summary>.env（APIキー）を GitHub に上げてしまいました</summary><div class="faq__a">まず <code>.gitignore</code> に <code>.env</code> を追加し、<code>git rm --cached .env</code> → コミット → push で追跡から外します。ただし過去のコミットには残るため、<strong>漏れた API キーは流出した前提で即無効化し、新しいキーを再発行</strong>してください（こちらが最優先）。（EP25）</div></details><details class="faq"><summary>Private にしたかったのに Public で作られました</summary><div class="faq__a">作成時に公開範囲の選択を見落とし、Public のまま進んでしまうことが原因です。リポジトリの Settings → 一番下「Change repository visibility」で Private に変更できます。最初から非公開にするには <code>gh repo create --private</code>、または Claude Code に「Private でアップして」と頼みます。（EP25）</div></details><details class="faq"><summary>git push が拒否（rejected）されます</summary><div class="faq__a">多くは、リモート（GitHub）に自分の手元へ未取得の変更があるためです。先に <code>git pull</code> で取り込み、必要なら衝突を解消してから、もう一度 push します。</div></details><details class="faq"><summary>コマンドを全部覚えないとダメ？</summary><div class="faq__a">いいえ。本ゼミでは Git 操作の多くを Claude Code に日本語で任せられます。まずは <code>status / add / commit / push / pull</code> の流れと <code>.gitignore</code> の意味だけ押さえれば十分です。（EP25）</div></details>
+</div></section>
+<section class="sec sec--soft"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section>
+<footer class="footer">
+  <p>DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ 補助教材：Git の基本操作</p>
+  <p class="src">参考：DMM 生成AI CAMP「GitHubアカウントの作成」(EP24)／「GitHubとターミナルの連携」(EP25)／「公開」(EP26)。Git・GitHub・gh CLI の仕様は更新されることがあります。最新は各公式情報をご確認ください。</p>
+</footer>
+</body></html>
