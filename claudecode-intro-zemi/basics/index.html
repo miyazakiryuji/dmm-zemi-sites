@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はじめての基礎｜Claude とは／Claude Code とは／各版の違い ｜ Claude Code入門ゼミ</title>
+<meta name="description" content="Claude Code入門ゼミの基礎解説。Claude とは、Claude Code とは、Web版・デスクトップ版・CLI版の違いを、完全な初学者向けにやさしく整理しました。">
+<style>
+:root{--bg-main:#FFF9F0;--bg-soft:#FFF3E6;--bg-card:#FFFFFF;--text-main:#2A2F45;--text-sub:#5A6178;--text-mute:#8A91A8;--orange:#FF8C42;--orange-d:#FF7424;--blue:#4DA8FF;--green:#5BC48B;--accent:#B84A00;--border:#FFE2C7;--shadow:0 4px 16px rgba(255,140,66,.08);--radius:18px;--container:920px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;color:var(--text-main);background:var(--bg-main);line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--orange-d);text-decoration:none}a:hover{color:var(--orange)}
+code{background:#2A2F45;color:#ffe9d6;padding:2px 7px;border-radius:6px;font-size:.85em;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,249,240,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav__in{max-width:var(--container);margin:0 auto;padding:11px 22px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.nav__brand{font-weight:800;font-size:14px}
+.nav__menu{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.nav__menu a{font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:999px;color:var(--text-sub)}
+.nav__menu a:hover{background:var(--bg-soft);color:var(--orange-d)}
+.nav__back{border:1px solid var(--border);background:var(--bg-card)}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px}
+.hero{padding:60px 22px 40px;text-align:center;background:radial-gradient(circle at 20% 0%,rgba(255,209,102,.25),transparent 60%),radial-gradient(circle at 85% 15%,rgba(77,168,255,.13),transparent 55%)}
+.hero__badge{display:inline-block;padding:7px 15px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(23px,4.6vw,34px);font-weight:900;line-height:1.4;margin:18px 0 12px}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--text-sub);max-width:680px;margin:0 auto;font-size:15px}
+.hero__jump{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.hero__jump a{background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:800;color:var(--accent);box-shadow:var(--shadow)}
+.hero__jump a:hover{border-color:var(--orange);transform:translateY(-2px)}
+.sec{padding:46px 0}.sec--soft{background:var(--bg-soft)}
+.topic{border-top:1px solid var(--border)}
+.topic:nth-child(even){background:var(--bg-soft)}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 6px}
+.h2{font-size:clamp(21px,4vw,28px);font-weight:900;margin:0 0 6px;scroll-margin-top:70px}
+.tagline{font-size:14.5px;font-weight:800;color:var(--orange-d);margin:0 0 14px}
+.lead{color:var(--text-sub);font-size:15px;margin:0 0 22px}
+.blk{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);margin:0 0 16px}
+.bh{font-size:16.5px;font-weight:900;margin:0 0 8px;color:var(--text-main)}
+.btag{font-size:13px;font-weight:800;color:var(--orange-d);margin:-2px 0 10px}
+.bp{font-size:14.5px;color:var(--text-main);margin:0 0 10px}.bp:last-child{margin-bottom:0}
+.pts{margin:10px 0 0;padding-left:20px}.pts li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.pts li strong{color:var(--text-main)}
+.steps{background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow);margin:0 0 16px}
+.steps__h{font-weight:900;font-size:13.5px;color:var(--accent);margin:0 0 8px;letter-spacing:.03em}
+.steps ol{margin:0;padding-left:20px}.steps li{margin:7px 0;font-size:14px;color:var(--text-sub)}
+.tw{overflow-x:auto;margin-top:4px}
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:440px}
+.cmp th{background:#FFF1E2;color:var(--accent);font-weight:800;text-align:left;padding:10px 13px;border-bottom:2px solid var(--border)}
+.cmp th:first-child{border-radius:10px 0 0 0}.cmp th:last-child{border-radius:0 10px 0 0}
+.cmp td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text-sub);vertical-align:top}
+.cmp td:first-child{font-weight:800;color:var(--text-main);white-space:nowrap}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp tbody tr:nth-child(even){background:#FFFBF5}
+.cap{font-size:12px;color:var(--text-mute);margin:8px 2px 0}
+.note{border-radius:12px;padding:13px 17px;margin:0 0 16px;border:1px solid}
+.note ul{margin:2px 0 0;padding-left:18px}.note li{font-size:13.5px;margin:5px 0}
+.note__t{font-weight:800;font-size:13.5px;margin:0 0 6px}
+.note__solo{margin:0;font-size:13.8px}
+.note--tip{background:#FFF6EC;border-color:#FFD9B3}.note--tip .note__t{color:var(--orange-d)}.note--tip li,.note--tip .note__solo{color:#7a4a1a}
+.note--info{background:#F2F8FF;border-color:#cfe6ff}.note--info .note__t{color:#2c7bd6}.note--info li,.note--info .note__solo{color:#3a5a78}
+.note--warn{background:#FFF4F2;border-color:#ffd2c9}.note--warn .note__t{color:#d9533a}.note--warn li,.note--warn .note__solo{color:#7a3a2c}
+.q{margin:0 0 16px;background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:14px 18px;font-size:14.5px;color:var(--text-main);font-weight:600;box-shadow:var(--shadow)}
+.q cite{display:block;margin-top:8px;font-size:12px;color:var(--text-mute);font-style:normal;font-weight:700}
+.faq{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2px 18px;margin:0 0 10px;box-shadow:var(--shadow)}
+.faq summary{cursor:pointer;font-weight:800;font-size:14.5px;padding:14px 0;list-style:none;color:var(--text-main)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"＋";color:var(--orange-d);font-weight:900;margin-right:10px}
+.faq[open] summary::before{content:"−"}
+.faq__a{padding:0 0 16px;font-size:14px;color:var(--text-sub);line-height:1.9}
+.survey{text-align:center}
+.survey a{display:inline-block;padding:13px 28px;background:var(--orange-d);color:#fff;font-weight:800;font-size:15px;border-radius:999px;box-shadow:var(--shadow)}
+.footer{padding:34px 22px;text-align:center;border-top:1px solid var(--border);background:var(--bg-soft);color:var(--text-sub);font-size:13px}
+.footer .src{font-size:12px;color:var(--text-mute);margin-top:8px}
+@media(max-width:640px){.sec{padding:34px 0}.blk{padding:16px 16px}}
+</style></head><body>
+<nav class="nav"><div class="nav__in">
+  <div class="nav__brand">Claude Code入門ゼミ ｜ はじめての基礎</div>
+  <div class="nav__menu"><a href="#claude">Claude とは</a><a href="#claudecode">Claude Code とは</a><a href="#editions">Web版・デスクトップ版・CLI版の違い</a><a href="../" class="nav__back">← 入門ゼミ Home</a></div>
+</div></nav>
+<header class="hero">
+  <span class="hero__badge">Claude Code入門ゼミ ／ はじめての基礎</span>
+  <h1>はじめに知っておきたい <em>3つの基礎</em></h1>
+  <p>Claude Code をさわる前に、「<strong>Claude とは</strong>」「<strong>Claude Code とは</strong>」「<strong>Web版・デスクトップ版・CLI版の違い</strong>」の3点を、完全な初学者向けにやさしく整理しました。</p>
+  <div class="hero__jump"><a href="#claude">Claude とは</a><a href="#claudecode">Claude Code とは</a><a href="#editions">Web版・デスクトップ版・CLI版の違い</a></div>
+</header>
+<section class="sec topic" id="claude">
+  <div class="wrap">
+    <p class="kicker">POINT 1</p>
+    <h2 class="h2">Claude とは</h2>
+    <p class="tagline">Anthropic がつくった対話型の生成AI（＝“頭脳”そのもの）</p>
+    <p class="lead">まず <strong>Claude（クロード）</strong> は、AI企業 <strong>Anthropic（アンソロピック）</strong> が開発した生成AI（大規模言語モデル）です。日本語で話しかけると、文章づくり・要約・翻訳・調べ物・コード生成などをこなします。ChatGPT や Gemini と並ぶ、代表的な生成AIのひとつです。</p>
+    <div class="blk"><h3 class="bh">Claude をひとことで言うと</h3><p class="bp">Claude は、アメリカ・カリフォルニア州に拠点を置く AI 企業 <strong>Anthropic</strong> が開発した対話型の生成AIです。ChatGPT（OpenAI）の代表的なライバルとして知られています。</p><p class="bp">私たちが日本語で質問や指示を入力すると、Claude がその意味をくみ取り、文章・要約・翻訳・アイデア出し・プログラムのコードなどを生成して返してくれます。</p><ul class="pts"><li><strong>開発元</strong>：Anthropic（アンソロピック）— 米国カリフォルニア州の AI 企業</li><li><strong>種類</strong>：対話型（チャット型）の生成AI／大規模言語モデル（LLM）</li><li><strong>入力</strong>：日本語をふくむ自然言語。専門知識がなくても話し言葉で使える</li><li><strong>得意なこと</strong>：文章生成・要約・翻訳・調査の壁打ち・コード生成 など</li></ul></div><div class="note note--tip"><p class="note__t">💡 用語ミニ解説</p><ul><li><strong>生成AI</strong>：文章や画像などを“生成”する AI の総称。</li><li><strong>LLM（大規模言語モデル）</strong>：大量の文章で学習し、言葉を扱うのが得意な AI の仕組み。</li><li><strong>Anthropic</strong>：Claude をつくっている会社。安全性を重視した AI 開発で知られる。</li></ul></div><div class="blk"><h3 class="bh">Claude の特徴</h3><p class="bp">Claude は特に、長い文章やコードをまとめて読み取り・整理することや、コード生成の品質で高い評価を受けています。また Anthropic は「AI を安全で誠実にふるまわせる」ことを重視した開発方針を掲げています。</p><ul class="pts"><li><strong>長文に強い</strong>：長い資料やコードをまとめて読み、要約・整理するのが得意</li><li><strong>コードが得意</strong>：プログラム生成の品質に定評があり、開発支援で広く使われる</li><li><strong>安全性を重視</strong>：危険・不誠実な出力を避ける方針で設計されている</li></ul></div><div class="blk"><h3 class="bh">モデルには“種類”と“バージョン”がある</h3><p class="bp">Claude には用途別に複数の“モデル”があり、性能と速度のバランスが異なります。バージョンは頻繁に更新されるため、最新の名称は公式サイトで確認してください。</p><ul class="pts"><li><strong>Opus（オーパス）</strong>：最高性能。むずかしい・大きなタスク向け</li><li><strong>Sonnet（ソネット）</strong>：性能と速度のバランス型。日常使いの主力</li><li><strong>Haiku（ハイク）</strong>：軽量・高速。手早い処理向け</li></ul></div><div class="note note--info"><p class="note__solo">ℹ️ モデルのバージョンは数か月単位で新しくなります（例：Opus 4 系 など）。本資料では特定の版に依存しないよう、系統名（Opus / Sonnet / Haiku）で説明しています。</p></div><div class="blk"><h3 class="bh">Claude を使う“入口”はいくつもある</h3><p class="bp">同じ Claude（頭脳）を、いろいろな“入口”から使えます。</p><ul class="pts"><li><strong>Web版（claude.ai）</strong>：ブラウザで開いてチャット。いちばん手軽</li><li><strong>デスクトップアプリ</strong>：Mac / Windows のアプリ。スマホアプリもある</li><li><strong>Claude Code（CLI）</strong>：ターミナルで動く“エージェント”。本ゼミのメイン（次の項目）</li><li><strong>API</strong>：開発者が自分のアプリに Claude を組み込むための接続口</li></ul></div><div class="note note--tip"><p class="note__solo">💡 ポイント：<strong>「Claude」は頭脳そのもの</strong>。それを <strong>どの入口（Web／アプリ／ターミナル）で使うか</strong> が、3番目の項目で扱う“版の違い”です。</p></div>
+  </div>
+</section><section class="sec topic" id="claudecode">
+  <div class="wrap">
+    <p class="kicker">POINT 2</p>
+    <h2 class="h2">Claude Code とは</h2>
+    <p class="tagline">Claude をターミナルで動かし、ファイル操作まで自動でこなす“AIエージェント”</p>
+    <p class="lead"><strong>Claude Code</strong> は、Anthropic が開発した <strong>AIエージェント</strong> です。ターミナル（黒い画面）で日本語の指示を出すと、Claude が自分でコードを書き、ファイルを操作し、複数の作業を自動で進めてくれます。名前に “Code” と付きますが、コーディング専用ではなく、調査・資料作成・業務自動化まで幅広く使えます。</p>
+    <div class="blk"><h3 class="bh">Claude Code をひとことで言うと</h3><p class="bp">Claude Code は Anthropic が開発した <strong>AIコーディングエージェント</strong> です。ターミナルという“コマンドを打つ黒い画面”の上で動きます。</p><p class="bp">「このホームページを作って」「このアプリを作って」と <strong>日本語で指示を出すだけ</strong> で、AI が自動でコードを書いたり、パソコン上のファイルを操作したりしてくれます。</p></div><blockquote class="q">Claude Code というのはコーディングだけじゃなくて、ビジネスのあらゆる場面で使える AI エージェントになります。<cite>— DMM 生成AI CAMP『Claude Code とは』(EP02) より</cite></blockquote><div class="blk"><h3 class="bh">なぜ“ターミナル”で動くの？</h3><p class="bp">ターミナルは、ファイルの操作やコマンドの実行を、文字（テキスト）で行える環境です。AI が「何をするか」を文字でそのまま指示・確認できるため、<strong>AI が直接作業を進めやすい</strong> のです。</p><p class="bp">「黒い画面」と聞くと身構えますが、入門で実際に打つのは <code>claude</code> や <code>node -v</code> 程度。コマンドを暗記する必要はありません。</p></div><div class="note note--tip"><p class="note__solo">💡 ChatGPT などが“ブラウザの中で会話する”のに対し、Claude Code は“あなたのパソコンの中で実際に手を動かす”イメージです。</p></div><div class="blk"><h3 class="bh">ChatGPT / Gemini との違い</h3><div class="tw"><table class="cmp"><thead><tr><th>観点</th><th>ChatGPT / Gemini</th><th>Claude Code</th></tr></thead><tbody><tr><td>動作場所</td><td>ブラウザ</td><td>ターミナル</td></tr><tr><td>PC内のファイル操作</td><td>アップロードした内容は読めるが、PC内のファイルは操作しない</td><td>パソコン上のファイルを直接操作できる</td></tr><tr><td>自律実行</td><td>一問一答</td><td>連続実行・複数ステップを自動</td></tr><tr><td>得意分野</td><td>質問対応・文章生成</td><td>開発・業務の自動化</td></tr></tbody></table></div><p class="cap">出典：DMM 生成AI CAMP『Claude Code とは』(EP02) の比較表をもとに整理</p></div><div class="blk"><h3 class="bh">できること①：コーディング・開発</h3><p class="bp">メインはやはり“ものづくり”。日本語の指示から、こんなものを作れます。</p><ul class="pts"><li><strong>Webサイト・ホームページ</strong>：会社HP やランディングページ など</li><li><strong>Webアプリ・スマホアプリ</strong>：入力フォームや診断ツール、簡単なアプリ など</li><li><strong>既存コードの修正</strong>：バグ修正・リファクタリング・テストコードの作成</li></ul></div><div class="note note--info"><p class="note__solo">ℹ️ <strong>リファクタリング</strong>＝ごちゃごちゃしたコードを整理して読みやすくすること。<strong>テストコード</strong>＝プログラムが正しく動くか確かめるためのコード。（EP02 の用語解説より）</p></div><div class="blk"><h3 class="bh">できること②：コーディング以外の仕事</h3><p class="bp">“Code” と付きますが、非エンジニアの業務にも使えます。EP02 では次のような用途が紹介されています。</p><ul class="pts"><li><strong>プロジェクト管理</strong>：進捗・スケジュール・タスクの管理</li><li><strong>新規事業・リサーチ</strong>：競合調査、ビジネスモデルの検討</li><li><strong>調査・分析・戦略立案</strong>：Web 検索を自動で実行して情報を集める</li><li><strong>AI 秘書 / 事務</strong>：リサーチ代行、請求書・領収書などの PDF 発行</li></ul></div><div class="blk"><h3 class="bh">“新人の部下”にたとえると</h3><p class="bp">Claude Code は <strong>AIエージェント</strong>＝「指示すると自律的に複数ステップを実行する AI」です。EP03 ではこれを“新人の部下”にたとえています。</p><p class="bp">新人がいきなり自己流で仕事を始めたら不安ですよね。Claude Code は、あらかじめ <strong>ルールや業務マニュアルを渡しておける</strong> のが強みです。</p><ul class="pts"><li><strong>CLAUDE.md</strong>：プロジェクトの“ルールブック”。守ってほしい約束を書いておくファイル</li><li><strong>Skills</strong>：作業手順を“マニュアル化”して、決まった仕事を任せられる仕組み</li><li><strong>サブエージェント / Agent Teams</strong>：複数の AI を並行で動かし、大きな作業を分担できる</li></ul></div><div class="note note--tip"><p class="note__solo">💡 自由度の高さ（CLAUDE.md・Skills で細かく制御できる点）が、Cursor や Codex と比べたときの Claude Code の独自の強みです。（EP03）</p></div><div class="blk"><h3 class="bh">どうやって使い始める？</h3><p class="bp">導入の詳細は後の回で手を動かしながら進めますが、流れはシンプルです。</p></div><div class="steps"><p class="steps__h">はじめ方の流れ</p><ol><li>Node.js を入れる（準備）</li><li>ターミナルで <code>npm install -g @anthropic-ai/claude-code</code> を実行してインストール</li><li>プロジェクトのフォルダで <code>claude</code> と打って起動</li><li>あとは日本語で「○○を作って」と指示するだけ</li></ol></div><div class="note note--info"><ul><li>本ゼミでは、この後の回で実際のインストールと操作を、手を動かしながら進めます（Node.js＋npm 方式：EP07／EP08）。</li><li>なお現在はネイティブインストーラでの導入方法もあり、推奨手順は更新されることがあるため、最新は公式サイトでご確認ください。</li></ul></div>
+  </div>
+</section><section class="sec topic" id="editions">
+  <div class="wrap">
+    <p class="kicker">POINT 3</p>
+    <h2 class="h2">Web版・デスクトップ版・CLI版の違い</h2>
+    <p class="tagline">同じ Claude を“どの入口で使うか”。手軽さ重視か、作る力重視か</p>
+    <p class="lead">Claude（頭脳）は同じでも、使う“入口（容れ物）”によってできることが変わります。ここでは代表的な 3 つ — <strong>Web版・デスクトップアプリ・CLI版（＝Claude Code）</strong> — の違いを整理します。結論から言うと、<strong>気軽に試すなら Web、普段使い＋ツール連携ならデスクトップ、実際に作る・自動化するなら CLI（本ゼミのメイン）</strong> です。</p>
+    <div class="blk"><h3 class="bh">① Web版（claude.ai）</h3><p class="btag">ブラウザで開くだけ。いちばん手軽な入口</p><ul class="pts"><li><strong>使い方</strong>：ブラウザで claude.ai を開いてチャットするだけ。インストール不要</li><li><strong>できること</strong>：質問・文章作成・要約・翻訳、ファイルや画像をアップロードして読ませる、Web 検索 など</li><li><strong>PC内のファイル</strong>：アップロードしたものは読めるが、<strong>あなたの PC 内のファイルを自由に読み書きはしない</strong>（ブラウザの中で完結）</li><li><strong>料金</strong>：無料枠あり。有料プラン（Pro など）で利用量が増える</li><li><strong>向いている人</strong>：まず生成AI を気軽に体験したい人／調べ物・文章作成が中心の人</li></ul></div><div class="note note--info"><p class="note__solo">ℹ️ 最近は claude.ai 上から、ブラウザ／クラウドで動く Claude Code（Claude Code on the web）も使えるようになってきています。提供機能は更新されるため、最新は公式で確認してください。</p></div><div class="blk"><h3 class="bh">② デスクトップアプリ（Mac / Windows）</h3><p class="btag">Web と同じ体験をネイティブアプリで。外部ツール連携に強い</p><ul class="pts"><li><strong>使い方</strong>：Mac / Windows にアプリをインストールして常駐。起動が速く OS と馴染む（スマホアプリ版もある）</li><li><strong>できること</strong>：基本は Web版と同じチャット。加えて <strong>MCP</strong> に対応し、外部のツールやデータと連携できる</li><li><strong>PC内のファイル</strong>：MCP 連携を設定すれば、対応ツール経由で手元のデータを扱える</li><li><strong>向いている人</strong>：毎日 Claude を使う人／対応ツールと連携して使い込みたい人</li></ul></div><div class="note note--tip"><p class="note__solo">💡 <strong>MCP（Model Context Protocol）</strong>＝AI と外部ツール／データをつなぐ“共通の差し込み口”。対応サービスを足すと、できることが広がります。</p></div><div class="blk"><h3 class="bh">③ CLI版 ＝ Claude Code（本ゼミのメイン）</h3><p class="btag">ターミナルで動く“エージェント”。実際に手を動かして作る・自動化する</p><ul class="pts"><li><strong>使い方</strong>：ターミナルにインストールし、<code>claude</code> で起動。プロジェクトのフォルダ上で動かす</li><li><strong>できること</strong>：ローカルのファイルを直接読み書き、コマンドを実行、複数ステップを <strong>自律的に</strong> 進める</li><li><strong>制御の仕組み</strong>：CLAUDE.md・Skills・サブエージェントで、ルールや手順を渡して動かせる</li><li><strong>向いている人</strong>：Web サイト・アプリを作りたい人／作業を自動化したい人（＝本ゼミの内容）</li></ul></div><div class="note note--info"><p class="note__solo">ℹ️ Claude Code は CLI（ターミナル）が基本ですが、いまは <strong>デスクトップアプリ・Web（claude.ai/code）・IDE拡張（VS Code / JetBrains）</strong> からも使えます。</p></div><div class="blk"><h3 class="bh">ひと目で比較</h3><div class="tw"><table class="cmp"><thead><tr><th>観点</th><th>Web版（claude.ai）</th><th>デスクトップアプリ</th><th>CLI版（Claude Code）</th></tr></thead><tbody><tr><td>動作場所</td><td>ブラウザ</td><td>アプリ（Mac/Win）</td><td>ターミナル</td></tr><tr><td>インストール</td><td>不要（URL を開く）</td><td>必要（アプリ）</td><td>必要（npm）</td></tr><tr><td>主な用途</td><td>チャット・調べ物・文章</td><td>チャット＋ツール連携</td><td>開発・ファイル操作・自動化</td></tr><tr><td>PC内のファイル操作</td><td>基本しない</td><td>MCP 連携で可</td><td>直接できる</td></tr><tr><td>複数ステップの自律実行</td><td>限定的</td><td>限定的</td><td>得意</td></tr><tr><td>こんな人に</td><td>まず気軽に試したい</td><td>常用＋連携したい</td><td>作る・自動化したい（本ゼミ）</td></tr></tbody></table></div><p class="cap">※ 料金・対応プラットフォーム・機能は更新されます。最新は各公式情報を確認してください。</p></div><div class="note note--tip"><p class="note__t">💡 迷ったら（結論）</p><ul><li><strong>とりあえず試す</strong> → Web版（claude.ai）をブラウザで開く</li><li><strong>毎日使う・ツール連携</strong> → デスクトップアプリ</li><li><strong>実際に作る・自動化する</strong> → CLI版＝Claude Code（本ゼミで扱うのはこれ）</li><li>どれも“頭脳は同じ Claude”。入口を変えても、覚えた感覚はそのまま活かせます。</li></ul></div>
+  </div>
+</section>
+<section class="sec sec--soft"><div class="wrap">
+  <p class="kicker">FAQ</p><h2 class="h2">よくある質問</h2>
+  <p class="lead">つまずきやすいポイントをまとめました。</p>
+  <details class="faq"><summary>「Claude」と「Claude Code」は何が違うの？</summary><div class="faq__a"><strong>Claude は頭脳（AI そのもの）</strong>、<strong>Claude Code はその Claude をターミナルで動かし、ファイル操作や自動実行までさせる“道具（エージェント）”</strong> です。Web版でチャットするのが Claude、ターミナルで手を動かさせるのが Claude Code、と整理すると分かりやすいです。</div></details><details class="faq"><summary>非エンジニアでも Claude Code を使える？</summary><div class="faq__a">はい。指示は <strong>日本語の話し言葉でOK</strong>。入門で打つコマンドも <code>claude</code> 程度で、暗記は不要です。EP02 でも非エンジニア向けの用途（リサーチ・PDF 発行・プロジェクト管理など）が紹介されています。</div></details><details class="faq"><summary>ChatGPT と何が違うの？</summary><div class="faq__a">ChatGPT / Gemini は基本 <strong>ブラウザでの“一問一答・壁打ち”</strong>。Claude Code は <strong>ターミナルであなたの PC のファイルを操作し、複数ステップを自動</strong> で進めます。“質問の相手”と“手を動かす部下”の違いです。</div></details><details class="faq"><summary>無料で使える？</summary><div class="faq__a">Claude 自体は <strong>無料枠</strong> から試せます。利用量や使える機能はプランによって変わり、料金は更新されるため、最新は公式で確認してください。</div></details><details class="faq"><summary>どれから始めればいい？</summary><div class="faq__a">まず <strong>Web版（claude.ai）</strong> で生成AI の感触をつかみ、本ゼミの本番である <strong>CLI版（Claude Code）</strong> に進むのがおすすめです。</div></details>
+</div></section>
+<section class="sec"><div class="wrap survey">
+  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
+  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
+  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する</a>
+</div></section>
+<footer class="footer">
+  <p>DMM 生成AI CAMP 学び放題 ／ Claude Code入門ゼミ ／ はじめての基礎</p>
+  <p class="src">参考：DMM 生成AI CAMP「Claude Code とは」(EP02)／「Claude Code と類似ツールの違い」(EP03)。製品仕様・料金・対応プラットフォームは更新されます。最新は各公式情報をご確認ください。</p>
+</footer>
+</body></html>
