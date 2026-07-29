@@ -253,11 +253,7 @@ git push</code></pre><p class="cap"><code>--cached</code> は手元のファイ�
   <p class="lead">つまずきやすいポイントと対処法。</p>
   <details class="faq"><summary>Windows で「git が見つからない」と出ます</summary><div class="faq__a">Windows は Git が標準で入っていません。公式サイトから「Git for Windows」をインストールし（エディタは閉じてから／終わったら再起動）、<code>git --version</code> で確認してください。Mac は標準で入っていることが多く、無ければ <code>brew install git</code>。（EP25）</div></details><details class="faq"><summary>.env（APIキー）を GitHub に上げてしまいました</summary><div class="faq__a">まず <code>.gitignore</code> に <code>.env</code> を追加し、<code>git rm --cached .env</code> → コミット → push で追跡から外します。ただし過去のコミットには残るため、<strong>漏れた API キーは流出した前提で即無効化し、新しいキーを再発行</strong>してください（こちらが最優先）。（EP25）</div></details><details class="faq"><summary>Private にしたかったのに Public で作られました</summary><div class="faq__a">作成時に公開範囲の選択を見落とし、Public のまま進んでしまうことが原因です。リポジトリの Settings → 一番下「Change repository visibility」で Private に変更できます。最初から非公開にするには <code>gh repo create --private</code>、または Claude Code に「Private でアップして」と頼みます。（EP25）</div></details><details class="faq"><summary>git push が拒否（rejected）されます</summary><div class="faq__a">多くは、リモート（GitHub）に自分の手元へ未取得の変更があるためです。先に <code>git pull</code> で取り込み、必要なら衝突を解消してから、もう一度 push します。</div></details><details class="faq"><summary>コマンドを全部覚えないとダメ？</summary><div class="faq__a">いいえ。本ゼミでは Git 操作の多くを Claude Code に日本語で任せられます。まずは <code>status / add / commit / push / pull</code> の流れと <code>.gitignore</code> の意味だけ押さえれば十分です。（EP25）</div></details>
 </div></section>
-<section class="sec sec--soft"><div class="wrap survey">
-  <p class="kicker">Survey</p><h2 class="h2">授業<em>アンケート</em></h2>
-  <p class="lead">この資料・授業の感想やご要望をぜひお聞かせください。</p>
-  <a href="https://thoracic-mum-bd8.notion.site/62f6ee6bd4844b9c8d3897dbe4ef85f9" target="_blank" rel="noopener">📋 アンケートに回答する（1期生）</a><span style="display:inline-block;width:12px"></span><a href="https://thoracic-mum-bd8.notion.site/380090c7fc6d81d7acf9c9ff7edc9694" target="_blank" rel="noopener">📋 アンケートに回答する（2期生）</a><span style="display:inline-block;width:12px"></span><a href="https://thoracic-mum-bd8.notion.site/0e9090c7fc6d82cea94d01235db68eed" target="_blank" rel="noopener">📋 アンケートに回答する（3期生）</a>
-</div></section>
+
 <footer class="footer">
   <p>DMM 生成AI CAMP 学び放題 ／ Claude Codeマスターゼミ ／ 補助教材：Git の基本操作</p>
   <p class="src">参考：DMM 生成AI CAMP「GitHubアカウントの作成」(EP24)／「GitHubとターミナルの連携」(EP25)／「公開」(EP26)。Git・GitHub・gh CLI の仕様は更新されることがあります。最新は各公式情報をご確認ください。</p>
