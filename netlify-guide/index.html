@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Netlifyのアカウント作成から最初のデプロイ、カスタムドメイン設定までを画面付きで解説する完全ガイド。">
+  <meta name="description" content="Netlifyのアカウント作成から最初のデプロイ、公開設定（Public / Private）、カスタムドメイン設定までを画面付きで解説する完全ガイド。">
   <title>Netlify 利用開始ガイド | はじめての方へ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,12 +64,13 @@
           <span class="hero-line">利用開始ガイド</span>
         </h1>
         <p class="hero-subtitle">
-          アカウント作成から最初のデプロイ、カスタムドメイン設定まで。<br>
-          実画面のスクリーンショットつきで、迷わず進められる17ステップ。
+          アカウント作成から最初のデプロイ、公開設定、カスタムドメイン設定まで。<br>
+          実画面のスクリーンショットつきで、迷わず進められる19ステップ。<br>
+          <small>画面は 2026年9月12日 時点。公開設定（Public / Private）とバッジの手順を追加。</small>
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <div class="stat-number" data-count="17">0</div>
+            <div class="stat-number" data-count="19">0</div>
             <div class="stat-label">ステップ</div>
           </div>
           <div class="stat">
@@ -181,7 +182,7 @@
           <div class="step-body">
             <h3 class="step-title">サインアップ方法を選ぶ</h3>
             <p class="step-text">
-              <strong>「The launch center for first-time builders」</strong> の画面が表示されます。
+              <strong>「The launch center for …」</strong> の画面が表示されます（「…」の部分は first-time builders / internal teams などが数秒ごとに入れ替わります）。
               利用するアカウントを選んで進みましょう。
             </p>
             <ul class="check-list">
@@ -238,6 +239,13 @@
           </div>
           <h2 class="chapter-title">オンボーディング設定</h2>
           <p class="chapter-description">Netlifyからの簡単な質問に答えていきます。回答内容に応じて、最適な案内が用意されます。</p>
+          <div class="callout callout-note" style="margin-top:16px;">
+            <div class="callout-icon">📝</div>
+            <div class="callout-body">
+              <div class="callout-title">質問の内容は変わることがあります</div>
+              <p>この章の画面は 2026年5月に撮影したものです。Netlify はこの質問を予告なく入れ替えるので、順番や文言が違っていても大丈夫。いちばん近いものを選んで進めば、最後に「Deploy your first project」の画面に着きます。</p>
+            </div>
+          </div>
         </header>
 
         <article class="step reveal">
@@ -388,10 +396,10 @@
         <header class="chapter-header reveal">
           <div class="chapter-meta">
             <span class="chapter-tag">Chapter 03</span>
-            <span class="chapter-progress">5 ステップ</span>
+            <span class="chapter-progress">6 ステップ</span>
           </div>
           <h2 class="chapter-title">最初のプロジェクトをデプロイする</h2>
-          <p class="chapter-description">いよいよ実際のサイト公開へ。ファイルをドラッグ&ドロップするだけでデプロイできます。</p>
+          <p class="chapter-description">いよいよ実際のサイト公開へ。ファイルをドラッグ&amp;ドロップするだけでデプロイできます。デプロイ後に <strong>公開設定（Public / Private）</strong> を確認するところまでがこの章です。</p>
           <img src="Assets/penguins/penguin_laptop_standing.png" alt="" aria-hidden="true" loading="lazy"
                style="display:block;width:90px;max-width:100%;height:auto;margin-top:14px;filter:drop-shadow(0 8px 20px rgba(0,199,183,0.2));">
         </header>
@@ -409,7 +417,7 @@
             </p>
             <figure class="figure">
               <img src="Assets/11-continue-to-deploy-button.png" alt="Continue to deployボタン" class="step-image" data-caption="Continue to deployボタン" loading="lazy">
-              <figcaption class="figcaption">Continue to deploy ボタン</figcaption>
+              <figcaption class="figcaption">Continue to deploy ボタン（2026年5月撮影）</figcaption>
             </figure>
           </div>
         </article>
@@ -429,7 +437,7 @@
                 <div class="method-num">A</div>
                 <div class="method-body">
                   <strong>AIエージェントで作る</strong>
-                  <p>Claude Agent等を使い、プロンプトから自動でサイト生成。<span class="hl">400 Extra Credits</span> がもらえる。</p>
+                  <p>Claude Agent等を使い、プロンプトから自動でサイト生成。</p>
                 </div>
               </div>
               <div class="method-item">
@@ -443,13 +451,20 @@
                 <div class="method-num">C</div>
                 <div class="method-body">
                   <strong>ファイルを直接アップロード</strong>
-                  <p>HTML/CSSの完成ファイルをドラッグ&ドロップ。<span class="hl">今回はこの方法</span>を使います。</p>
+                  <p>HTML/CSSの完成ファイルをドラッグ&amp;ドロップ。<span class="hl">今回はこの方法</span>を使います。</p>
                 </div>
+              </div>
+            </div>
+            <div class="callout callout-note">
+              <div class="callout-icon">📝</div>
+              <div class="callout-body">
+                <div class="callout-title">2回目以降は</div>
+                <p>この画面はアカウント作成直後の1回だけ出ます。2つめ以降のサイトは、ログイン後の <strong>Projects</strong> 画面の下にあるドロップ枠（次のステップ）か、<a href="https://app.netlify.com/drop" target="_blank" rel="noopener" class="link">Netlify Drop</a> のページから同じようにアップロードできます。</p>
               </div>
             </div>
             <figure class="figure">
               <img src="Assets/12-deploy-method-selection.png" alt="デプロイ方法の選択画面" class="step-image" data-caption="デプロイ方法の選択" loading="lazy">
-              <figcaption class="figcaption">デプロイ方法の選択画面</figcaption>
+              <figcaption class="figcaption">デプロイ方法の選択画面（2026年5月撮影）</figcaption>
             </figure>
           </div>
         </article>
@@ -462,19 +477,24 @@
           <div class="step-body">
             <h3 class="step-title">ファイルをアップロードする</h3>
             <p class="step-text">
-              <strong>「Upload your project files」</strong> エリアに、プロジェクトフォルダ・ZIP・単一HTMLファイルをドラッグ&ドロップします。
-              <code>browse files to upload</code> から選択することも可能です。
+              <strong>「Drag and drop your project folder, zip file, or a single HTML file to deploy instantly.」</strong> と書かれた枠に、
+              プロジェクトフォルダ・ZIP・単一HTMLファイルをドラッグ&amp;ドロップします。
+              <code>browse files to upload</code>（ファイルを選ぶ）／ <code>choose a folder</code>（フォルダを選ぶ）からも選択できます。
             </p>
             <div class="callout callout-tip">
               <div class="callout-icon">📦</div>
               <div class="callout-body">
                 <div class="callout-title">用意するファイル</div>
-                <p><code>index.html</code> をエントリーポイントとして含むフォルダ、もしくはZIPがあればOKです。</p>
+                <p><code>index.html</code> をエントリーポイントとして含むフォルダ、もしくはZIPがあればOKです。HTMLファイル1枚だけでも公開できます。</p>
               </div>
             </div>
             <figure class="figure">
-              <img src="Assets/13-upload-files-area.png" alt="ファイルアップロードエリア" class="step-image" data-caption="ファイルアップロードエリア" loading="lazy">
-              <figcaption class="figcaption">ファイルアップロードエリア</figcaption>
+              <img src="Assets/13-projects-drop-area.png" alt="Projects画面のドロップ枠" class="step-image" data-caption="Projects画面の下にあるドロップ枠" loading="lazy">
+              <figcaption class="figcaption">Projects 画面の下にあるドロップ枠。ここに置くと「Uploading…」と出て数秒で完了します</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="Assets/12-netlify-drop-page.png" alt="Netlify Dropのページ" class="step-image" data-caption="Netlify Drop（app.netlify.com/drop）" loading="lazy">
+              <figcaption class="figcaption">同じことができる Netlify Drop のページ（app.netlify.com/drop）。「Drop here」に置くか、file / folder から選びます</figcaption>
             </figure>
           </div>
         </article>
@@ -490,6 +510,7 @@
               アップロードしたファイル名が <code>index.html</code> でない場合、
               <strong>「Rename to index.html?」</strong> のダイアログが表示されます。
               <strong>「Rename and deploy」</strong> を選ぶと、自動でリネームしてデプロイされます。
+              最初から <code>index.html</code> という名前なら、この確認は出ません。
             </p>
             <div class="callout callout-warning">
               <div class="callout-icon">⚠️</div>
@@ -500,7 +521,7 @@
             </div>
             <figure class="figure">
               <img src="Assets/14-rename-to-index-html-dialog.png" alt="index.htmlへのリネーム確認ダイアログ" class="step-image" data-caption="index.htmlへのリネーム確認" loading="lazy">
-              <figcaption class="figcaption">リネーム確認ダイアログ</figcaption>
+              <figcaption class="figcaption">リネーム確認ダイアログ（2026年5月撮影）</figcaption>
             </figure>
           </div>
         </article>
@@ -513,20 +534,90 @@
           <div class="step-body">
             <h3 class="step-title">デプロイ完了 🎉</h3>
             <p class="step-text">
-              アップロードが完了すると、自動的に <strong>プロジェクトダッシュボード</strong> に遷移します。
-              ランダムなプロジェクト名(例: <code>glowing-sawine-2df6e3</code>)で公開されます。
+              アップロードが完了すると、自動的に <strong>プロジェクト画面（Project overview）</strong> に切り替わります。
+              ランダムなプロジェクト名(例: <code>charming-seahorse-0269da</code>)で公開され、
+              名前の横に <strong>Public</strong> または <strong>Private</strong> のラベルが付いています。
+              緑の文字のURL（<code>xxxx.netlify.app</code>）があなたのサイトのアドレスです。
             </p>
-            <div class="success-banner">
-              <div class="success-emoji">🚀</div>
-              <div>
-                <strong>あなたのサイトが世界に公開されました!</strong>
-                <p><code>https://*****.netlify.app</code> でアクセス可能です。</p>
+            <div class="callout callout-warning">
+              <div class="callout-icon">👀</div>
+              <div class="callout-body">
+                <div class="callout-title">ここで必ず見るところ</div>
+                <p>名前の横のラベルが <strong>Private</strong> になっていたら、まだ本人以外は見られません。次のステップで <strong>Public</strong> に切り替えます。</p>
               </div>
             </div>
             <figure class="figure">
-              <img src="Assets/15-dashboard-after-deploy.png" alt="デプロイ完了後のダッシュボード" class="step-image" data-caption="デプロイ完了後のプロジェクトダッシュボード" loading="lazy">
-              <figcaption class="figcaption">プロジェクトダッシュボード</figcaption>
+              <img src="Assets/15-dashboard-after-deploy.png" alt="デプロイ完了後のプロジェクト画面" class="step-image" data-caption="デプロイ完了後のプロジェクト画面（Project overview）" loading="lazy">
+              <figcaption class="figcaption">プロジェクト画面（Project overview）。以前の「Quick setup」ボタンはなくなり、「Project configuration」「Share」になりました</figcaption>
             </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">15</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">公開設定を確認する（Public / Private）</h3>
+            <p class="step-text">
+              2026年7月末から、<strong>新しく作ったアカウント（チーム）ではプロジェクトが「Private（非公開）」で作られる</strong> ようになりました。
+              Private のままだと、URLを送っても相手には「This site is private」という画面しか出ません。
+              ポートフォリオとして人に見せるには <strong>Public</strong> に切り替えます。
+            </p>
+            <figure class="figure">
+              <img src="Assets/22-private-site-visitor.png" alt="Privateのサイトを開いた人に表示される画面" class="step-image" data-caption="Private のサイトを開いた人に表示される画面" loading="lazy">
+              <figcaption class="figcaption">Private のサイトのURLを開いた人に表示される画面。相手からは中身が一切見えません</figcaption>
+            </figure>
+            <div class="method-list">
+              <div class="method-item">
+                <div class="method-num">1</div>
+                <div class="method-body">
+                  <strong>Project configuration を開く</strong>
+                  <p>プロジェクト画面の左メニュー、または名前の下の <span class="hl">「Project configuration」</span> ボタン。</p>
+                </div>
+              </div>
+              <div class="method-item">
+                <div class="method-num">2</div>
+                <div class="method-body">
+                  <strong>General → Visitor access → Project visibility</strong>
+                  <p>「Production visibility」が <span class="hl">Private</span> なら、<span class="hl">「Edit visibility」</span> を押します。</p>
+                </div>
+              </div>
+              <div class="method-item method-active">
+                <div class="method-num">3</div>
+                <div class="method-body">
+                  <strong>Public を選んで Save</strong>
+                  <p>「Visibility」で <span class="hl">Public</span>（Anyone can visit your project）を選び、<span class="hl">「Save」</span>。表示が Public に変わればOK。</p>
+                </div>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/21-visibility-result-private.png" alt="Project visibilityがPrivateになっている状態" class="step-image" data-caption="Visitor access → Project visibility が Private の状態" loading="lazy">
+              <figcaption class="figcaption">Project configuration → General → Visitor access。「Production visibility: Private」なら「Edit visibility」を押す</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="Assets/23-visibility-edit-public.png" alt="PublicとPrivateの選択画面" class="step-image" data-caption="Visibility で Public を選んで Save" loading="lazy">
+              <figcaption class="figcaption">「Public — Anyone can visit your project.」を選んで「Save」</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="Assets/19-visibility-section-public.png" alt="Public に切り替わった状態" class="step-image" data-caption="Production visibility が Public になった状態" loading="lazy">
+              <figcaption class="figcaption">「Production visibility: Public」になれば、誰でもURLから見られます</figcaption>
+            </figure>
+            <div class="success-banner">
+              <div class="success-emoji">🚀</div>
+              <div>
+                <strong>これであなたのサイトが世界に公開されました!</strong>
+                <p><code>https://*****.netlify.app</code> を送れば、誰でも見られます。</p>
+              </div>
+            </div>
+            <div class="callout callout-tip">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">
+                <div class="callout-title">最初から Public にしておきたいとき</div>
+                <p>左メニューの <strong>Team settings → General → Visitor access → Default project visibility</strong> を Public にすると、以後作るプロジェクトは最初から Public になります。</p>
+              </div>
+            </div>
           </div>
         </article>
       </section>
@@ -536,41 +627,11 @@
         <header class="chapter-header reveal">
           <div class="chapter-meta">
             <span class="chapter-tag">Chapter 04</span>
-            <span class="chapter-progress">3 ステップ</span>
+            <span class="chapter-progress">4 ステップ</span>
           </div>
           <h2 class="chapter-title">公開後のカスタマイズ</h2>
-          <p class="chapter-description">プロジェクト名やドメインを整えて、シェアしやすいサイトに仕上げます。</p>
+          <p class="chapter-description">プロジェクト名やドメイン、画面右下に出るバッジを整えて、シェアしやすいサイトに仕上げます。</p>
         </header>
-
-        <article class="step reveal">
-          <aside class="step-side">
-            <div class="step-num">15</div>
-            <div class="step-line"></div>
-          </aside>
-          <div class="step-body">
-            <h3 class="step-title">プロジェクト名を変更する</h3>
-            <p class="step-text">
-              ダッシュボードの <strong>「Quick setup」</strong> から <strong>「Update the project name」</strong> を開きます。
-              プロジェクト名はそのままURLになるので、覚えやすい名前にしましょう。
-            </p>
-            <div class="url-preview">
-              <span class="url-protocol">https://</span>
-              <span class="url-name">miyazaki-portfolio</span>
-              <span class="url-suffix">.netlify.app</span>
-            </div>
-            <div class="callout callout-note">
-              <div class="callout-icon">📝</div>
-              <div class="callout-body">
-                <div class="callout-title">命名ルール</div>
-                <p>英数字と単一のハイフン(<code>-</code>)のみ使用可。最大37文字です。</p>
-              </div>
-            </div>
-            <figure class="figure">
-              <img src="Assets/16-update-project-name.png" alt="プロジェクト名更新画面" class="step-image" data-caption="プロジェクト名の更新" loading="lazy">
-              <figcaption class="figcaption">プロジェクト名更新画面</figcaption>
-            </figure>
-          </div>
-        </article>
 
         <article class="step reveal">
           <aside class="step-side">
@@ -578,26 +639,30 @@
             <div class="step-line"></div>
           </aside>
           <div class="step-body">
-            <h3 class="step-title">カスタムドメイン・パスワード保護を設定</h3>
+            <h3 class="step-title">プロジェクト名を変更する</h3>
             <p class="step-text">
-              次の画面で、より上級のカスタマイズを選べます。必要なければスキップでOKです。
+              <strong>Project configuration → General → Project details</strong> にある <strong>「Change project name」</strong> を押します。
+              プロジェクト名はそのままURLになるので、覚えやすい名前にしましょう。
             </p>
-            <div class="feature-grid">
-              <div class="feature-card">
-                <div class="feature-icon">🌐</div>
-                <h4>Set custom domain</h4>
-                <p>独自ドメイン(例: <code>example.com</code>)を接続できます。
-                所有しているドメインを追加、または新規購入も可能。</p>
-              </div>
-              <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h4>Set password protection</h4>
-                <p>サイトをパスワードで保護できます。クライアント確認用や、初期段階の制作物の限定共有に便利。</p>
+            <div class="url-preview">
+              <span class="url-protocol">https://</span>
+              <span class="url-name">hajimete-portfolio-site</span>
+              <span class="url-suffix">.netlify.app</span>
+            </div>
+            <div class="callout callout-note">
+              <div class="callout-icon">📝</div>
+              <div class="callout-body">
+                <div class="callout-title">命名ルール</div>
+                <p>英数字と単一のハイフン(<code>-</code>)のみ使用可。最大37文字です。世界中で早い者勝ちなので、「Project name is not available」と出たら別の名前にします。「Project name is available」と出れば「Save」で確定です。</p>
               </div>
             </div>
             <figure class="figure">
-              <img src="Assets/17-domain-and-password-settings.png" alt="ドメイン・パスワード設定画面" class="step-image" data-caption="ドメイン・パスワード設定" loading="lazy">
-              <figcaption class="figcaption">ドメイン・パスワード設定画面</figcaption>
+              <img src="Assets/16-project-configuration-general.png" alt="Project configuration の General 画面" class="step-image" data-caption="Project configuration → General → Change project name" loading="lazy">
+              <figcaption class="figcaption">Project configuration → General。「Project information」の下に「Change project name」がある</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="Assets/17-change-project-name-dialog.png" alt="Change project name ダイアログ" class="step-image" data-caption="Change project name ダイアログ" loading="lazy">
+              <figcaption class="figcaption">新しい名前を入れると、そのままURLのプレビューと空き状況が出ます</figcaption>
             </figure>
           </div>
         </article>
@@ -608,10 +673,66 @@
             <div class="step-line"></div>
           </aside>
           <div class="step-body">
+            <h3 class="step-title">「Powered by Netlify」バッジを消す（任意）</h3>
+            <p class="step-text">
+              2026年8月から、無料プランで新しく作った公開サイトには、画面右下に <strong>「Powered by Netlify」</strong> という小さなバッジが表示されます。
+              そのままでも問題ありませんが、消したいときは
+              <strong>Project configuration → General → Powered by Netlify badge → 「Configure」</strong> を開き、
+              <strong>「Show the badge on this project」のチェックを外して「Save」</strong> します。
+            </p>
+            <figure class="figure">
+              <img src="Assets/24-live-site-with-badge.png" alt="右下にPowered by Netlifyバッジが出ている公開サイト" class="step-image" data-caption="公開サイトの右下に出る Powered by Netlify バッジ" loading="lazy">
+              <figcaption class="figcaption">公開したサイトを開くと、右下に「Powered by Netlify」バッジが出ます</figcaption>
+            </figure>
+            <figure class="figure">
+              <img src="Assets/25-badge-configure.png" alt="Powered by Netlify badge の設定" class="step-image" data-caption="Powered by Netlify badge → Configure" loading="lazy">
+              <figcaption class="figcaption">「Configure」を押すとチェックボックスが出る。外して「Save」でバッジが消えます</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">18</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
+            <h3 class="step-title">カスタムドメインを設定する（任意）</h3>
+            <p class="step-text">
+              プロジェクト画面右上の <strong>「Go to Domain management」</strong>、または左メニューの <strong>Domain management</strong> を開きます。
+              必要なければスキップでOKです。
+            </p>
+            <div class="feature-grid">
+              <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h4>Add a domain</h4>
+                <p>独自ドメイン(例: <code>example.com</code>)を接続できます。
+                所有しているドメインを追加、または新規購入も可能。<code>xxxx.netlify.app</code> のURLはそのまま使えます。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h4>パスワード保護は Pro プラン</h4>
+                <p>サイト全体をパスワードで守る機能は、現在は有料の Pro プラン限定です（Visitor access の中にあります）。無料プランで限定共有したいときは Private のままにして、見せたい相手をチームに招待します。</p>
+              </div>
+            </div>
+            <figure class="figure">
+              <img src="Assets/18-domain-management.png" alt="Domain management 画面" class="step-image" data-caption="Domain management" loading="lazy">
+              <figcaption class="figcaption">Domain management。「Add a domain」から独自ドメインを追加できます</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <aside class="step-side">
+            <div class="step-num">19</div>
+            <div class="step-line"></div>
+          </aside>
+          <div class="step-body">
             <h3 class="step-title">プロジェクト一覧で確認 🎊</h3>
             <p class="step-text">
-              すべての設定が完了すると、プロジェクト一覧に <strong>サムネイル付きのカード</strong> が表示されます。
-              緑のドットが <code>Published</code> 状態を示しています。
+              左メニューの <strong>Projects</strong> を開くと、作ったサイトが <strong>サムネイル付きの一覧</strong> に並びます。
+              名前の横の地球アイコン（🌐）が Public、鍵アイコンなら Private です。
+              一覧の下のドロップ枠に次のファイルを置けば、2つめのサイトもすぐ作れます。
             </p>
             <div class="success-banner success-final">
               <div class="success-emoji">🎉</div>
@@ -621,8 +742,8 @@
               </div>
             </div>
             <figure class="figure">
-              <img src="Assets/18-published-project-card.png" alt="公開済みプロジェクトカード" class="step-image" data-caption="公開済みプロジェクトカード" loading="lazy">
-              <figcaption class="figcaption">公開済みプロジェクトカード</figcaption>
+              <img src="Assets/26-projects-list.png" alt="プロジェクト一覧" class="step-image" data-caption="プロジェクト一覧" loading="lazy">
+              <figcaption class="figcaption">プロジェクト一覧。上が今回作ったサイトです</figcaption>
             </figure>
           </div>
         </article>
