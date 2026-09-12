@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宮﨑竜治 ｜ 作って、教える。— Portfolio</title>
+<meta name="description" content="生成AI講師 × iOS・組込みエンジニア 宮﨑竜治のポートフォリオ。App Store 公開アプリ、Claude Code プラグイン（OSS）、ゼミ教材などの作品を並べています。">
+<style>
+:root{
+  --paper:#F5F3EE; --ink:#141414; --mute:#6B6863; --gray:#E4E1DA;
+  --rule:#141414; --rule-soft:rgba(20,20,20,.18); --red:#C8102E;
+  --serif:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho",YuMincho,"Noto Serif JP","Times New Roman",Georgia,serif;
+  --display:"Didot","Bodoni 72","Bodoni MT",Georgia,"Times New Roman","Hiragino Mincho ProN",serif;
+  --sans:"Helvetica Neue",Helvetica,Arial,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;position:relative}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-feature-settings:"palt"}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* page frame: two hairlines running down the page, like column rules on a spread */
+.frame{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 48px));border-left:1px solid var(--rule-soft);border-right:1px solid var(--rule-soft);pointer-events:none;z-index:0}
+
+.kicker{font-family:var(--display);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:10px;margin:0 0 14px;font-weight:400}
+.kicker::before{content:"";width:7px;height:7px;background:var(--red);flex:none}
+.arrow{display:inline-block;margin-left:6px;font-family:var(--sans)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.brand{font-family:var(--display);font-size:17px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.brand i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-left:7px;vertical-align:middle;position:relative;top:-1px}
+.menu{display:flex;gap:24px;list-style:none;margin:0;padding:0;font-size:12px;letter-spacing:.14em}
+.menu a{display:inline-flex;gap:7px;align-items:baseline;padding:4px 0;border-bottom:1px solid transparent}
+.menu a b{font-family:var(--display);font-weight:400;color:var(--mute);font-size:12px}
+.menu a:hover{border-bottom-color:var(--ink)}
+.nav-cta{font-size:12px;letter-spacing:.14em;border-bottom:1px solid var(--ink);padding-bottom:1px;white-space:nowrap}
+.nav-cta:hover{color:var(--red);border-bottom-color:var(--red)}
+
+/* ---------- hero ---------- */
+.hero{padding:44px 0 0}
+.mast{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.86;letter-spacing:-.01em;font-size:clamp(56px,13.4vw,180px);margin:6px 0 28px;display:flex;flex-direction:column}
+.mast .o{color:var(--ink)}
+@supports ((-webkit-text-stroke:1px #000)){.mast .o{color:transparent;-webkit-text-stroke:1.5px var(--ink)}}
+.mast .s{align-self:flex-end}
+.deck{display:grid;grid-template-columns:200px 1fr;gap:48px;padding:36px 0 44px;border-top:1px solid var(--rule)}
+.pic{width:168px;padding:6px;border:1px solid var(--rule);background:#fff}
+.pic img{width:100%;aspect-ratio:1;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.who .name{font-family:var(--serif);font-size:24px;font-weight:500;margin:18px 0 2px;letter-spacing:.04em;line-height:1.3}
+.who .role,.who .area{margin:0;font-size:12.5px;color:var(--mute);letter-spacing:.04em;line-height:1.8}
+.say .tag{font-family:var(--serif);font-size:clamp(40px,5.6vw,72px);font-weight:500;line-height:1.15;letter-spacing:.04em;margin:0 0 22px}
+.say .intro{font-family:var(--serif);font-size:16px;line-height:2.1;max-width:62ch;margin:0 0 28px}
+.cta{display:flex;gap:32px;flex-wrap:wrap}
+.cta a{font-size:13px;letter-spacing:.16em;border-bottom:1px solid var(--ink);padding-bottom:3px}
+.cta a:hover{color:var(--red);border-bottom-color:var(--red)}
+.band{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap}
+.band div{flex:1 1 auto;display:flex;align-items:baseline;gap:12px;padding:14px 22px;border-right:1px solid var(--rule-soft);font-size:12px;letter-spacing:.1em;white-space:nowrap}
+.band div:last-child{border-right:0}
+.band b{font-family:var(--display);font-size:30px;font-weight:400;line-height:1;letter-spacing:0}
+
+/* ---------- sections ---------- */
+section{padding:88px 0}
+.sh{display:grid;grid-template-columns:130px 1fr minmax(0,440px);gap:32px;align-items:end;border-top:1px solid var(--rule);padding-top:22px;margin-bottom:44px}
+.sh .n{font-family:var(--display);font-size:76px;line-height:.78;font-weight:400}
+.sh h2{font-family:var(--serif);font-size:clamp(32px,4vw,46px);margin:0;font-weight:500;line-height:1.1;letter-spacing:.04em}
+.sh .en{font-family:var(--display);text-transform:uppercase;letter-spacing:.22em;font-size:12px;color:var(--mute);margin:10px 0 0}
+.sh .desc{font-size:13.5px;color:var(--mute);margin:0;line-height:1.9}
+
+/* ---------- featured figures ---------- */
+.feat{display:grid;grid-template-columns:repeat(12,1fr);gap:28px 24px;margin-bottom:64px;align-items:stretch}
+.lnk{display:flex;flex-direction:column;min-width:0}
+.fig{margin:0;display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.fig .box{position:relative;overflow:hidden;background:var(--gray);border:1px solid var(--rule-soft);flex:1 1 auto;min-height:240px}
+.fig .box.r43{aspect-ratio:4/3}
+.fig .box.r169{aspect-ratio:16/9}
+.fig .box>img.shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.05)}
+.fig .box.game{background:#0d0d0d}
+.fig .box.game>img.shot{object-fit:contain}
+.box.app{background:linear-gradient(180deg,#ECEAE4 0%,#DCD9D1 100%)}
+.box.app .icon{position:absolute;left:9%;top:50%;transform:translateY(-50%);width:26%;aspect-ratio:1;border-radius:22%;filter:grayscale(1);box-shadow:0 14px 34px rgba(0,0,0,.22)}
+.box.app .phone{position:absolute;right:8%;top:7%;height:86%;width:auto;filter:grayscale(1);border:1px solid rgba(0,0,0,.35);box-shadow:0 18px 40px rgba(0,0,0,.22)}
+.fig figcaption{border-top:1px solid var(--rule);margin-top:12px;padding-top:10px;display:flex;justify-content:space-between;gap:12px;font-size:12px;letter-spacing:.06em;line-height:1.6}
+.fig figcaption b{font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.fig figcaption span{color:var(--mute);text-align:right}
+.lnk:hover .box{border-color:var(--ink)}
+.lnk:hover figcaption b{color:var(--red)}
+.f1{grid-column:span 7}.f2{grid-column:span 5}.f3{grid-column:span 5}.f4{grid-column:span 7}
+
+/* ---------- numbered works list ---------- */
+.works{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.works li{border-bottom:1px solid var(--rule)}
+.works .row{display:grid;grid-template-columns:64px minmax(0,1fr) 176px 84px 150px;gap:0 20px;align-items:start;padding:24px 14px;transition:background .18s,color .18s}
+.works a.row:hover,.works a.row:focus-visible{background:var(--ink);color:var(--paper);outline:none}
+.works div.row:hover{background:rgba(20,20,20,.04)}
+.works .no{font-family:var(--display);font-size:24px;line-height:1;padding-top:6px}
+.works h3{font-family:var(--serif);font-size:24px;font-weight:500;margin:0 0 6px;line-height:1.3;letter-spacing:.02em;word-break:keep-all;overflow-wrap:anywhere}
+.works .one{margin:0 0 6px;font-size:15px;line-height:1.8}
+.works .dt{margin:0 0 10px;font-size:13px;color:var(--mute);line-height:1.85;max-width:66ch}
+.works .tech{margin:0;font-size:11.5px;letter-spacing:.1em;color:var(--mute)}
+.works a.row:hover .dt,.works a.row:hover .tech,.works a.row:hover .kind,.works a.row:hover .go span{color:rgba(245,243,238,.72)}
+.meta{display:contents}
+.works .kind{font-size:12px;letter-spacing:.06em;color:var(--mute);padding-top:9px;line-height:1.7}
+.works .year{font-family:var(--display);font-size:15px;letter-spacing:.06em;padding-top:8px;white-space:nowrap}
+.works .go{font-size:12px;letter-spacing:.1em;text-align:right;padding-top:9px;line-height:1.7}
+.works .go span{color:var(--mute)}
+.works .go em{font-style:normal;border-bottom:1px solid currentColor;padding-bottom:1px;white-space:nowrap}
+
+/* ---------- more (table) ---------- */
+.list{width:100%;border-collapse:collapse;border-top:1px solid var(--rule)}
+.list th{font-family:var(--display);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:400;text-align:left;padding:12px 12px;border-bottom:1px solid var(--rule);color:var(--mute)}
+.list td{padding:16px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;font-size:13px}
+.list tr:hover td{background:rgba(20,20,20,.04)}
+.list td.name{font-family:var(--serif);font-size:17px;font-weight:500;letter-spacing:.02em;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
+.list td.name small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--mute);font-weight:400;margin-top:4px;line-height:1.75;letter-spacing:0}
+.list td.kind-cell{color:var(--mute);letter-spacing:.04em;white-space:nowrap}
+.list td.year{font-family:var(--display);font-size:15px;white-space:nowrap}
+.list td.go{text-align:right;white-space:nowrap;letter-spacing:.08em}
+.list td.go a{border-bottom:1px solid var(--ink);padding-bottom:1px}
+.list td.go a:hover{color:var(--red);border-bottom-color:var(--red)}
+.list td.go span{color:var(--mute)}
+
+/* ---------- about ---------- */
+.about .cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.about .col{padding-right:56px}
+.about .col+.col{border-left:1px solid var(--rule-soft);padding-left:56px;padding-right:0}
+.about p.body{font-family:var(--serif);font-size:15.5px;line-height:2.15;margin:0 0 18px;text-align:justify}
+.skills{border-top:1px solid var(--rule);margin-top:30px}
+.skills .row{display:grid;grid-template-columns:104px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule-soft);font-size:13.5px;line-height:1.8}
+.skills .row b{font-size:11px;letter-spacing:.16em;color:var(--mute);font-weight:400;padding-top:4px}
+.career{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.career li{display:grid;grid-template-columns:136px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule-soft)}
+.career .when{font-family:var(--display);font-size:14px;letter-spacing:.06em;padding-top:3px;white-space:nowrap}
+.career .t{font-family:var(--serif);font-size:16px;font-weight:500;line-height:1.5;letter-spacing:.02em}
+.career .t small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--mute);font-weight:400;letter-spacing:0}
+.photo-wide{margin:36px 0 0}
+.photo-wide img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:grayscale(1) contrast(1.05);border:1px solid var(--rule-soft)}
+.photo-wide figcaption{font-size:12px;color:var(--mute);padding-top:9px;letter-spacing:.04em;line-height:1.7}
+
+/* ---------- contact ---------- */
+.contact{background:var(--ink);color:var(--paper);padding:96px 0 80px}
+.contact .sh{border-top-color:var(--paper)}
+.contact .sh .en,.contact .sh .desc,.contact .kicker{color:rgba(245,243,238,.6)}
+.contact .mail{font-family:var(--display);font-size:clamp(22px,4.2vw,54px);letter-spacing:.01em;line-height:1.2;display:inline-block;border-bottom:1px solid var(--paper);padding-bottom:6px;overflow-wrap:anywhere;margin:6px 0 34px}
+.contact .mail:hover{color:#fff;border-bottom-color:var(--red)}
+.contact .links{display:flex;gap:32px;flex-wrap:wrap}
+.contact .links a{font-size:13px;letter-spacing:.16em;border-bottom:1px solid rgba(245,243,238,.5);padding-bottom:3px}
+.contact .links a:hover{border-bottom-color:var(--paper)}
+footer{background:var(--ink);color:rgba(245,243,238,.55);font-size:11.5px;letter-spacing:.06em;padding:20px 0 34px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(245,243,238,.22);padding-top:18px}
+footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--paper)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .sh{grid-template-columns:100px 1fr;gap:20px 28px}
+  .sh .desc{grid-column:2}
+  .about .cols{grid-template-columns:1fr}
+  .about .col{padding-right:0}
+  .about .col+.col{border-left:0;padding-left:0;margin-top:56px;border-top:1px solid var(--rule);padding-top:40px}
+  .works .row{grid-template-columns:52px minmax(0,1fr) 150px 80px 130px;gap:0 18px}
+}
+@media (max-width:720px){
+  .frame{display:none}
+  .nav .wrap{height:52px}
+  .brand{font-size:14px}
+  .menu{gap:12px;font-size:11.5px;letter-spacing:.08em}
+  .menu a b{display:none}
+  .nav-cta{display:none}
+  .hero{padding-top:28px}
+  .mast{margin-bottom:20px}
+  .deck{grid-template-columns:1fr;gap:28px;padding:28px 0 32px}
+  .pic{width:140px}
+  .say .intro{font-size:15px;line-height:2}
+  .band div{flex:1 1 100%;padding:10px 14px;font-size:11.5px;border-right:0;border-bottom:1px solid var(--rule-soft)}
+  .band div:last-child{border-bottom:0}
+  .band b{font-size:26px}
+  .kicker .x{display:none}
+  .fig figcaption{flex-direction:column;gap:2px}
+  .fig figcaption span{text-align:left}
+  section{padding:64px 0}
+  .sh{grid-template-columns:1fr;gap:12px;margin-bottom:32px}
+  .sh .n{font-size:56px}
+  .sh .desc{grid-column:1}
+  .feat{gap:28px 0;margin-bottom:48px}
+  .f1,.f2,.f3,.f4{grid-column:span 12}
+  .fig .box{aspect-ratio:4/3 !important;min-height:0}
+  .fig .box.game{aspect-ratio:1 !important}
+  .works .row{grid-template-columns:44px minmax(0,1fr);gap:0 14px;padding:20px 8px}
+  .works h3{font-size:21px}
+  .works .no{font-size:20px;padding-top:5px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 18px;grid-column:2;margin-top:10px;padding-top:10px;border-top:1px solid var(--rule-soft)}
+  .works a.row:hover .meta{border-top-color:rgba(245,243,238,.3)}
+  .works .kind,.works .year,.works .go{padding-top:0;text-align:left}
+  .list,.list tbody{display:block}
+  .list thead{display:none}
+  .list tr{display:grid;grid-template-columns:1fr auto;gap:0 12px;padding:14px 0;border-bottom:1px solid var(--rule-soft)}
+  .list tr:hover td{background:transparent}
+  .list td{border:0;padding:2px 0}
+  .list td.name{grid-column:1/-1}
+  .list td.kind-cell{white-space:normal}
+  .list td.go{grid-column:1/-1;text-align:left;padding-top:6px}
+  .skills .row{grid-template-columns:1fr;gap:4px}
+  .career li{grid-template-columns:1fr;gap:2px}
+  .contact{padding:72px 0 56px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.works .row{transition:none}}
+</style>
+</head>
+<body>
+<div class="frame" aria-hidden="true"></div>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Ryuji Miyazaki<i></i></a>
+    <ul class="menu">
+      <li><a href="#works"><b>01</b>作品</a></li>
+      <li><a href="#more"><b>02</b>その他</a></li>
+      <li><a href="#about"><b>03</b>経歴</a></li>
+      <li><a href="#contact"><b>04</b>連絡先</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">相談する<span class="arrow">→</span></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Portfolio<span class="x"> ／ 生成AI講師 × iOS・組込みエンジニア</span></p>
+    <h1 class="mast"><span class="o">Ryuji</span><span class="s">Miyazaki</span></h1>
+
+    <div class="deck">
+      <div class="who">
+        <div class="pic"><img src="images/face.png" alt="宮﨑竜治の顔写真"></div>
+        <p class="name">宮﨑 竜治</p>
+        <p class="role">生成AI講師<br>× iOS・組込みエンジニア</p>
+        <p class="area">東京／フルリモート可</p>
+      </div>
+      <div class="say">
+        <p class="tag">作って、教える。</p>
+        <p class="intro">富士ソフトで組込み・バックエンド・モバイルアプリの開発を担当しながら、副業で DMM 生成AI CAMP の Claude Code／Dify ゼミ講師とワークショップ登壇を続けています。個人では iOS アプリを App Store に公開し、Claude Code 向けのプラグインを OSS として公開中。「自分で作れる」と「人に教えられる」の両輪で、AI を使って人のキャリアを前に進める仕事をしています。</p>
+        <div class="cta">
+          <a href="#works">作品を見る<span class="arrow">↓</span></a>
+          <a href="#contact">連絡する<span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div><b>2</b>App Store 公開アプリ</div>
+      <div><b>6</b>OSS 公開プロジェクト</div>
+      <div><b>6</b>ゼミ講師（のべクラス数）</div>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <header class="sh">
+      <span class="n">01</span>
+      <div><h2>作品</h2><p class="en">Selected Works</p></div>
+      <p class="desc">公開しているアプリ・OSS・教材から、いま見てほしいものを並べています。番号の行を押すと公開先へ移動します。</p>
+    </header>
+
+    <div class="feat">
+      <a class="lnk f1" href="https://apps.apple.com/jp/app/pettrack/id6755449885" target="_blank" rel="noopener noreferrer"><figure class="fig">
+        <div class="box app r43">
+          <img class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
+          <img class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
+        </div>
+        <figcaption><b>No. 01 — PetTrack</b><span>iOS アプリ ・ 2025.11</span></figcaption>
+      </figure></a>
+      <a class="lnk f2" href="https://apps.apple.com/jp/app/scanguard/id6755509656" target="_blank" rel="noopener noreferrer"><figure class="fig">
+        <div class="box app">
+          <img class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
+          <img class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
+        </div>
+        <figcaption><b>No. 02 — ScanGuard</b><span>iOS アプリ ・ 2025.11</span></figcaption>
+      </figure></a>
+      <a class="lnk f3" href="https://miyazakiryuji.github.io/nimbus-ide/" target="_blank" rel="noopener noreferrer"><figure class="fig">
+        <div class="box">
+          <img class="shot" src="images/nimbus.png" alt="Nimbus の導入手順ページ">
+        </div>
+        <figcaption><b>No. 04 — Nimbus</b><span>デスクトップアプリ ・ 2026.08</span></figcaption>
+      </figure></a>
+      <figure class="fig f4">
+        <div class="box r169">
+          <img class="shot" src="images/header-claudecode.png" alt="ゼミ告知の見出し画像">
+        </div>
+        <figcaption><b>No. 08 — 見出し画像シリーズ</b><span>画像・デザイン ・ 2026.09</span></figcaption>
+      </figure>
+    </div>
+
+    <ol class="works">
+      <li>
+        <a class="row" href="https://apps.apple.com/jp/app/pettrack/id6755449885" target="_blank" rel="noopener noreferrer">
+          <span class="no">01</span>
+          <div class="main">
+            <h3>PetTrack</h3>
+            <p class="one">ペットの食事・散歩・健康記録を、家族みんなで続けられるアプリ。</p>
+            <p class="dt">MVVM で画面とデータの責務を分け、Firebase Authentication と Cloud Firestore で家族間のリアルタイム共有を実現。企画から設計・実装・審査提出まで一人で対応し App Store に公開。</p>
+            <p class="tech">Swift ／ SwiftUI ／ Firebase ／ MVVM</p>
+          </div>
+          <div class="meta">
+            <span class="kind">スマホアプリ（iOS）</span>
+            <span class="year">2025.11</span>
+            <span class="go"><em>App Store</em><span class="arrow">↗</span></span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://apps.apple.com/jp/app/scanguard/id6755509656" target="_blank" rel="noopener noreferrer">
+          <span class="no">02</span>
+          <div class="main">
+            <h3>ScanGuard</h3>
+            <p class="one">書類を共有する前に、写り込んだ個人情報を AI が自動で見つけて隠すアプリ。</p>
+            <p class="dt">Apple の Vision と AI で、顔・氏名・電話番号・マイナンバーなど 30 種類以上の個人情報を画像から検出してマスキング。すべて端末内で処理し、外部にデータを送らない設計。</p>
+            <p class="tech">Swift ／ SwiftUI ／ Vision</p>
+          </div>
+          <div class="meta">
+            <span class="kind">スマホアプリ（iOS）</span>
+            <span class="year">2025.11</span>
+            <span class="go"><em>App Store</em><span class="arrow">↗</span></span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://github.com/miyazakiryuji/cc-DevelopmentTeam" target="_blank" rel="noopener noreferrer">
+          <span class="no">03</span>
+          <div class="main">
+            <h3>cc-DevelopmentTeam</h3>
+            <p class="one">個人開発に「設計・開発・レビュー・テスト・セキュリティ」の 5 部署をつける仕組み。</p>
+            <p class="dt">Claude Code のサブエージェント 5 体と 13 個のスラッシュコマンドで、チーム開発の流れを一人でも回せるようにしたプラグイン。仕様書なしで作り始めても、完了時に仕様書が自動で書き戻される。</p>
+            <p class="tech">Claude Code ／ Markdown ／ Bash</p>
+          </div>
+          <div class="meta">
+            <span class="kind">自動化ツール（Claude Code プラグイン・OSS）</span>
+            <span class="year">2026.05</span>
+            <span class="go"><em>GitHub</em><span class="arrow">↗</span></span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://miyazakiryuji.github.io/nimbus-ide/" target="_blank" rel="noopener noreferrer">
+          <span class="no">04</span>
+          <div class="main">
+            <h3>Nimbus</h3>
+            <p class="one">Claude Code のエージェントを操縦するためのコックピット IDE。</p>
+            <p class="dt">Code - OSS を土台に、Claude Code のセッション・承認・並列タスク・コストを 1 つの画面で見渡せるようにした非公式の独立プロジェクト。導入手順ページを GitHub Pages で公開。</p>
+            <p class="tech">TypeScript ／ Electron ／ Claude Code</p>
+          </div>
+          <div class="meta">
+            <span class="kind">デスクトップアプリ（OSS・開発中）</span>
+            <span class="year">2026.08</span>
+            <span class="go"><em>導入ページ</em><span class="arrow">↗</span></span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://github.com/miyazakiryuji/my-secretary" target="_blank" rel="noopener noreferrer">
+          <span class="no">05</span>
+          <div class="main">
+            <h3>my-secretary</h3>
+            <p class="one">フォルダを開くだけで出迎えてくれる、自分専用の AI 秘書（ワークショップ配布プラグイン）。</p>
+            <p class="dt">朝会・夕会・週次レビュー、締切と返事待ちの管理、人物メモと打ち合わせ準備、代筆までを Claude Code のスキルとフックで実装。DMM のワークショップ題材を「後から育てられる資産」として公開。同じ狙いで proposal-slidekit（商談メモ→提案書）、competitor-researcher（競合調査）も公開。</p>
+            <p class="tech">Claude Code ／ Python ／ Skills / Hooks</p>
+          </div>
+          <div class="meta">
+            <span class="kind">自動化ツール（Claude Code プラグイン・OSS）</span>
+            <span class="year">2026.07–09</span>
+            <span class="go"><em>GitHub</em><span class="arrow">↗</span></span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://miyazakiryuji.github.io/ai-app-zemi/" target="_blank" rel="noopener noreferrer">
+          <span class="no">06</span>
+          <div class="main">
+            <h3>AIアプリ開発入門ゼミ<wbr>受講生向けサイト</h3>
+            <p class="one">DMM のゼミ全 7 回の教材・演習を 1 か所にまとめた受講生向けサイト。</p>
+            <p class="dt">カリキュラムの正本（Markdown）から公開ページを生成する仕組みにして、教材の修正がサイトに素直に反映されるようにした。実機スクリーンショットと図解つき。GitHub Pages で公開。</p>
+            <p class="tech">HTML / CSS ／ Python ／ Claude Code ／ GitHub Pages</p>
+          </div>
+          <div class="meta">
+            <span class="kind">Web サイト</span>
+            <span class="year">2026.09</span>
+            <span class="go"><em>サイト</em><span class="arrow">↗</span></span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <div class="row">
+          <span class="no">07</span>
+          <div class="main">
+            <h3>スペースインベーダー<wbr>（ワークショップ教材）</h3>
+            <p class="one">プログラミング未経験者が 60 分で作れる、Claude Code のゲーム制作ワークショップ。</p>
+            <p class="dt">HTML 1 ファイルで動くレトロなインベーダーを題材に、「小さく頼んで・遊んで確かめて・次へ」の型で進める手順書を作成。防御壁・UFO・効果音まで入った完成見本つき。</p>
+            <p class="tech">Claude Code ／ HTML / JavaScript（Canvas）</p>
+          </div>
+          <div class="meta">
+            <span class="kind">学習の成果物（ブラウザゲーム・教材）</span>
+            <span class="year">2026.08</span>
+            <span class="go"><span>DMM 生成AI CAMP で開催</span></span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="row">
+          <span class="no">08</span>
+          <div class="main">
+            <h3>ゼミ告知の<wbr>見出し画像シリーズ</h3>
+            <p class="one">ペンギン先生が案内する、ゼミ 4 種 × 期ごとの告知バナー。</p>
+            <p class="dt">画像生成 AI でキャラクターを出し、日本語の文字は Pillow で合成する分担にして文字崩れを防いだ。同じ仕組みで書籍の販促 POP と LP の自動生成システムも制作。</p>
+            <p class="tech">画像生成 AI ／ Python（Pillow） ／ Codex</p>
+          </div>
+          <div class="meta">
+            <span class="kind">画像・デザイン</span>
+            <span class="year">2026.09</span>
+            <span class="go"><span>DMM 生成AI CAMP のコミュニティで掲示</span></span>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <header class="sh">
+      <span class="n">02</span>
+      <div><h2>その他の制作物</h2><p class="en">More Works</p></div>
+      <p class="desc">公開中の小さなプロジェクトと、守秘のため詳細を出せない業務案件です。</p>
+    </header>
+    <table class="list">
+      <thead><tr><th>Name</th><th>Type</th><th>Year</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="name">リカイド／Boarding Pass<small>授業中の理解度チェックと、演習・宿題・模擬試験の成績集計。複数ゼミ・複数期で稼働中（Node.js / Turso / Vercel）</small></td><td class="kind-cell">Web アプリ</td><td class="year">2026</td><td class="go"><span>受講生専用</span></td></tr>
+        <tr><td class="name">proposal-slidekit<small>商談メモから提案書と PowerPoint を自動作成する Claude Code プラグイン</small></td><td class="kind-cell">OSS</td><td class="year">2026</td><td class="go"><a href="https://github.com/miyazakiryuji/proposal-slidekit" target="_blank" rel="noopener noreferrer">GitHub</a><span class="arrow">↗</span></td></tr>
+        <tr><td class="name">competitor-researcher<small>競合の料金・特徴を Web 調査し、出典つき比較レポートを作る「専属リサーチャー」</small></td><td class="kind-cell">OSS</td><td class="year">2026</td><td class="go"><a href="https://github.com/miyazakiryuji/competitor-researcher" target="_blank" rel="noopener noreferrer">GitHub</a><span class="arrow">↗</span></td></tr>
+        <tr><td class="name">cc-PortfolioKit<small>対話だけで 1 ページのポートフォリオを作る Claude Code プラグイン</small></td><td class="kind-cell">OSS</td><td class="year">2026</td><td class="go"><a href="https://github.com/miyazakiryuji/cc-PortfolioKit" target="_blank" rel="noopener noreferrer">GitHub</a><span class="arrow">↗</span></td></tr>
+        <tr><td class="name">Claude Code 2Day マスタープロンプト<small>公開講座（全 4 コマ）で使うプロンプト集をそのまま公開</small></td><td class="kind-cell">講座教材</td><td class="year">2026</td><td class="go"><a href="https://miyazakiryuji.github.io/claude-code-master-prompts/" target="_blank" rel="noopener noreferrer">サイト</a><span class="arrow">↗</span></td></tr>
+        <tr><td class="name">生成AIパスポート 勉強ノート<small>試験範囲の要点を 1 ページにまとめた学習ノート</small></td><td class="kind-cell">学習ノート</td><td class="year">2026</td><td class="go"><a href="https://miyazakiryuji.github.io/genai-passport-notes/" target="_blank" rel="noopener noreferrer">サイト</a><span class="arrow">↗</span></td></tr>
+        <tr><td class="name">書籍 POP・LP 自動生成システム<small>販促 POP 画像と LP を一括生成するマルチエージェント構成（Python / Flask / 画像生成 API）</small></td><td class="kind-cell">受託開発</td><td class="year">2026</td><td class="go"><span>非公開</span></td></tr>
+        <tr><td class="name">製造業向け電子タグ<small>NFC・E-paper・ZigBee を統合した省電力の組込み機器。要件定義から納品まで主担当（C++ / Arduino）</small></td><td class="kind-cell">業務案件</td><td class="year">2024</td><td class="go"><span>非公開</span></td></tr>
+        <tr><td class="name">ドライブレコーダー連携 Web のバックエンド<small>エラーディスパッチャの新規実装と不具合改修（Go / Echo / MariaDB）</small></td><td class="kind-cell">業務案件</td><td class="year">2024</td><td class="go"><span>非公開</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <header class="sh">
+      <span class="n">03</span>
+      <div><h2>宮﨑竜治について</h2><p class="en">About</p></div>
+      <p class="desc">営業からテスターへ、そして組込み・バックエンド・アプリ開発と生成AI の講師へ。歩いてきた道と、いま使える道具です。</p>
+    </header>
+    <div class="cols">
+      <div class="col">
+        <p class="kicker">Profile</p>
+        <p class="body">大学卒業後、三菱電機ITソリューションズでコンサルティング営業を担当し、5 エリアの代理店で売上目標を継続達成。2022 年に富士ソフトへ転職し、テスターからキャリアを始めて、Go でのバックエンド開発、C++ による組込み機器の主担当、Flutter でのアプリ開発へと担当領域を広げてきました。</p>
+        <p class="body">並行して生成AI の実務にも取り組み、DMM 生成AI CAMP では Claude Code／Dify のゼミ講師として、3 か月・全 13 回のゼミをのべ 6 クラス担当。受講生の理解度を測る学習管理システムも自作して本番運用しています。「自分で作れる」と「人に教えられる」を両輪に、AI で人のキャリアを前に進める仕事をしていきたいと考えています。</p>
+        <div class="skills">
+          <div class="row"><b>生成AI</b><span>Claude Code、Codex、Dify、ChatGPT / Claude、画像生成 AI</span></div>
+          <div class="row"><b>アプリ開発</b><span>Swift / SwiftUI、Dart / Flutter、Firebase</span></div>
+          <div class="row"><b>Web・サーバ</b><span>HTML / CSS / JavaScript、Node.js、Python、Go、Turso / SQLite、Vercel、GitHub Pages</span></div>
+          <div class="row"><b>組込み</b><span>C++ / Arduino（NFC・E-paper・ZigBee）</span></div>
+          <div class="row"><b>教える</b><span>ゼミ講師（のべ 6 クラス）、ワークショップ設計、教材・演習問題づくり</span></div>
+        </div>
+      </div>
+      <div class="col">
+        <p class="kicker">Career</p>
+        <ul class="career">
+          <li><span class="when">2022.09 — 現在</span><span class="t">富士ソフト株式会社<small>組込み・業務系エンジニア（本業）</small></span></li>
+          <li><span class="when">2025.07 — 現在</span><span class="t">合同会社DMM 生成AI CAMP<small>ゼミ講師・ワークショップ登壇（副業）</small></span></li>
+          <li><span class="when">2026.04 — 現在</span><span class="t">デジハク（UNIT BASE株式会社）<small>生成AI PRO コース 専属メンター（副業）</small></span></li>
+          <li><span class="when">2021.04 — 2022.08</span><span class="t">三菱電機ITソリューションズ株式会社<small>コンサルティング営業</small></span></li>
+        </ul>
+        <figure class="photo-wide">
+          <img src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
+          <figcaption>DMM 初のオフラインイベント「AI 1DAY Boot Camp」に運営スタッフとして参加（2026.05）</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <header class="sh">
+      <span class="n">04</span>
+      <div><h2>一緒に作りませんか。</h2><p class="en">Contact</p></div>
+      <p class="desc">生成AI の研修・ワークショップ講師、AI メンタリング、モバイルアプリや業務自動化の開発など、業務委託のご相談はメールでどうぞ。作ったものは GitHub にも置いています。</p>
+    </header>
+    <p class="kicker">Mail</p>
+    <a class="mail" href="mailto:miyazaki.ryuji.pgc@gmail.com">miyazaki.ryuji.pgc@gmail.com</a>
+    <div class="links">
+      <a href="mailto:miyazaki.ryuji.pgc@gmail.com">メールで連絡する<span class="arrow">→</span></a>
+      <a href="https://github.com/miyazakiryuji" target="_blank" rel="noopener noreferrer">GitHub を見る<span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><b>© 2026 Ryuji Miyazaki</b></span>
+    <span>このページは portfolio.md（設計書）から Claude Code で作成しています</span>
+  </div>
+</footer>
+</body>
+</html>

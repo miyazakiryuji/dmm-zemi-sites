@@ -37,7 +37,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- hero ---------- */
 .hero{padding:72px 0 64px}
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
 .pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent-ink);background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin-bottom:22px}
 .pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(108,61,244,.18)}
 h1{font-size:clamp(46px,7.2vw,88px);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin:0 0 22px}
@@ -48,18 +48,22 @@ h1 .ac{color:var(--accent)}
 .hero p.desc{color:var(--mute);margin:0 0 30px;max-width:540px}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
 
-.hero-side{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.photo{grid-column:1 / -1;display:flex;justify-content:center;margin-bottom:6px}
-.photo .ring{width:196px;height:196px;border-radius:50%;padding:8px;border:1.5px solid var(--accent);position:relative}
-.photo .ring::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px dashed rgba(108,61,244,.35)}
+.hero-side{display:flex;justify-content:center}
+.photo{position:relative;padding-bottom:18px}
+.photo .ring{width:228px;height:228px;border-radius:50%;padding:9px;border:1.5px solid var(--accent);position:relative;background:var(--bg)}
+.photo .ring::after{content:"";position:absolute;inset:-16px;border-radius:50%;border:1px dashed rgba(108,61,244,.35)}
 .photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;transition:transform .2s}
-.stat:hover{transform:translateY(-3px)}
-.stat b{display:block;font-size:34px;line-height:1;font-weight:800;letter-spacing:-.03em}
-.stat b sup{font-size:16px;vertical-align:top;margin-left:2px}
-.stat span{display:block;font-size:12px;color:var(--mute);margin-top:8px;letter-spacing:.02em}
-.stat.ac{background:var(--accent);border-color:var(--accent);color:#fff}
-.stat.ac span{color:rgba(255,255,255,.8)}
+.photo .chip{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:700;box-shadow:var(--shadow)}
+.photo .chip::before{content:"";width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+
+/* 実績の帯（数字＋ラベルを横に並べる。均等なタイルにしない） */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:60px 0 0;padding:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:26px 28px 22px;border-left:1px solid var(--line)}
+.stats div:first-child{border-left:0;padding-left:0}
+.stats dt{font-size:12px;color:var(--mute);letter-spacing:.04em;margin:0 0 6px}
+.stats dd{margin:0;font-size:44px;line-height:1;font-weight:800;letter-spacing:-.04em}
+.stats dd sup{font-size:18px;vertical-align:top;margin-left:2px;color:var(--accent)}
+.stats dd small{display:block;font-size:12px;font-weight:500;letter-spacing:0;color:#9A9AA6;margin-top:10px}
 
 /* ---------- sections ---------- */
 section{padding:72px 0}
@@ -148,8 +152,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
-  .hero .wrap{grid-template-columns:1fr;gap:40px}
-  .hero-side{max-width:520px}
+  .hero .hero-grid{grid-template-columns:1fr;gap:36px}
+  .hero-side{justify-content:center}
   .card{grid-column:span 3}
   .card.featured{grid-column:span 3}
   .about .cols{grid-template-columns:1fr;gap:40px}
@@ -159,8 +163,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .hero{padding:48px 0 40px}
   section{padding:56px 0}
   .card,.card.featured{grid-column:span 6}
-  .hero-side{grid-template-columns:1fr 1fr}
-  .stat b{font-size:28px}
+  .stats{margin-top:40px}
+  .stats div{padding:18px 12px 16px}
+  .stats dt{font-size:11px}
+  .stats dd{font-size:32px}
+  .stats dd small{font-size:11px}
   .list thead{display:none}
   .list tr{display:grid;grid-template-columns:1fr auto;padding:14px 0;border-bottom:1px solid var(--line)}
   .list td{border:0;padding:2px 0}
@@ -189,7 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </header>
 
 <section class="hero">
-  <div class="wrap">
+  <div class="wrap hero-grid">
     <div>
       <span class="pill">業務委託・講師のご相談 受付中</span>
       <h1>作って、<br><span class="ac">教える。</span></h1>
@@ -201,12 +208,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </div>
     </div>
     <div class="hero-side">
-      <div class="photo"><div class="ring"><img src="images/face.png" alt="宮﨑竜治の顔写真"></div></div>
-      <div class="stat"><b>2</b><span>App Store 公開アプリ</span></div>
-      <div class="stat"><b>6</b><span>OSS 公開プロジェクト</span></div>
-      <div class="stat"><b>6</b><span>ゼミ講師（のべクラス数）</span></div>
-      <div class="stat ac"><b>370<sup>+</sup></b><span>担当ゼミへの応募者</span></div>
+      <div class="photo">
+        <div class="ring"><img src="images/face.png" alt="宮﨑竜治の顔写真"></div>
+        <span class="chip">東京 ・ フルリモート可</span>
+      </div>
     </div>
+  </div>
+  <div class="wrap">
+    <dl class="stats">
+      <div><dt>App Store 公開アプリ</dt><dd>2<small>PetTrack ・ ScanGuard</small></dd></div>
+      <div><dt>OSS 公開プロジェクト</dt><dd>6<small>Claude Code プラグインなど</small></dd></div>
+      <div><dt>ゼミ講師（のべクラス数）</dt><dd>6<small>Claude Code ・ Dify</small></dd></div>
+    </dl>
   </div>
 </section>
 
