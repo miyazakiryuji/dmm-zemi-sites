@@ -206,6 +206,9 @@ footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-tr
   .contact{padding:72px 0 56px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.works .row{transition:none}}
+
+a:focus-visible,button:focus-visible{outline:3px solid #111111;outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -214,15 +217,16 @@ footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-tr
 <header class="nav" id="top">
   <div class="wrap">
     <a class="brand" href="#top">Ryuji Miyazaki<i></i></a>
-    <ul class="menu">
+    <nav aria-label="ページ内メニュー"><ul class="menu">
       <li><a href="#works"><b>01</b>作品</a></li>
       <li><a href="#more"><b>02</b>その他</a></li>
       <li><a href="#about"><b>03</b>経歴</a></li>
       <li><a href="#contact"><b>04</b>連絡先</a></li>
-    </ul>
+    </ul></nav>
     <a class="nav-cta" href="#contact">相談する<span class="arrow">→</span></a>
   </div>
 </header>
+<main id="main">
 
 <section class="hero">
   <div class="wrap">
@@ -265,27 +269,27 @@ footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-tr
     <div class="feat">
       <a class="lnk f1" href="https://apps.apple.com/jp/app/pettrack/id6755449885" target="_blank" rel="noopener noreferrer"><figure class="fig">
         <div class="box app r43">
-          <img class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
-          <img class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
+          <img loading="lazy" decoding="async" class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
+          <img loading="lazy" decoding="async" class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
         </div>
         <figcaption><b>No. 01 — PetTrack</b><span>iOS アプリ ・ 2025.11</span></figcaption>
       </figure></a>
       <a class="lnk f2" href="https://apps.apple.com/jp/app/scanguard/id6755509656" target="_blank" rel="noopener noreferrer"><figure class="fig">
         <div class="box app">
-          <img class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
-          <img class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
+          <img loading="lazy" decoding="async" class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
+          <img loading="lazy" decoding="async" class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
         </div>
         <figcaption><b>No. 02 — ScanGuard</b><span>iOS アプリ ・ 2025.11</span></figcaption>
       </figure></a>
       <a class="lnk f3" href="https://miyazakiryuji.github.io/nimbus-ide/" target="_blank" rel="noopener noreferrer"><figure class="fig">
         <div class="box">
-          <img class="shot" src="images/nimbus.png" alt="Nimbus の導入手順ページ">
+          <img loading="lazy" decoding="async" class="shot" src="images/nimbus.png" alt="Nimbus の導入手順ページ">
         </div>
         <figcaption><b>No. 04 — Nimbus</b><span>デスクトップアプリ ・ 2026.08</span></figcaption>
       </figure></a>
       <figure class="fig f4">
         <div class="box r169">
-          <img class="shot" src="images/header-claudecode.png" alt="ゼミ告知の見出し画像">
+          <img loading="lazy" decoding="async" class="shot" src="images/header-claudecode.png" alt="ゼミ告知の見出し画像">
         </div>
         <figcaption><b>No. 08 — 見出し画像シリーズ</b><span>画像・デザイン ・ 2026.09</span></figcaption>
       </figure>
@@ -432,7 +436,7 @@ footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-tr
       <p class="desc">公開中の小さなプロジェクトと、守秘のため詳細を出せない業務案件です。</p>
     </header>
     <table class="list">
-      <thead><tr><th>Name</th><th>Type</th><th>Year</th><th></th></tr></thead>
+      <caption class="sr-only">その他の制作物の一覧</caption><thead><tr><th scope="col">Name</th><th scope="col">Type</th><th scope="col">Year</th><th scope="col">Link</th></tr></thead>
       <tbody>
         <tr><td class="name">リカイド／Boarding Pass<small>授業中の理解度チェックと、演習・宿題・模擬試験の成績集計。複数ゼミ・複数期で稼働中（Node.js / Turso / Vercel）</small></td><td class="kind-cell">Web アプリ</td><td class="year">2026</td><td class="go"><span>受講生専用</span></td></tr>
         <tr><td class="name">proposal-slidekit<small>商談メモから提案書と PowerPoint を自動作成する Claude Code プラグイン</small></td><td class="kind-cell">OSS</td><td class="year">2026</td><td class="go"><a href="https://github.com/miyazakiryuji/proposal-slidekit" target="_blank" rel="noopener noreferrer">GitHub</a><span class="arrow">↗</span></td></tr>
@@ -477,7 +481,7 @@ footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-tr
           <li><span class="when">2021.04 — 2022.08</span><span class="t">三菱電機ITソリューションズ株式会社<small>コンサルティング営業</small></span></li>
         </ul>
         <figure class="photo-wide">
-          <img src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
+          <img loading="lazy" decoding="async" src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
           <figcaption>DMM 初のオフラインイベント「AI 1DAY Boot Camp」に運営スタッフとして参加（2026.05）</figcaption>
         </figure>
       </div>
@@ -501,6 +505,7 @@ footer b{font-family:var(--display);font-weight:400;letter-spacing:.12em;text-tr
   </div>
 </section>
 
+</main>
 <footer>
   <div class="wrap">
     <span><b>© 2026 Ryuji Miyazaki</b></span>

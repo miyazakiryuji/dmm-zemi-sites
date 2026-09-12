@@ -51,7 +51,7 @@ svg.i{width:14px;height:14px;flex:none}
 .pill{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink-2);border:1px solid var(--line-2);padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.03)}
 .pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 4px var(--ac-25),0 0 14px var(--ac)}
 .hero-top{display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;margin-top:34px}
-h1.name{margin:0 0 0 -.04em;font-size:clamp(66px,15.8vw,208px);line-height:.88;letter-spacing:-.045em;font-weight:900;text-transform:uppercase;color:var(--ink)}
+h1.name{margin:0 0 0 -.04em;font-size:clamp(66px,13.5vw,170px);line-height:.88;letter-spacing:-.045em;font-weight:900;text-transform:uppercase;color:var(--ink)}
 h1.name span{display:block}
 h1.name .l2{color:var(--bg);-webkit-text-stroke:2.5px rgba(244,245,248,.92);paint-order:stroke fill}
 @supports not (-webkit-text-stroke:1px #fff){h1.name .l2{color:var(--ink-2)}}
@@ -187,9 +187,9 @@ footer{border-top:1px solid var(--line);color:var(--mute);font-size:12px;padding
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 /* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.ticker .track{animation:none}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.ticker{overflow:visible}.ticker .track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}.ticker ul{flex-wrap:wrap;justify-content:center}.ticker ul:nth-child(n+2){display:none}}
 
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
@@ -209,7 +209,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .ruled li{grid-template-columns:44px 1fr 110px 56px 120px;gap:14px}
 }
 @media (max-width:720px){
-  .nav ul{display:none}
+  .nav ul{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}
   .hero{padding-top:44px}
   .hero-top{grid-template-columns:1fr;gap:28px;align-items:start}
   .avatar{width:148px;height:148px;margin:10px 0 16px 22px}
@@ -234,6 +234,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .contact::after{width:360px;height:360px}
   .cta .btn{flex:1 1 auto}
 }
+
+a:focus-visible,button:focus-visible{outline:3px solid #FFD43B;outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:380px){h1.name{font-size:clamp(46px,15vw,72px)}}
+@media print{.rv{opacity:1!important;transform:none!important}:root{--bg:#fff;--bg-2:#fff;--panel:#fff;--panel-2:#f4f4f6;--ink:#111;--ink-2:#333;--mute:#555;--line:#ddd;--line-2:#bbb}h1.name .l2{color:#111;-webkit-text-stroke:0}}
 </style>
 </head>
 <body>
@@ -242,15 +247,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <header class="nav" id="top">
   <div class="wrap">
     <a class="brand" href="#top"><span class="mark">RM</span>Ryuji Miyazaki</a>
-    <ul>
+    <nav aria-label="ページ内メニュー"><ul>
       <li><a href="#works" data-n="01">作品</a></li>
       <li><a href="#more" data-n="02">その他</a></li>
       <li><a href="#about" data-n="03">経歴</a></li>
       <li><a href="#contact" data-n="04">連絡先</a></li>
-    </ul>
+    </ul></nav>
     <a class="btn ac small" href="#contact">相談する</a>
   </div>
 </header>
+<main id="main">
 
 <section class="hero">
   <div class="wrap">
@@ -319,8 +325,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
       <a class="card feat rv" href="https://apps.apple.com/jp/app/pettrack/id6755449885" target="_blank" rel="noopener noreferrer">
         <div class="shot app">
-          <img class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
-          <img class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
+          <img loading="lazy" decoding="async" class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
+          <img loading="lazy" decoding="async" class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
         </div>
         <div class="body">
           <div class="meta"><span class="idx">01</span><span>iOS アプリ</span><span>2025.11</span></div>
@@ -333,8 +339,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
       <a class="card feat rv" href="https://apps.apple.com/jp/app/scanguard/id6755509656" target="_blank" rel="noopener noreferrer">
         <div class="shot app">
-          <img class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
-          <img class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
+          <img loading="lazy" decoding="async" class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
+          <img loading="lazy" decoding="async" class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
         </div>
         <div class="body">
           <div class="meta"><span class="idx">02</span><span>iOS アプリ</span><span>2025.11</span></div>
@@ -346,7 +352,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </a>
 
       <a class="card rv" href="https://github.com/miyazakiryuji/cc-DevelopmentTeam" target="_blank" rel="noopener noreferrer">
-        <div class="shot"><img src="images/cc-devteam.png" alt="cc-DevelopmentTeam の GitHub ページ"></div>
+        <div class="shot"><img loading="lazy" decoding="async" src="images/cc-devteam.png" alt="cc-DevelopmentTeam の GitHub ページ"></div>
         <div class="body">
           <div class="meta"><span class="idx">03</span><span>Claude Code プラグイン</span><span>OSS ・ 2026.05</span></div>
           <h3>cc-DevelopmentTeam</h3>
@@ -357,7 +363,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </a>
 
       <a class="card rv" href="https://miyazakiryuji.github.io/nimbus-ide/" target="_blank" rel="noopener noreferrer">
-        <div class="shot"><img src="images/nimbus.png" alt="Nimbus の導入手順ページ"></div>
+        <div class="shot"><img loading="lazy" decoding="async" src="images/nimbus.png" alt="Nimbus の導入手順ページ"></div>
         <div class="body">
           <div class="meta"><span class="idx">04</span><span>デスクトップアプリ</span><span>OSS・開発中 ・ 2026.08</span></div>
           <h3>Nimbus</h3>
@@ -368,7 +374,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </a>
 
       <a class="card rv" href="https://github.com/miyazakiryuji/my-secretary" target="_blank" rel="noopener noreferrer">
-        <div class="shot"><img src="images/my-secretary.png" alt="my-secretary の GitHub ページ"></div>
+        <div class="shot"><img loading="lazy" decoding="async" src="images/my-secretary.png" alt="my-secretary の GitHub ページ"></div>
         <div class="body">
           <div class="meta"><span class="idx">05</span><span>Claude Code プラグイン</span><span>OSS ・ 2026.07 - 09</span></div>
           <h3>my-secretary</h3>
@@ -379,7 +385,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </a>
 
       <a class="card rv" href="https://miyazakiryuji.github.io/ai-app-zemi/" target="_blank" rel="noopener noreferrer">
-        <div class="shot"><img src="images/ai-app-zemi.png" alt="AIアプリ開発入門ゼミ 受講生向けサイト"></div>
+        <div class="shot"><img loading="lazy" decoding="async" src="images/ai-app-zemi.png" alt="AIアプリ開発入門ゼミ 受講生向けサイト"></div>
         <div class="body">
           <div class="meta"><span class="idx">06</span><span>Web サイト</span><span>2026.09</span></div>
           <h3>AIアプリ開発入門ゼミ 受講生向けサイト</h3>
@@ -390,7 +396,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </a>
 
       <article class="card rv">
-        <div class="shot game"><img src="images/invader.png" alt="ワークショップで作るスペースインベーダー"></div>
+        <div class="shot game"><img loading="lazy" decoding="async" src="images/invader.png" alt="ワークショップで作るスペースインベーダー"></div>
         <div class="body">
           <div class="meta"><span class="idx">07</span><span>ワークショップ教材</span><span>2026.08</span></div>
           <h3>スペースインベーダーを作ろう</h3>
@@ -401,7 +407,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </article>
 
       <article class="card rv">
-        <div class="shot"><img src="images/header-claudecode.png" alt="ゼミ告知の見出し画像"></div>
+        <div class="shot"><img loading="lazy" decoding="async" src="images/header-claudecode.png" alt="ゼミ告知の見出し画像"></div>
         <div class="body">
           <div class="meta"><span class="idx">08</span><span>画像・デザイン</span><span>2026.09</span></div>
           <h3>ゼミ告知の見出し画像シリーズ</h3>
@@ -466,7 +472,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <li><span class="when">2021.04 — 2022.08</span><span class="t">三菱電機ITソリューションズ株式会社<small>コンサルティング営業</small></span></li>
         </ul>
         <figure class="side-photo">
-          <img src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
+          <img loading="lazy" decoding="async" src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
           <figcaption>DMM 初のオフラインイベント「AI 1DAY Boot Camp」に運営スタッフとして参加（2026.05）</figcaption>
         </figure>
       </div>
@@ -487,6 +493,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </section>
 
+</main>
 <footer>
   <div class="wrap">
     <span>© 2026 Ryuji Miyazaki</span>
@@ -495,6 +502,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </footer>
 
 <script>
+document.documentElement.classList.add('js');
 (function(){
   var nav=document.querySelector('.nav'),bar=document.querySelector('.bar');
   function onScroll(){

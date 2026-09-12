@@ -8,7 +8,7 @@
 <style>
 :root{
   --cream:#FFF4E1; --paper:#FFFDF8; --ink:#2B1A10; --mute:#7A6353; --line:#EAD6BE;
-  --orange:#F26B1D; --coral:#F04E5E; --mustard:#F7B733; --peach:#FFD9B3; --peach-2:#FFE7CC; --rose:#FFCBD0; --sand:#FDE6B8;
+  --orange:#F26B1D; --coral:#F04E5E; --coral-text:#B8283A; --mustard:#F7B733; --peach:#FFD9B3; --peach-2:#FFE7CC; --rose:#FFCBD0; --sand:#FDE6B8;
   --dark:#2B1A10; --dark-2:#3B2416;
   --font:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
   --round:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
@@ -39,7 +39,7 @@ section{position:relative}
 .mark{background:linear-gradient(transparent 58%,var(--mustard) 58%,var(--mustard) 92%,transparent 92%);padding:0 .08em}
 .nb{white-space:nowrap}
 .mark.c{background:linear-gradient(transparent 58%,var(--rose) 58%,var(--rose) 92%,transparent 92%)}
-.label{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--coral);margin:0 0 6px;display:flex;align-items:center;gap:10px;letter-spacing:.02em}
+.label{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--coral-text);margin:0 0 6px;display:flex;align-items:center;gap:10px;letter-spacing:.02em}
 .label b{font-style:normal;font-family:var(--font);font-size:12px;letter-spacing:.14em;font-weight:800;background:var(--ink);color:var(--cream);padding:1px 8px;border-radius:6px}
 h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-.02em;line-height:1.2;margin:0 0 10px;font-weight:800}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:38px;flex-wrap:wrap}
@@ -53,7 +53,7 @@ h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-.02em;line-height:1.2;margin
 .nav.scrolled{border-bottom-color:var(--ink)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
 .brand{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:19px;letter-spacing:.02em}
-.brand .tag{font-family:var(--serif);font-style:italic;font-weight:400;font-size:13px;color:var(--coral);background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;padding:0 9px;transform:rotate(-4deg);line-height:1.6}
+.brand .tag{font-family:var(--serif);font-style:italic;font-weight:400;font-size:13px;color:var(--coral-text);background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;padding:0 9px;transform:rotate(-4deg);line-height:1.6}
 .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:24px;font-size:14px;font-weight:700;color:var(--mute);font-family:var(--round)}
 .nav ul a{position:relative;padding:4px 0}
 .nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;border-radius:2px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .2s}
@@ -68,9 +68,9 @@ h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-.02em;line-height:1.2;margin
 .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
 .hero .sticker{margin-bottom:26px;--r:-2deg}
 h1{font-size:clamp(44px,7vw,86px);line-height:1.08;letter-spacing:-.03em;font-weight:900;margin:0 0 8px}
-.hl{position:relative;display:inline-block;color:var(--orange);isolation:isolate}
+.hl{position:relative;display:inline-block;color:#C4480A;isolation:isolate}
 .hl::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.02em;height:.3em;z-index:-1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 12 C40 3, 70 18, 100 10 S160 3, 197 12' fill='none' stroke='%23F04E5E' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%}
-.note-hand{font-family:var(--round);color:var(--coral);font-size:15px;font-weight:700;margin:0 0 18px;display:inline-block;transform:rotate(-1.5deg)}
+.note-hand{font-family:var(--round);color:var(--coral-text);font-size:15px;font-weight:700;margin:0 0 18px;display:inline-block;transform:rotate(-1.5deg)}
 .lead{font-size:20px;font-weight:800;margin:0 0 12px;letter-spacing:-.01em}
 .lead .en{font-family:var(--serif);font-style:italic;font-weight:400;font-size:15px;color:var(--mute);margin-left:8px}
 .lead small{display:block;font-size:14px;color:var(--mute);font-weight:600;margin-top:4px;letter-spacing:.02em;font-family:var(--round)}
@@ -113,7 +113,7 @@ a.card:hover{transform:rotate(0) translate(-3px,-3px);box-shadow:9px 9px 0 var(-
 .thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
 .thumb.app{background:linear-gradient(135deg,var(--peach) 0%,var(--rose) 100%)}
 .thumb.app .icon{position:absolute;left:9%;top:50%;transform:translateY(-50%) rotate(-6deg);width:26%;aspect-ratio:1;height:auto;border-radius:22%;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
-.thumb.app .phone{position:absolute;right:9%;top:11%;width:40%;height:auto;border-radius:16px;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transform:rotate(3deg)}
+.thumb.app .phone{position:absolute;right:9%;top:8%;height:100%;width:auto;border-radius:16px;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transform:rotate(3deg)}
 .thumb.game{background:#0b0b10}
 .thumb.game img{object-fit:contain;padding:6px}
 .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
@@ -148,7 +148,7 @@ a.card:hover .more .arr{background:var(--coral);transform:rotate(45deg)}
 .list td.year{color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--round)}
 .list td.go{text-align:right;white-space:nowrap}
 .list td.go a{font-weight:800;font-size:13px;font-family:var(--round);border-bottom:2px solid var(--coral)}
-.list td.go a:hover{color:var(--coral)}
+.list td.go a:hover{color:var(--coral-text)}
 .list td.go span{font-size:12px;color:var(--mute);font-family:var(--round);font-weight:700;border:1.5px dashed var(--mute);border-radius:999px;padding:1px 9px}
 
 /* ---------- about ---------- */
@@ -164,7 +164,7 @@ a.card:hover .more .arr{background:var(--coral);transform:rotate(45deg)}
 .sub-h{font-size:19px;font-weight:800;margin:32px 0 14px;display:flex;align-items:center;gap:10px}
 .skills{display:grid;gap:12px}
 .skills .row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start}
-.skills .row b{font-size:12px;letter-spacing:.06em;padding-top:6px;font-family:var(--round);font-weight:800;color:var(--coral)}
+.skills .row b{font-size:12px;letter-spacing:.06em;padding-top:6px;font-family:var(--round);font-weight:800;color:var(--coral-text)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-size:13px;border:1.5px solid var(--ink);background:#fff;padding:2px 11px;border-radius:999px;font-family:var(--round);font-weight:700}
 .timeline{list-style:none;margin:0;padding:0}
@@ -215,7 +215,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .about .cols{grid-template-columns:1fr;gap:44px}
 }
 @media (max-width:640px){
-  .nav ul{display:none}
+  .nav ul{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}
   .nav .wrap{height:60px}
   .brand{font-size:17px}
   .hero{padding:44px 0 72px}
@@ -253,6 +253,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .timeline .when{grid-column:2}
   .polaroid{margin:34px 4px 0;transform:rotate(1.2deg)}
 }
+
+a:focus-visible,button:focus-visible{outline:3px solid #2B1A10;outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.badge{animation-iteration-count:3}
+@media print{.card{transform:none!important}}
 </style>
 </head>
 <body>
@@ -269,6 +274,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <a class="btn primary small" href="#contact">話しかける</a>
   </div>
 </header>
+<main id="main">
 
 <section class="hero">
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
@@ -315,8 +321,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <span class="tape"></span>
         <span class="kind">iOS アプリ</span>
         <div class="thumb app">
-          <img class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
-          <img class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
+          <img loading="lazy" decoding="async" class="icon" src="images/pettrack-icon.jpg" alt="PetTrack のアイコン">
+          <img loading="lazy" decoding="async" class="phone" src="images/pettrack-shot1.jpg" alt="PetTrack の画面">
         </div>
         <div class="body">
           <span class="when">2025.11 ・ App Store で公開中</span>
@@ -331,8 +337,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <span class="tape"></span>
         <span class="kind p">iOS アプリ</span>
         <div class="thumb app">
-          <img class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
-          <img class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
+          <img loading="lazy" decoding="async" class="icon" src="images/scanguard-icon.jpg" alt="ScanGuard のアイコン">
+          <img loading="lazy" decoding="async" class="phone" src="images/scanguard-shot1.jpg" alt="ScanGuard の画面">
         </div>
         <div class="body">
           <span class="when">2025.11 ・ App Store で公開中</span>
@@ -346,7 +352,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a class="card" href="https://github.com/miyazakiryuji/cc-DevelopmentTeam" target="_blank" rel="noopener noreferrer">
         <span class="tape"></span>
         <span class="kind o">Claude Code プラグイン ・ OSS</span>
-        <div class="thumb"><img src="images/cc-devteam.png" alt="cc-DevelopmentTeam の GitHub ページ"></div>
+        <div class="thumb"><img loading="lazy" decoding="async" src="images/cc-devteam.png" alt="cc-DevelopmentTeam の GitHub ページ"></div>
         <div class="body">
           <span class="when">2026.05</span>
           <h3>cc-DevelopmentTeam</h3>
@@ -359,7 +365,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a class="card" href="https://miyazakiryuji.github.io/nimbus-ide/" target="_blank" rel="noopener noreferrer">
         <span class="tape"></span>
         <span class="kind">デスクトップアプリ ・ OSS</span>
-        <div class="thumb"><img src="images/nimbus.png" alt="Nimbus の導入手順ページ"></div>
+        <div class="thumb"><img loading="lazy" decoding="async" src="images/nimbus.png" alt="Nimbus の導入手順ページ"></div>
         <div class="body">
           <span class="when">2026.08 ・ 開発中</span>
           <h3>Nimbus</h3>
@@ -372,7 +378,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a class="card" href="https://github.com/miyazakiryuji/my-secretary" target="_blank" rel="noopener noreferrer">
         <span class="tape"></span>
         <span class="kind p">Claude Code プラグイン ・ OSS</span>
-        <div class="thumb"><img src="images/my-secretary.png" alt="my-secretary の GitHub ページ"></div>
+        <div class="thumb"><img loading="lazy" decoding="async" src="images/my-secretary.png" alt="my-secretary の GitHub ページ"></div>
         <div class="body">
           <span class="when">2026.07 〜 2026.09</span>
           <h3>my-secretary</h3>
@@ -385,7 +391,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a class="card" href="https://miyazakiryuji.github.io/ai-app-zemi/" target="_blank" rel="noopener noreferrer">
         <span class="tape"></span>
         <span class="kind o">Web サイト</span>
-        <div class="thumb"><img src="images/ai-app-zemi.png" alt="AIアプリ開発入門ゼミ 受講生向けサイト"></div>
+        <div class="thumb"><img loading="lazy" decoding="async" src="images/ai-app-zemi.png" alt="AIアプリ開発入門ゼミ 受講生向けサイト"></div>
         <div class="body">
           <span class="when">2026.09 ・ GitHub Pages</span>
           <h3>AIアプリ開発入門ゼミ 受講生向けサイト</h3>
@@ -398,7 +404,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <article class="card">
         <span class="tape"></span>
         <span class="kind">ワークショップ教材</span>
-        <div class="thumb game"><img src="images/invader.png" alt="ワークショップで作るスペースインベーダー"></div>
+        <div class="thumb game"><img loading="lazy" decoding="async" src="images/invader.png" alt="ワークショップで作るスペースインベーダー"></div>
         <div class="body">
           <span class="when">2026.08 ・ ブラウザゲーム</span>
           <h3>スペースインベーダーを作ろう</h3>
@@ -411,7 +417,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <article class="card">
         <span class="tape"></span>
         <span class="kind p">画像・デザイン</span>
-        <div class="thumb"><img src="images/header-claudecode.png" alt="ゼミ告知の見出し画像"></div>
+        <div class="thumb"><img loading="lazy" decoding="async" src="images/header-claudecode.png" alt="ゼミ告知の見出し画像"></div>
         <div class="body">
           <span class="when">2026.09 ・ シリーズもの</span>
           <h3>ゼミ告知の見出し画像シリーズ</h3>
@@ -438,7 +444,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="paper">
       <span class="tape"></span><span class="tape r"></span>
       <table class="list">
-        <thead><tr><th>名前</th><th>種別</th><th>年</th><th></th></tr></thead>
+        <caption class="sr-only">その他の制作物の一覧</caption><thead><tr><th scope="col">名前</th><th scope="col">種別</th><th scope="col">年</th><th scope="col">公開先</th></tr></thead>
         <tbody>
           <tr><td class="name">リカイド／Boarding Pass<small>授業中の理解度チェックと、演習・宿題・模擬試験の成績集計。複数ゼミ・複数期で稼働中（Node.js / Turso / Vercel）</small></td><td class="kind-cell"><span>Web アプリ</span></td><td class="year">2026</td><td class="go"><span>受講生専用</span></td></tr>
           <tr><td class="name">proposal-slidekit<small>商談メモから提案書と PowerPoint を自動作成する Claude Code プラグイン</small></td><td class="kind-cell"><span>OSS</span></td><td class="year">2026</td><td class="go"><a href="https://github.com/miyazakiryuji/proposal-slidekit" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td></tr>
@@ -489,7 +495,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         </ul>
         <figure class="polaroid">
           <span class="tape"></span>
-          <img src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
+          <img loading="lazy" decoding="async" src="images/dmm-bootcamp.jpg" alt="DMM AI 1DAY Boot Camp の集合写真">
           <figcaption>DMM 初のオフラインイベント「AI 1DAY Boot Camp」に運営スタッフとして参加（2026.05）</figcaption>
         </figure>
       </div>
@@ -513,6 +519,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </section>
 
+</main>
 <footer>
   <div class="wrap">
     <span>© 2026 Ryuji Miyazaki</span>
