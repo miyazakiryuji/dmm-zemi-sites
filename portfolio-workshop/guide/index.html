@@ -38,6 +38,16 @@ pre {
 pre.long { break-inside: auto; }
 pre.long code { font-size: 12px; line-height: 1.7; }
 .prompt-group { break-inside: avoid; }
+.pre-wrap { position: relative; }
+.pre-wrap pre { padding-right: 84px; }
+.copy {
+  position: absolute; top: 8px; right: 10px; z-index: 1;
+  font: 700 12px/1 "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif; color: #0b5c37;
+  background: #fff; border: 1px solid #9dc9b1; border-radius: 6px; padding: 6px 10px; cursor: pointer;
+}
+.copy:hover { background: #e6f2ea; }
+.copy.done { background: #1a7f4b; color: #fff; border-color: #1a7f4b; }
+@media print { .copy { display: none; } .pre-wrap pre { padding-right: 16px; } }
 th:first-child { width: 18%; }
 @media screen and (max-width: 640px) {
   table { display: block; overflow-x: auto; }
@@ -122,11 +132,11 @@ hr { border: 0; border-top: 1px dashed #c9d6cf; margin: 24px 0; }
 <p>配布物は zip 形式で届きます。① ダウンロードする → ② <strong>ダブルクリックして展開する</strong>（Windows は右クリック →「すべて展開」。zip を開いただけの状態からはコピーしないでください）→ ③ 出てきた <code>portfolio</code> フォルダをデスクトップへドラッグ、の順です。</p>
 <p>配布物には2つのフォルダが入っています。<strong>デスクトップにコピーするのは <code>portfolio</code> のほうだけ</strong>です。</p>
 <div class="prompt-group">
-<pre><code>配布物/
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>配布物/
 ├── portfolio/            ← これをデスクトップにコピーして使う
 │   ├── portfolio.md      ← 設計書。ここに「載せたいこと」を書く
 │   └── images/           ← 顔写真・作品の画像を入れる
-└── 記入例_ペン太/         ← 書き方の見本（コピーしない。見るだけ）</code></pre>
+└── 記入例_ペン太/         ← 書き方の見本（コピーしない。見るだけ）</code></pre></div>
 <figure class="shot"><img class="" src="images/00-folder.png" alt="デスクトップに置いた portfolio フォルダ（中に portfolio.md と images）"><figcaption>デスクトップに置いた portfolio フォルダ（中に portfolio.md と images）</figcaption></figure>
 <blockquote>🤔 <strong>なぜフォルダを1つ決めるのか</strong><br>
 Code は「このフォルダの中でファイルを読み書きしてよい」と決めてから動きます。フォルダを決めないと、設計書がどこにあるのか、<code>index.html</code> をどこに作ればよいのかが決まりません。<br>
@@ -135,7 +145,7 @@ Code は「このフォルダの中でファイルを読み書きしてよい」
 <blockquote>⚠️ フォルダ名とファイル名は <strong>半角の英数字</strong> にしてください（<code>portfolio</code>・<code>face.jpg</code>・<code>work1.png</code> のように）。<br>
 公開したとき、画像のファイル名は <strong>そのまま URL の一部</strong>になります。日本語や全角のファイル名は、環境によって文字化けしたり画像が表示されなかったりする原因になります。</blockquote>
 <h3>1-2. 画像を images フォルダに入れる</h3>
-<ul><li><strong>顔写真・アバター</strong>：スマホで撮ったもので十分です。顔出しに抵抗があれば、イラストやアバター画像でかまいません。用意できない方は、<code>images</code> に同梱してある <code>avatar1.png</code>（または <code>avatar2.png</code>）のファイル名をそのまま設計書に書いてください。空欄にすると、写真なしのレイアウトで作られます。</li><li><strong>作品の画像</strong>：Web サイトなら画面のスクリーンショット、アプリなら画面写真、画像作品はそのもの。文章や記事の作品は画像が無くても大丈夫です。</li><li>入れたら、<strong>ファイル名を控えておきます</strong>（あとで設計書に書きます）。</li></ul>
+<ul><li><strong>顔写真・アバター</strong>：スマホで撮ったもので十分です。顔出しに抵抗があれば、イラストやアバター画像でかまいません。用意できない方は、<code>images</code> に同梱してある <code>avatar1.png</code>（または <code>avatar2.png</code>）のファイル名をそのまま設計書に書いてください。空欄にすると、写真なしのレイアウトで作られます。</li><li><strong>作品の画像</strong>：Web サイトなら画面のスクリーンショット、アプリなら画面写真、画像作品はそのもの。文章や記事の作品は画像が無くても大丈夫です。</li><li><strong>画像のファイル名は、半角の英数字にします</strong>（例：<code>face.jpg</code>、<code>work1.png</code>）。日本語やスペースを含む名前は、Claude が読み違えたり、公開したときに画像が表示されなかったりする原因になります。スマホから送った写真は <code>IMG_1234.jpg</code> のような名前になっているので、そのままでもかまいません。</li><li>入れたら、<strong>ファイル名を控えておきます</strong>（あとで設計書に書きます）。</li></ul>
 <blockquote>💡 <strong>スクリーンショットの撮り方</strong><br>
 <strong>Mac</strong>：<code>⇧ shift</code> + <code>⌘ command</code> + <code>4</code> を押し、撮りたい範囲をドラッグ → デスクトップに画像ファイルとして保存されます。<br>
 <strong>Windows</strong>：<code>Win</code> + <code>Shift</code> + <code>S</code> を押し、撮りたい範囲をドラッグ → 画面右下の通知を押すと保存できます（保存先は「ピクチャ」→「スクリーンショット」）。<br>
@@ -146,12 +156,12 @@ Code は「このフォルダの中でファイルを読み書きしてよい」
 <blockquote>📗 <strong>用語</strong><br>
 <strong>Markdown（<code>.md</code>）</strong>：<code>#</code> で見出し、<code>-</code> で箇条書きを表す、<strong>ただの文字だけの書き方</strong>です。特別なソフトは要りません。Claude はこの書き方を正確に読めるので、設計書に向いています。</blockquote>
 <p>設計書は <strong>5つの部分</strong> に分かれています。<strong>書けるところだけ</strong>で大丈夫です。空欄はサイトに載りません。 書き方は簡単です。<strong>それぞれの行の「：」のうしろに、そのまま続けて書きます。</strong> 長くなるときは改行してかまいません。</p>
-<table><thead><tr><th>項目</th><th>書くこと</th><th>なぜ必要か</th></tr></thead><tbody><tr><td><strong>1. あなたのこと</strong></td><td>名前（表示名）・肩書き・ひとこと・自己紹介（3〜5行）・顔写真のファイル名・活動エリア</td><td>サイトの一番上に出て、見た人が最初に読む場所です。<strong>何をしている人か</strong>が1行で伝わる言葉を入れます</td></tr><tr><td><strong>2. 作品</strong></td><td>作品名・種類・ひとことで何か・くわしく・使ったもの・画像のファイル名・リンク・作った時期</td><td>今日いちばん大事な部分。<strong>載せたい順</strong>に書きます（上に書いたものがサイトでも上に来ます）</td></tr><tr><td><strong>3. できること・使える道具</strong></td><td>ツール名やスキルを箇条書き</td><td>作品だけでは伝わりにくい「対応できる範囲」を補います</td></tr><tr><td><strong>4. 連絡先・リンク</strong></td><td>メール・SNS・GitHub など</td><td>サイトの目的は「連絡してもらうこと」。<strong>1つでもあれば十分</strong>です</td></tr><tr><td><strong>5. サイトの雰囲気</strong></td><td>色の好み・雰囲気・参考サイト</td><td>Claude がデザインを決めるときの手がかり。空欄なら Claude におまかせになります</td></tr></tbody></table>
+<table><thead><tr><th>項目</th><th>書くこと</th><th>なぜ必要か</th></tr></thead><tbody><tr><td><strong>1. あなたのこと</strong></td><td>名前（表示名）・肩書き・ひとこと・自己紹介（3〜5行）・顔写真のファイル名（半角英数字）・活動エリア</td><td>サイトの一番上に出て、見た人が最初に読む場所です。<strong>何をしている人か</strong>が1行で伝わる言葉を入れます</td></tr><tr><td><strong>2. 作品</strong></td><td>作品名・種類・ひとことで何か・くわしく・使ったもの・画像のファイル名（半角英数字）・リンク・作った時期</td><td>今日いちばん大事な部分。<strong>載せたい順</strong>に書きます（上に書いたものがサイトでも上に来ます）</td></tr><tr><td><strong>3. できること・使える道具</strong></td><td>ツール名やスキルを箇条書き</td><td>作品だけでは伝わりにくい「対応できる範囲」を補います</td></tr><tr><td><strong>4. 連絡先・リンク</strong></td><td>メール・SNS・GitHub など</td><td>サイトの目的は「連絡してもらうこと」。<strong>1つでもあれば十分</strong>です</td></tr><tr><td><strong>5. サイトの雰囲気</strong></td><td>色の好み・雰囲気・参考サイト</td><td>Claude がデザインを決めるときの手がかり。空欄なら Claude におまかせになります</td></tr></tbody></table>
 <h3>作品が少ない・まだ無い方へ</h3>
 <p>「作品」は、お金をもらって作ったものだけではありません。次のようなものも立派な作品です。</p>
 <ul><li><strong>学習の成果物</strong>：コースの課題で作ったもの、ワークショップで作ったゲームやアプリ、コンペに出した作品</li><li><strong>練習で作ったもの</strong>：自分用の家計簿、業務の自動化スクリプト、Canva で作ったバナー</li><li><strong>文章</strong>：note や SNS の記事、社内向けに書いたマニュアルやプロンプト集（社外に出してよいものだけ）</li><li><strong>これから作るもの</strong>：「制作中」として1枚書いておく（完成したら差し替える）</li></ul>
 <p><strong>それでも思いつかない方へ</strong>：今日作るこのポートフォリオサイト自体を「作品1」にしてください。</p>
-<pre><code>### 作品1
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>### 作品1
 - 作品名：自分のポートフォリオサイト
 - 種類：Webサイト
 - ひとことで何か（1行）：Claude Code に日本語で頼んで作った、自己紹介と作品の1ページ
@@ -159,7 +169,7 @@ Code は「このフォルダの中でファイルを読み書きしてよい」
 - 使ったもの：Claude Code
 - 画像のファイル名：
 - リンク：
-- 作った時期：（今日の年月）</code></pre>
+- 作った時期：（今日の年月）</code></pre></div>
 <p><strong>1つでも十分です。</strong> 今日の目的は「完成した作品集」ではなく、<strong>これから作ったものを足していけるサイトと URL</strong> を手に入れることです。 使わなかった「### 作品2」「### 作品3」は、<strong>空のまま残しておいて大丈夫</strong>です。お願い文で「空欄の項目はサイトに表示しない」と伝えるので、サイトには出てきません。</p>
 <h3>書くときのコツ</h3>
 <ul><li><strong>数字を入れる</strong>：「毎週使っている」「上司の確認時間が半分に」「7ステップで完成」など、具体的な数字や変化があると伝わります</li><li><strong>誰に見せるかを思い浮かべる</strong>：応募先の担当者・SNS で知り合った人・知人。その人が知りたいことから書きます</li><li><strong>きれいな文章でなくて OK</strong>：箇条書きや話し言葉のままで大丈夫です。整えるのは Claude の仕事です</li></ul>
@@ -170,7 +180,7 @@ Code は「このフォルダの中でファイルを読み書きしてよい」
 あとから直せるので、迷ったものは<strong>今日は空欄</strong>にしておきましょう。</div></blockquote>
 <h3>記入例</h3>
 <p>配布物の中の <strong><code>記入例_ペン太</code></strong> フォルダ（<code>portfolio</code> と同じ並びにあります）に、事務職で生成AIを学習中の「ペン太」さんの設計書と、そこから作ったサイトを入れてあります。「作品」の書き方は、たとえばこうです。</p>
-<pre><code>### 作品1
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>### 作品1
 - 作品名：今月の家計簿アプリ
 - 種類：学習の成果物（Webアプリ）
 - ひとことで何か（1行）：収入・支出・残りが一目でわかる、自分用のシンプルな家計簿
@@ -179,7 +189,7 @@ Code は「このフォルダの中でファイルを読み書きしてよい」
 - 使ったもの：Claude Code、HTML / CSS / JavaScript
 - 画像のファイル名：kakeibo.png
 - リンク：
-- 作った時期：2026年8月</code></pre>
+- 作った時期：2026年8月</code></pre></div>
 <p>書き終えたら <strong>保存</strong>（<code>⌘S</code>。Windows は <code>Ctrl+S</code>）します。保存していないと、Claude は古い内容を読んでしまいます。</p>
 <hr>
 <div class="hrow h2row"><h2>3. Claude の「Code」を開いて、フォルダを選ぶ</h2><img class="peng-side" src="images/penguins/penguin_pointing.png" alt="画面を指すペンギン先生"></div>
@@ -220,7 +230,7 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 <div class="hrow h2row"><h2>4. お願い①：サイトを作ってもらう</h2><img class="peng-side" src="images/penguins/penguin_laptop_with_coffee.png" alt="授業をするペンギン先生"></div>
 <p>🎯 <strong>ゴール</strong>：<code>portfolio</code> フォルダに <code>index.html</code> ができて、ダブルクリックで自分のサイトが開く</p>
 <p>💬 <strong>貼り付けるお願い</strong>（このまま全部コピーして貼ります）</p>
-<pre><code>このフォルダの portfolio.md を読んで、自己紹介と作品を並べた1ページのポートフォリオサイトを index.html という名前で作ってください。
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>このフォルダの portfolio.md を読んで、自己紹介と作品を並べた1ページのポートフォリオサイトを index.html という名前で作ってください。
 
 守ってほしいこと：
 - HTML・CSS・JavaScript は index.html の1ファイルにまとめる（外部のライブラリやCDNは使わない）
@@ -232,7 +242,7 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 - 画像には内容が分かる代わりの文（alt）を付け、文字は背景に対して読みやすい濃さにする
 - JavaScript が動かなくても内容が読めるようにする
 
-できあがったら、確認のしかたを教えてください。</code></pre>
+できあがったら、確認のしかたを教えてください。</code></pre></div>
 <p>画面下の入力欄に貼り付けて、<strong>Enter</strong> で送信します。</p>
 <figure class="shot"><img class="" src="images/06-input.png" alt="お願いを入力したところ"><figcaption>お願いを入力したところ</figcaption></figure>
 <blockquote>🤔 <strong>お願い文の「守ってほしいこと」は何のためか</strong><br>
@@ -267,14 +277,14 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 <h3>直すときの3つのコツ</h3>
 <table><thead><tr><th>コツ</th><th>どういうこと？</th><th>例</th></tr></thead><tbody><tr><td><strong>① 一度にひとつだけ頼む</strong></td><td>欲張ると意図と違う直し方をされやすい。1回のお願い＝1か所</td><td>×「色も並びも文章も全部変えて」 → 〇「まず見出しの色だけ変えて」</td></tr><tr><td><strong>② 見た目の言葉で場所を伝える</strong></td><td>HTML の言葉は不要。画面のどこかを言えば通じる</td><td>〇「作品の2番目のカードの説明文を、2行くらいに短くして」</td></tr><tr><td><strong>③ 直したら再読み込み</strong></td><td>ブラウザは開いた時点の内容を表示したまま。<code>index.html</code> が書き換わっても自動では変わらない</td><td>直してもらったら <strong>⌘R</strong>（Windows は <strong>Ctrl+R</strong>）</td></tr></tbody></table>
 <h3>お願い文の例（〈 〉のところは、自分のサイトに合わせて置き換えます）</h3>
-<pre><code>見出しと差し色を、緑系に変えてください。</code></pre>
-<pre><code>作品の並び順を変えて、〈いちばん見せたい作品名〉を一番上にしてください。</code></pre>
-<pre><code>自己紹介の文章を、もう少し短く3行くらいにまとめてください。内容は変えないでください。</code></pre>
-<pre><code>顔写真をもう少し大きく、丸く切り抜いて表示してください。</code></pre>
-<pre><code>「できること」の項目を、タグのような小さな四角で横に並べてください。</code></pre>
-<pre><code>連絡先の下に、メールを送るボタンを付けてください（portfolio.md に書いたメールアドレスを使ってください）。</code></pre>
-<pre><code>スマホの幅で見ると作品カードの文字がはみ出します。スマホでは1列に並ぶように直してください。</code></pre>
-<pre><code>その変更は取り消して、直前の状態に戻してください。</code></pre>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>見出しと差し色を、緑系に変えてください。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>作品の並び順を変えて、〈いちばん見せたい作品名〉を一番上にしてください。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>自己紹介の文章を、もう少し短く3行くらいにまとめてください。内容は変えないでください。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>顔写真をもう少し大きく、丸く切り抜いて表示してください。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>「できること」の項目を、タグのような小さな四角で横に並べてください。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>連絡先の下に、メールを送るボタンを付けてください（portfolio.md に書いたメールアドレスを使ってください）。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>スマホの幅で見ると作品カードの文字がはみ出します。スマホでは1列に並ぶように直してください。</code></pre></div>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>その変更は取り消して、直前の状態に戻してください。</code></pre></div>
 </div><p>たとえば「見出しと差し色を緑系に」と頼むと、こう変わります。<strong>中身は同じまま、色だけが変わっている</strong>ことを確かめてください。</p>
 <figure class="shot"><img class="" src="images/10-site-after.png" alt="色を変える前（左）と後（右）"><figcaption>色を変える前（左）と後（右）</figcaption></figure>
 <p>直し終わると、Claude は <strong>何をどう変えたか</strong> を説明してくれます。思っていたのと違えば、その説明を手がかりにもう一度頼みます（例：「背景の薄い色は水色のままにして」）。</p>
@@ -287,7 +297,7 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 <blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_thumbs_up.png" alt="よくできましたと伝えるペンギン先生"><div class="qbody">🎉 <strong>ここまでで「自分のポートフォリオサイト」が手元にできました。</strong> ファイルはすでにあなたのパソコンにあります。保存の作業はいりません。</div></blockquote>
 <hr>
 <div class="hrow h2row"><h2>6. 雰囲気をまるごと変える（どんな指示で、どんなサイトになるか）</h2><img class="peng-side" src="images/penguins/penguin_chart_presentation.png" alt="組み合わせを考えるペンギン先生"></div>
-<p>色や文言を1か所ずつ直すだけでなく、<strong>「雰囲気」をまるごと指定して作り直す</strong>こともできます。 講師の見本は、<strong>同じ設計書（<code>portfolio.md</code>）と同じ画像</strong>から、Claude に次のようなお願いをして5つのパターンに作り分けたものです。 中身は5つとも同じで、変わっているのは見た目と語り口だけです。気に入った方向のお願い文を、自分の言葉に直して使ってください。</p>
+<p>色や文言を1か所ずつ直すだけでなく、<strong>「雰囲気」をまるごと指定して作り直す</strong>こともできます。 講師の見本は、<strong>同じ設計書（<code>portfolio.md</code>）と同じ画像</strong>から、Claude に次のようなお願いをして5つのパターンに作り分けたものです。 中身は5つとも同じで、変わっているのは見た目と語り口だけです。<strong>お願い文は、それぞれ1つの塊をそのまま全部コピーして貼ります</strong>（右上の「コピー」ボタンで写せます。後半の「守ってほしいこと」は5つとも共通です）。〈 〉の部分だけ自分のものに置き換えてください。</p>
 <blockquote>📗 <strong>用語</strong><br>
 <strong>ヒーロー</strong>：サイトを開いていちばん最初に目に入る、上部の大きな一区画のことです。名前・肩書き・顔写真が入るところを指します。<br>
 <strong>差し色</strong>：白や黒などの地の色に対して、ボタンや見出しなどに少しだけ使う目立つ色のことです。</blockquote>
@@ -297,62 +307,93 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 <blockquote>⚠️ 別バージョンは <strong>別の名前</strong>（<code>index-humor.html</code> など）で作ってもらうと、元の <code>index.html</code> が残ります。<br>
 できあがった別バージョンは <code>portfolio</code> フォルダの中にできています。<strong>そのファイルをダブルクリック</strong>して開いてください（<code>index.html</code> のタブを再読み込みしても変わりません）。<br>
 公開するときは、<strong>まず今の <code>index.html</code> を <code>index-simple.html</code> などに改名してから</strong>、気に入ったほうを <code>index.html</code> に改名します。先に改名しないと、元のほうが上書きされます。</blockquote>
-<h3>5つに共通して付ける「守ってほしいこと」</h3>
-<p>どのパターンのお願い文にも、<strong>最後に次の塊を付けて</strong>貼ります。デザインを大きく変える依頼では、Claude が中身や画像の場所まで書き換えてしまうことがあるためです。</p>
-<pre><code>守ってほしいこと：
+<h3>パターン1：ミニマル（白地に差し色1つ）</h3>
+<p>講師の見本は、<strong>設計書の「5. サイトの雰囲気」にこう書いたうえで、4章のお願い①を貼った</strong>結果です。</p>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>- 色の好み：白地に、紫のアクセントを 1 色だけ
+- 雰囲気：余白を広く取ったシンプルで今風。作品カードを主役に
+- 参考にしたいサイト：見出しを大きく・写真は丸く・実績の数字は帯にして横に並べる</code></pre></div>
+<p>すでに <code>index.html</code> がある方が、別バージョンとして試すときはこう頼みます。</p>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>index.html を、雰囲気だけ変えた別バージョン index-minimal.html として作ってください。
+載せる内容・作品の順番・リンク・数字は変えないでください。
+
+白地に、差し色は1色だけ（紫）。余白を広く取ったシンプルで今風の雰囲気。
+見出しは大きく、顔写真は丸く、実績の数字は「大きな数字＋小さなラベル」を横に並べた帯にしてください。
+作品カードを主役にして、カードにマウスを乗せると少し浮くようにしてください。
+
+守ってほしいこと：
 - portfolio.md・images フォルダ・元の index.html は変更しない。指定した別ファイルだけを作る
 - 設計書（portfolio.md）に無い事実・実績・経歴・数字・サービスを足さない
 - 外部のライブラリ・CDN・Web フォントを使わない。画像のパスも変えない
 - スマホ（幅 320px）でも横にはみ出さない。文字は背景に対して読みやすい濃さにする
 - 画像の alt、見出しの順番、キーボードでの操作は元のまま保つ
-- できあがったら、作ったファイル名と確認のしかたを教えてください</code></pre>
-<h3>パターン1：ミニマル（白地に差し色1つ）</h3>
-<p>講師の見本は、<strong>設計書の「5. サイトの雰囲気」にこう書いたうえで、4章のお願い①を貼った</strong>結果です。</p>
-<pre><code>- 色の好み：白地に、紫のアクセントを 1 色だけ
-- 雰囲気：余白を広く取ったシンプルで今風。作品カードを主役に
-- 参考にしたいサイト：見出しを大きく・写真は丸く・実績の数字は帯にして横に並べる</code></pre>
-<p>すでに <code>index.html</code> がある方が、別バージョンとして試すときはこう頼みます。</p>
-<pre><code>index.html を、雰囲気だけ変えた別バージョン index-minimal.html として作ってください。
-載せる内容・作品の順番・リンク・数字は変えないでください。
-
-白地に、差し色は1色だけ（紫）。余白を広く取ったシンプルで今風の雰囲気。
-見出しは大きく、顔写真は丸く、実績の数字は「大きな数字＋小さなラベル」を横に並べた帯にしてください。
-作品カードを主役にして、カードにマウスを乗せると少し浮くようにしてください。</code></pre>
+- できあがったら、作ったファイル名と確認のしかたを教えてください</code></pre></div>
 <figure class="shot"><img class="" src="images/13-pattern-main.png" alt="パターン1：ミニマル"><figcaption>パターン1：ミニマル</figcaption></figure>
 <h3>パターン2：ユーモア・親しみ</h3>
-<pre><code>index.html を、雰囲気だけ変えた別バージョン index-humor.html として作ってください。
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>index.html を、雰囲気だけ変えた別バージョン index-humor.html として作ってください。
 載せる内容・作品の順番・リンク・数字は変えないでください。
 
 方向性はユーモアと親しみ。事実・固有名詞・数字・実績・作品名・リンクは変えずに、文章の意味を保ったまま、語尾と語り口だけを砕けた一人称にして人柄を見せてください（実績の数字や信頼感は崩さない）。
 色は暖色（オレンジ・コーラル・クリーム）。丸みのある形、手描き風の下線、少し傾けたラベル、2px の濃い色の枠線と影、吹き出しの自己紹介で遊んでください。
 ヒーローは丸い顔写真のまわりに、実績のバッジを浮かべる構成に。作品カードは、上にマスキングテープを貼ったような飾りを付けて少し傾けてください。
-絵文字は使わず、言葉づかいと色とあしらいで親しみを出してください。</code></pre>
+絵文字は使わず、言葉づかいと色とあしらいで親しみを出してください。
+
+守ってほしいこと：
+- portfolio.md・images フォルダ・元の index.html は変更しない。指定した別ファイルだけを作る
+- 設計書（portfolio.md）に無い事実・実績・経歴・数字・サービスを足さない
+- 外部のライブラリ・CDN・Web フォントを使わない。画像のパスも変えない
+- スマホ（幅 320px）でも横にはみ出さない。文字は背景に対して読みやすい濃さにする
+- 画像の alt、見出しの順番、キーボードでの操作は元のまま保つ
+- できあがったら、作ったファイル名と確認のしかたを教えてください</code></pre></div>
 <figure class="shot"><img class="" src="images/13-pattern-humor.png" alt="パターン2：ユーモア・親しみ"><figcaption>パターン2：ユーモア・親しみ</figcaption></figure>
 <h3>パターン3：ダーク・モダン</h3>
-<pre><code>index.html を、雰囲気だけ変えた別バージョン index-dark.html として作ってください。
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>index.html を、雰囲気だけ変えた別バージョン index-dark.html として作ってください。
 載せる内容・作品の順番・リンク・数字は変えないでください。
 
 黒〜濃紺の地に、差し色は1色だけ（黄色）。画面幅いっぱいに迫る巨大な名前の文字（〈あなたの名前をローマ字で。例：PENTA〉）で個性を出してください。
 実績の数字は、大きな数字と小さなラベルを横に並べた帯にして、均等なタイルにはしないでください。
 作品カードは暗いカードにうっすら光る差し色。マウスを乗せると浮く。経歴は差し色の点と線のタイムライン。
-暗い背景でも本文が読めるコントラストを確保してください。</code></pre>
+暗い背景でも本文が読めるコントラストを確保してください。
+
+守ってほしいこと：
+- portfolio.md・images フォルダ・元の index.html は変更しない。指定した別ファイルだけを作る
+- 設計書（portfolio.md）に無い事実・実績・経歴・数字・サービスを足さない
+- 外部のライブラリ・CDN・Web フォントを使わない。画像のパスも変えない
+- スマホ（幅 320px）でも横にはみ出さない。文字は背景に対して読みやすい濃さにする
+- 画像の alt、見出しの順番、キーボードでの操作は元のまま保つ
+- できあがったら、作ったファイル名と確認のしかたを教えてください</code></pre></div>
 <figure class="shot"><img class="" src="images/13-pattern-dark.png" alt="パターン3：ダーク・モダン"><figcaption>パターン3：ダーク・モダン</figcaption></figure>
 <h3>パターン4：エディトリアル・モノクロ</h3>
-<pre><code>index.html を、雰囲気だけ変えた別バージョン index-editorial.html として作ってください。
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>index.html を、雰囲気だけ変えた別バージョン index-editorial.html として作ってください。
 載せる内容・作品の順番・リンク・数字は変えないでください。
 
 雑誌の誌面のような白黒と罫線。巨大な英字の名前と、明朝体（セリフ体）の日本語見出し。余白をたっぷり取ってください。
 作品は「番号付きの罫線リスト（作品名・種別・年・リンク）」を主役にして、全部を元の順番で載せてください。そのうち画像がある先頭の3〜4点だけを、リストの前に同じ順番で大きな画像で見せる構成に。
-写真はモノクロに統一。差し色を使うなら1色をごく少量。動きは控えめに。</code></pre>
+写真はモノクロに統一。差し色を使うなら1色をごく少量。動きは控えめに。
+
+守ってほしいこと：
+- portfolio.md・images フォルダ・元の index.html は変更しない。指定した別ファイルだけを作る
+- 設計書（portfolio.md）に無い事実・実績・経歴・数字・サービスを足さない
+- 外部のライブラリ・CDN・Web フォントを使わない。画像のパスも変えない
+- スマホ（幅 320px）でも横にはみ出さない。文字は背景に対して読みやすい濃さにする
+- 画像の alt、見出しの順番、キーボードでの操作は元のまま保つ
+- できあがったら、作ったファイル名と確認のしかたを教えてください</code></pre></div>
 <figure class="shot"><img class="" src="images/13-pattern-editorial.png" alt="パターン4：エディトリアル・モノクロ"><figcaption>パターン4：エディトリアル・モノクロ</figcaption></figure>
 <h3>パターン5：ビジネス・信頼</h3>
-<pre><code>index.html を、雰囲気だけ変えた別バージョン index-business.html として作ってください。
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>index.html を、雰囲気だけ変えた別バージョン index-business.html として作ってください。
 載せる内容・作品の順番・リンク・数字は変えないでください。
 
 読む相手は〈読んでほしい相手。例：企業の研修担当者や、業務委託の発注者〉です。紺とベージュを基調に、金や朱の差し色を少量。明朝体（セリフ体）の大見出しで落ち着いた信頼感を出してください。
 ヒーローには、設計書の「できること・使える道具」に書いてある内容だけを「提供できること」のカードとして並べ（3枚に満たなくてもよい。書いていないサービスは足さない）、その下に実績の数字を1行の帯で。
 作品カードは白いカードに細い罫線と控えめな影。経歴は会社ごとのカード。
-連絡先には「ご相談の流れ（ご連絡 → 内容のすり合わせ → 実施）」のような一般的な3段階を添えて、メールのボタンを目立たせてください。料金や日数は書かないでください。文体は敬体で簡潔に。</code></pre>
+連絡先には「ご相談の流れ（ご連絡 → 内容のすり合わせ → 実施）」のような一般的な3段階を添えて、メールのボタンを目立たせてください。料金や日数は書かないでください。文体は敬体で簡潔に。
+
+守ってほしいこと：
+- portfolio.md・images フォルダ・元の index.html は変更しない。指定した別ファイルだけを作る
+- 設計書（portfolio.md）に無い事実・実績・経歴・数字・サービスを足さない
+- 外部のライブラリ・CDN・Web フォントを使わない。画像のパスも変えない
+- スマホ（幅 320px）でも横にはみ出さない。文字は背景に対して読みやすい濃さにする
+- 画像の alt、見出しの順番、キーボードでの操作は元のまま保つ
+- できあがったら、作ったファイル名と確認のしかたを教えてください</code></pre></div>
 <figure class="shot"><img class="" src="images/13-pattern-business.png" alt="パターン5：ビジネス・信頼"><figcaption>パターン5：ビジネス・信頼</figcaption></figure>
 <blockquote>💡 <strong>お願い文の作り方（共通の型）</strong><br>
 ①「別の名前で作って」＋「中身は変えないで」 → ②誰に見せたいか・どんな印象にしたいか → ③色（2〜3語） → ④形や質感（丸い・罫線・ステッカー・光る など） → ⑤見出しの書体（ゴシック／明朝）と語り口。<br>
@@ -370,13 +411,13 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 <div class="hrow h2row"><h2>8. あとから作品を足す 🌱</h2><img class="peng-side" src="images/penguins/penguin_idea_lightbulb.png" alt="ひらめいたペンギン先生"></div>
 <p>作品が増えたら、こう更新します。</p>
 <ol><li><code>portfolio.md</code> に <strong>作品の塊を1つ足す</strong>（「### 作品」をコピーして書く）。画像があれば <code>images</code> に入れる</li><li>Claude の Code で <strong>同じ <code>portfolio</code> フォルダ</strong> を開き、次のお願いを貼る</li><li>公開し直す（別紙の手順）</li></ol>
-<pre><code>portfolio.md に作品を1つ足しました。index.html に反映してください。
-デザインは今のまま変えないでください。</code></pre>
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre><code>portfolio.md に作品を1つ足しました。index.html に反映してください。
+デザインは今のまま変えないでください。</code></pre></div>
 <blockquote>💡 これが、設計書を先に書く方式の良いところです。<strong>サイトを作り直すのではなく、設計書に足すだけです。</strong><br>
 デザインを変えたくなったときも、<code>portfolio.md</code> はそのままで「雰囲気を落ち着いた紺色に変えて」と頼めば、文章やリンクを保ったまま見た目だけを変えられます。</blockquote>
 <hr>
 <div class="hrow h2row"><h2>9. うまくいかないとき（そのまま貼れる言葉）🔧</h2><img class="peng-side" src="images/penguins/penguin_magnifying_front.png" alt="原因をさがすペンギン先生"></div>
-<table><thead><tr><th>こまりごと</th><th>やること</th></tr></thead><tbody><tr><td><strong>直してもらったのに、さっきと同じまま</strong></td><td>まずブラウザのタブで <strong>⌘R</strong>（Windows は <strong>Ctrl+R</strong>）で再読み込み。頼み直す前に、必ずこれを試す</td></tr><tr><td>画像が表示されない（枠だけ・壊れたマーク）</td><td><code>portfolio.md</code> のファイル名と <code>images</code> の中のファイル名を見比べる（大文字小文字・拡張子まで同じか）。直したら <code>画像のファイル名を直しました。反映してください。</code></td></tr><tr><td><code>index.html</code> ができない</td><td>入力欄左下が「プラン」になっていないか確認。「手動」か「自動」にして <code>index.html を作ってください。</code></td></tr><tr><td>「許可しますか？」で止まっている</td><td>場所が <code>Desktop/portfolio</code> の中であることを確かめて「一度だけ許可」を押す。押すまで Claude は待っています</td></tr><tr><td>作るのが途中で止まった</td><td>「作成中」「考え中」の表示が<strong>消えているか</strong>確認。消えていたら <code>続きを作ってください。</code></td></tr><tr><td>変な方向に変わってしまった</td><td><code>直前の変更を取り消してください。</code> それでも直らなければ、いまの <code>index.html</code> を <code>index-old.html</code> に改名してから、<strong>控えの名前を <code>index.html</code> に変える</strong></td></tr><tr><td>いっぺんに頼んだら崩れた</td><td>ひとつずつに分けて頼み直す（コツ①）</td></tr><tr><td>フォルダを間違えた</td><td>入力欄の上のフォルダのボタンから選び直す。分からなければ左上の「新規」で会話を作り直し、3章のやり方でもう一度選ぶ</td></tr><tr><td>設計書を直したのに反映されない</td><td><code>portfolio.md</code> を<strong>保存</strong>したか確認（<code>⌘S</code>。Windows は <code>Ctrl+S</code>）。保存してから <code class="long">portfolio.md を更新しました。反映してください。</code></td></tr><tr><td><code>利用の上限に達しました</code> と出た</td><td>ファシリテーターに声をかけてください。しばらく待つと再び使えるようになります。<strong>そこまでに作られたファイルはフォルダに残っています</strong>（消えません）。待つあいだは <code>portfolio.md</code> の書き足しを進めておくと無駄がありません</td></tr></tbody></table>
+<table><thead><tr><th>こまりごと</th><th>やること</th></tr></thead><tbody><tr><td><strong>直してもらったのに、さっきと同じまま</strong></td><td>まずブラウザのタブで <strong>⌘R</strong>（Windows は <strong>Ctrl+R</strong>）で再読み込み。頼み直す前に、必ずこれを試す</td></tr><tr><td>画像が表示されない（枠だけ・壊れたマーク）</td><td><code>portfolio.md</code> のファイル名と <code>images</code> の中のファイル名を見比べる（大文字小文字・拡張子まで同じか。日本語やスペースが入っていたら半角英数字に変える）。直したら <code>画像のファイル名を直しました。反映してください。</code></td></tr><tr><td><code>index.html</code> ができない</td><td>入力欄左下が「プラン」になっていないか確認。「手動」か「自動」にして <code>index.html を作ってください。</code></td></tr><tr><td>「許可しますか？」で止まっている</td><td>場所が <code>Desktop/portfolio</code> の中であることを確かめて「一度だけ許可」を押す。押すまで Claude は待っています</td></tr><tr><td>作るのが途中で止まった</td><td>「作成中」「考え中」の表示が<strong>消えているか</strong>確認。消えていたら <code>続きを作ってください。</code></td></tr><tr><td>変な方向に変わってしまった</td><td><code>直前の変更を取り消してください。</code> それでも直らなければ、いまの <code>index.html</code> を <code>index-old.html</code> に改名してから、<strong>控えの名前を <code>index.html</code> に変える</strong></td></tr><tr><td>いっぺんに頼んだら崩れた</td><td>ひとつずつに分けて頼み直す（コツ①）</td></tr><tr><td>フォルダを間違えた</td><td>入力欄の上のフォルダのボタンから選び直す。分からなければ左上の「新規」で会話を作り直し、3章のやり方でもう一度選ぶ</td></tr><tr><td>設計書を直したのに反映されない</td><td><code>portfolio.md</code> を<strong>保存</strong>したか確認（<code>⌘S</code>。Windows は <code>Ctrl+S</code>）。保存してから <code class="long">portfolio.md を更新しました。反映してください。</code></td></tr><tr><td><code>利用の上限に達しました</code> と出た</td><td>ファシリテーターに声をかけてください。しばらく待つと再び使えるようになります。<strong>そこまでに作られたファイルはフォルダに残っています</strong>（消えません）。待つあいだは <code>portfolio.md</code> の書き足しを進めておくと無駄がありません</td></tr></tbody></table>
 <hr>
 <div class="closing"><div class="hrow h2row"><h2>🎓 今日のまとめ</h2><img class="peng-side" src="images/penguins/penguin_holding_diploma.png" alt="修了証を持つペンギン先生"></div>
 <ul><li><strong>中身を先に設計書に書き、それを Claude Code にサイトの形にしてもらう</strong></li><li>直すときは <strong>小さく・具体的に・ひとつずつ</strong>。直したら <strong>再読み込み</strong></li><li>作品が増えたら <strong>設計書に足して「反映して」</strong>。サイトと URL があれば、あとはいくらでも育てられる</li></ul>
@@ -385,7 +426,7 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 <hr>
 </div><div class="hrow h2row"><h2>付録A：<code>portfolio.md</code> のひな形（全文）</h2><img class="peng-side" src="images/penguins/penguin_holding_book.png" alt="本を持つペンギン先生"></div>
 <p>配布フォルダが手元に無いときは、以下をテキストエディット（Windows はメモ帳）に貼り付け、<code>portfolio.md</code> という名前で <code>portfolio</code> フォルダに保存してください。</p>
-<pre class="long"><code># ポートフォリオの設計書
+<div class="pre-wrap"><button class="copy" type="button" aria-label="この文をコピー">コピー</button><pre class="long"><code># ポートフォリオの設計書
 
 このファイルに「サイトに載せたいこと」を書きます。**書けるところだけで大丈夫**です。
 空欄の項目はサイトに載りません。あとから足せば、そのぶんサイトも育ちます。
@@ -397,7 +438,7 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 - 名前（サイトに出す表示名。ニックネームでも可）：
 - 肩書き・ひとこと（例：Webデザイン学習中／生成AIで業務改善をしています）：
 - 自己紹介（3〜5行。何をしてきて・何ができて・これから何をしたいか）：
-- 顔写真・アバターのファイル名（images フォルダに入れたもの。例：face.jpg）：
+- 顔写真・アバターのファイル名（images フォルダに入れたもの。半角英数字で。例：face.jpg）：
 - 活動エリア（任意。例：東京／フルリモート）：
 
 ---
@@ -410,7 +451,7 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 - ひとことで何か（1行）：
 - くわしく（2〜4行。何のために・何を・どう工夫したか）：
 - 使ったもの（例：Claude Code、Canva、Dify、Python）：
-- 画像のファイル名（images フォルダに入れたもの。例：work1.png）：
+- 画像のファイル名（images フォルダに入れたもの。半角英数字で。例：work1.png）：
 - リンク（公開URL・App Store・GitHub など。無ければ空欄）：
 - 作った時期（例：2026年8月）：
 
@@ -457,6 +498,26 @@ Claude Code は、選んだフォルダの中にある <code>portfolio.md</code>
 
 - 色の好み（例：紺と白で落ち着いた感じ／明るいオレンジ）：
 - 雰囲気（例：シンプル／親しみやすい／かっこいい）：
-- 参考にしたいサイトのURL（あれば）：</code></pre>
-</div></body>
+- 参考にしたいサイトのURL（あれば）：</code></pre></div>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var pre = btn.parentNode.querySelector('pre');
+    var text = pre ? pre.innerText : '';
+    function done() { btn.textContent = 'コピーしました'; btn.classList.add('done');
+      setTimeout(function () { btn.textContent = 'コピー'; btn.classList.remove('done'); }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+      ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta);
+    }
+  });
+});
+</script>
+
+</body>
 </html>
