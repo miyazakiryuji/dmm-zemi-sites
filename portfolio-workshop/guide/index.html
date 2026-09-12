@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>作品を並べた1ページのポートフォリオサイトを作ろう｜ワークショップ手順</title>
+<style>
+@page { size: A4; margin: 15mm 14mm; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: #1f2a24; background: #fff;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 14.5px; line-height: 1.85;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.page { max-width: 760px; margin: 0 auto; padding: 8px 0 40px; }
+
+h1, h2, h3, h4 { color: #0b5c37; font-weight: 700; break-after: avoid; }
+h1 { font-size: 27px; margin: 0 0 14px; padding-bottom: 12px; border-bottom: 3px solid #1a7f4b; line-height: 1.4; }
+h2 { font-size: 20px; margin: 30px 0 12px; padding-left: 12px; border-left: 6px solid #1a7f4b; line-height: 1.5; }
+h3 { font-size: 16.5px; margin: 22px 0 8px; line-height: 1.6; }
+h4 { font-size: 15px; margin: 18px 0 6px; }
+h1 + h3 { color: #385044; font-weight: 600; font-size: 15.5px; margin: -6px 0 14px; }
+
+p { margin: 10px 0; }
+strong { color: #0b5c37; }
+a { color: #1a7f4b; }
+
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.86em;
+  background: #eef1ef; color: #24352c; padding: 1.5px 5px; border-radius: 4px;
+  white-space: nowrap;
+}
+code.long { white-space: normal; }
+pre {
+  background: #f3f8f5; border-left: 4px solid #9dc9b1; border-radius: 0 8px 8px 0;
+  padding: 13px 16px; margin: 12px 0; overflow: hidden; break-inside: avoid;
+}
+pre code {
+  background: none; padding: 0; font-size: 13px; line-height: 1.8;
+  white-space: pre-wrap; word-break: break-word; color: #22322a;
+}
+
+blockquote {
+  background: #eef7f1; border-left: 4px solid #1a7f4b; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; break-inside: avoid;
+}
+blockquote.with-peng { display: flex; align-items: center; gap: 12px; }
+blockquote .qbody { flex: 1 1 auto; min-width: 0; }
+.peng-in { width: 64px; flex: 0 0 auto; }
+blockquote.cover .peng-in { width: 104px; }
+
+.hrow { display: flex; align-items: center; gap: 16px; break-inside: avoid; break-after: avoid; }
+.hrow > :first-child { flex: 1 1 auto; margin-top: 0; margin-bottom: 0; }
+.h2row { margin: 30px 0 12px; }
+.h3row { margin: 22px 0 8px; }
+.peng-side { width: 66px; flex: 0 0 auto; }
+
+figure { margin: 18px 0; text-align: center; break-inside: avoid; }
+figure.shot img { max-width: 100%; max-height: 168mm; border-radius: 8px; box-shadow: 0 1px 7px rgba(0,0,0,.16); }
+figcaption { font-size: 11px; color: #6b7a72; margin-top: 7px; }
+.peng-mid { width: 104px; }
+
+ul, ol { margin: 10px 0; padding-left: 1.6em; }
+li { margin: 5px 0; }
+ul.checklist { list-style: none; padding-left: 0.3em; }
+ul.checklist li::before { content: "□ "; color: #1a7f4b; font-weight: 700; }
+
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th, td { border: 1px solid #cfe0d6; padding: 8px 10px; vertical-align: top; line-height: 1.75; }
+th { background: #e6f2ea; color: #0b5c37; text-align: left; }
+td code { white-space: normal; }
+
+hr { border: 0; border-top: 1px dashed #c9d6cf; margin: 24px 0; }
+</style>
+</head>
+<body><div class="page">
+<h1>作品を並べた1ページのポートフォリオサイトを作ろう</h1>
+<h3>Claude デスクトップアプリの「Code」で作る ポートフォリオ制作ワークショップ</h3>
+<blockquote class="with-peng cover"><img class="peng-in" src="images/penguins/penguin_teaching.png" alt="ペンギン先生"><div class="qbody"><strong>対象</strong>：コードを書いたことがない方（Claude Code をはじめて使う方も歓迎）<br>
+<strong>使うもの</strong>：Claude デスクトップアプリ（Mac / Windows）の <strong>Code</strong>（Claude Code）・<strong>有料プラン</strong><br>
+<strong>作るもの</strong>：自己紹介と作品を並べた <strong>1ページのサイト</strong>（<code>index.html</code> というファイル1つ）<br>
+<strong>公開のしかた</strong>：別紙「Netlify で公開する」を使います。この手順書は <strong>「作る」ところまで</strong> を扱います<br>
+※ <strong>画面写真は Mac のものです。Windows でも操作は同じです。</strong></div></blockquote>
+<hr>
+<div class="hrow h2row"><h2>0. このワークショップについて</h2><img class="peng-side" src="images/penguins/penguin_waving_hello.png" alt="あいさつするペンギン先生"></div>
+<p><strong>コードは一行も書きません。</strong> やることは、Claude に日本語で「こう作って」とお願いするだけです。</p>
+<p>今日いちばん覚えて帰ってほしいのは、この順番です。</p>
+<ol><li><strong>載せる中身を先に、文章（設計書）に書き出す</strong></li><li>その設計書を Claude Code に読ませて、<strong>サイトの形にしてもらう</strong></li><li>できたサイトを見ながら、<strong>色や並び順を「頼むだけ」で直す</strong></li></ol>
+<blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_pointing.png" alt="説明するペンギン先生"><div class="qbody">🤔 <strong>なぜ、いきなり「サイトを作って」と頼まないのか</strong><br>
+チャットで思いつくまま伝えると、作品の抜けや、書き忘れた連絡先が出ます。先に1枚の設計書にまとめておけば、Claude はそれを読んで<strong>全部を漏れなく</strong>並べられます。さらに、あとで作品が増えたときも<strong>設計書に1つ足して「反映して」と頼むだけ</strong>で更新できます。<br>
+デザインを作り直しても中身は残るので、「中身」と「見た目」を別々に育てられるのが、この方式のいちばんの利点です。</div></blockquote>
+<h3>完成イメージ（講師の見本）</h3>
+<p>自己紹介・作品カード・連絡先を1ページに並べたサイトです。今日はこの「器」を自分の内容で作ります。</p>
+<figure class="shot"><img class="" src="images/11-mihon.png" alt="講師の見本サイト（上部）"><figcaption>講師の見本サイト（上部）</figcaption></figure>
+<h3>今日のゴール</h3>
+<ul><li>自分のパソコンの <code>portfolio</code> フォルダに <strong><code>index.html</code> ができて、ダブルクリックで自分のサイトが開く</strong></li><li>色・並び順・文言を、<strong>お願い文を貼るだけで直せる</strong></li><li>別紙の公開手順に進める状態になっている（公開すると <strong>URL 1本で自己紹介が済む</strong>）</li></ul>
+<blockquote>📗 <strong>用語</strong><br>
+<strong>ポートフォリオ</strong>：これまで作ったもの・できることをまとめて見せるための作品集。応募フォームやプロフィール欄に URL を貼って使います。<br>
+<strong><code>index.html</code></strong>：Web ページの本体となるファイル。ブラウザはこの名前のファイルを「そのフォルダの表紙」として最初に開きます。だからサイトの本体はこの名前にします。<br>
+<strong>Claude Code（Code）</strong>：Claude デスクトップアプリの中の、<strong>あなたのパソコンのフォルダに本物のファイルを作ってくれる</strong>モード。チャットは画面の中だけですが、Code はフォルダに <code>index.html</code> を実際に保存します。</blockquote>
+<hr>
+<div class="hrow h2row"><h2>1. 準備するもの</h2><img class="peng-side" src="images/penguins/penguin_checkmark_ok.png" alt="持ち物を確認するペンギン先生"></div>
+<ul class="checklist"><li><strong>Claude デスクトップアプリ</strong>（インストール＆ログイン済み・<strong>有料プラン</strong>）</li><li>配布した <strong><code>portfolio</code> フォルダ</strong>（手元に無い方は、この章の中で自分で作れます）</li><li><strong>顔写真かアバター画像</strong>（無くても作れます。イラストでも OK）</li><li><strong>作品の画像</strong>（スクリーンショットなど。無い作品は文章だけでも OK）</li><li>載せたい <strong>リンク</strong>（公開 URL・SNS・GitHub など。無くても OK）</li></ul>
+<blockquote>🔑 <strong>アプリのインストールとログインは開始前にすませてください。</strong><br>
+分からない場合はファシリテーターに声をかけてください。</blockquote>
+<h3>1-1. 作業フォルダをデスクトップに置く</h3>
+<p>配布した <code>portfolio</code> フォルダを、<strong>デスクトップにそのままコピー</strong>します。中身はこの2つです。</p>
+<pre><code>portfolio/
+├── portfolio.md   ← 設計書。ここに「載せたいこと」を書く
+└── images/        ← 顔写真・作品の画像を入れる</code></pre>
+<figure class="shot"><img class="" src="images/00-folder.png" alt="デスクトップに置いた portfolio フォルダ（中に portfolio.md と images）"><figcaption>デスクトップに置いた portfolio フォルダ（中に portfolio.md と images）</figcaption></figure>
+<blockquote>🤔 <strong>なぜフォルダを1つ決めるのか</strong><br>
+Code は「このフォルダの中でファイルを読み書きしてよい」と決めてから動きます。フォルダを決めないと、設計書がどこにあるのか、<code>index.html</code> をどこに作ればよいのかが決まりません。<br>
+<strong>デスクトップに置く</strong>のは、あとでフォルダを選ぶときに迷わないためと、公開するときにアップロードするフォルダをすぐ見つけられるためです。</blockquote>
+<p><strong>配布フォルダが手元に無い方</strong>：デスクトップで右クリック →「新規フォルダ」（Windows は「新規作成」→「フォルダー」）で <strong><code>portfolio</code></strong> を作り、その中にもう1つ <strong><code>images</code></strong> フォルダを作ってください。<code>portfolio.md</code> は、巻末の <strong>付録A</strong> の内容を「テキストエディット」（Windows は「メモ帳」）に貼り付けて、<code>portfolio.md</code> という名前で <code>portfolio</code> フォルダに保存すれば同じものになります。</p>
+<blockquote>⚠️ フォルダ名とファイル名は <strong>半角の英数字</strong> にしてください（<code>portfolio</code>・<code>face.jpg</code>・<code>work1.png</code> のように）。<br>
+公開したとき、画像のファイル名は <strong>そのまま URL の一部</strong>になります。日本語や全角のファイル名は、環境によって文字化けしたり画像が表示されなかったりする原因になります。</blockquote>
+<h3>1-2. 画像を images フォルダに入れる</h3>
+<ul><li><strong>顔写真・アバター</strong>：スマホで撮ったもので十分です。顔出しに抵抗があれば、イラストやアバター画像でかまいません。</li><li><strong>作品の画像</strong>：Web サイトなら画面のスクリーンショット、アプリなら画面写真、画像作品はそのもの。文章や記事の作品は画像が無くても大丈夫です。</li><li>入れたら、<strong>ファイル名を控えておきます</strong>（あとで設計書に書きます）。</li></ul>
+<blockquote>📗 <strong>スクリーンショットの撮り方</strong><br>
+<strong>Mac</strong>：<code>⇧ shift</code> + <code>⌘ command</code> + <code>4</code> を押し、撮りたい範囲をドラッグ → デスクトップに画像ファイルとして保存されます。<br>
+<strong>Windows</strong>：<code>Win</code> + <code>Shift</code> + <code>S</code> を押し、撮りたい範囲をドラッグ → 画面右下の通知を押すと保存できます（保存先は「ピクチャ」→「スクリーンショット」）。<br>
+撮れたファイルの名前を <code>work1.png</code> のような半角英数字に変えてから <code>images</code> に入れると、あとで指定しやすくなります。</blockquote>
+<hr>
+<div class="hrow h2row"><h2>2. 載せる中身を決めて、設計書 <code>portfolio.md</code> に書く（ここが一番大事）</h2><img class="peng-side" src="images/penguins/penguin_koko_daiji_board.png" alt="「ここ大事！」と伝えるペンギン先生"></div>
+<p><code>portfolio</code> フォルダの中の <strong><code>portfolio.md</code></strong> を開きます。ダブルクリックで開かないときは、右クリック →「このアプリケーションで開く」→ <strong>テキストエディット</strong>（Windows は <strong>メモ帳</strong>）を選びます。VS Code などのエディタがある方はそれで開いてください。</p>
+<blockquote>📗 <strong>用語</strong><br>
+<strong>Markdown（<code>.md</code>）</strong>：<code>#</code> で見出し、<code>-</code> で箇条書きを表す、<strong>ただの文字だけの書き方</strong>です。特別なソフトは要りません。Claude はこの書き方を正確に読めるので、設計書に向いています。</blockquote>
+<p>設計書は <strong>5つの箱</strong> に分かれています。<strong>書けるところだけ</strong>で大丈夫です。空欄はサイトに載りません。</p>
+<table><thead><tr><th>箱</th><th>書くこと</th><th>なぜ必要か</th></tr></thead><tbody><tr><td><strong>1. あなたのこと</strong></td><td>表示名・肩書きのひとこと・自己紹介（3〜5行）・顔写真のファイル名</td><td>サイトの一番上に出る「顔」。見た人が最初に読む場所なので、<strong>何をしている人か</strong>が1行で伝わる言葉を入れます</td></tr><tr><td><strong>2. 作品</strong></td><td>作品名・種類・ひとこと・くわしく・使ったもの・画像のファイル名・リンク・時期</td><td>今日の主役。<strong>載せたい順</strong>に書きます（上に書いたものがサイトでも上に来ます）</td></tr><tr><td><strong>3. できること・使える道具</strong></td><td>ツール名やスキルを箇条書き</td><td>作品だけでは伝わりにくい「対応できる範囲」を補います</td></tr><tr><td><strong>4. 連絡先・リンク</strong></td><td>メール・SNS・GitHub など</td><td>サイトの目的は「連絡してもらうこと」。<strong>1つでもあれば十分</strong>です</td></tr><tr><td><strong>5. サイトの雰囲気</strong></td><td>色の好み・雰囲気・参考サイト</td><td>Claude がデザインを決めるときの手がかり。空欄なら Claude におまかせになります</td></tr></tbody></table>
+<h3>作品が少ない・まだ無い方へ</h3>
+<p>「作品」は、お金をもらって作ったものだけではありません。次のようなものも立派な作品です。</p>
+<ul><li><strong>学習の成果物</strong>：コースの課題で作ったもの、ワークショップで作ったゲームやアプリ、コンペに出した作品</li><li><strong>練習で作ったもの</strong>：自分用の家計簿、業務の自動化スクリプト、Canva で作ったバナー</li><li><strong>文章</strong>：note や SNS の記事、社内向けに書いたマニュアルやプロンプト集（社外に出してよいものだけ）</li><li><strong>これから作るもの</strong>：「制作中」として1枚書いておく（完成したら差し替える）</li></ul>
+<p><strong>1つでも十分です。</strong> 今日の目的は「完成した作品集」ではなく、<strong>これから作ったものを足していける器と URL</strong> を手に入れることです。</p>
+<h3>書くときのコツ</h3>
+<ul><li><strong>数字を入れる</strong>：「毎週使っている」「上司の確認時間が半分に」「7ステップで完成」など、具体的な数字や変化があると伝わります</li><li><strong>誰に見せるかを思い浮かべる</strong>：応募先の担当者・SNS で知り合った人・知人。その人が知りたいことから書きます</li><li><strong>きれいな文章でなくて OK</strong>：箇条書きや話し言葉のままで大丈夫です。整えるのは Claude の仕事です</li></ul>
+<blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_warning_sign.png" alt="注意をうながすペンギン先生"><div class="qbody">⚠️ <strong>公開される前提で書いてください。</strong><br>
+住所・電話番号・生年月日は載せません。本名を出すかニックネームにするかは自分で決めます。<br>
+勤務先の名前や、仕事で作ったものは <strong>社外に出してよいか</strong> を確認してから載せます。顔写真も同じです。<br>
+あとから直せるので、迷ったものは<strong>今日は空欄</strong>にしておきましょう。</div></blockquote>
+<h3>記入例</h3>
+<p>配布フォルダの <code>記入例_ペン太</code> に、事務職で生成AI を学習中の「ペン太」さんの設計書と、そこから作ったサイトを入れてあります。「作品」の書き方は、たとえばこうです。</p>
+<pre><code>### 作品1
+- 作品名：今月の家計簿アプリ
+- 種類：学習の成果物（Webアプリ）
+- ひとことで何か（1行）：収入・支出・残りが一目でわかる、自分用のシンプルな家計簿
+- くわしく（2〜4行）：Excelで管理していた家計簿を、スマホでも見やすいWebアプリにしました。
+  Claude Codeに日本語で頼みながら、分類の色分けと「残り」の自動計算を追加。
+- 使ったもの：Claude Code、HTML / CSS / JavaScript
+- 画像のファイル名：kakeibo.png
+- リンク：
+- 作った時期：2026年8月</code></pre>
+<p>書き終えたら <strong>保存</strong>（<code>⌘S</code> / <code>Ctrl+S</code>）します。保存していないと、Claude は古い内容を読んでしまいます。</p>
+<hr>
+<div class="hrow h2row"><h2>3. Claude の「Code」を開いて、フォルダを選ぶ</h2><img class="peng-side" src="images/penguins/penguin_pointing.png" alt="画面を指すペンギン先生"></div>
+<h3>3-1. 「Code」に切り替える</h3>
+<p>アプリ左上の <strong>「ホーム」／「Code」</strong> の切り替えで、<strong>「Code」</strong> をクリックします。</p>
+<figure class="shot"><img style="max-width:40%" class="" src="images/01-code-tab.png" alt="Codeタブに切り替える"><figcaption>Codeタブに切り替える</figcaption></figure>
+<h3>3-2. 作業フォルダを選ぶ</h3>
+<p><strong>入力欄のすぐ上</strong>に、フォルダのアイコンが付いた小さなボタンがあります（<code>ローカル</code> の<strong>右どなり</strong>です）。 これをクリック →「<strong>フォルダを開く…</strong>」を選びます。</p>
+<figure class="shot"><img class="" src="images/02-folder-button.png" alt="フォルダのボタンを押すと出るメニュー。一番下の「フォルダを開く…」を選ぶ"><figcaption>フォルダのボタンを押すと出るメニュー。一番下の「フォルダを開く…」を選ぶ</figcaption></figure>
+<p>ファイルを選ぶ画面が開くので、<strong>デスクトップ → <code>portfolio</code></strong> の順にたどって、<code>portfolio</code> フォルダを選んだ状態で <strong>「開く」</strong> を押します。</p>
+<figure class="shot"><img class="" src="images/03-open-panel.png" alt="デスクトップの portfolio フォルダを選んで「開く」"><figcaption>デスクトップの portfolio フォルダを選んで「開く」</figcaption></figure>
+<blockquote>🤔 <strong>なぜ「フォルダ」を選ぶのか（ファイルではなく）</strong><br>
+Claude Code は、選んだフォルダの中にある <code>portfolio.md</code> と <code>images</code> を読み、同じ場所に <code>index.html</code> を作ります。<br>
+ファイル1つを渡す方式だと、画像フォルダが見えず、作った <code>index.html</code> の置き場所も決まりません。</blockquote>
+<h3>3-3. 「信頼しますか？」と聞かれたら</h3>
+<p>初めてのフォルダでは、下のような確認が出ます。押す前に、ダイアログに出ている<strong>フォルダの場所</strong>を見てください。 <strong>いちばん最後が <code>portfolio</code>、その1つ手前が <code>Desktop</code>（デスクトップ）</strong> になっていれば OK です。 違うところが出ていたら「キャンセル」して、もう一度フォルダを選び直してください。 確認できたら「<strong>ワークスペースを信頼する</strong>」を押して進みます。</p>
+<figure class="shot"><img class="" src="images/04-trust.png" alt="ワークスペースを信頼する"><figcaption>ワークスペースを信頼する</figcaption></figure>
+<blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_warning_sign.png" alt="注意をうながすペンギン先生"><div class="qbody">⚠️ これは「このフォルダの中で、ファイルを読み書きしたり<strong>動かしたり</strong>していいですか？」という確認です。<br>
+信頼すると、Claude がこのフォルダの中で自分でファイルを作ったり書き換えたりできるようになります。<br>
+<strong>自分が作った・中身が分かっているフォルダのときだけ</strong>信頼してください。<br>
+※ 一度信頼したフォルダでは、この確認は出ません。出なくても失敗ではありません。</div></blockquote>
+<h3>3-4. 選べたか確認する</h3>
+<p>入力欄の上のボタンが <strong><code>portfolio</code></strong> になっていれば成功です。</p>
+<figure class="shot"><img class="" src="images/05-folder-selected.png" alt="フォルダが portfolio になっている。左下は「手動」"><figcaption>フォルダが portfolio になっている。左下は「手動」</figcaption></figure>
+<blockquote>💡 入力欄の<strong>左下のボタン</strong>が <strong>「手動」</strong>（古いバージョンでは「編集を承認」）か <strong>「自動」</strong> なら、そのまま進めます。<br>
+ここが <strong>「プラン」</strong> になっていると<strong>ファイルが1つも作られません。</strong>「手動」か「自動」に切り替えてください。<br>
+「手動」のときは、Claude がファイルを作る前に「はい／許可」を聞いてきます。<strong>内容を見て「許可」</strong>を押せば進みます。</blockquote>
+<blockquote>📗 <strong>ターミナル版（コマンド入力）で参加する方へ</strong><br>
+ターミナルで <code>cd ~/Desktop/portfolio</code>（Windows は <code class="long">cd %USERPROFILE%\Desktop\portfolio</code>）と入力して Enter、続けて <code>claude</code> と入力して Enter で起動します。<br>
+あとは、この手順書の<strong>お願い文をそのまま貼る</strong>だけで同じように進められます。「信頼しますか？」の確認も同じように出ます。</blockquote>
+<hr>
+<div class="hrow h2row"><h2>4. お願い①：サイトを作ってもらう</h2><img class="peng-side" src="images/penguins/penguin_laptop_with_coffee.png" alt="授業をするペンギン先生"></div>
+<p>🎯 <strong>ゴール</strong>：<code>portfolio</code> フォルダに <code>index.html</code> ができて、ダブルクリックで自分のサイトが開く</p>
+<p>💬 <strong>貼り付けるお願い</strong>（このまま全部コピーして貼ります）</p>
+<pre><code>このフォルダの portfolio.md を読んで、自己紹介と作品を並べた1ページのポートフォリオサイトを index.html という名前で作ってください。
+
+守ってほしいこと：
+- HTML・CSS・JavaScript は index.html の1ファイルにまとめる（外部のライブラリやCDNは使わない）
+- 画像は images フォルダのものを使う
+- スマホでもパソコンでも見やすいレイアウトにする
+- portfolio.md で空欄の項目はサイトに表示しない
+- 作品は portfolio.md に書いた順番で並べる
+- 「5. サイトの雰囲気」に書いた希望を色とデザインに反映する
+
+できあがったら、確認のしかたを教えてください。</code></pre>
+<p>画面下の入力欄に貼り付けて、<strong>Enter</strong> で送信します。</p>
+<figure class="shot"><img class="" src="images/06-input.png" alt="お願いを入力したところ"><figcaption>お願いを入力したところ</figcaption></figure>
+<blockquote>🤔 <strong>お願い文の「守ってほしいこと」は何のためか</strong><br>
+<strong>1ファイルにまとめる</strong>：公開するときに <code>index.html</code> と <code>images</code> だけをアップロードすればよくなり、「別のファイルが足りなくて表示が崩れる」事故を防げます。<br>
+<strong>外部のライブラリを使わない</strong>：インターネット上の部品に頼ると、その部品が変わったり止まったりしたときにサイトごと壊れます。<br>
+<strong>空欄は表示しない</strong>：「メール：」のような空の見出しが残ると、未完成に見えてしまいます。<br>
+<strong>書いた順番で並べる</strong>：見せたい順は、あなたが決めるものです。Claude に勝手に並べ替えさせません。</blockquote>
+<blockquote>📗 <strong>用語</strong><br>
+<strong>HTML / CSS / JavaScript</strong>：Web ページを作る3種類の書き方です。HTML は「何を載せるか」（文章・画像）、CSS は「どう見せるか」（色・配置）、JavaScript は「どう動くか」（クリックしたときの反応）を担当します。今日はすべて Claude が書きます。</blockquote>
+<p>送信すると「作成中」や「考え中」と表示されます。<strong>ここで数分かかります</strong>。Claude はまず <code>portfolio.md</code> と <code>images</code> の中身を読み、それから <code>index.html</code> を書きます。</p>
+<figure class="shot"><img class="" src="images/07-generating.png" alt="作成中（このまま数分待ちます）"><figcaption>作成中（このまま数分待ちます）</figcaption></figure>
+<p><strong>「許可しますか？」と聞かれたら</strong>、内容を見て <strong>「一度だけ許可」</strong>（または「許可」）を押してください。「手動」のときは、Claude が画像の大きさを調べたりファイルを作ったりする前に、このように一つずつ確認してきます。<strong>押すまで Claude は待っています</strong>ので、止まって見えたらこの確認が出ていないか見てください。</p>
+<figure class="shot"><img class="" src="images/08-permission.png" alt="「許可しますか？」の確認。右下の「一度だけ許可」を押す"><figcaption>「許可しますか？」の確認。右下の「一度だけ許可」を押す</figcaption></figure>
+<blockquote>🤔 <strong>なぜ毎回聞かれるのか</strong><br>
+「手動」は、Claude がパソコンの中で何かを実行する前に必ず人の確認を取る設定です。今日のように中身の分かっているフォルダなら「自動」にしても構いませんが、初めてのうちは<strong>何をしようとしているかが見える「手動」</strong>のほうが安心です。</blockquote>
+<p>👀 <strong>うまくいくと</strong>：<code>portfolio</code> フォルダに <strong><code>index.html</code></strong> ができ、Claude が「ダブルクリックで開けます」のような案内を返します。右側にアプリ内のブラウザが開いて、サイトが表示されることもあります。</p>
+<figure class="shot"><img class="" src="images/08-done.png" alt="できあがり。「確認のしかた」と、作られたファイルの一覧が返ってくる"><figcaption>できあがり。「確認のしかた」と、作られたファイルの一覧が返ってくる</figcaption></figure>
+<p>✅ <strong>見てみよう</strong>：<code>portfolio</code> フォルダの <code>index.html</code> を<strong>ダブルクリック</strong>すると、いつものブラウザで開きます。</p>
+<figure class="shot"><img class="" src="images/09-site-first.png" alt="できたサイトをブラウザで開いたところ（記入例「ペン太」の場合）"><figcaption>できたサイトをブラウザで開いたところ（記入例「ペン太」の場合）</figcaption></figure>
+<blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_warning_sign.png" alt="注意をうながすペンギン先生"><div class="qbody">⚠️ <strong>AIなので、出来上がりは人によって違います。</strong> 隣の人と色や配置が違っていて正常です。<br>
+気に入らないところは、次の章で「頼んで直す」ので心配いりません。</div></blockquote>
+<p>🔧 <strong>ダメなとき</strong></p>
+<ul><li>画像が出ない → <code>portfolio.md</code> に書いたファイル名と、<code>images</code> の中のファイル名（拡張子 <code>.png</code> <code>.jpg</code> まで）が同じか確認。違っていたら直して <code class="long">画像のファイル名を直しました。index.html に反映してください。</code></li><li>途中で止まった → 「作成中」の表示が消えているのを確かめてから <code>続きを作ってください。</code></li><li><code>index.html</code> ができない → 左下が「プラン」になっていないか確認（3-4）</li></ul>
+<hr>
+<div class="hrow h2row"><h2>5. お願い②：見ながら直す（色・並び順・文言）</h2><img class="peng-side" src="images/penguins/penguin_puzzle.png" alt="組み合わせを考えるペンギン先生"></div>
+<p>ここからは <strong>「見て → 頼んで → 再読み込み」</strong> の繰り返しです。<strong>同じ会話に続けて</strong>貼っていきます（新しく開き直さないでください）。</p>
+<h3>直すときの3つのコツ</h3>
+<table><thead><tr><th>コツ</th><th>どういうこと？</th><th>例</th></tr></thead><tbody><tr><td><strong>① 一度にひとつだけ頼む</strong></td><td>欲張ると意図と違う直し方をされやすい。1回のお願い＝1か所</td><td>×「色も並びも文章も全部変えて」 → 〇「まず見出しの色だけ変えて」</td></tr><tr><td><strong>② 見た目の言葉で場所を伝える</strong></td><td>HTML の言葉は不要。画面のどこかを言えば通じる</td><td>〇「作品の2番目のカードの説明文を、2行くらいに短くして」</td></tr><tr><td><strong>③ 直したら再読み込み</strong></td><td>ブラウザは開いた時点の内容を表示したまま。<code>index.html</code> が書き換わっても自動では変わらない</td><td>直してもらったら <strong>⌘R（Windows は Ctrl+R）</strong></td></tr></tbody></table>
+<h3>そのまま貼れるお願い文の例</h3>
+<pre><code>見出しと差し色を、水色ではなく緑系に変えてください。</code></pre>
+<pre><code>作品の並び順を変えて、「スペースインベーダー」を一番上にしてください。</code></pre>
+<pre><code>自己紹介の文章を、もう少し短く3行くらいにまとめてください。内容は変えないでください。</code></pre>
+<pre><code>顔写真をもう少し大きく、丸く切り抜いて表示してください。</code></pre>
+<pre><code>「できること」の項目を、タグのような小さな四角で横に並べてください。</code></pre>
+<pre><code>連絡先の下に、メールを送るボタンを付けてください。</code></pre>
+<pre><code>スマホの幅で見ると作品カードの文字がはみ出します。スマホでは1列に並ぶように直してください。</code></pre>
+<pre><code>その変更は取り消して、直前の状態に戻してください。</code></pre>
+<p>たとえば「見出しと差し色を緑系に」と頼むと、こう変わります。<strong>中身は同じまま、色だけが変わっている</strong>ことを確かめてください。</p>
+<figure class="shot"><img class="" src="images/10-site-after.png" alt="色を変える前（左）と後（右）"><figcaption>色を変える前（左）と後（右）</figcaption></figure>
+<p>直し終わると、Claude は <strong>何をどう変えたか</strong> を説明してくれます。思っていたのと違えば、その説明を手がかりにもう一度頼みます（例：「背景の薄い色は水色のままにして」）。</p>
+<figure class="shot"><img class="" src="images/12-fix-reply.png" alt="直したあとの返事。変えたところの一覧と、確認のしかたが書かれている"><figcaption>直したあとの返事。変えたところの一覧と、確認のしかたが書かれている</figcaption></figure>
+<blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_warning_sign.png" alt="注意をうながすペンギン先生"><div class="qbody">⚠️ <strong>直してもらったのに変わらないときは、まず再読み込み。</strong> ブラウザのタブを開いたままだと<strong>前のまま</strong>です。<br>
+<strong>⌘R（Windows は Ctrl+R）</strong> を押してから、もう一度見てください。アプリの中のプレビューも同じです。</div></blockquote>
+<blockquote>📎 <strong>気に入った状態になったら、控えを1つ。</strong> <code>index.html</code> をコピー＆ペーストして複製しておくと、この先で崩れても必ずここに戻れます。</blockquote>
+<blockquote class="with-peng"><img class="peng-in" src="images/penguins/penguin_thumbs_up.png" alt="よくできましたと伝えるペンギン先生"><div class="qbody">🎉 <strong>ここまでで「自分のポートフォリオサイト」が手元にできました。</strong> ファイルはすでにあなたのパソコンにあります。保存の作業はいりません。</div></blockquote>
+<hr>
+<div class="hrow h2row"><h2>6. 公開する（別紙へ）</h2><img class="peng-side" src="images/penguins/penguin_chart_presentation.png" alt="進み方を説明するペンギン先生"></div>
+<p>公開の手順は、別紙 <strong>「Netlify で公開する」</strong> に沿って進めます。ここでは、公開すると何が起きるかだけ押さえておきます。</p>
+<ul><li><code>portfolio</code> フォルダ（<code>index.html</code> と <code>images</code>）を Netlify という公開サービスにアップロードすると、<strong>あなた専用の URL</strong> が発行されます</li><li>その URL を開くと、世界中のどこからでも今日作ったサイトが表示されます</li><li>URL は、応募フォームやプロフィール欄に <strong>そのまま貼って使えます</strong></li></ul>
+<blockquote>🤔 <strong>なぜ <code>index.html</code> をダブルクリックで開けるのに、公開の作業がいるのか</strong><br>
+ダブルクリックで開いているのは、<strong>あなたのパソコンの中のファイル</strong>です。他の人のパソコンにはそのファイルが無いので、URL を送っても開けません。<br>
+インターネット上の置き場所（サーバー）にファイルを置いて、誰でも取りに来られる状態にするのが「公開」です。</blockquote>
+<h3>公開する前の確認</h3>
+<ul class="checklist"><li>住所・電話番号・生年月日など、<strong>載せたくない情報が入っていない</strong></li><li>顔写真・勤務先名・仕事で作ったものは、<strong>出してよいと確認済み</strong></li><li>リンクを1つずつクリックして、<strong>正しいページが開く</strong></li><li>ブラウザの幅を狭くして（またはスマホで）、<strong>崩れていない</strong></li><li><code>portfolio.md</code>（設計書）は公開しなくてよい。<strong>アップロードするのは <code>index.html</code> と <code>images</code> だけ</strong>でもよい</li></ul>
+<hr>
+<div class="hrow h2row"><h2>7. あとから育てる 🌱</h2><img class="peng-side" src="images/penguins/penguin_idea_lightbulb.png" alt="ひらめいたペンギン先生"></div>
+<p>作品が増えたら、こう更新します。</p>
+<ol><li><code>portfolio.md</code> に <strong>作品の塊を1つ足す</strong>（「### 作品」をコピーして書く）。画像があれば <code>images</code> に入れる</li><li>Claude の Code で <strong>同じ <code>portfolio</code> フォルダ</strong> を開き、次のお願いを貼る</li><li>公開し直す（別紙の手順）</li></ol>
+<pre><code>portfolio.md に作品を1つ足しました。index.html に反映してください。
+デザインは今のまま変えないでください。</code></pre>
+<blockquote>💡 これが、設計書を先に書く方式の良いところです。<strong>サイトを作り直すのではなく、設計書に足すだけ。</strong><br>
+デザインを変えたくなったときも、<code>portfolio.md</code> はそのままで「雰囲気を落ち着いた紺色に変えて」と頼めば、中身を失わずに衣替えできます。</blockquote>
+<hr>
+<div class="hrow h2row"><h2>8. うまくいかないとき（そのまま貼れる言葉）🔧</h2><img class="peng-side" src="images/penguins/penguin_magnifying_front.png" alt="原因をさがすペンギン先生"></div>
+<table><thead><tr><th>こまりごと</th><th>やること</th></tr></thead><tbody><tr><td><strong>直してもらったのに、さっきと同じまま</strong></td><td>まずブラウザのタブで <strong>⌘R / Ctrl+R</strong>（再読み込み）。頼み直す前に、必ずこれを試す</td></tr><tr><td>画像が表示されない（枠だけ・壊れたマーク）</td><td><code>portfolio.md</code> のファイル名と <code>images</code> の中のファイル名を見比べる（大文字小文字・拡張子まで同じか）。直したら <code>画像のファイル名を直しました。反映してください。</code></td></tr><tr><td><code>index.html</code> ができない</td><td>入力欄左下が「プラン」になっていないか確認。「手動」か「自動」にして <code>index.html を作ってください。</code></td></tr><tr><td>「許可しますか？」で止まっている</td><td>内容を見て「許可」を押す。押すまで Claude は待っています</td></tr><tr><td>作るのが途中で止まった</td><td>「作成中」「考え中」の表示が<strong>消えているか</strong>確認。消えていたら <code>続きを作ってください。</code></td></tr><tr><td>変な方向に変わってしまった</td><td><code>直前の変更を取り消してください。</code> それでも直らなければ、取っておいた<strong>控えを <code>index.html</code> に戻す</strong></td></tr><tr><td>いっぺんに頼んだら崩れた</td><td>ひとつずつに分けて頼み直す（コツ①）</td></tr><tr><td>フォルダを間違えた</td><td>入力欄の上のフォルダのボタンから選び直す。分からなければ左上の「新規」で会話を作り直し、3章のやり方でもう一度選ぶ</td></tr><tr><td>設計書を直したのに反映されない</td><td><code>portfolio.md</code> を<strong>保存</strong>したか確認（<code>⌘S</code> / <code>Ctrl+S</code>）。保存してから <code class="long">portfolio.md を更新しました。反映してください。</code></td></tr><tr><td><code>利用の上限に達しました</code> と出た</td><td>手を挙げてください。<strong>そこまでのファイルはフォルダに残っています</strong>（消えません）</td></tr></tbody></table>
+<hr>
+<div class="hrow h2row"><h2>9. ファシリテーターの方へ 🧑‍🏫</h2><img class="peng-side" src="images/penguins/penguin_holding_book.png" alt="進行の手引きを持つペンギン先生"></div>
+<h3>事前準備</h3>
+<ul><li><strong>必ず一度、自分で最後まで通しで作る</strong>（配布フォルダ → お願い① → お願い②。返り方と待ち時間の感覚をつかむ）</li><li><strong>当日の実機で UI（Code タブ・フォルダ選択・信頼ダイアログ・左下のモード名）を確認</strong>（バージョンで文言が変わります）</li><li>講師の見本サイト（<code>見本_宮﨑竜治/index.html</code>）と記入例（<code>配布/記入例_ペン太</code>）を、<strong>冒頭で実際に開いて見せる</strong></li><li>開始前に、全員の <strong>ログイン済み／有料プラン／Code タブが見える</strong> ことを確認</li><li>開始前に、全員の入力欄<strong>左下を「手動」か「自動」にそろえる</strong>（「プラン」だとファイルが作られません）</li><li>参加者に<strong>配布フォルダをデスクトップに置かせ、画像を入れさせておく</strong>と、当日の立ち上がりが速い</li></ul>
+<h3>進行のコツ</h3>
+<ul><li>山場は <strong>2章（設計書を書く）</strong>。ここに一番時間を使う。「1つでいい」「空欄でいい」を何度も言う</li><li>お願い①の生成待ちは<strong>実況で埋める</strong>（「いま portfolio.md を読んでいます」「index.html を書き始めました」）と「止まった？」の不安を防げる</li><li><strong>出来上がりは人によって違う。</strong>「隣と違って OK」と最初に伝える</li><li>お願い②は「見る → 頼む → ⌘R」の3拍子。<strong>再読み込みを毎回声に出す</strong></li><li>公開（別紙）に進む前に、6章の「公開する前の確認」を全員で読み合わせる</li></ul>
+<h3>つまずきどころ Top3</h3>
+<ol><li><strong>フォルダ選択と信頼ダイアログ＋許可ダイアログ</strong> → 最初の関門。全員そろってから次へ進む</li><li><strong>画像のファイル名の食い違い</strong> → <code>portfolio.md</code> の記載と <code>images</code> の実物が違う（全角・拡張子・大文字小文字）。「ファイル名をコピーして貼る」を勧める</li><li><strong>再読み込みし忘れ</strong> → お願い②に入る<strong>前に</strong>「直したら ⌘R」を伝えておく</li></ol>
+<hr>
+<div class="hrow h2row"><h2>付録A：<code>portfolio.md</code> のひな形（全文）</h2><img class="peng-side" src="images/penguins/penguin_holding_book.png" alt="本を持つペンギン先生"></div>
+<p>配布フォルダが手元に無いときは、以下をテキストエディット（Windows はメモ帳）に貼り付け、<code>portfolio.md</code> という名前で <code>portfolio</code> フォルダに保存してください。</p>
+<pre><code># ポートフォリオの設計書
+
+このファイルに「サイトに載せたいこと」を書きます。書けるところだけで大丈夫です。
+空欄の項目はサイトに載りません。あとから足せば、そのぶんサイトも育ちます。
+
+---
+
+## 1. あなたのこと
+
+- 名前（サイトに出す表示名。ニックネームでも可）：
+- 肩書き・ひとこと（例：Webデザイン学習中／生成AIで業務改善をしています）：
+- 自己紹介（3〜5行。何をしてきて・何ができて・これから何をしたいか）：
+- 顔写真・アバターのファイル名（images フォルダに入れたもの。例：face.jpg）：
+- 活動エリア（任意。例：東京／フルリモート）：
+
+---
+
+## 2. 作品（載せたい順に。作品が増えたら「### 作品」の塊をコピーして足す）
+
+### 作品1
+- 作品名：
+- 種類（例：Webサイト／スマホアプリ／画像・デザイン／文章・記事／自動化ツール／学習の成果物）：
+- ひとことで何か（1行）：
+- くわしく（2〜4行。何のために・何を・どう工夫したか）：
+- 使ったもの（例：Claude Code、Canva、Dify、Python）：
+- 画像のファイル名（images フォルダに入れたもの。例：work1.png）：
+- リンク（公開URL・App Store・GitHub など。無ければ空欄）：
+- 作った時期（例：2026年8月）：
+
+### 作品2
+- 作品名：
+- 種類：
+- ひとことで何か（1行）：
+- くわしく（2〜4行）：
+- 使ったもの：
+- 画像のファイル名：
+- リンク：
+- 作った時期：
+
+---
+
+## 3. できること・使える道具
+
+- （例：Claude Code／ChatGPT／Canva／Excel／写真撮影／文章作成）
+-
+
+---
+
+## 4. 連絡先・リンク
+
+- メール：
+- X（Twitter）：
+- GitHub：
+- その他（Instagram・note・YouTube など）：
+
+---
+
+## 5. サイトの雰囲気（任意）
+
+- 色の好み（例：紺と白で落ち着いた感じ／明るいオレンジ）：
+- 雰囲気（例：シンプル／親しみやすい／かっこいい）：
+- 参考にしたいサイトのURL（あれば）：</code></pre>
+<hr>
+<div class="hrow h3row"><h3>🎓 今日のまとめ</h3><img class="peng-side" src="images/penguins/penguin_holding_diploma.png" alt="修了証を持つペンギン先生"></div>
+<ul><li><strong>中身を先に設計書に書き、それを Claude Code にサイトの形にしてもらう</strong></li><li>直すときは <strong>小さく・具体的に・ひとつずつ</strong>。直したら <strong>再読み込み</strong></li><li>作品が増えたら <strong>設計書に足して「反映して」</strong>。器と URL があれば、あとはいくらでも育てられる</li></ul>
+<p><strong>あなたの「作ったもの」を、そのまま言葉にすれば形になります。おつかれさまでした！</strong></p>
+<figure class="peng-solo"><img class="peng-mid" src="images/penguins/penguin_bowing.png" alt="おじぎをするペンギン先生"></figure>
+</div></body>
+</html>
