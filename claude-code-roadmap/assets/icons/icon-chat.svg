@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#B84A00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <title>向かい合う二つの吹き出し</title>
+  <path fill="#FFE2C7" d="M5.5 8h24v16H14l-6 5v-5H5.5z"/>
+  <path fill="#FFD166" d="M19 27h15l6 5v-5h2.5V15H33"/>
+  <path d="M11 14h13M11 19h9M25 33h8"/>
+</svg>

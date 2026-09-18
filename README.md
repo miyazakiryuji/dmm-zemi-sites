@@ -12,6 +12,7 @@ DMM 生成AI CAMP 学び放題の各ゼミで使用している **講義資料�
 | Codex 入門ゼミ 資料サイト | https://miyazakiryuji.github.io/dmm-zemi-sites/codex-intro-zemi/ |
 | Dify マスターゼミ 資料サイト | https://miyazakiryuji.github.io/dmm-zemi-sites/dify-zemi/ |
 | Skills 説明資料サイト（補助教材） | https://miyazakiryuji.github.io/dmm-zemi-sites/skills/ |
+| 注目スキルと、これからの Claude Code の学び方（補助教材） | https://miyazakiryuji.github.io/dmm-zemi-sites/claude-code-roadmap/ |
 | Python / Streamlit / API 入門（補助教材） | https://miyazakiryuji.github.io/dmm-zemi-sites/python-streamlit-api/ |
 | 生成AIライティングツールを作る（補助教材） | https://miyazakiryuji.github.io/dmm-zemi-sites/ai-writing-tool/ |
 | Claude Codeゼミ 第1回 事前課題レビュー（匿名） | https://miyazakiryuji.github.io/dmm-zemi-sites/claudecode-review-1/ |
@@ -29,6 +30,7 @@ DMM 生成AI CAMP 学び放題の各ゼミで使用している **講義資料�
 ├── codex-intro-zemi/       … Codex 入門ゼミ 資料サイト（初学者向け・たたき台）
 ├── dify-zemi/              … Dify マスターゼミ 資料サイト
 ├── skills/                 … Skills 説明資料サイト
+├── claude-code-roadmap/    … 注目スキルと、これからの Claude Code の学び方（学習ロードマップ）
 ├── python-streamlit-api/   … Python / Streamlit / API 入門（EP17解説＋補足）
 ├── ai-writing-tool/        … 生成AIライティングツールを作る（EP19解説＋補足）
 ├── claudecode-review-1/    … Claude Codeゼミ 第1回 事前課題レビュー（匿名）

@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>注目スキルと、これからの Claude Code の学び方</title>
+<meta name="description" content="話題の Claude Code スキル（i-have-adhd・grill-me・superpowers・ponytail など）の中身と入れ方、入れる前の安全チェック、Claude Code 本体・周辺知識・業務効率化（ブラウザ操作と MCP 接続）を5つの段階で学ぶ学習ロードマップ。">
+<style>
+/* 配色・部品は AIアプリ開発入門ゼミ／Claude Codeマスターゼミの公開サイトに合わせている */
+:root {
+  --bg-main: #FFF9F0;
+  --bg-soft: #FFF3E6;
+  --bg-card: #FFFFFF;
+  --text-main: #2A2F45;
+  --text-sub: #4F566C;
+  --text-mute: #646B82;
+  --accent-orange: #FF8C42;
+  --text-accent: #B84A00;
+  --accent-blue: #4DA8FF;
+  --accent-pink: #FF9EC3;
+  --accent-green: #6FD49D;
+  --accent-yellow: #FFD166;
+  --on-blue: #1F6FB8;
+  --on-green: #1F7A55;
+  --on-pink: #B5487B;
+  --border: #FFE2C7;
+  --line: #D9D3C8;
+  --shadow-sm: 0 4px 16px rgba(255, 140, 66, 0.08);
+  --shadow-md: 0 12px 32px rgba(255, 140, 66, 0.12);
+  --radius: 12px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 1180px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg-main); color: var(--text-main);
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 17px; line-height: 1.8; font-feature-settings: "palt"; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; }
+a { color: var(--text-accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid #B84A00; outline-offset: 3px; border-radius: 6px; }
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--bg-card); border: 2px solid var(--accent-orange);
+  border-radius: 0 0 10px 0; padding: 10px 18px; font-weight: 800; text-decoration: none; }
+.skip-link:focus { left: 0; }
+code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: .9em; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 6px; padding: 1px 6px; color: var(--text-accent); overflow-wrap: anywhere; }
+kbd { font-family: inherit; font-size: .85em; font-weight: 800; background: var(--bg-soft); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 6px; padding: 1px 7px; }
+.ui { display: inline-block; font-size: .9em; font-weight: 800; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 0 8px; margin: 1px 0; color: var(--text-main); white-space: nowrap; }
+
+/* ---- ヘッダ ---- */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 249, 240, 0.94); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); transition: box-shadow .3s var(--ease); }
+.site-header.is-scrolled { box-shadow: 0 6px 24px rgba(255, 140, 66, .14); }
+.site-header__inner { max-width: var(--container); margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 16px; }
+.site-header__name { font-weight: 900; font-size: 15px; white-space: nowrap; }
+.site-header__name a { color: inherit; text-decoration: none; }
+.site-header__nav { margin-left: auto; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.site-header__nav::-webkit-scrollbar { display: none; }
+.site-header__nav a { flex: none; font-size: 13px; font-weight: 700; text-decoration: none; color: var(--text-sub); padding: 5px 11px; border-radius: 100px; white-space: nowrap; }
+.site-header__nav a:hover { background: var(--bg-soft); color: var(--text-accent); }
+.site-header__nav a.is-active { background: var(--bg-soft); color: var(--text-accent); box-shadow: inset 0 -2px 0 var(--accent-orange); }
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); pointer-events: none; }
+@media (max-width: 900px) { .site-header__name { display: none; } .site-header__nav { margin-left: 0; } }
+
+/* ---- ヒーロー ---- */
+.hero { padding: 52px 20px 40px; background:
+  radial-gradient(1100px 460px at 82% -8%, rgba(255, 209, 102, .38), transparent 60%),
+  radial-gradient(900px 420px at 8% 8%, rgba(255, 158, 195, .26), transparent 60%), var(--bg-main); }
+.hero__inner { max-width: var(--container); margin: 0 auto; display: grid; grid-template-columns: 1fr 210px; gap: 36px; align-items: center; }
+.crumbs { font-size: 13px; color: var(--text-mute); margin: 0 0 8px; }
+.crumbs a { font-weight: 700; text-decoration: none; }
+.hero__kicker { font-size: 13px; font-weight: 800; letter-spacing: .12em; color: var(--text-accent); margin: 0 0 10px; }
+.hero__title { font-size: 40px; font-weight: 800; line-height: 1.4; margin: 0 0 12px; line-break: strict; }
+.hero__title em { font-style: normal; background: linear-gradient(180deg, transparent 62%, rgba(255, 209, 102, .8) 62%); }
+.hero__sub { font-size: 18px; color: var(--text-sub); margin: 0 0 20px; font-weight: 700; line-height: 1.6; }
+.hero__facts { display: flex; gap: 10px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+.hero__facts li { background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 6px 16px; font-size: 14.5px; font-weight: 800; box-shadow: var(--shadow-sm); }
+.hero__mascot img { width: 200px; display: block; margin: 0 auto; }
+@media (max-width: 900px) { .hero__inner { grid-template-columns: 1fr 110px; gap: 16px; } .hero__mascot img { width: 110px; } }
+@media (max-width: 720px) { .hero { padding: 36px 16px 28px; } .hero__title { font-size: 28px; } .hero__sub { font-size: 16px; }
+  .hero__inner { grid-template-columns: 1fr; } .hero__mascot { display: none; } .hero__facts li { font-size: 13.5px; } }
+
+/* ---- 前提の帯 ---- */
+.now { max-width: var(--container); margin: 0 auto; padding: 0 20px 8px; }
+.now__inner { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 5px solid var(--accent-orange); border-radius: 14px; padding: 18px 22px; box-shadow: var(--shadow-md); }
+.now__label { font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--text-accent); margin: 0; }
+.now__title { font-size: 19px; font-weight: 800; margin: 2px 0 0; line-height: 1.5; }
+.now__meta { font-size: 15.5px; color: var(--text-sub); margin: 4px 0 0; max-width: 820px; }
+.now__actions { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-block; text-decoration: none; font-weight: 800; font-size: 14px; padding: 10px 18px; border-radius: 100px; transition: all .2s var(--ease); }
+.btn--primary { background: #B84A00; color: #fff; }
+.btn--primary:hover { background: #9E3F00; transform: translateY(-2px); }
+.btn--ghost { background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-accent); }
+.btn--ghost:hover { background: #FFE7CF; transform: translateY(-2px); }
+@media (max-width: 720px) { .now { padding: 0 16px 8px; } .now__actions { margin-left: 0; } }
+
+/* ---- セクション ---- */
+.section { padding: 60px 20px; }
+.section--soft { background: var(--bg-soft); }
+.section__inner { max-width: var(--container); margin: 0 auto; }
+.section__head { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; }
+.section__icon { flex: none; width: 46px; height: 46px; padding: 8px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border); display: grid; place-items: center; }
+.section__icon img { width: 28px; height: 28px; display: block; }
+.section__kicker { font-size: 13px; font-weight: 800; letter-spacing: .14em; color: var(--text-accent); margin: 0 0 2px; }
+.section__title { font-size: 32px; font-weight: 800; line-height: 1.4; margin: 0; line-break: strict; }
+.section__lead { font-size: 18px; color: var(--text-sub); margin: 0 0 28px; max-width: 840px; }
+.section__inner h3.sub { font-size: 22px; font-weight: 800; line-height: 1.45; margin: 48px 0 14px; padding-left: 14px; border-left: 5px solid var(--accent-orange); }
+.section__inner > p, .section__inner > ul, .section__inner > ol:not(.steps) { font-size: 17px; color: var(--text-sub); max-width: 840px; margin: 14px 0 0; }
+.section__inner > ul, .section__inner > ol:not(.steps) { padding-left: 1.4em; }
+.section__inner > ul li, .section__inner > ol:not(.steps) li { margin: 6px 0; }
+.why { font-weight: 800; color: var(--text-main); }
+@media (max-width: 720px) { .section { padding: 44px 16px; } .section__title { font-size: 24px; } .section__lead { font-size: 16.5px; }
+  .section__inner h3.sub { font-size: 19px; margin-top: 40px; } .section__inner > p, .section__inner > ul, .section__inner > ol:not(.steps) { font-size: 16px; } }
+
+/* ---- 番号つきの手順 ---- */
+.steps { display: grid; gap: 14px; margin: 18px 0 0; padding: 0; list-style: none; }
+.steps > li { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; }
+.steps__n { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #B84A00, #B5487B); color: #fff; font-weight: 900; font-size: 16px; }
+.steps__title { font-size: 18px; font-weight: 800; line-height: 1.5; margin: 0 0 4px; }
+.steps__desc { font-size: 16px; color: var(--text-sub); margin: 0; }
+.steps__desc + .steps__desc { margin-top: 8px; }
+.steps__desc ul { margin: 6px 0 0; padding-left: 1.2em; }
+.steps .prompt, .steps .cmd { margin-top: 12px; }
+@media (max-width: 720px) { .steps > li { grid-template-columns: 1fr; gap: 8px; padding: 16px; } .steps__n { width: 34px; height: 34px; font-size: 14px; } }
+
+/* ---- 全体地図 ---- */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 18px; }
+.flow__step { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 12px; text-align: center; text-decoration: none; color: inherit; transition: all .2s var(--ease); }
+a.flow__step:hover { border-color: #FFB27A; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.flow__n { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-weight: 900; font-size: 13px; background: linear-gradient(135deg, #B84A00, #B5487B); margin-bottom: 4px; }
+.flow__name { font-size: 16px; font-weight: 800; margin: 0; line-height: 1.4; }
+.flow__desc { font-size: 13.5px; color: var(--text-mute); margin: 4px 0 0; line-height: 1.6; }
+
+/* ---- 注意書き ---- */
+.note { display: flow-root; background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent-yellow); border-radius: var(--radius);
+  padding: 18px 22px; font-size: 16px; color: var(--text-sub); margin-top: 20px; max-width: 980px; }
+.note strong { color: var(--text-main); }
+.note p { margin: 0; } .note p + p, .note p + ul, .note ul + p { margin-top: 8px; }
+.note ul, .note ol { margin: 8px 0 0; padding-left: 1.3em; } .note li { margin: 4px 0; }
+.note--key { border-left-color: var(--accent-orange); background: #FFF7EE; }
+.note--warn { border-left-color: #E0563F; background: #FFF4F0; }
+.note__title { font-weight: 800; color: var(--text-main); margin: 0 0 6px !important; }
+.note__mascot { float: right; width: 92px; margin: -4px 0 8px 14px; }
+@media (max-width: 720px) { .note { padding: 16px; font-size: 15.5px; } .note__mascot { width: 64px; } }
+
+/* ---- 用語の箱 ---- */
+.term { margin: 22px 0 0; padding: 18px 22px; background: #F2F8FF; border: 1px solid #CFE3FA; border-left: 4px solid var(--accent-blue); border-radius: var(--radius); max-width: 980px; }
+.term__title { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 13.5px; font-weight: 800; letter-spacing: .06em; color: var(--on-blue); }
+.term dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; font-size: 16px; line-height: 1.75; }
+.term dt { font-weight: 800; color: var(--text-main); }
+.term dd { margin: 0; color: var(--text-sub); }
+@media (max-width: 720px) { .term { padding: 16px; } .term dl { grid-template-columns: 1fr; gap: 2px 0; } .term dd { margin-bottom: 8px; } }
+
+/* ---- 表 ---- */
+.table-wrap { margin-top: 18px; max-width: 100%; overflow-x: auto; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+table.tbl th, table.tbl td { padding: 14px 16px; text-align: left; vertical-align: top; font-size: 15.5px; line-height: 1.7; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+table.tbl thead th { background: var(--bg-soft); font-weight: 800; border-bottom: 2px solid var(--text-accent); }
+table.tbl tr > * + * { border-left: 1px solid var(--border); }
+table.tbl tbody tr:last-child > * { border-bottom: 0; }
+table.tbl tbody tr > :first-child { font-weight: 800; color: var(--text-main); }
+table.tbl td { color: var(--text-sub); }
+table.tbl code { font-size: .85em; }
+table.tbl thead th:first-child { width: 24%; }
+table.tbl--wide thead th:first-child { width: 19%; }
+.table-hint { display: none; font-size: 13px; color: var(--text-mute); margin: 6px 0 0; }
+@media (max-width: 720px) {
+  table.tbl--wide { min-width: 46rem; }
+  .table-wrap:has(.tbl--wide) + .table-hint { display: block; }
+  table.tbl th, table.tbl td { padding: 12px 10px; font-size: 14.5px; }
+}
+
+/* ---- 説明カード（項目｜内容｜なぜ） ---- */
+.explain-list { display: grid; gap: 14px; margin: 18px 0 0; }
+.explain-list__item { display: grid; grid-template-columns: minmax(10rem, 22%) 1fr 1fr; gap: 16px; padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); }
+.explain-list__term { margin: 0; font-weight: 800; color: var(--text-main); font-size: 17px; line-height: 1.6; }
+.explain-list__value, .explain-list__reason { margin: 0; font-size: 15.5px; color: var(--text-sub); min-width: 0; overflow-wrap: anywhere; }
+.explain-list__label { display: block; margin: 0 0 4px; color: var(--text-accent); font-size: 12.5px; font-weight: 800; letter-spacing: .04em; }
+@media (max-width: 760px) { .explain-list__item { grid-template-columns: 1fr; gap: 10px; }
+  .explain-list__value, .explain-list__reason { padding-top: 10px; border-top: 1px solid var(--border); } }
+
+/* ---- 指示の型・コマンド（コピーできる） ---- */
+.prompt { position: relative; margin: 20px 0 0; background: #2A2F45; color: #F4F1EA; border-radius: var(--radius); padding: 0 22px 18px; overflow: hidden;
+  font-family: "SF Mono", Menlo, Consolas, "Hiragino Kaku Gothic ProN", monospace; font-size: 14.5px; line-height: 1.85; white-space: pre-wrap; word-break: break-word; max-width: 980px; }
+/* 見出し帯は通常の流れに置く（狭い幅で2行に折り返しても本文に重ならない） */
+.prompt::before { content: attr(data-label); display: block; margin: 0 -22px 12px; padding: 9px 104px 9px 18px; font-size: 12px; font-weight: 800; line-height: 1.6;
+  letter-spacing: .04em; color: #FFD166; background: rgba(255, 255, 255, .07); white-space: normal; font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; }
+.prompt + .steps__desc, .cmd + .steps__desc, .prompt + .card__desc, .cmd + .card__desc { margin-top: 10px; }
+.cmd { position: relative; margin: 8px 0 0; background: #2A2F45; color: #F4F1EA; border-radius: 10px; padding: 12px 84px 12px 14px;
+  font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 14px; line-height: 1.75; white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
+.cmd code, .prompt code { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; }
+.copybtn { position: absolute; top: 6px; right: 8px; z-index: 1; font-family: inherit; font-size: 12px; font-weight: 800; color: #2A2F45; background: #FFD166;
+  border: 0; border-radius: 100px; padding: 4px 12px; cursor: pointer; transition: background .2s var(--ease); }
+.copybtn:hover { background: #FFC233; }
+.copybtn.is-done { background: var(--accent-green); color: #0F3D28; }
+.cmd .copybtn { top: 9px; }
+.codeblock { margin: 16px 0 0; background: #FFFDF9; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; color: #3B4158; max-width: 980px; }
+@media (max-width: 720px) { .prompt { font-size: 13.5px; padding: 0 14px 16px; } .prompt::before { margin: 0 -14px 12px; padding-left: 14px; } .cmd { font-size: 13px; } }
+
+/* ---- 汎用カード ---- */
+.cards { display: grid; gap: 18px; margin-top: 20px; }
+.cards--2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.cards--3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+.card__title { font-size: 18px; font-weight: 800; margin: 0 0 8px; line-height: 1.5; }
+.card__desc { font-size: 15.5px; color: var(--text-sub); margin: 0; }
+.card__desc + .card__desc { margin-top: 8px; }
+.card ul { margin: 8px 0 0; padding-left: 1.2em; font-size: 15.5px; color: var(--text-sub); } .card li { margin: 3px 0; }
+.card .cmd, .card .prompt { margin-top: 12px; }
+@media (max-width: 380px) { .cards--2, .cards--3 { grid-template-columns: 1fr; } }
+
+/* ---- スキルのカード ---- */
+.group-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.group-title small { font-size: 15px; font-weight: 700; color: var(--text-mute); }
+.skill { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 18px; box-shadow: var(--shadow-sm); }
+.skill__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 14px; }
+.skill__name { font-size: 25px; font-weight: 900; margin: 0; line-height: 1.3; font-family: "SF Mono", Menlo, Consolas, "Hiragino Kaku Gothic ProN", monospace; letter-spacing: -.01em; }
+.skill__name small { font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 15px; color: var(--text-mute); font-weight: 700; }
+.badges { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { font-size: 12.5px; font-weight: 800; padding: 2px 10px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-sub); line-height: 1.6; white-space: nowrap; }
+.badge--hot { background: #B84A00; border-color: #B84A00; color: #fff; }
+.badge--official { background: #EAF4FF; border-color: #CFE3FA; color: var(--on-blue); }
+.badge--author { background: #F4F1FF; border-color: #DCD5FA; color: #5B4BB0; }
+.skill__body { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 24px; }
+.skill__what { font-size: 17px; margin: 0; color: var(--text-main); }
+.skill__facts { margin: 10px 0 0; }
+.skill__facts dt { font-weight: 800; font-size: 14px; color: var(--text-accent); margin: 14px 0 2px; letter-spacing: .03em; }
+.skill__facts dd { margin: 0; font-size: 16px; color: var(--text-sub); }
+.skill__facts dd ol, .skill__facts dd ul { margin: 4px 0 0; padding-left: 1.4em; } .skill__facts dd li { margin: 2px 0; }
+.skill__side { background: var(--bg-soft); border-radius: 12px; padding: 16px 16px 18px; align-self: start; }
+.skill__label { font-size: 13.5px; font-weight: 800; color: var(--text-main); margin: 14px 0 0; }
+.skill__label:first-child { margin-top: 0; }
+.skill__hint { font-size: 14px; color: var(--text-sub); margin: 6px 0 0; }
+.skill__link { font-size: 14px; margin: 14px 0 0; font-weight: 700; }
+.rules { margin: 6px 0 0; padding-left: 1.6em; columns: 2; column-gap: 28px; font-size: 15.5px; }
+.rules li { break-inside: avoid; margin: 0 0 4px; }
+@media (max-width: 900px) { .skill__body { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .skill { padding: 18px 16px; } .skill__name { font-size: 21px; } .rules { columns: 1; } }
+
+/* ---- 入れる前／入れた後 ---- */
+.ba { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.ba__col { margin: 0; border-radius: 12px; padding: 14px 16px; border: 1px solid var(--line); background: #F7F6F3; }
+.ba__col--after { background: #F0FAF4; border-color: #BFE3CD; }
+.ba__col figcaption { font-weight: 800; font-size: 13.5px; margin: 0 0 6px; color: var(--text-main); }
+.ba__col--after figcaption { color: var(--on-green); }
+.ba__col blockquote { margin: 0; font-size: 15px; line-height: 1.8; color: var(--text-sub); }
+.ba__col blockquote ol { margin: 6px 0; padding-left: 1.4em; }
+.ba__src { font-size: 13px; color: var(--text-mute); margin: 8px 0 0; }
+@media (max-width: 720px) { .ba { grid-template-columns: 1fr; } }
+
+/* ---- 学び方：段階 ---- */
+.level { display: grid; grid-template-columns: 84px 1fr; gap: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 18px; }
+.level__n { width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, #B84A00, #B5487B); color: #fff; display: grid; place-content: center; text-align: center; font-weight: 800; font-size: 12px; line-height: 1.2; }
+.level__n b { display: block; font-size: 30px; font-weight: 900; line-height: 1.1; }
+.level__title { font-size: 22px; font-weight: 800; margin: 0; line-height: 1.45; }
+.level__goal { font-size: 16px; color: var(--text-accent); font-weight: 800; margin: 4px 0 0; }
+.level__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; margin-top: 14px; }
+.level__label { font-size: 13.5px; font-weight: 800; color: var(--text-main); margin: 0 0 6px; }
+.level__why { font-size: 15.5px; color: var(--text-sub); margin: 12px 0 0; }
+.level__docs { font-size: 14.5px; margin: 12px 0 0; color: var(--text-sub); }
+.level__docs a { font-weight: 700; }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ticks li { position: relative; padding-left: 26px; font-size: 15.5px; color: var(--text-sub); line-height: 1.75; }
+.ticks li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 14px; height: 14px; border: 2px solid #D98C5F; border-radius: 4px; background: #fff; }
+.ticks li strong { color: var(--text-main); }
+@media (max-width: 900px) { .level__grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .level { grid-template-columns: 1fr; gap: 12px; padding: 18px 16px; } .level__n { width: auto; height: auto; padding: 8px 14px; display: inline-flex; gap: 8px; align-items: baseline; justify-self: start; }
+  .level__n b { font-size: 22px; } .level__title { font-size: 19px; } }
+
+/* ---- ロードマップの表（3本柱×5段階） ---- */
+table.tbl--map td:first-child b { display: block; font-size: 13px; color: var(--text-accent); }
+
+/* ---- 周辺知識 ---- */
+.tier { margin-top: 34px; }
+.tier__title { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; margin: 0 0 4px; }
+.tier__title span { font-size: 12.5px; font-weight: 800; color: #fff; background: var(--on-blue); border-radius: 999px; padding: 2px 10px; letter-spacing: .04em; }
+.tier__lead { font-size: 15.5px; color: var(--text-mute); margin: 0; }
+.know-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 14px; }
+.know--wide { grid-column: 1 / -1; }
+@media (max-width: 760px) { .know-grid { grid-template-columns: 1fr; } }
+.know { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.know__title { font-size: 18px; font-weight: 800; margin: 0; line-height: 1.5; }
+.know p { font-size: 15.5px; color: var(--text-sub); margin: 8px 0 0; }
+.know__label { display: inline-block; font-size: 12.5px; font-weight: 800; color: var(--text-accent); margin-right: 6px; }
+
+/* ---- 実例 ---- */
+.examples { display: grid; gap: 18px; margin-top: 18px; }
+.example { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+.example__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.example__n { font-size: 13px; font-weight: 900; color: #fff; background: var(--on-green); border-radius: 999px; padding: 2px 12px; }
+.example__title { font-size: 19px; font-weight: 800; margin: 0; line-height: 1.5; }
+.example__note { font-size: 15.5px; color: var(--text-sub); margin: 12px 0 0; }
+@media (max-width: 720px) { .example { padding: 18px 16px; } }
+
+/* ---- つまずき ---- */
+.pitfalls { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 18px; }
+.pitfall { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.pitfall__title { font-size: 17px; font-weight: 800; margin: 0 0 6px; line-height: 1.5; }
+.pitfall__what { font-size: 14.5px; color: var(--text-mute); margin: 0 0 8px; }
+.pitfall__how { font-size: 15.5px; color: var(--text-sub); margin: 0; }
+.pitfall__how strong { color: var(--text-accent); }
+@media (max-width: 380px) { .pitfalls { grid-template-columns: 1fr; } }
+
+/* ---- チェックリスト ---- */
+.check, .section__inner > ul.check { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; max-width: 900px; }
+.check label { display: flex; gap: 12px; align-items: flex-start; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; cursor: pointer; font-size: 16px; color: var(--text-sub); }
+.check input { flex: none; width: 20px; height: 20px; margin: 4px 0 0; accent-color: #B84A00; }
+.check input:checked + span { color: var(--text-mute); text-decoration: line-through; text-decoration-color: rgba(100, 107, 130, .5); }
+.check__status { font-size: 15px; font-weight: 800; color: var(--text-accent); margin: 12px 0 0; min-height: 1.5em; }
+
+/* ---- 用語集・出典 ---- */
+.gloss { display: grid; grid-template-columns: minmax(11rem, max-content) 1fr; gap: 0; margin: 18px 0 0; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; max-width: 1000px; }
+.gloss dt, .gloss dd { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 15.5px; line-height: 1.7; }
+.gloss dt { font-weight: 800; background: #FFFCF7; }
+.gloss dd { color: var(--text-sub); }
+.gloss dt:last-of-type, .gloss dd:last-of-type { border-bottom: 0; }
+@media (max-width: 720px) { .gloss { grid-template-columns: 1fr; } .gloss dt { border-bottom: 0; padding-bottom: 2px; } .gloss dd { padding-top: 0; } }
+.src { font-size: 14px; color: var(--text-sub); max-width: 980px; padding-left: 1.4em; margin: 14px 0 0; }
+.src li { margin: 4px 0; overflow-wrap: anywhere; }
+
+/* ---- 開閉 ---- */
+details.more { margin-top: 18px; max-width: 980px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); }
+details.more > summary { cursor: pointer; list-style: none; padding: 14px 18px; font-weight: 800; color: var(--text-accent); }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::before { content: "＋ "; }
+details.more[open] > summary::before { content: "－ "; }
+.more__body { padding: 0 18px 18px; font-size: 15.5px; color: var(--text-sub); }
+.more__body p { margin: 8px 0 0; }
+
+/* ---- フッタ・上へ ---- */
+.site-footer { padding: 44px 20px 64px; border-top: 1px solid var(--border); background: var(--bg-soft); }
+.site-footer__inner { max-width: var(--container); margin: 0 auto; font-size: 14px; color: var(--text-mute); }
+.site-footer__name { font-size: 16px; font-weight: 800; color: var(--text-main); margin: 0 0 12px; }
+.site-footer__links { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.site-footer__links a { text-decoration: none; font-weight: 700; font-size: 14px; padding: 7px 14px; border-radius: 100px; background: var(--bg-card); border: 1px solid var(--border); }
+.site-footer p { margin: 6px 0 0; }
+.totop { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 60; width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center; text-decoration: none; font-weight: 900; font-size: 18px; color: #fff; background: linear-gradient(135deg, #B84A00, #B5487B);
+  box-shadow: 0 0 0 3px var(--bg-main), var(--shadow-md); opacity: 0; visibility: hidden; transition: opacity .3s var(--ease), visibility 0s linear .3s; }
+.totop.is-shown { opacity: 1; visibility: visible; transition-delay: 0s; }
+@media (max-width: 720px) { .totop { right: 10px; width: 42px; height: 42px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+@media print { .site-header, .totop, .copybtn, .now__actions { display: none !important; } .section { padding: 24px 0; } body { font-size: 12pt; } .skill, .level, .example { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <span class="site-header__name"><a href="#top">Claude Code の次の一歩</a></span>
+    <nav class="site-header__nav" aria-label="ページ内の目次">
+      <a href="#goal">ゴール</a>
+      <a href="#basics">しくみ</a>
+      <a href="#install">入れ方</a>
+      <a href="#skills">注目スキル</a>
+      <a href="#try">試す</a>
+      <a href="#roadmap">学び方</a>
+      <a href="#knowledge">周辺知識</a>
+      <a href="#work">業務効率化</a>
+      <a href="#sources">情報源</a>
+      <a href="#summary">まとめ</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- ヒーロー -->
+<section class="hero" id="top">
+  <div class="hero__inner">
+    <div>
+      <p class="crumbs"><a href="../">資料サイト集</a> ／ Claude Code の次の一歩</p>
+      <p class="hero__kicker">NEXT STEPS ／ 注目スキルと学び方</p>
+      <h1 class="hero__title">注目のスキルと、<em>これからの学び方</em></h1>
+      <p class="hero__sub">～ 話題のスキルで Claude Code の使い心地を変え、本体・周辺知識・業務効率化の3本で学びを広げる ～</p>
+      <ul class="hero__facts">
+        <li>注目スキル 8本を、入れ方つきで</li>
+        <li>入れる前の安全チェック 5項目</li>
+        <li>学び方は 3本柱 × 5段階</li>
+        <li>ブラウザ操作と MCP 接続の実例 5つ</li>
+      </ul>
+    </div>
+    <div class="hero__mascot"><img src="assets/penguins/penguin_teaching.png" alt="" width="200" height="200"></div>
+  </div>
+</section>
+
+<div class="now">
+  <div class="now__inner">
+    <div>
+      <p class="now__label">このページの前提</p>
+      <p class="now__title">Claude Code を一度でも動かしたことがある方向け（デスクトップアプリの「コード」タブ／ターミナルのどちらでも）</p>
+      <p class="now__meta">スキルやプラグインを入れる操作は、Claude の有料プランで Claude Code を使える状態が前提です。スター数・インストール数・画面の文言は 2026年9月中旬に確かめたもので、変わることがあります。最新は各リンク先（公式・作者のページ）でご確認ください。</p>
+    </div>
+    <div class="now__actions">
+      <a class="btn btn--primary" href="#skills">注目スキルを見る</a>
+      <a class="btn btn--ghost" href="#roadmap">学び方を見る</a>
+    </div>
+  </div>
+</div>
+
+<!-- 01 ゴール -->
+<section class="section" id="goal">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-deliverable.svg" alt=""></span><div><p class="section__kicker">01</p><h2 class="section__title">この資料のゴール</h2></div></div>
+    <p class="section__lead">読み終わったときに、次の5つを自分の言葉で説明できる状態を目指します。</p>
+    <ol class="steps">
+      <li><span class="steps__n">1</span><div><p class="steps__title">スキル・プラグイン・MCP・CLAUDE.md の違い</p><p class="steps__desc">それぞれ何で、いつ読み込まれ、うまく動かないときにどこを直すか。</p></div></li>
+      <li><span class="steps__n">2</span><div><p class="steps__title">話題のスキルを、中身を確かめてから入れる・外す方法</p><p class="steps__desc">公式と作者配布の違い、入れる範囲の選び方、止め方まで。</p></div></li>
+      <li><span class="steps__n">3</span><div><p class="steps__title">自分に合うスキルの選び方</p><p class="steps__desc">目的から選び、1本ずつ試し、入れすぎない理由。</p></div></li>
+      <li><span class="steps__n">4</span><div><p class="steps__title">これから何を、どの順で学ぶか</p><p class="steps__desc">Claude Code 本体・周辺知識・業務効率化の3本と、5つの段階。</p></div></li>
+      <li><span class="steps__n">5</span><div><p class="steps__title">ブラウザ操作と MCP 接続で、手作業を1つ任せる手順</p><p class="steps__desc">「読むだけ」から始める理由と、守る約束。</p></div></li>
+    </ol>
+
+    <h3 class="sub">全体地図</h3>
+    <div class="flow">
+      <a class="flow__step" href="#basics"><span class="flow__n">1</span><p class="flow__name">しくみを知る</p><p class="flow__desc">似た名前の4つを見分ける</p></a>
+      <a class="flow__step" href="#install"><span class="flow__n">2</span><p class="flow__name">安全に入れる</p><p class="flow__desc">中身を読んでから入れる</p></a>
+      <a class="flow__step" href="#skills"><span class="flow__n">3</span><p class="flow__name">注目スキルを試す</p><p class="flow__desc">1本ずつ入れて比べる</p></a>
+      <a class="flow__step" href="#roadmap"><span class="flow__n">4</span><p class="flow__name">学び方を決める</p><p class="flow__desc">3本柱 × 5段階</p></a>
+      <a class="flow__step" href="#work"><span class="flow__n">5</span><p class="flow__name">外とつなぐ</p><p class="flow__desc">ブラウザ操作と MCP 接続</p></a>
+      <a class="flow__step" href="#sources"><span class="flow__n">6</span><p class="flow__name">学び続ける</p><p class="flow__desc">公式と作者の情報を追う</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- 02 しくみ -->
+<section class="section section--soft" id="basics">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-stack.svg" alt=""></span><div><p class="section__kicker">02</p><h2 class="section__title">まず整理 ― スキル・プラグイン・MCP・CLAUDE.md</h2></div></div>
+    <p class="section__lead">Claude Code のふるまいを変える方法は1つではありません。名前が似ていて混ざりやすいので、「中身は何か」「いつ読み込まれるか」で見分けます。</p>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Claude Code を拡張する6つの方法の比較">
+      <table class="tbl tbl--wide">
+        <thead><tr><th>名前</th><th>中身</th><th>いつ読み込まれるか</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td>CLAUDE.md</td><td>フォルダに置く Markdown のファイル。そのフォルダで毎回守ってほしい決まりを書く</td><td>会話を始めるたびに、毎回</td><td>「返事は日本語で」「docs/ の中は書き換えない」</td></tr>
+          <tr><td>スキル</td><td>1つの作業の手順や知識をまとめたフォルダ。中心は SKILL.md というファイル</td><td>名前と説明文だけは毎回。本文は使うときだけ</td><td>i-have-adhd、grill-me</td></tr>
+          <tr><td>プラグイン</td><td>スキル・サブエージェント・フック・MCP の設定などを、1つにまとめて配れる形にしたもの</td><td>入っている中身ごとに違う</td><td>superpowers、mattpocock-skills</td></tr>
+          <tr><td>MCP（コネクタ）</td><td>外部のサービスとやり取りするための接続。Gmail・Notion・ブラウザなど</td><td>接続先の道具が必要になったとき</td><td>Google カレンダー、Notion、Playwright</td></tr>
+          <tr><td>サブエージェント</td><td>本体とは別の会話で動く担当。調べものやレビューを任せる</td><td>仕事を任されたとき</td><td>コードを読むだけの調査係</td></tr>
+          <tr><td>フック</td><td>決めたタイミングで自動で実行される命令</td><td>決めたタイミング（作業の終わり など）</td><td>作業が終わったら通知を出す</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+
+    <p><span class="why">なぜ先に見分けるか：</span>うまく動かないとき、どれの問題かで直す場所が変わるからです。たとえば「Notion のページを読んでくれない」は MCP（接続）の問題なので、スキルを入れ直しても直りません。反対に「毎回同じ説明をし直している」なら、CLAUDE.md かスキルに書く話です。</p>
+
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>Markdown</dt><dd>「#」で見出し、「-」で箇条書き、のように記号で文書の形を表す書き方。ファイル名の末尾は .md</dd>
+        <dt>スキル（Skill）</dt><dd>特定の作業のやり方を Claude に教える指示書のフォルダ。中心は SKILL.md というファイル</dd>
+        <dt>プラグイン（Plugin）</dt><dd>スキル・サブエージェント・フック・MCP の設定などを1つにまとめ、入れる・外す・更新するを一度にできるようにしたもの</dd>
+        <dt>MCP</dt><dd>Model Context Protocol の略。AI と外部のサービスをつなぐための共通の取り決め。この取り決めに沿って作られた接続先を「MCP サーバー」と呼ぶ</dd>
+        <dt>コネクタ</dt><dd>デスクトップアプリや claude.ai の画面から追加できる MCP の接続。Google カレンダー・Gmail などがある</dd>
+        <dt>サブエージェント</dt><dd>本体とは別の会話で動く担当。任せた作業の途中経過が本体の会話に入らないので、本体の会話が長くならない</dd>
+        <dt>フック（hooks）</dt><dd>「作業が終わったとき」「ファイルを書き換える前」など、決めたタイミングで自動で実行される命令</dd>
+      </dl>
+    </div>
+
+    <h3 class="sub">スキルの中身は「読める文章」</h3>
+    <p>スキルの正体は、Markdown で書かれた指示書です。話題の i-have-adhd の SKILL.md は、先頭がこうなっています（実物からの抜粋）。</p>
+<pre class="codeblock">---
+name: i-have-adhd
+description: 'Shape output for a reader with ADHD: lead with the next action, number multi-step work, ...'
+disable-model-invocation: true
+license: MIT
+---
+
+# i-have-adhd
+
+The reader has ADHD. Output is not just brief. It is shaped so an ADHD brain can act on it.
+（このあとに10のルールと、ルールを緩めてよい場面が続く）</pre>
+    <div class="explain-list">
+      <div class="explain-list__item"><p class="explain-list__term">name</p><p class="explain-list__value"><span class="explain-list__label">意味</span>呼び出すときの名前</p><p class="explain-list__reason"><span class="explain-list__label">なぜ</span>入力欄で「/」に続けて打つ名前になる</p></div>
+      <div class="explain-list__item"><p class="explain-list__term">description</p><p class="explain-list__value"><span class="explain-list__label">意味</span>どんなときに使うスキルかの説明</p><p class="explain-list__reason"><span class="explain-list__label">なぜ</span>Claude は、使っていないスキルもこの説明文だけは毎回読み、使うかどうかを決める</p></div>
+      <div class="explain-list__item"><p class="explain-list__term">disable-model-invocation: true</p><p class="explain-list__value"><span class="explain-list__label">意味</span>Claude が自分の判断で使い始めないようにする設定</p><p class="explain-list__reason"><span class="explain-list__label">なぜ</span>返事の形を大きく変えるスキルなので、自分が呼んだときだけ動くようにしてある</p></div>
+    </div>
+    <p><span class="why">なぜ中身を見るか：</span>読める文章だと分かれば、入れる前に「何をさせる指示か」を自分で確かめられるからです。次の節の安全チェックは、この「読んで確かめる」が前提です。</p>
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>SKILL.md</dt><dd>スキルの本体のファイル。先頭の「---」で囲まれた設定部分（フロントマター）に名前と説明を書き、その下に手順を書く</dd>
+        <dt>YAML</dt><dd>「項目名: 値」を1行ずつ並べる設定の書き方。フロントマターはこの形式で書く</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 03 入れ方 -->
+<section class="section" id="install">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-key.svg" alt=""></span><div><p class="section__kicker">03</p><h2 class="section__title">入れ方・外し方 ― 入れる前に5つ確かめる</h2></div></div>
+    <p class="section__lead">入れ方は3通りあります。どれもすぐ終わりますが、入れたものは自分のPCの上で、自分の権限で動きます。「どこから入れるか」を先に決め、中身を確かめてから入れます。</p>
+
+    <h3 class="sub">入れ方は3通り</h3>
+    <div class="explain-list">
+      <div class="explain-list__item">
+        <p class="explain-list__term">① 公式マーケットプレイスから<br><span class="badge badge--official">まずはここ</span></p>
+        <p class="explain-list__value"><span class="explain-list__label">どうやって</span>デスクトップアプリは、入力欄の <span class="ui">＋</span> → <span class="ui">プラグイン</span> → <span class="ui">プラグインを追加</span> で一覧を開いて選ぶ。ターミナルは <code>/plugin</code> と送って Discover タブから選ぶか、<code>/plugin install 名前@claude-plugins-official</code></p>
+        <p class="explain-list__reason"><span class="explain-list__label">なぜ</span>Anthropic が選んで載せている一覧（claude-plugins-official）で、Claude Code に最初から登録されている。追加の登録がいらず、更新も自動で届く</p>
+      </div>
+      <div class="explain-list__item">
+        <p class="explain-list__term">② 作者のマーケットプレイスを登録してから</p>
+        <p class="explain-list__value"><span class="explain-list__label">どうやって</span><code>/plugin marketplace add 作者名/リポジトリ名</code> を送り、続けて <code>/plugin install プラグイン名@マーケットプレイス名</code> を送る（1行ずつ別々に）。デスクトップアプリは、サイドバーの <span class="ui">カスタマイズ</span> でマーケットプレイスを追加してから <span class="ui">プラグインを追加</span> で選ぶ</p>
+        <p class="explain-list__reason"><span class="explain-list__label">なぜ</span>公式の一覧に無いもの（i-have-adhd・ponytail など）は、先に作者の一覧を登録しないと、名前で探せないため</p>
+      </div>
+      <div class="explain-list__item">
+        <p class="explain-list__term">③ skills コマンドで</p>
+        <p class="explain-list__value"><span class="explain-list__label">どうやって</span>ターミナルで <code>npx skills add 作者名/リポジトリ名</code>。探すときは <code>npx skills find キーワード</code>、消すときは <code>npx skills remove スキル名</code></p>
+        <p class="explain-list__reason"><span class="explain-list__label">なぜ</span>Claude Code 以外の AI（Codex・Cursor など）にも同じスキルを入れられる。スキルのファイルが手元にコピーされるので、読んで書き換えられる。Node.js が必要</p>
+      </div>
+    </div>
+    <div class="note">
+      <p><strong>表示は版によって変わることがあります。</strong>ボタンの名前が見つからないときは、デスクトップアプリ 2.2553 の表記（<span class="ui">プラグイン</span>・<span class="ui">プラグインを追加</span>・<span class="ui">プラグインを管理</span>・<span class="ui">カスタマイズ</span>）に近いものを探してください。作者のマーケットプレイスの登録には Git が必要です。デスクトップアプリで「マーケットプレイスを追加するにはGitが必要です」と出たら、Git を入れてからアプリを再起動します。</p>
+    </div>
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>マーケットプレイス</dt><dd>プラグインの一覧。登録すると、その一覧に載っているプラグインを名前で選んで入れられる。公式のものは claude-plugins-official</dd>
+        <dt>GitHub</dt><dd>ソースコードをインターネット上に置いて公開・共有できるサービス。スキルやプラグインの多くはここで配られている</dd>
+        <dt>リポジトリ</dt><dd>GitHub 上の保管場所の単位。「作者名/リポジトリ名」の形で1つに決まる</dd>
+        <dt>Git</dt><dd>ファイルの変更の履歴を記録するソフト。GitHub からリポジトリを取ってくるときにも使う</dd>
+        <dt>Node.js・npx</dt><dd>Node.js は JavaScript を PC で動かすためのソフト。npx は、その上で道具をその場で取ってきて実行するコマンド</dd>
+      </dl>
+    </div>
+
+    <h3 class="sub">入れる範囲（スコープ）を選ぶ</h3>
+    <p>プラグインを入れるときは、どこまで効かせるかを選びます。</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="インストールの範囲">
+      <table class="tbl">
+        <thead><tr><th>スコープ</th><th>効く範囲</th><th>向いている場面</th></tr></thead>
+        <tbody>
+          <tr><td>ユーザー</td><td>自分のPCの、すべてのフォルダ</td><td>毎日どこでも使うと決めたもの</td></tr>
+          <tr><td>プロジェクト</td><td>このフォルダ。設定がフォルダ内（.claude/settings.json）に書かれ、同じフォルダで作業する人にも効く</td><td>チームで同じものを使うとき</td></tr>
+          <tr><td>ローカル</td><td>このフォルダで、自分だけ</td><td>お試し</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><span class="why">なぜお試しはローカルか：</span>合わなかったとき、ほかのフォルダの作業に影響しないからです。気に入ってから、ユーザーに入れ直します。</p>
+
+    <h3 class="sub">🔒 入れる前に確かめる5つ</h3>
+    <div class="note note--warn">
+      <img class="note__mascot" src="assets/penguins/penguin_warning_sign.png" alt="" width="92" height="92">
+      <p class="note__title">プラグインは、あなたの権限で動くプログラムです</p>
+      <p>公式ドキュメントも「プラグインとマーケットプレイスは、あなたの権限で任意のコードを実行できる。信頼できる提供元からだけ入れる」と注意しています。人気があることと、安全であることは別です。</p>
+    </div>
+    <ol class="steps">
+      <li><span class="steps__n">1</span><div><p class="steps__title">作者名まで確かめる</p><p class="steps__desc">同じ名前の別物があるためです。2026年9月には、スキル一覧サイト skills.sh の「24時間の急上昇」の上位に、「◯◯/superpowers」という名前のリポジトリがいくつも並びました。調べると、どれも2026年8〜9月に作られたばかりで、GitHub のスターはほぼ0。スター約28.8万の本家 obra/superpowers とは別物でした。</p></div></li>
+      <li><span class="steps__n">2</span><div><p class="steps__title">SKILL.md とファイルの一覧を読む</p><p class="steps__desc">何をさせる指示かを確かめます。「外部に送る」「鍵やパスワードの入ったファイルを読む」「確認せずに実行する」のような指示が無いか。英語で書かれていても、下の指示の型で Claude に要約させれば読めます。</p></div></li>
+      <li><span class="steps__n">3</span><div><p class="steps__title">プログラムとフックの有無を見る</p><p class="steps__desc">scripts/ のようなフォルダや hooks の設定があれば、それは自分のPCで自動で動きます。何が動くのかを、入れる前に知っておきます。</p></div></li>
+      <li><span class="steps__n">4</span><div><p class="steps__title">更新日・スター数・Issue を見る</p><p class="steps__desc">放置されていないか、不具合の報告（Issue）に作者が答えているかを見ます。ただし、スター数やインストール数は増やせる数字なので、数字だけで信用しません。</p></div></li>
+      <li><span class="steps__n">5</span><div><p class="steps__title">ローカルで試し、入れる前と後で比べる</p><p class="steps__desc">同じ依頼を、入れる前と後で1回ずつ送って違いを見ます。効果が分かり、合わなければすぐ外せます。</p></div></li>
+    </ol>
+<pre class="prompt" data-label="指示の型 ― 入れる前に中身を確かめる（手動モードで送る）">次のスキルを入れるか迷っています。まだ入れないでください。
+https://github.com/（作者名）/（リポジトリ名）
+
+1. SKILL.md と、入っているファイルの一覧を読んで、何をするスキルかを日本語で3行にまとめてください。
+2. 外部への送信、秘密の情報が入ったファイルの読み取り、確認なしの実行など、気になる指示やプログラムがあれば、ファイル名と該当箇所を挙げてください。
+3. フック（hooks）やスクリプトがあれば、いつ・何を実行するかを書いてください。</pre>
+    <p><span class="why">なぜ「まだ入れないで」と書くか：</span>「調べて」とだけ頼むと、そのまま入れる作業まで進めることがあるからです。手動モード（実行の前に確認が出る状態）にしておけば、コマンドが実行される前に必ず止まります。</p>
+
+    <h3 class="sub">外し方・止め方</h3>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="スキルの止め方・外し方">
+      <table class="tbl tbl--wide">
+        <thead><tr><th>したいこと</th><th>やり方</th><th>補足</th></tr></thead>
+        <tbody>
+          <tr><td>会話の途中で止める</td><td>スキルごとの合図を送る。i-have-adhd は「stop adhd mode」、caveman は <code>/caveman off</code></td><td>入れたまま、その会話だけ普段の返事に戻せる</td></tr>
+          <tr><td>しばらく使わない</td><td>デスクトップアプリは <span class="ui">＋</span> → <span class="ui">プラグイン</span> → <span class="ui">プラグインを管理</span> で無効にする。ターミナルは <code>/plugin</code> の Installed タブ</td><td>無効は「残したまま止める」。あとで有効に戻せる</td></tr>
+          <tr><td>消す</td><td>同じ画面でアンインストール。コマンドなら <code>claude plugin uninstall 名前@マーケットプレイス名</code>。skills コマンドで入れたものは <code>npx skills remove スキル名</code></td><td>迷ったら、先に無効にして様子を見る</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+
+    <h3 class="sub">入れすぎない</h3>
+    <p>スキルは、使っていないときも名前と説明文が毎回読み込まれます。数が増えるほど会話に使える量が減り、Claude が使うスキルを取り違えることも増えます。また、同じところを変えるスキル同士を同時に入れると、指示がぶつかります。</p>
+    <ul>
+      <li>返事の形を変えるもの同士：i-have-adhd と caveman</li>
+      <li>作業の進め方を決めるもの同士：superpowers と get-shit-done</li>
+      <li>入れる前に、ターミナルの <code>/plugin</code> の詳細画面に出る「Context cost」（毎回どれだけ読み込まれるか）を見る</li>
+      <li>2週間以上使っていないプラグインは、<code>/plugin</code> の Installed タブで「Not used recently」にまとまる。ときどき見直して外す</li>
+      <li><code>/context</code> で、いま何がどれだけ読み込まれているかを確かめられる</li>
+    </ul>
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>コンテキスト（context）</dt><dd>Claude が1回の返事を作るときに読める文章の全体。会話の履歴・CLAUDE.md・スキルの説明などの合計で、上限がある。上限に近づくと、前半の指示を取りこぼしやすくなる</dd>
+        <dt>トークン（token）</dt><dd>AI が文章を数える単位。料金や利用上限は、トークンの量で数える</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 04 注目スキル -->
+<section class="section section--soft" id="skills">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-tasks.svg" alt=""></span><div><p class="section__kicker">04</p><h2 class="section__title">2026年9月の注目スキル</h2></div></div>
+    <p class="section__lead">GitHub のスター数、スキル一覧サイト skills.sh のインストール数、Claude の公式プラグイン一覧のインストール数から、いま話題になっているもののうち、Claude Code を使い始めたばかりの人にも使い道があるものを選びました。</p>
+    <div class="note">
+      <p><strong>選んだ基準：</strong>① 数字で話題になっていることが確かめられる ② 作者と中身が公開されている ③ 入れる前と後で違いを体感しやすい。スター数・インストール数は 2026年9月中旬の値で、毎日変わります。</p>
+    </div>
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>スター（GitHub）</dt><dd>GitHub で「気になる・役に立った」と印を付けた人の数。人気の目安にはなるが、品質や安全の保証ではない</dd>
+        <dt>インストール数</dt><dd>skills コマンドや公式の一覧から入れられた回数の集計</dd>
+      </dl>
+    </div>
+
+    <!-- A -->
+    <h3 class="sub group-title">A. 返事を読みやすく・短くする <small>いちばん話題の分野</small></h3>
+
+    <article class="skill" id="skill-adhd">
+      <div class="skill__head">
+        <h4 class="skill__name">i-have-adhd <small>（I have ADHD）</small></h4>
+        <ul class="badges">
+          <li class="badge badge--hot">いま最も話題</li>
+          <li class="badge badge--author">作者配布</li>
+          <li class="badge">★ 約4.8万</li>
+          <li class="badge">2026年5月公開</li>
+          <li class="badge">MIT</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">返事の形を、10のルールで整えるスキルです。次にやることから書き始め、手順には番号を付け、最後は「2分以内にできる次の一手」を1つだけ示します。前置き・まとめ直し・締めの挨拶は書きません。</p>
+          <dl class="skill__facts">
+            <dt>10のルール</dt>
+            <dd><ol class="rules">
+              <li>次にやることから書き始める</li>
+              <li>手順には番号を付ける</li>
+              <li>最後は、2分以内にできる次の一手を1つ</li>
+              <li>脱線しない（別の話は分けて聞く）</li>
+              <li>毎回、いまの進み具合を書く</li>
+              <li>所要時間は「少し」ではなく分単位で</li>
+              <li>できたことを、見える形で示す</li>
+              <li>エラーは場所・原因・直し方だけ</li>
+              <li>箇条書きは5項目まで</li>
+              <li>前置き・まとめ直し・締めの挨拶を書かない</li>
+            </ol></dd>
+            <dt>名前について</dt>
+            <dd>ADHD（注意欠如・多動症）のある読み手に合わせた返事の形、という意味の名前です。SKILL.md には設計の理由として「作業中に覚えておける量は少ない」「最初の一歩がいちばん重い」「進んでいることが見えないと続かない」などが書かれています。README には「ADHD の診断は不要」とあり、誰でも使えます。長い返事から次の行動を探す手間は多くの人に共通する不満だったため、作者の想定を超えて広まりました（2026年8月初めにスター約1.6万、9月中旬に約4.8万）。</dd>
+            <dt>向いている人</dt>
+            <dd>返事が長くて、どこから手を付ければいいか迷う人</dd>
+            <dt>注意</dt>
+            <dd>仕組みを理解したいときは「説明して」と頼みます。説明を頼まれたときはルールを緩めて最後まで説明する、とスキルに書かれています。削除など取り返しのつかない操作の前の確認は省かれません。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方（ターミナル）</p>
+<pre class="cmd">claude plugin marketplace add ayghri/i-have-adhd
+claude plugin install i-have-adhd@i-have-adhd</pre>
+          <p class="skill__hint">Claude Code の入力欄から入れるときは、先頭を <code>/plugin</code> にして1行ずつ送ります（<code>/plugin marketplace add ayghri/i-have-adhd</code> → <code>/plugin install i-have-adhd@i-have-adhd</code>）。</p>
+          <p class="skill__label">使い方</p>
+<pre class="cmd">/i-have-adhd</pre>
+          <p class="skill__hint">入力欄に <code>/i-have</code> まで打つと候補に出ます。その会話のあいだ有効で、止めるときは「stop adhd mode」と送ります。</p>
+          <p class="skill__label">毎回自動で有効にする（Mac）</p>
+<pre class="cmd">touch ~/.claude/.i-have-adhd-always</pre>
+          <p class="skill__hint">空のファイルを1つ置くと、会話を始めるたびに有効になります。戻すときはそのファイルを消します。Windows では Claude に「ホームの .claude フォルダに .i-have-adhd-always という空のファイルを作って」と頼みます。</p>
+          <p class="skill__link"><a href="https://github.com/ayghri/i-have-adhd" target="_blank" rel="noopener">作者のページ（GitHub・日本語 README あり）</a></p>
+        </div>
+      </div>
+      <div class="ba">
+        <figure class="ba__col"><figcaption>入れる前</figcaption><blockquote>良い質問ですね！考えてみましょう。認証フローには、ミドルウェア、トークン検証、Cookieの処理といういくつかの要素があります。<code>src/auth.ts</code> を見ると、<code>verifyToken</code> 関数（42〜58行目付近）は古い <code>jsonwebtoken</code> API を使っているようです。一つの方法としては、パッケージを更新してその関数を書き直すことです。…（中略）…お役に立てれば幸いです！さらに詳しく調べたい場合はお知らせください。</blockquote></figure>
+        <figure class="ba__col ba__col--after"><figcaption>入れた後</figcaption><blockquote><code>npm install jsonwebtoken@latest</code> を実行後、<code>src/auth.ts:42</code> を編集する。<ol><li><code>src/auth.ts</code> を開く</li><li><code>verifyToken</code>（42〜58行目）を以下のスニペットに置き換える</li><li><code>npm test -- auth.spec.ts</code> を実行する</li></ol>次の行動：テストが失敗した場合は、最初のエラー行を貼り付ける。</blockquote></figure>
+      </div>
+      <p class="ba__src">出典：i-have-adhd の日本語 README に載っている例（MIT ライセンス）。</p>
+    </article>
+
+    <article class="skill" id="skill-caveman">
+      <div class="skill__head">
+        <h4 class="skill__name">caveman</h4>
+        <ul class="badges">
+          <li class="badge badge--author">作者配布</li>
+          <li class="badge">★ 約10.7万</li>
+          <li class="badge">2026年4月公開</li>
+          <li class="badge">GitHub Trending 1位（2026年7月）</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">返事の文章から、前置き・言い換え・つなぎの言葉を削って短くするスキルです。コード・コマンド・ファイルの場所・エラーメッセージはそのまま残し、削除などの確認は普通の文で出します。強さは <code>/caveman lite</code>（控えめ）から <code>/caveman ultra</code>（最も短い）まで選べます。</p>
+          <dl class="skill__facts">
+            <dt>向いている人</dt>
+            <dd>i-have-adhd よりさらに短い返事がほしい人</dd>
+            <dt>知っておきたいこと</dt>
+            <dd>返事が短くなっても、作業全体の料金が同じだけ下がるとは限りません。Claude Code の作業では、返事を書く量よりも、ファイルやログを読む量のほうが大きいためです。別のスキル（ponytail）の作者が行った比較では、コードを書く作業全体のトークンは減りませんでした（+7%）。自分の使い方で、入れる前と後を <code>/usage</code> で比べて確かめます。</dd>
+            <dt>注意</dt>
+            <dd>i-have-adhd と同時に使いません。どちらも返事の形を変えるので、指示がぶつかります。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方（skills コマンド）</p>
+<pre class="cmd">npx skills add JuliusBrussee/caveman -g</pre>
+          <p class="skill__label">入れ方（プラグインとして）</p>
+<pre class="cmd">claude plugin marketplace add JuliusBrussee/caveman
+claude plugin install caveman@caveman</pre>
+          <p class="skill__label">使い方</p>
+<pre class="cmd">/caveman lite</pre>
+          <p class="skill__hint">止めるときは <code>/caveman off</code> か「normal mode」。</p>
+          <p class="skill__link"><a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener">作者のページ（GitHub）</a></p>
+        </div>
+      </div>
+    </article>
+
+    <div class="note note--key">
+      <p><strong>入れなくても近いことができる：</strong>Claude Code には公式の出力スタイル「Concise」があり、<code>/output-style concise</code> で、結果から書き始めて前置きを省く返事に切り替えられます（v2.1.237 以降）。まずこれを試し、足りなければスキルを入れる、という順番でも構いません。</p>
+    </div>
+
+    <!-- B -->
+    <h3 class="sub group-title">B. 作る前に、考えを固める <small>AI に質問させる</small></h3>
+
+    <article class="skill" id="skill-grill">
+      <div class="skill__head">
+        <h4 class="skill__name">grill-me <small>（mattpocock-skills の1つ）</small></h4>
+        <ul class="badges">
+          <li class="badge badge--official">公式マーケットプレイス収録</li>
+          <li class="badge">skills.sh 約120万インストール</li>
+          <li class="badge">作者 Matt Pocock</li>
+          <li class="badge">MIT</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">作りたいものや計画について、AI が質問を番号付きで、おすすめの答えと一緒に出してきます。答えると、その答えを前提にした次の質問が出て、決めることが無くなるまで続きます。調べれば分かる事実は AI が自分で調べ、「どうしたいか」という決めごとだけを聞いてきます。</p>
+          <dl class="skill__facts">
+            <dt>なぜおすすめか</dt>
+            <dd>AI にいきなり作らせると、決めていないことを AI が推測で埋めたまま進みます。先に質問させると、仕様書に書いていなかった抜けが、作る前に見つかります。</dd>
+            <dt>注意</dt>
+            <dd>決めるのは自分です。おすすめの答えを全部そのまま採用すると、AI が決めたのと変わりません。質問が多すぎるときは「1回に3つまで」と頼みます。</dd>
+            <dt>同じセットに入っているもの</dt>
+            <dd><code>teach</code>（数回に分けて教わる。<a href="#roadmap-tools">学び方の節</a>で使う）、<code>handoff</code>（別の会話に引き継ぐためのメモを作る）など。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方</p>
+<pre class="cmd">/plugin install mattpocock-skills@claude-plugins-official</pre>
+          <p class="skill__hint">デスクトップアプリは <span class="ui">＋</span> → <span class="ui">プラグイン</span> → <span class="ui">プラグインを追加</span> で mattpocock-skills を選びます。</p>
+          <p class="skill__label">使い方</p>
+          <p class="skill__hint">入力欄に <code>/grill</code> まで打つと候補に出ます。プラグインから入れたスキルは、<code>/mattpocock-skills:grill-me</code> のように「プラグイン名:スキル名」の形で表示されます。選んだあとに、作りたいものを書いて送ります（<a href="#try">やってみよう</a>に指示の型）。</p>
+          <p class="skill__link"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">作者のページ（GitHub）</a></p>
+        </div>
+      </div>
+    </article>
+
+    <article class="skill" id="skill-superpowers">
+      <div class="skill__head">
+        <h4 class="skill__name">superpowers</h4>
+        <ul class="badges">
+          <li class="badge badge--official">公式マーケットプレイス収録</li>
+          <li class="badge">約100万インストール</li>
+          <li class="badge">★ 約28.8万</li>
+          <li class="badge">作者 obra（Jesse Vincent）</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">作り始める前に質問して設計をまとめ（brainstorming）、作業を細かいタスクに分けた計画を書き（writing-plans）、テストを先に書いてから作る（test-driven-development）という、開発の進め方一式を Claude に教えるスキル集です。場面に応じて自動で発動します。</p>
+          <dl class="skill__facts">
+            <dt>向いている人</dt>
+            <dd>作るものが大きくなり、途中で方向がぶれたり、直したところが別の場所を壊したりすることが増えた人</dd>
+            <dt>注意</dt>
+            <dd>進め方そのものが変わるので、小さな修正でも手順が増えます。まずローカルに入れて、大きめの作業で試します。また、設計図を表示する機能は作者のサイトから画像を読み込み、使っている版の情報が送られる、と README に書かれています（止める設定もある）。このように「何が外に送られるか」は README で確かめられます。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方</p>
+<pre class="cmd">/plugin install superpowers@claude-plugins-official</pre>
+          <p class="skill__hint">入れたあとは、ふだんどおり「〜を作りたい」と頼むだけで、まず質問から始まります。</p>
+          <p class="skill__link"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">作者のページ（GitHub）</a></p>
+        </div>
+      </div>
+      <div class="term">
+        <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+        <dl><dt>テスト駆動開発（TDD）</dt><dd>先に「こう動けば正しい」を確かめるテストを書き、そのテストが通るようにコードを書く進め方。直した拍子に別の場所が壊れても、テストが落ちて気づける</dd></dl>
+      </div>
+    </article>
+
+    <!-- C -->
+    <h3 class="sub group-title">C. 作りすぎ・触りすぎを防ぐ <small>AI が足しがちなものを削る</small></h3>
+
+    <article class="skill" id="skill-ponytail">
+      <div class="skill__head">
+        <h4 class="skill__name">ponytail</h4>
+        <ul class="badges">
+          <li class="badge badge--author">作者配布</li>
+          <li class="badge">★ 約14.2万</li>
+          <li class="badge">2026年6月公開</li>
+          <li class="badge">MIT</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">コードを書く前に、次の順で「書かずに済む方法」を探させるスキルです。① そもそも要るか ② すでにこのフォルダにあるか ③ 言語の標準の機能で足りるか ④ ブラウザや OS の機能で足りるか ⑤ 入っている部品で足りるか ⑥ 1行で済むか ⑦ それでもだめなら最小限を書く。たとえば日付を選ぶ部品を頼むと、部品を追加する代わりに、ブラウザに最初からある <code>&lt;input type="date"&gt;</code> を使います。</p>
+          <dl class="skill__facts">
+            <dt>作者の測定</dt>
+            <dd>実在の公開リポジトリで12件の機能追加をさせた比較で、書かれたコードの量が平均で約54%減りました（Haiku 4.5・作者の測定）。入力のチェック、データを失わないための処理、セキュリティ、アクセシビリティは削らない、と明記されています。</dd>
+            <dt>なぜおすすめか</dt>
+            <dd>AI は頼んでいない部品や機能を足しがちで、足したぶんだけ壊れる場所と、あとで読む量が増えます。</dd>
+            <dt>注意</dt>
+            <dd>常に有効にする仕組みに Node.js を使います（無くてもスキル自体は働きます）。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方（2行は別々に送る）</p>
+<pre class="cmd">/plugin marketplace add DietrichGebert/ponytail</pre>
+<pre class="cmd">/plugin install ponytail@ponytail</pre>
+          <p class="skill__hint">デスクトップアプリは、サイドバーの <span class="ui">カスタマイズ</span> でマーケットプレイス（DietrichGebert/ponytail）を追加してから、<span class="ui">＋</span> → <span class="ui">プラグイン</span> → <span class="ui">プラグインを追加</span> で選びます。</p>
+          <p class="skill__link"><a href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">作者のページ（GitHub）</a></p>
+        </div>
+      </div>
+    </article>
+
+    <article class="skill" id="skill-karpathy">
+      <div class="skill__head">
+        <h4 class="skill__name">andrej-karpathy-skills</h4>
+        <ul class="badges">
+          <li class="badge badge--author">作者配布</li>
+          <li class="badge">★ 約21.4万</li>
+          <li class="badge">CLAUDE.md 1枚</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">AI 研究者の Andrej Karpathy 氏が指摘した「AI がコードを書くときの失敗」への対策を、4つの原則にまとめた CLAUDE.md です。</p>
+          <dl class="skill__facts">
+            <dt>4つの原則</dt>
+            <dd><ol>
+              <li>書く前に考える（分からないことは聞き、推測で進めない）</li>
+              <li>シンプルに（頼まれていない機能を足さない）</li>
+              <li>頼まれた所だけ直す（関係ない所を「ついでに」直さない）</li>
+              <li>確かめられるゴールを決めてから進める</li>
+            </ol></dd>
+            <dt>なぜおすすめか</dt>
+            <dd>入れなくても、CLAUDE.md に何をどう書けば効くかの見本として読む価値があります。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方（2行は別々に送る）</p>
+<pre class="cmd">/plugin marketplace add multica-ai/andrej-karpathy-skills</pre>
+<pre class="cmd">/plugin install andrej-karpathy-skills@karpathy-skills</pre>
+          <p class="skill__hint">プラグインにせず、README の内容を自分の CLAUDE.md に貼る使い方もできます。</p>
+          <p class="skill__link"><a href="https://github.com/multica-ai/andrej-karpathy-skills" target="_blank" rel="noopener">作者のページ（GitHub）</a></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- D -->
+    <h3 class="sub group-title">D. 見た目を整える</h3>
+
+    <article class="skill" id="skill-frontend">
+      <div class="skill__head">
+        <h4 class="skill__name">frontend-design</h4>
+        <ul class="badges">
+          <li class="badge badge--official">Anthropic 公式</li>
+          <li class="badge">公式一覧で約113万インストール（最多クラス）</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">画面を作る前に、目的と雰囲気から見た目の方向（配色・文字・余白・動き）を決めさせ、AI が作りがちなありきたりな見た目を避けるスキルです。</p>
+          <dl class="skill__facts">
+            <dt>使い方の例</dt>
+            <dd>「frontend-design スキルを使って、（画面の説明）を作ってください」。画面づくりの依頼では、自動で使われることもあります。</dd>
+            <dt>似たもの</dt>
+            <dd>taste-skill（★約8.8万）、ui-ux-pro-max（★約12.9万）。見た目を決めるスキル同士なので、同時に入れず1本ずつ比べます。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方</p>
+<pre class="cmd">/plugin install frontend-design@claude-plugins-official</pre>
+          <p class="skill__link"><a href="https://claude.com/plugins" target="_blank" rel="noopener">公式のプラグイン一覧</a></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- E -->
+    <h3 class="sub group-title">E. 仕事の資料をつくる</h3>
+
+    <article class="skill" id="skill-docs">
+      <div class="skill__head">
+        <h4 class="skill__name">document-skills</h4>
+        <ul class="badges">
+          <li class="badge badge--official">Anthropic 公式</li>
+          <li class="badge">anthropics/skills ★ 約17.7万</li>
+        </ul>
+      </div>
+      <div class="skill__body">
+        <div>
+          <p class="skill__what">Word（docx）・Excel（xlsx）・PowerPoint（pptx）・PDF を、読む・作る・直すためのスキル4本のセットです。</p>
+          <dl class="skill__facts">
+            <dt>使い方の例</dt>
+            <dd>「PDF スキルで、この申込書の入力欄を一覧にしてください」「この CSV から、月ごとの合計を出した Excel の表を作ってください」</dd>
+            <dt>注意</dt>
+            <dd>社外秘の資料は、会社のルールで AI に渡してよいかを先に確かめます。</dd>
+          </dl>
+        </div>
+        <div class="skill__side">
+          <p class="skill__label">入れ方（2行は別々に送る）</p>
+<pre class="cmd">/plugin marketplace add anthropics/skills</pre>
+<pre class="cmd">/plugin install document-skills@anthropic-agent-skills</pre>
+          <p class="skill__link"><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">公式のリポジトリ（GitHub）</a></p>
+        </div>
+      </div>
+    </article>
+
+    <h3 class="sub">ほかにも話題のスキル</h3>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="ほかの話題のスキル">
+      <table class="tbl tbl--wide">
+        <thead><tr><th>名前</th><th>何をするか</th><th>数字（2026年9月中旬）</th><th>入れ方</th></tr></thead>
+        <tbody>
+          <tr><td>last30days</td><td>直近30日の Reddit・X・YouTube などの話題を調べてまとめる</td><td>★ 約6.2万</td><td>作者配布</td></tr>
+          <tr><td>marketingskills</td><td>LP の改善・コピー・SEO など、マーケティングの作業</td><td>★ 約5.1万</td><td>作者配布</td></tr>
+          <tr><td>humanizer</td><td>AI が書いた文章に出やすい癖を取り除く。英語版 Wikipedia の指針がもとで、例も英語が中心</td><td>★ 約5.0万</td><td>作者配布</td></tr>
+          <tr><td>hyperframes</td><td>HeyGen 製。HTML を書いて動画にする</td><td>★ 約5.1万</td><td>公式マーケットプレイス</td></tr>
+          <tr><td>gstack</td><td>Y Combinator 代表 Garry Tan 氏の設定一式。企画・デザイン・QA などの役割を担う23の道具</td><td>★ 約13.4万</td><td>作者配布</td></tr>
+          <tr><td>claude-mem</td><td>会話の内容を記録・要約して、次の会話に引き継ぐ</td><td>★ 約9.4万</td><td>作者配布</td></tr>
+          <tr><td>get-shit-done</td><td>仕様書から作る進め方を決める道具。superpowers と同時には入れない</td><td>★ 約6.5万</td><td>作者配布</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+
+    <!-- F -->
+    <h3 class="sub">スキルを探す・自分で作る</h3>
+    <div class="cards cards--2">
+      <div class="card">
+        <p class="card__title">skill-creator（Anthropic 公式・約38.5万インストール）</p>
+        <p class="card__desc">自分用のスキルを、会話しながら作る・直す・効果を測るスキルです。</p>
+<pre class="cmd">/plugin install skill-creator@claude-plugins-official</pre>
+        <p class="card__desc"><span class="why">なぜいちばんのおすすめか：</span>人のスキルを入れるより、自分が毎回書いている指示をスキルにするほうが効果が大きいからです。自分の困りごとに合わせたスキルは、自分にしか作れません。</p>
+      </div>
+      <div class="card">
+        <p class="card__title">探すときの3つの場所</p>
+        <ul>
+          <li>公式の一覧：<a href="https://claude.com/plugins" target="_blank" rel="noopener">claude.com/plugins</a>（Claude Code では <code>/plugin</code> の Discover タブ）</li>
+          <li>skills.sh：<a href="https://skills.sh/" target="_blank" rel="noopener">skills.sh</a>。ターミナルなら <code>npx skills find キーワード</code></li>
+          <li>まとめリポジトリ：<a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" rel="noopener">awesome-claude-code</a>、<a href="https://github.com/ComposioHQ/awesome-claude-skills" target="_blank" rel="noopener">awesome-claude-skills</a></li>
+        </ul>
+        <p class="card__desc">どこで見つけても、入れる前の<a href="#install">5つの確認</a>は同じです。</p>
+      </div>
+    </div>
+
+    <h3 class="sub">目的別の選び方</h3>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="目的別のスキルの選び方">
+      <table class="tbl">
+        <thead><tr><th>やりたいこと</th><th>まず1本</th><th>慣れてきたら</th></tr></thead>
+        <tbody>
+          <tr><td>作りたいものを固めたい</td><td>grill-me</td><td>superpowers</td></tr>
+          <tr><td>返事を読みやすくしたい</td><td>i-have-adhd</td><td>公式の出力スタイル Concise と比べる</td></tr>
+          <tr><td>作りすぎを防ぎたい</td><td>ponytail</td><td>andrej-karpathy-skills を読み、CLAUDE.md に取り入れる</td></tr>
+          <tr><td>見た目を整えたい</td><td>frontend-design</td><td>taste-skill と比べる</td></tr>
+          <tr><td>仕事の資料を作りたい</td><td>document-skills</td><td>自分の書式をスキルにする</td></tr>
+          <tr><td>自分の手順を残したい</td><td>skill-creator</td><td>作ったスキルをプラグインにまとめて配る</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 05 やってみよう -->
+<section class="section" id="try">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-chat.svg" alt=""></span><div><p class="section__kicker">05</p><h2 class="section__title">やってみよう ― 3つの体験</h2></div></div>
+    <p class="section__lead">LIVE講義では講師の画面で一緒に確かめ、あとから自分のPCで同じ手順を追ってください。どれも、手動モード（実行の前に確認が出る状態）で行います。</p>
+    <ol class="steps">
+      <li><span class="steps__n">1</span><div>
+        <p class="steps__title">公式の一覧を眺める</p>
+        <p class="steps__desc">デスクトップアプリは <span class="ui">＋</span> → <span class="ui">プラグイン</span> → <span class="ui">プラグインを追加</span>、ターミナルは <code>/plugin</code> → Discover タブ。Web なら <a href="https://claude.com/plugins" target="_blank" rel="noopener">claude.com/plugins</a>。</p>
+        <p class="steps__desc"><span class="why">なぜ：</span>何があるかを一度見ておくと、困ったときに「スキルで片づくかもしれない」と思いつけるからです。</p>
+      </div></li>
+      <li><span class="steps__n">2</span><div>
+        <p class="steps__title">i-have-adhd で、返事の違いを比べる</p>
+        <p class="steps__desc">入れる前に下の質問を送る → i-have-adhd を入れて <code>/i-have-adhd</code> を送る → 同じ質問を送る → 2つの返事を並べて比べる。</p>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る（入れる前と後で同じものを送る）">このフォルダの中身を確認して、いまの状態と、次に何をすればよいかを教えてください。ファイルは変更しないでください。</pre>
+        <p class="steps__desc"><span class="why">なぜ同じ質問か：</span>質問が違うと、返事の違いがスキルのせいか質問のせいか分からないからです。</p>
+      </div></li>
+      <li><span class="steps__n">3</span><div>
+        <p class="steps__title">grill-me で、作りたいものを固める</p>
+        <p class="steps__desc">入力欄に <code>/grill</code> と打って grill-me を選び、続けて次の文を貼って送ります。</p>
+<pre class="prompt" data-label="指示の型 ― （ ）の中を自分の案に差し替えて貼る">作りたいもの：（例：自分用の家計簿アプリ。レシートの金額と品目を入れて、月ごとの合計を見たい）
+質問は日本語で、1回に3つまでにしてください。
+決まったことは、最後に箇条書きでまとめてください。</pre>
+        <p class="steps__desc">質問に答え終わったら、決まったことを仕様書に反映させます。</p>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">いま決まったことを、仕様書（docs/spec.md）に反映してください。
+書き換える前に、どこをどう変えるかを一覧で見せて、私の確認を待ってください。</pre>
+        <p class="steps__desc"><span class="why">なぜ一覧を先に見せてもらうか：</span>決めていないことまで書き足されていないかを、書き換わる前に確かめられるからです。</p>
+      </div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 06 学び方 -->
+<section class="section section--soft" id="roadmap">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-spec.svg" alt=""></span><div><p class="section__kicker">06</p><h2 class="section__title">これからの学び方 ― 3本の柱と5つの段階</h2></div></div>
+    <p class="section__lead">Claude Code を使いこなす力は、① Claude Code 本体の使い方 ② 周辺の知識 ③ 外のサービスとつなぐ力（業務効率化）の3本で伸びます。段階ごとに、3本を少しずつ進めます。</p>
+    <p><span class="why">なぜ3本同時か：</span>1本だけ伸ばすと、どこかで行き詰まるからです。たとえば MCP でサービスをつなごうとしても（③）、設定ファイルの JSON が読めないと（②）、エラーを伝えられません。反対に知識だけ増やしても、本体の機能（①）を知らなければ、手で同じ作業を続けることになります。</p>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-label="3本の柱と5つの段階の一覧">
+      <table class="tbl tbl--wide tbl--map">
+        <thead><tr><th>段階</th><th>① Claude Code 本体</th><th>② 周辺知識</th><th>③ 業務効率化</th></tr></thead>
+        <tbody>
+          <tr><td><b>段階 1</b>毎日迷わず使う</td><td>権限モード・やり直し・会話の整理・CLAUDE.md</td><td>ファイルの場所（パス）・Markdown</td><td>コネクタを1つつなぎ、読むだけの作業を頼む</td></tr>
+          <tr><td><b>段階 2</b>自分用に整える</td><td>スキル（入れる → 作る）・出力スタイル・フック・サブエージェント</td><td>Git で履歴を残す・戻す</td><td>毎日送っている定型の指示をスキルにする</td></tr>
+          <tr><td><b>段階 3</b>外とつなぐ</td><td>MCP・ブラウザ操作</td><td>API・APIキー・JSON</td><td>ブラウザ操作で手作業を1つ任せる</td></tr>
+          <tr><td><b>段階 4</b>任せて回す</td><td>定期実行・ヘッドレス実行・Remote Control</td><td>セキュリティ・トークンと料金</td><td>朝の確認などを定期実行にする</td></tr>
+          <tr><td><b>段階 5</b>作って配る</td><td>プラグイン・MCP サーバー・Agent SDK</td><td>公開（デプロイ）・データベース</td><td>チームで使える形にして配る</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+    <p>段階は目安です。仕事で必要なら、段階 3 の業務効率化から始めても構いません。そのときも、段階 1 の「権限モード」と「やり直し」だけは先に押さえます。<span class="why">なぜ：</span>外のサービスに触れる操作は、間違えたときの影響が PC の中より大きいからです。</p>
+
+    <!-- 段階1 -->
+    <article class="level" id="level-1">
+      <div class="level__n"><span>段階</span><b>1</b></div>
+      <div>
+        <h3 class="level__title">毎日迷わず使う</h3>
+        <p class="level__goal">できるようになること：壊さずに頼み、壊れても戻せる</p>
+        <div class="level__grid">
+          <div>
+            <p class="level__label">学ぶこと</p>
+            <ul class="ticks">
+              <li><strong>権限モード</strong>：デスクトップアプリの表示で「手動」「編集を受け入れる」「プラン」「自動」。最初は手動で、何を実行しようとしているかを読んでから許可する。自動は便利だが、判定は完全ではない。「権限をバイパス」は隔離された実験用の環境でだけ使う</li>
+              <li><strong>プラン</strong>：大きな変更の前に、何をどう変えるかの計画だけを先に出させる</li>
+              <li><strong>やり直し</strong>：ターミナルでは、入力欄が空のときに <kbd>Esc</kbd> を2回（または <code>/rewind</code>）で、会話とファイルを前の時点に戻す。ただし、コマンド（<code>rm</code> など）で変わったファイルは戻らないので、大事なフォルダは Git で履歴を残しておく</li>
+              <li><strong>会話の整理</strong>：<code>/clear</code>（新しく始める）・<code>/compact</code>（要約して続ける）・<code>/context</code>（いま読み込んでいる量）・<code>/resume</code>（前の会話に戻る）</li>
+              <li><strong>CLAUDE.md</strong>：<code>/init</code> で作らせ、毎回言っている注意を書き足していく</li>
+              <li><strong>使った量</strong>：<code>/usage</code> で、プランの利用上限のうちどれだけ使ったかを見る</li>
+            </ul>
+          </div>
+          <div>
+            <p class="level__label">最初の一歩</p>
+            <p class="level__why" style="margin-top:0">入力欄で <code>/init</code> を送って CLAUDE.md を作らせ、次の2行を足すよう頼みます。</p>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">CLAUDE.md に次の2行を足してください。
+・返事は日本語で。専門用語には短い説明を付ける
+・ファイルを変更する前に、何をどう変えるかを一覧で見せて、確認を待つ</pre>
+            <p class="level__why"><span class="why">なぜ最初にここか：</span>どれも毎回の作業で使う操作だからです。ここが曖昧なままだと、壊したときに戻せず、長い会話で指示を忘れる理由も分かりません。</p>
+          </div>
+        </div>
+        <p class="level__docs">公式ドキュメント（日本語）：<a href="https://code.claude.com/docs/ja/permission-modes" target="_blank" rel="noopener">権限モード</a> ／ <a href="https://code.claude.com/docs/ja/checkpointing" target="_blank" rel="noopener">チェックポイント</a> ／ <a href="https://code.claude.com/docs/ja/memory" target="_blank" rel="noopener">CLAUDE.md と記憶</a> ／ <a href="https://code.claude.com/docs/ja/best-practices" target="_blank" rel="noopener">ベストプラクティス</a></p>
+      </div>
+    </article>
+
+    <!-- 段階2 -->
+    <article class="level" id="level-2">
+      <div class="level__n"><span>段階</span><b>2</b></div>
+      <div>
+        <h3 class="level__title">自分用に整える</h3>
+        <p class="level__goal">できるようになること：同じ説明を二度しない</p>
+        <div class="level__grid">
+          <div>
+            <p class="level__label">学ぶこと</p>
+            <ul class="ticks">
+              <li><strong>スキル</strong>：この資料の前半で入れる → skill-creator で自分用を1本作る</li>
+              <li><strong>出力スタイル</strong>：<code>/output-style</code> で返事の形を切り替える。学びたいときは Learning（大事な分かれ目で、少しだけ自分に書かせる）や Explanatory（選んだ理由の解説が付く）</li>
+              <li><strong>フック</strong>：作業が終わったら通知を出す、など決めたタイミングの自動実行。公式の hookify プラグインなら、会話から作れる</li>
+              <li><strong>サブエージェント</strong>：調べものやレビューを別の担当に任せ、本体の会話を短く保つ</li>
+              <li><strong><code>/insights</code></strong>：自分の最近の使い方を分析したレポート（HTML）を作らせる。うまくいかなかった場面と、試すとよい機能が分かる</li>
+            </ul>
+          </div>
+          <div>
+            <p class="level__label">最初の一歩</p>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">この会話の中で、私が何度も繰り返している指示や手順を探してください。
+スキルにすると便利そうなものを3つ挙げ、それぞれ「名前」「いつ使うか」「中身の要点」を書いてください。
+まだ作らないでください。</pre>
+            <p class="level__why"><span class="why">なぜこの段階か：</span>使い方が決まってきたころに整えると、何を残すべきかが分かっているからです。早すぎると、使わないスキルが増えるだけです。</p>
+          </div>
+        </div>
+        <p class="level__docs">公式ドキュメント（日本語）：<a href="https://code.claude.com/docs/ja/skills" target="_blank" rel="noopener">スキル</a> ／ <a href="https://code.claude.com/docs/ja/output-styles" target="_blank" rel="noopener">出力スタイル</a> ／ <a href="https://code.claude.com/docs/ja/hooks-guide" target="_blank" rel="noopener">hooks</a> ／ <a href="https://code.claude.com/docs/ja/sub-agents" target="_blank" rel="noopener">サブエージェント</a></p>
+      </div>
+    </article>
+
+    <!-- 段階3 -->
+    <article class="level" id="level-3">
+      <div class="level__n"><span>段階</span><b>3</b></div>
+      <div>
+        <h3 class="level__title">外とつなぐ</h3>
+        <p class="level__goal">できるようになること：コピーと貼り付けの往復をやめる</p>
+        <div class="level__grid">
+          <div>
+            <p class="level__label">学ぶこと</p>
+            <ul class="ticks">
+              <li><strong>コネクタ・MCP</strong>：Google カレンダー・Gmail・Notion などをつなぎ、読む作業から任せる（<a href="#work">業務効率化の節</a>）</li>
+              <li><strong>ブラウザ操作</strong>：Claude in Chrome・デスクトップアプリのブラウザ欄・Playwright の使い分け（同）</li>
+              <li><strong><code>/mcp</code></strong>：つないだ先の状態（接続済み・要ログイン・失敗）を見る</li>
+            </ul>
+          </div>
+          <div>
+            <p class="level__label">最初の一歩</p>
+            <p class="level__why" style="margin-top:0">デスクトップアプリで <span class="ui">＋</span> → <span class="ui">コネクタ</span> から Google カレンダーをつなぎ、次のように頼みます。</p>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">今週の予定を、日付・時刻・予定名・場所の表にしてください。予定の追加・変更・削除はしないでください。</pre>
+            <p class="level__why"><span class="why">なぜ：</span>ここから Claude Code は、話し相手から「代わりに手を動かす担当」に変わります。外に影響が出る操作も増えるので、読むだけの作業から始めます。</p>
+          </div>
+        </div>
+        <p class="level__docs">公式ドキュメント（日本語）：<a href="https://code.claude.com/docs/ja/mcp" target="_blank" rel="noopener">MCP</a> ／ <a href="https://code.claude.com/docs/ja/chrome" target="_blank" rel="noopener">Chrome</a>　公式講座（英語）：<a href="https://academy.claude.com/tutorials/getting-started-with-connectors" target="_blank" rel="noopener">Getting started with connectors</a></p>
+      </div>
+    </article>
+
+    <!-- 段階4 -->
+    <article class="level" id="level-4">
+      <div class="level__n"><span>段階</span><b>4</b></div>
+      <div>
+        <h3 class="level__title">任せて回す</h3>
+        <p class="level__goal">できるようになること：決まった作業を、自分が張り付いていなくても回す</p>
+        <div class="level__grid">
+          <div>
+            <p class="level__label">学ぶこと</p>
+            <ul class="ticks">
+              <li><strong>定期実行の3つ</strong>：会話を開いているあいだ繰り返す <code>/loop</code>／PC の上で決まった時刻に動かすデスクトップアプリの「ルーティン」（アプリが開いていて PC が起きているときだけ動く）／PC を閉じていても動くクラウドのルーティン（<code>/schedule</code>。最短1時間ごと。手元のファイルは使えない）</li>
+              <li><strong>ヘッドレス実行</strong>：<code>claude -p "指示"</code> で、画面を開かずに1回だけ実行する。スクリプトや GitHub Actions から呼べる</li>
+              <li><strong>Remote Control</strong>：手元の PC で動いている作業を、スマホや Web から見る・指示する</li>
+              <li><strong>並列</strong>：調べものを複数のサブエージェントに分けて任せる</li>
+            </ul>
+          </div>
+          <div>
+            <p class="level__label">最初の一歩</p>
+            <p class="level__why" style="margin-top:0">デスクトップアプリの「コード」タブで、サイドバーの <span class="ui">ルーティン</span> → <span class="ui">新しいルーチン</span> → <span class="ui">ローカル</span>。スケジュールは <span class="ui">平日</span>、指示は次のとおり。</p>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">今日の予定と、今日中に返信が要りそうなメールを表にまとめてください。
+メールの送信・削除・既読への変更、予定の変更はしないでください。</pre>
+            <p class="level__why"><span class="why">なぜ：</span>毎日手で送る指示は、忘れた日に止まります。定期実行にすると、人は結果を見て判断するだけになります。<strong>自分が見ていないときに動くので、送信・削除など外に影響する操作は入れず、「まとめて見せる」までにします。</strong></p>
+          </div>
+        </div>
+        <p class="level__docs">公式ドキュメント（日本語）：<a href="https://code.claude.com/docs/ja/desktop-scheduled-tasks" target="_blank" rel="noopener">デスクトップの定期実行</a> ／ <a href="https://code.claude.com/docs/ja/routines" target="_blank" rel="noopener">ルーティン</a> ／ <a href="https://code.claude.com/docs/ja/headless" target="_blank" rel="noopener">プログラムで実行</a> ／ <a href="https://code.claude.com/docs/ja/remote-control" target="_blank" rel="noopener">Remote Control</a></p>
+      </div>
+    </article>
+
+    <!-- 段階5 -->
+    <article class="level" id="level-5">
+      <div class="level__n"><span>段階</span><b>5</b></div>
+      <div>
+        <h3 class="level__title">作って配る</h3>
+        <p class="level__goal">できるようになること：自分の工夫を、ほかの人が使える形にする</p>
+        <div class="level__grid">
+          <div>
+            <p class="level__label">学ぶこと</p>
+            <ul class="ticks">
+              <li><strong>プラグインを作って配る</strong>：自作のスキルをプラグインにまとめ、GitHub のリポジトリをマーケットプレイスにして配る</li>
+              <li><strong>MCP サーバーを作る</strong>：社内のデータや自分のアプリを、Claude からつなげるようにする</li>
+              <li><strong>Claude Agent SDK</strong>：Claude Code と同じ仕組み（考える → 道具を使う → 確かめる）を、自分のアプリの中に組み込む</li>
+            </ul>
+          </div>
+          <div>
+            <p class="level__label">最初の一歩</p>
+<pre class="prompt" data-label="指示の型 ― （ ）の中を差し替えて貼る">私が作ったスキル（.claude/skills/（スキル名））を、ほかの人が /plugin で入れられるプラグインにしたいです。
+必要なファイルと手順を、まず一覧で見せてください。まだファイルは作らないでください。</pre>
+            <p class="level__why"><span class="why">なぜ最後か：</span>配る側に回ると、入れた人の PC で動くものに責任を持つことになるからです。入れる側の安全チェック（この資料の前半）を自分で説明できるようになってから進みます。</p>
+          </div>
+        </div>
+        <p class="level__docs">公式ドキュメント（日本語）：<a href="https://code.claude.com/docs/ja/plugins" target="_blank" rel="noopener">プラグインを作成する</a> ／ <a href="https://code.claude.com/docs/ja/agent-sdk/overview" target="_blank" rel="noopener">Agent SDK</a>　公式講座（英語）：<a href="https://academy.claude.com/courses/introduction-to-model-context-protocol" target="_blank" rel="noopener">Introduction to Model Context Protocol</a></p>
+      </div>
+    </article>
+
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>権限モード</dt><dd>Claude が確認なしで実行してよい範囲の設定。手動は、ファイルの変更やコマンドの前に毎回確認が出る</dd>
+        <dt>出力スタイル</dt><dd>返事の書き方の設定。Concise（短く）・Explanatory（解説つき）・Learning（自分にも書かせる）などがある</dd>
+        <dt>ヘッドレス実行</dt><dd>会話の画面を開かずに、指示を1回だけ実行して結果を受け取る使い方</dd>
+        <dt>ルーティン</dt><dd>決めた時刻や間隔で、同じ指示を自動で実行する仕組み。PC の上で動くものと、クラウドで動くものがある</dd>
+        <dt>Agent SDK</dt><dd>Claude Code と同じ仕組みを、自分のプログラムから使えるようにした部品。SDK は Software Development Kit の略</dd>
+      </dl>
+    </div>
+
+    <h3 class="sub" id="roadmap-tools">学ぶときに使える3つの道具</h3>
+    <div class="cards cards--3">
+      <div class="card">
+        <p class="card__title">/teach（mattpocock-skills）</p>
+        <p class="card__desc">学びたいことごとにフォルダを1つ作り、<code>/teach</code> に続けてテーマを送ると、目的（MISSION.md）を聞かれ、短いレッスン（HTML）と「何を学んだか」の記録がフォルダに溜まっていきます。</p>
+        <p class="card__desc"><span class="why">なぜ：</span>記録がフォルダに残るので、何日かに分けても、前に学んだところの続きから始められるからです。</p>
+<pre class="prompt" data-label="指示の型 ― /teach を選んでから貼る">ターミナルの基本（cd・ls・pwd と、パスの読み方）。
+Claude Code が提案するコマンドを読んで、許可してよいか判断できるようになりたい。
+レッスンは日本語で。</pre>
+      </div>
+      <div class="card">
+        <p class="card__title">/btw（横道の質問）</p>
+        <p class="card__desc">作業の途中で分からない言葉が出たら、<code>/btw いまの「コンテキスト」って何？</code> のように聞きます。Claude Code に最初から入っている機能です。</p>
+        <p class="card__desc"><span class="why">なぜ：</span><code>/btw</code> の質問と答えは、いまの会話の流れに入らないからです。作業中の会話を長くせずに、その場で疑問を解消できます。</p>
+      </div>
+      <div class="card">
+        <p class="card__title">academy-guide（Anthropic 公式）</p>
+        <p class="card__desc">Claude の使い方を質問すると、答えのあとに、合う公式の講座やチュートリアル（Claude Academy・無料・英語）を添えてくれるスキルです。</p>
+<pre class="cmd">/plugin marketplace add anthropics/skills</pre>
+<pre class="cmd">/plugin install academy-guide@anthropic-agent-skills</pre>
+        <p class="card__desc">同じ一覧の discernment-nudge は、答えのあとに「前提や事実を確かめるための質問」を2〜3個添えます。AI の答えをうのみにしない練習になります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 周辺知識 -->
+<section class="section" id="knowledge">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-define.svg" alt=""></span><div><p class="section__kicker">07</p><h2 class="section__title">周辺知識 ― Claude Code の外側で学んでおくと効くこと</h2></div></div>
+    <p class="section__lead">任せる範囲が広がるほど、「AI がいま何をしようとしているか」を読む力が要ります。自分でコードを書けるようになる必要はありません。次の知識があると、許可・拒否の判断と、うまくいかないときの伝え方が変わります。</p>
+    <p><span class="why">学び方の型：</span>どれも <code>/teach</code> に続けてテーマを送れば始められます。テーマの後ろに「何のために学ぶか」を1行足すと、レッスンがその目的に寄ります。</p>
+
+    <div class="tier">
+      <p class="tier__title"><span>まず</span>毎日の作業で効く</p>
+      <div class="know-grid">
+        <div class="know"><p class="know__title">ターミナルとファイルの場所（パス）</p><p><span class="know__label">なぜ</span>Claude Code が提案するコマンド（ファイルを消す <code>rm</code>、動かす <code>mv</code> など）を読んで、許可してよいかを判断するため。どのフォルダで作業しているかが分かっていないと、別の場所のファイルを消されても気づけない</p><p><span class="know__label">最初の一歩</span><code>/teach</code> ターミナルの基本（cd・ls・pwd・パスの読み方）</p></div>
+        <div class="know"><p class="know__title">Markdown</p><p><span class="know__label">なぜ</span>CLAUDE.md・SKILL.md・仕様書は、どれも Markdown。書ければ、AI への指示を文章として残し、使い回せる</p><p><span class="know__label">最初の一歩</span>自分の CLAUDE.md を開き、見出しと箇条書きで整理し直す</p></div>
+        <div class="know"><p class="know__title">Git と GitHub</p><p><span class="know__label">なぜ</span>変更の履歴を残しておけば、AI が壊したときに前の状態へ戻せる。スキルやプラグインの配布も、作ったものの公開も GitHub を使う</p><p><span class="know__label">最初の一歩</span><code>/teach</code> Git の基本（履歴を残す・前の状態に戻す）</p></div>
+        <div class="know"><p class="know__title">HTML・CSS・JavaScript の役割</p><p><span class="know__label">なぜ</span>画面が崩れたとき、「見た目（CSS）の話か、動き（JavaScript）の話か」を伝えられると、直すのが速い</p><p><span class="know__label">最初の一歩</span>自分の画面を開き、各部分が HTML・CSS・JavaScript のどれでできているかを Claude に説明させる</p></div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <p class="tier__title"><span>次に</span>外とつなぐときに効く</p>
+      <div class="know-grid">
+        <div class="know"><p class="know__title">API と APIキー・.env</p><p><span class="know__label">なぜ</span>外部のサービスとつなぐときの鍵。GitHub に上げてしまうと他人に使われ、料金が自分に来る</p><p><span class="know__label">最初の一歩</span><code>/teach</code> API と APIキーの安全な扱い方</p></div>
+        <div class="know"><p class="know__title">JSON・YAML・CSV</p><p><span class="know__label">なぜ</span>MCP の設定（.mcp.json）は JSON、スキルの先頭（フロントマター）は YAML、表のやり取りは CSV。カンマや括弧が1つ欠けるだけで読み込まれない</p><p><span class="know__label">最初の一歩</span>自分の PC の設定ファイル（~/.claude/settings.json）を Claude に読ませ、各行の意味を説明させる（書き換えはさせない）</p></div>
+        <div class="know"><p class="know__title">Node.js・npx と Python・uv</p><p><span class="know__label">なぜ</span>スキルや MCP サーバーの多くは <code>npx</code> や <code>uvx</code> で動く。「command not found」が出たとき、何が足りないのかが分かる</p><p><span class="know__label">最初の一歩</span><code>/teach</code> npx と uvx は何をしているか</p></div>
+        <div class="know"><p class="know__title">セキュリティの基本</p><p><span class="know__label">なぜ</span>Web ページやメールを読ませると、その中に書かれた命令に AI が従ってしまうことがある（プロンプトインジェクション）。秘密の情報と、許可の範囲を意識できると事故を防げる</p><p><span class="know__label">最初の一歩</span>公式ドキュメント「<a href="https://code.claude.com/docs/ja/security" target="_blank" rel="noopener">セキュリティ</a>」を Claude と一緒に読む</p></div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <p class="tier__title"><span>余裕が出たら</span>作って届けるときに効く</p>
+      <div class="know-grid">
+        <div class="know"><p class="know__title">公開（デプロイ）</p><p><span class="know__label">なぜ</span>作ったものを自分の PC の外から使うには、常に動いているサーバーに置く必要がある（GitHub Pages・Netlify・Vercel など）</p></div>
+        <div class="know"><p class="know__title">データベースの基本</p><p><span class="know__label">なぜ</span>データが増えたり、複数の端末から使ったりすると、ファイルへの保存では足りなくなる（Supabase・Turso など）</p></div>
+        <div class="know"><p class="know__title">トークン・コンテキスト・料金</p><p><span class="know__label">なぜ</span>長い会話で指示を忘れる理由、上限に早く届く理由が分かる。<code>/context</code> と <code>/usage</code> の表示が読めるようになる</p></div>
+        <div class="know"><p class="know__title">ほかの自動化の道具</p><p><span class="know__label">なぜ</span>決まった時刻に決まった処理をするだけなら、AI を使わない仕組み（Google Apps Script・Zapier・n8n など）のほうが安く確実なことがある。使い分けられると、Claude Code は判断が要るところに集中できる</p></div>
+        <div class="know know--wide"><p class="know__title">仕様を言葉にする力</p><p><span class="know__label">なぜ</span>AI は書いていないことを推測で埋める。何を作り、何を作らないかを書けるほど、やり直しが減る。grill-me で練習できる</p></div>
+      </div>
+    </div>
+
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>ターミナル</dt><dd>文字でコマンドを打って PC を操作する画面。Mac は「ターミナル」、Windows は「PowerShell」など</dd>
+        <dt>パス</dt><dd>ファイルやフォルダの場所を表す文字列。たとえば <code>~/Documents/my-app</code></dd>
+        <dt>API・APIキー</dt><dd>API はプログラム同士がデータをやり取りするための決まった受け付け方。APIキーは、その利用者を見分ける文字列で、他人に渡ると自分の分として使われる</dd>
+        <dt>.env</dt><dd>APIキーなどの秘密の値だけを書いておくファイル。GitHub に上げない設定にする</dd>
+        <dt>JSON・CSV</dt><dd>JSON は「"名前": 値」を括弧で囲んで並べるデータの書き方。CSV は1行1件・カンマ区切りの表のテキスト</dd>
+        <dt>プロンプトインジェクション</dt><dd>AI が読む文章の中に命令を仕込み、AI に本来の指示とは違うことをさせる攻撃</dd>
+        <dt>デプロイ</dt><dd>作ったものを公開用のサーバーに置き、ほかの人や端末から使える状態にすること</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 08 業務効率化 -->
+<section class="section section--soft" id="work">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-browser.svg" alt=""></span><div><p class="section__kicker">08</p><h2 class="section__title">業務効率化 ― ブラウザ操作と MCP 接続</h2></div></div>
+    <p class="section__lead">仕事の手作業は、Claude Code が外のサービスに触れられるようになると、任せられる範囲が大きく広がります。つなぎ方は大きく3つ。上から順に、速く・壊れにくい方法です。</p>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-label="外のサービスとつなぐ3つの方法">
+      <table class="tbl tbl--wide">
+        <thead><tr><th>つなぎ方</th><th>しくみ</th><th>向いている</th><th>向いていない</th></tr></thead>
+        <tbody>
+          <tr><td>① MCP・コネクタ</td><td>サービスが公開している API を通して、データを決まった形で直接やり取りする</td><td>予定・メール・文書・タスクの読み書き。速く、画面の変更の影響を受けない</td><td>MCP の接続先が用意されていないサービス</td></tr>
+          <tr><td>② ブラウザ操作</td><td>Chrome などを開き、画面を読みながらクリック・入力する</td><td>API の無いサイト、ログインが要る業務システム、自分が作ったアプリの動作確認</td><td>大量の繰り返し（遅い）。画面の配置や文言が変わると失敗しやすい</td></tr>
+          <tr><td>③ コンピューター操作</td><td>画面全体を見て、デスクトップのアプリを操作する</td><td>ブラウザの外のアプリ</td><td>②よりさらに遅い。研究プレビューで、使えるプランと OS が限られる</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+    <p><span class="why">なぜ①から考えるか：</span>API は決まった形のデータを返すので、読み違いが起きにくく速いからです。画面の操作は人と同じ手順を踏むぶん時間がかかり、ボタンの位置や文言が変わると止まります。①が無いときに②、②でも届かないときに③を考えます。</p>
+
+    <h3 class="sub">MCP・コネクタをつなぐ</h3>
+    <ol class="steps">
+      <li><span class="steps__n">1</span><div>
+        <p class="steps__title">デスクトップアプリから（いちばん簡単）</p>
+        <p class="steps__desc">入力欄の <span class="ui">＋</span> → <span class="ui">コネクタ</span> → <span class="ui">コネクタを追加</span> で選び、画面の案内に従ってログインします。あとから見直すときは <span class="ui">コネクタを管理</span>。</p>
+        <p class="steps__desc"><span class="why">なぜログインが要るか：</span>サービス側に「この Claude に、自分のアカウントのこの範囲を使わせてよい」と許可を出す手続きだからです。許可した範囲しか使えません。</p>
+      </div></li>
+      <li><span class="steps__n">2</span><div>
+        <p class="steps__title">claude.ai でつないだものは、そのまま使える</p>
+        <p class="steps__desc">claude.ai（Web）の「カスタマイズ」→「コネクタ」でつないだものは、同じアカウントでログインしている Claude Code にも出てきます。<code>/mcp</code> で一覧と状態を確かめられます。Gmail や Google カレンダーは、この方法（またはデスクトップアプリ）でつなぎます。</p>
+        <p class="steps__desc"><span class="why">なぜ：</span>コネクタの設定はアカウントに保存されるので、一度つなげば Web・デスクトップ・ターミナルで同じものが使えるからです。</p>
+      </div></li>
+      <li><span class="steps__n">3</span><div>
+        <p class="steps__title">ターミナルから</p>
+        <p class="steps__desc">接続先の URL が分かっていれば、次のように追加し、会話の中で <code>/mcp</code> を開いてログインします。公式マーケットプレイスのプラグインでも入れられます（<code>/plugin install notion@claude-plugins-official</code> など）。</p>
+<pre class="cmd">claude mcp add --transport http notion https://mcp.notion.com/mcp</pre>
+        <p class="steps__desc">追加するときも、範囲（local・project・user）を選べます。project にすると <code>.mcp.json</code> というファイルに書かれ、同じフォルダで作業する人と共有されます。<strong>人から受け取ったフォルダの .mcp.json は、中身を読んでから許可します。</strong></p>
+      </div></li>
+    </ol>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-label="主なつなぎ先">
+      <table class="tbl tbl--wide">
+        <thead><tr><th>主なつなぎ先</th><th>できること（例）</th><th>つなぎ方</th></tr></thead>
+        <tbody>
+          <tr><td>Google カレンダー・Gmail・Google ドライブ</td><td>予定の確認、メールの検索と下書き、文書の読み取り</td><td>claude.ai かデスクトップアプリのコネクタ</td></tr>
+          <tr><td>Notion</td><td>ページの検索・作成・更新</td><td>コネクタ／<code>/plugin install notion@claude-plugins-official</code></td></tr>
+          <tr><td>Slack</td><td>メッセージ・スレッドの検索と読み取り</td><td>コネクタ／<code>/plugin install slack@claude-plugins-official</code></td></tr>
+          <tr><td>GitHub</td><td>Issue・プルリクエストの操作</td><td><code>/plugin install github@claude-plugins-official</code></td></tr>
+          <tr><td>Canva・Figma</td><td>デザインの作成・読み取り</td><td><code>/plugin install canva@claude-plugins-official</code> など</td></tr>
+          <tr><td>Zapier</td><td>8,000以上のアプリの操作を呼び出す（呼び出すたびに Zapier の利用枠を使う）</td><td><code>/plugin install zapier@claude-plugins-official</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+    <div class="note"><p>つなぎ先ごとに、無料で使える範囲や必要なプランが違います。会社のアカウントでは、管理者の許可が要ることがあります。コードを書かない事務作業が中心なら、デスクトップアプリの「Cowork」タブも選択肢です（スキル・プラグイン・コネクタは「カスタマイズ」の設定から読み込むため、ターミナルの Claude Code に入れたものとは別に管理されます）。</p></div>
+
+    <h3 class="sub">ブラウザ操作の道具</h3>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="ブラウザ操作の道具の比較">
+      <table class="tbl tbl--wide">
+        <thead><tr><th>道具</th><th>特徴</th><th>向いている使い方</th><th>始め方</th></tr></thead>
+        <tbody>
+          <tr><td>Claude in Chrome<br>（Anthropic）</td><td>ふだんの Chrome を使う。ログイン済みのサイトをそのまま操作できる。ログイン画面や CAPTCHA では止まり、人に代わりを頼む</td><td>Gmail・業務システムなど、ログインが要る画面の定型作業</td><td>Chrome ウェブストアで拡張機能「Claude」を入れる → ターミナルは <code>claude --chrome</code>、会話中は <code>/chrome</code>。有料プラン（Pro・Max・Team・Enterprise）</td></tr>
+          <tr><td>ブラウザ欄<br>（デスクトップアプリ）</td><td>アプリの中のブラウザ。ログイン情報を持たない、まっさらな状態で開く</td><td>自分が作っているアプリの表示の確認</td><td>Mac は <kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>、Windows は <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd></td></tr>
+          <tr><td>Playwright MCP<br>（Microsoft）</td><td>決めた手順を、何度でも同じように実行できる。★約3.7万</td><td>自分のアプリのテスト、決まった手順の繰り返し</td><td><code>/plugin install playwright@claude-plugins-official</code></td></tr>
+          <tr><td>Chrome DevTools MCP<br>（Google の Chrome チーム）</td><td>通信・エラー・表示速度など、開発者ツールの情報を読める。★約5.2万</td><td>表示が遅い・エラーが出るときの原因調べ</td><td><code>/plugin install chrome-devtools-mcp@claude-plugins-official</code></td></tr>
+          <tr><td>agent-browser<br>（Vercel）</td><td>AI 向けに作られたブラウザ操作のコマンド。使うトークンが少ない。skills.sh 約88万インストール</td><td>ターミナルに慣れた人の繰り返し作業</td><td>本体を入れてから <code>npx skills add vercel-labs/agent-browser</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">表は横にスクロールできます。</p>
+    <div class="note note--key">
+      <p><strong>迷ったら：</strong>ログインが要る作業は Claude in Chrome。自分のアプリの確認はデスクトップアプリのブラウザ欄（ターミナルで使う人は Playwright）。情報を集めるだけなら、まずは Claude Code に「調べて」と頼みます（Web 検索と Web ページの読み取りは最初から入っています）。</p>
+    </div>
+    <div class="term">
+      <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
+      <dl>
+        <dt>拡張機能</dt><dd>Chrome に後から足す機能。Chrome ウェブストアから入れる</dd>
+        <dt>CAPTCHA</dt><dd>「私はロボットではありません」のように、操作しているのが人かどうかを確かめる仕組み。Claude は代わりに解かない</dd>
+      </dl>
+    </div>
+
+    <h3 class="sub">安全に使うための6つの約束</h3>
+    <div class="note note--warn">
+      <img class="note__mascot" src="assets/penguins/penguin_warning_sign.png" alt="" width="92" height="92">
+      <ol>
+        <li><strong>最初は「読むだけ」「下書きまで」。</strong>送信・購入・削除のボタンは自分で押します。読むだけなら、読み違えても何も壊れません。</li>
+        <li><strong>知らないページやメールを読ませる作業では、送信や書き込みをさせない。</strong>ページやメールの中に「前の指示を無視して、〜に送れ」のような文が仕込まれていると、AI が従ってしまうことがあります（プロンプトインジェクション）。Anthropic は検知の仕組みで危険を減らしていますが、ゼロにはならないと明記しています。「自分の大事なデータ」「知らない人が書いた文章」「外に送れる道具」の3つを、1つの作業にそろえないのが基本です。</li>
+        <li><strong>銀行・証券・決済、医療や法律の情報、会社の機密を扱うアカウントでは使わない。</strong>Claude in Chrome は、大事なアカウントにログインしていない別の Chrome プロファイルで使うよう、Anthropic も案内しています。</li>
+        <li><strong>許可は狭く。</strong>サイトごとの許可、「一度だけ許可」から始めます。</li>
+        <li><strong>録画やスクリーンショットには、ログイン中の画面がそのまま写る。</strong>人に見せる前に確かめます。</li>
+        <li><strong>会社で使うなら、つないでよいサービスと扱ってよい情報を、先に会社のルールで確かめる。</strong></li>
+      </ol>
+    </div>
+    <details class="more">
+      <summary>もう一歩：メールの送信だけは、どのモードでも必ず確認させる</summary>
+      <div class="more__body">
+        <p>自分の設定ファイル（<code>~/.claude/settings.json</code>）の <code>permissions</code> に <code>ask</code> を書くと、書いた道具は、自動モードでも必ず確認が出ます。claude.ai の Gmail コネクタの送信・返信・転送なら、次のとおりです（すでに設定ファイルがある場合は、中身を消さずに <code>permissions</code> の部分だけを足します。Claude に「この3つを ask に追加して」と頼むのが確実です）。</p>
+<pre class="cmd">{
+  "permissions": {
+    "ask": [
+      "mcp__claude_ai_Gmail__send_message",
+      "mcp__claude_ai_Gmail__reply",
+      "mcp__claude_ai_Gmail__forward"
+    ]
+  }
+}</pre>
+        <p><span class="why">なぜ：</span>Pro・Max・Team プランでは、Claude Code は最初から「自動」モードで始まり、多くの操作を別の AI の判定で進めます。取り消せない操作だけは、人の確認を必ず通すようにしておきます。</p>
+      </div>
+    </details>
+
+    <h3 class="sub">業務効率化の実例 5つ</h3>
+    <p>どれも「読む → まとめる → 人が確かめる」の順にしてあります。慣れたら、4 以外は <a href="#level-4">段階 4</a> の定期実行にもできます。</p>
+    <div class="examples">
+      <div class="example">
+        <div class="example__head"><span class="example__n">実例 1</span><p class="example__title">朝の確認を1回の指示で</p><ul class="badges"><li class="badge">Google カレンダー</li><li class="badge">Gmail</li></ul></div>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">今日の予定を Google カレンダーから、未読のメールを Gmail から読んで、次の3つに分けた表にしてください。
+1. 今日の予定（時刻・相手・準備が要るもの）
+2. 今日中に返信が要りそうなメール（差出人・件名・そう判断した理由）
+3. あとで読めばよいもの（件数だけ）
+メールの送信・削除・既読への変更、予定の変更はしないでください。</pre>
+        <p class="example__note"><span class="why">なぜ最初の1つにおすすめか：</span>読むだけで完結するので、読み違えても何も壊れず、毎朝の数分が確実に減るからです。</p>
+      </div>
+      <div class="example">
+        <div class="example__head"><span class="example__n">実例 2</span><p class="example__title">問い合わせへの返信を、下書きまで</p><ul class="badges"><li class="badge">Gmail</li></ul></div>
+<pre class="prompt" data-label="指示の型 ― そのまま貼る">Gmail で、件名に「お問い合わせ」を含む今週のメールを探して、それぞれへの返信の下書きを作ってください。送信はしないでください。
+下書きごとに、私が確かめるべき点（金額・日付・約束したこと）を箇条書きで添えてください。</pre>
+        <p class="example__note"><span class="why">なぜ下書きまでか：</span>金額や日付の間違いは、送ってしまうと取り消せないからです。確かめるべき点を添えさせると、見直しが速くなります。</p>
+      </div>
+      <div class="example">
+        <div class="example__head"><span class="example__n">実例 3</span><p class="example__title">競合サイトの料金を比較表に</p><ul class="badges"><li class="badge">ブラウザ操作</li></ul></div>
+<pre class="prompt" data-label="指示の型 ― （ ）の中を差し替えて貼る">次の3つのサイトの料金ページを開いて、プラン名・月額・主な機能を読み取り、比較表を pricing.csv に保存してください。
+ページ内のボタンは押さず、読むだけにしてください。読み取れなかった項目は空欄にして、その理由を最後に書いてください。
+（URL 1）
+（URL 2）
+（URL 3）</pre>
+        <p class="example__note"><span class="why">なぜ「読み取れなかった項目は空欄に」と書くか：</span>書いておかないと、読み取れなかった値を推測で埋めることがあるからです。空欄と理由があれば、自分で確かめに行けます。</p>
+      </div>
+      <div class="example">
+        <div class="example__head"><span class="example__n">実例 4</span><p class="example__title">議事録から、やることを抜き出して登録</p><ul class="badges"><li class="badge">Google ドライブ</li><li class="badge">Notion</li></ul></div>
+<pre class="prompt" data-label="指示の型 ― （ ）の中を差し替えて貼る">Google ドライブの「（議事録のファイル名）」を読んで、決まったこと・担当者・期限を表にしてください。
+その表を見せて、私が確認してから、Notion の「（タスク用のページ名）」に追加してください。</pre>
+        <p class="example__note"><span class="why">なぜ確認をはさむか：</span>書き込みの前に人が見ると、読み違いが外に出る前に止められるからです。</p>
+      </div>
+      <div class="example">
+        <div class="example__head"><span class="example__n">実例 5</span><p class="example__title">自分のアプリの動作確認を任せる</p><ul class="badges"><li class="badge">ブラウザ欄／Playwright</li></ul></div>
+<pre class="prompt" data-label="指示の型 ― （ ）の中を差し替えて貼る">（localhost:3000）を開いて、登録 → 一覧に出る → 再読み込みしても残る、を実際に操作して確かめてください。
+うまくいかなかった操作があれば、そこで止めて、画面の表示とコンソールのエラーを報告してください。勝手に直さないでください。</pre>
+        <p class="example__note"><span class="why">なぜ「勝手に直さないで」と書くか：</span>確認と修正を一度にさせると、何が起きていたのかが見えないまま変わってしまうからです。先に報告させ、直すかどうかは自分で決めます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 情報源 -->
+<section class="section" id="sources">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-detail.svg" alt=""></span><div><p class="section__kicker">09</p><h2 class="section__title">学び続けるための情報源</h2></div></div>
+    <p class="section__lead">Claude Code は毎週のように更新され、スキルも毎日増えています。まとめ記事より先に、一次情報（公式と、作者本人のページ）を見る習慣をつけると、古い情報で迷いません。</p>
+    <div class="cards cards--3">
+      <div class="card">
+        <p class="card__title">公式ドキュメント（日本語あり）</p>
+        <p class="card__desc"><a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">code.claude.com/docs/ja</a></p>
+        <p class="card__desc">まず読むページ：<a href="https://code.claude.com/docs/ja/best-practices" target="_blank" rel="noopener">ベストプラクティス</a>・<a href="https://code.claude.com/docs/ja/common-workflows" target="_blank" rel="noopener">一般的なワークフロー</a>・<a href="https://code.claude.com/docs/ja/skills" target="_blank" rel="noopener">スキル</a>・<a href="https://code.claude.com/docs/ja/discover-plugins" target="_blank" rel="noopener">プラグインの探し方</a>・<a href="https://code.claude.com/docs/ja/mcp" target="_blank" rel="noopener">MCP</a></p>
+      </div>
+      <div class="card">
+        <p class="card__title">Claude Academy（公式の講座・無料・英語）</p>
+        <p class="card__desc"><a href="https://academy.claude.com/" target="_blank" rel="noopener">academy.claude.com</a></p>
+        <ul>
+          <li><a href="https://academy.claude.com/courses/claude-code-101" target="_blank" rel="noopener">Claude Code 101</a>（入門）</li>
+          <li><a href="https://academy.claude.com/courses/claude-code-in-action" target="_blank" rel="noopener">Claude Code in action</a>（中級）</li>
+          <li><a href="https://academy.claude.com/courses/introduction-to-agent-skills" target="_blank" rel="noopener">Introduction to agent skills</a></li>
+          <li><a href="https://academy.claude.com/tutorials/creating-your-first-skill" target="_blank" rel="noopener">Creating your first skill</a>（短いチュートリアル）</li>
+          <li><a href="https://academy.claude.com/courses/ai-fluency-framework-foundations" target="_blank" rel="noopener">AI Fluency: Framework and foundations</a>（AI との協働の基本）</li>
+        </ul>
+        <p class="card__desc">英語の講座は、Claude に「このページを日本語で要約して、手を動かす部分を手順にして」と頼むと進めやすくなります。</p>
+      </div>
+      <div class="card">
+        <p class="card__title">更新情報とスキルの一覧</p>
+        <ul>
+          <li>更新履歴：Claude Code の中で <code>/release-notes</code>、または <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a></li>
+          <li>公式のプラグイン一覧：<a href="https://claude.com/plugins" target="_blank" rel="noopener">claude.com/plugins</a></li>
+          <li>スキルの一覧：<a href="https://skills.sh/" target="_blank" rel="noopener">skills.sh</a>（数字は参考。入れる前の<a href="#install">5つの確認</a>を忘れずに）</li>
+          <li>まとめ：<a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" rel="noopener">awesome-claude-code</a>（★約5.4万）、<a href="https://github.com/ComposioHQ/awesome-claude-skills" target="_blank" rel="noopener">awesome-claude-skills</a>（★約7.5万）</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">続けるための3つの習慣</h3>
+    <ol class="steps">
+      <li><span class="steps__n">1</span><div><p class="steps__title">週に1回、更新履歴を見る</p><p class="steps__desc"><code>/release-notes</code> を開きます。<span class="why">なぜ：</span>新しい機能は、知らなければ使えないからです。週1回なら、読む量も少なくて済みます。</p></div></li>
+      <li><span class="steps__n">2</span><div><p class="steps__title">気になった機能を1つだけ、小さな作業で試す</p><p class="steps__desc"><span class="why">なぜ：</span>一度に複数を試すと、どれが効いたのか分からないからです。</p></div></li>
+      <li><span class="steps__n">3</span><div><p class="steps__title">使えたら、CLAUDE.md かスキルに残す</p><p class="steps__desc"><span class="why">なぜ：</span>残さないと、次に同じ場面が来たときに思い出せないからです。残したものが、自分専用の使い方になっていきます。</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 10 まとめ -->
+<section class="section section--soft" id="summary">
+  <div class="section__inner">
+    <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-check-screen.svg" alt=""></span><div><p class="section__kicker">10</p><h2 class="section__title">まとめ</h2></div></div>
+    <div class="note note--key">
+      <img class="note__mascot" src="assets/penguins/penguin_koko_daiji_board.png" alt="" width="92" height="92">
+      <p class="note__title">🔑 ひとことで</p>
+      <p>スキルは「中身を読んでから、1本ずつ」。学びは「本体・周辺知識・外とつなぐ力」の3本を、段階ごとに少しずつ。業務効率化は「読むだけ」から。</p>
+    </div>
+
+    <h3 class="sub">つまずいたときの早見表</h3>
+    <div class="pitfalls">
+      <div class="pitfall"><p class="pitfall__title">「/plugin は使えない」と言われる</p><p class="pitfall__what">古い版を使っている／デスクトップアプリで送っている</p><p class="pitfall__how"><strong>対処：</strong>Claude Code を最新にする。デスクトップアプリは <span class="ui">＋</span> → <span class="ui">プラグイン</span> の画面から入れる</p></div>
+      <div class="pitfall"><p class="pitfall__title">「マーケットプレイスを追加するにはGitが必要です」</p><p class="pitfall__what">PC に Git が入っていない（Windows で起きやすい）</p><p class="pitfall__how"><strong>対処：</strong>Git を入れてから、アプリを再起動する</p></div>
+      <div class="pitfall"><p class="pitfall__title">入れたのに、スキルが候補に出ない</p><p class="pitfall__what">読み込み直しが済んでいない</p><p class="pitfall__how"><strong>対処：</strong><code>/reload-plugins</code> を送る。だめならアプリ（ターミナル）を再起動する</p></div>
+      <div class="pitfall"><p class="pitfall__title">npx skills で入れたのに、Claude Code で使えない</p><p class="pitfall__what">Claude Code が読まない場所（.agents/skills）に入った</p><p class="pitfall__how"><strong>対処：</strong><code>-a claude-code</code> を付けて入れ直す</p></div>
+      <div class="pitfall"><p class="pitfall__title">返事が短いまま戻らない</p><p class="pitfall__what">返事の形を変えるスキルが有効なまま</p><p class="pitfall__how"><strong>対処：</strong>「stop adhd mode」や <code>/caveman off</code> を送る。ずっと不要なら、プラグインを無効にする</p></div>
+      <div class="pitfall"><p class="pitfall__title">コネクタが「! Needs authentication」</p><p class="pitfall__what">つないだあとのログインが済んでいない</p><p class="pitfall__how"><strong>対処：</strong><code>/mcp</code> を開き、そのつなぎ先を選んでログインする</p></div>
+      <div class="pitfall"><p class="pitfall__title">ブラウザにつながらない</p><p class="pitfall__what">Chrome の拡張機能が止まっている／Chrome が起動していない</p><p class="pitfall__how"><strong>対処：</strong><code>/chrome</code> を開いて「Reconnect extension」。だめなら Chrome を再起動する</p></div>
+      <div class="pitfall"><p class="pitfall__title">長い会話で、前の指示を忘れる</p><p class="pitfall__what">コンテキストが上限に近い</p><p class="pitfall__how"><strong>対処：</strong><code>/compact</code>（要約して続ける）か <code>/clear</code>（新しく始める）。忘れられて困る決まりは CLAUDE.md に書く</p></div>
+    </div>
+
+    <h3 class="sub">実践チェックリスト</h3>
+    <p>チェックはこの端末のブラウザにだけ保存されます。</p>
+    <ul class="check" id="checklist">
+      <li><label><input type="checkbox" id="c1"><span>公式の一覧（<code>/plugin</code> か claude.com/plugins）を一度眺めた</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>スキルを1本、中身を確かめてから入れ、入れる前と後で同じ質問をして比べた</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>使わないスキルを、無効にする・アンインストールする方法が分かる</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>grill-me で作りたいものを固め、決まったことを仕様書に反映させた</span></label></li>
+      <li><label><input type="checkbox" id="c5"><span>自分がいまどの段階（1〜5）かを決め、次に学ぶことを1つ選んだ</span></label></li>
+      <li><label><input type="checkbox" id="c6"><span>周辺知識から1つ選び、<code>/teach</code> で学び始めた</span></label></li>
+      <li><label><input type="checkbox" id="c7"><span>コネクタを1つつなぎ、読むだけの作業を任せた</span></label></li>
+      <li><label><input type="checkbox" id="c8"><span>ブラウザ操作で、自分のアプリの確認を1回任せた</span></label></li>
+      <li><label><input type="checkbox" id="c9"><span>更新履歴（<code>/release-notes</code>）を見る曜日を決めた</span></label></li>
+    </ul>
+    <p class="check__status" id="check-status" aria-live="polite"></p>
+
+    <h3 class="sub">用語ミニ辞典</h3>
+    <dl class="gloss">
+      <dt>Markdown</dt><dd>記号で見出しや箇条書きを表す文書の書き方。CLAUDE.md・SKILL.md・仕様書で使う</dd>
+      <dt>CLAUDE.md</dt><dd>フォルダに置く、毎回守ってほしい決まりを書いたファイル。会話を始めるたびに読み込まれる</dd>
+      <dt>スキル／SKILL.md</dt><dd>特定の作業のやり方を教える指示書のフォルダと、その本体のファイル</dd>
+      <dt>フロントマター・YAML</dt><dd>SKILL.md の先頭の設定部分と、その書き方（「項目名: 値」を並べる）</dd>
+      <dt>プラグイン</dt><dd>スキル・サブエージェント・フック・MCP の設定などを1つにまとめたもの</dd>
+      <dt>マーケットプレイス</dt><dd>プラグインの一覧。公式は claude-plugins-official</dd>
+      <dt>スコープ</dt><dd>入れたものが効く範囲。ユーザー・プロジェクト・ローカル</dd>
+      <dt>MCP・MCP サーバー</dt><dd>AI と外部のサービスをつなぐための共通の取り決めと、それに沿った接続先</dd>
+      <dt>コネクタ</dt><dd>画面から追加できる MCP の接続</dd>
+      <dt>サブエージェント</dt><dd>本体とは別の会話で動く担当</dd>
+      <dt>フック</dt><dd>決めたタイミングで自動で実行される命令</dd>
+      <dt>コンテキスト</dt><dd>Claude が1回の返事で読める文章の全体。上限がある</dd>
+      <dt>トークン</dt><dd>AI が文章を数える単位。料金や上限の計算に使う</dd>
+      <dt>権限モード</dt><dd>確認なしで実行してよい範囲の設定。手動・編集を受け入れる・プラン・自動など</dd>
+      <dt>出力スタイル</dt><dd>返事の書き方の設定。Concise・Explanatory・Learning など</dd>
+      <dt>テスト駆動開発（TDD）</dt><dd>先にテストを書き、それが通るようにコードを書く進め方</dd>
+      <dt>GitHub・リポジトリ・Git</dt><dd>コードを公開・共有するサービス、その保管場所の単位、変更履歴を記録するソフト</dd>
+      <dt>Node.js・npx</dt><dd>JavaScript を PC で動かすソフトと、道具をその場で取ってきて実行するコマンド</dd>
+      <dt>ターミナル・パス</dt><dd>文字でコマンドを打つ画面と、ファイルの場所を表す文字列</dd>
+      <dt>API・APIキー・.env</dt><dd>プログラム同士の決まった受け付け方、利用者を見分ける文字列、秘密の値を書くファイル</dd>
+      <dt>JSON・CSV</dt><dd>括弧で囲んで並べるデータの書き方と、カンマ区切りの表のテキスト</dd>
+      <dt>プロンプトインジェクション</dt><dd>AI が読む文章に命令を仕込み、本来の指示と違うことをさせる攻撃</dd>
+      <dt>ヘッドレス実行</dt><dd>画面を開かずに、指示を1回だけ実行する使い方（<code>claude -p</code>）</dd>
+      <dt>ルーティン</dt><dd>決めた時刻や間隔で、同じ指示を自動で実行する仕組み</dd>
+      <dt>CAPTCHA</dt><dd>操作しているのが人かどうかを確かめる仕組み</dd>
+      <dt>デプロイ</dt><dd>作ったものを公開用のサーバーに置き、外から使えるようにすること</dd>
+      <dt>Agent SDK</dt><dd>Claude Code と同じ仕組みを、自分のプログラムから使うための部品</dd>
+    </dl>
+
+    <h3 class="sub">出典（2026年9月中旬に確認）</h3>
+    <ol class="src">
+      <li>スター数・作成日：GitHub API（各リポジトリ）、<a href="https://github.com/yuxiaopeng/Github-Ranking-AI/blob/main/Top100/Claude.md" target="_blank" rel="noopener">Github-Ranking-AI「Top100 Claude」</a>（2026-09-18 更新）</li>
+      <li>インストール数：<a href="https://skills.sh/" target="_blank" rel="noopener">skills.sh</a>（全期間・24時間の急上昇）、<a href="https://claude.com/plugins" target="_blank" rel="noopener">claude.com/plugins</a></li>
+      <li>公式マーケットプレイスの収録内容：<a href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener">anthropics/claude-plugins-official</a>、<a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">anthropics/skills</a></li>
+      <li>i-have-adhd の広まり：Enterprise DNA「AI Pulse」（2026-08-05）。例文は <a href="https://github.com/ayghri/i-have-adhd/blob/main/.github/readme/README.ja.md" target="_blank" rel="noopener">i-have-adhd の日本語 README</a></li>
+      <li>ponytail の測定：<a href="https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-06-18-agentic.md" target="_blank" rel="noopener">benchmarks/results/2026-06-18-agentic.md</a></li>
+      <li>入れ方・画面・コマンド：Claude Code 公式ドキュメント（<a href="https://code.claude.com/docs/ja/discover-plugins" target="_blank" rel="noopener">プラグイン</a>・<a href="https://code.claude.com/docs/ja/skills" target="_blank" rel="noopener">スキル</a>・<a href="https://code.claude.com/docs/ja/mcp" target="_blank" rel="noopener">MCP</a>・<a href="https://code.claude.com/docs/ja/chrome" target="_blank" rel="noopener">Chrome</a>・<a href="https://code.claude.com/docs/ja/desktop" target="_blank" rel="noopener">デスクトップ</a>・<a href="https://code.claude.com/docs/ja/permission-modes" target="_blank" rel="noopener">権限モード</a>・<a href="https://code.claude.com/docs/ja/desktop-scheduled-tasks" target="_blank" rel="noopener">定期実行</a>・<a href="https://code.claude.com/docs/ja/output-styles" target="_blank" rel="noopener">出力スタイル</a>）、Claude デスクトップアプリ 2.2553 の日本語表示</li>
+      <li>安全な使い方：<a href="https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely" target="_blank" rel="noopener">Use Claude in Chrome safely</a>、<a href="https://code.claude.com/docs/ja/security" target="_blank" rel="noopener">公式ドキュメント「セキュリティ」</a></li>
+      <li>公式講座：<a href="https://academy.claude.com/" target="_blank" rel="noopener">Claude Academy</a></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__name">Claude Code の次の一歩 ― 注目スキルと学び方</p>
+    <div class="site-footer__links">
+      <a href="../">資料サイト集のトップへ</a>
+      <a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">Claude Code 公式ドキュメント（日本語）</a>
+      <a href="https://academy.claude.com/" target="_blank" rel="noopener">Claude Academy</a>
+    </div>
+    <p>スター数・インストール数・画面の文言・プランの条件は、2026年9月中旬に確かめた情報です。変わることがあるので、最新は各公式ページ・作者のページでご確認ください。</p>
+    <p>各スキル・製品の名前は、それぞれの作者・企業のものです。このページはスキルの動作や安全を保証するものではありません。入れる前に、ご自身で中身を確かめてください。</p>
+  </div>
+</footer>
+
+<a class="totop" href="#top" aria-label="ページの先頭へ戻る">↑</a>
+
+<script>
+(function () {
+  'use strict';
+  function ready(fn) { if (document.readyState !== 'loading') { fn(); } else { document.addEventListener('DOMContentLoaded', fn); } }
+  ready(function () {
+    /* 1) コピーボタン（指示の型・コマンド） */
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) { return navigator.clipboard.writeText(text); }
+      return new Promise(function (resolve, reject) {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '-1000px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy') ? resolve() : reject(); } catch (e) { reject(e); }
+        document.body.removeChild(ta);
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.prompt, .cmd'), function (box) {
+      var text = box.textContent.replace(/\s+$/, '');
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'copybtn'; btn.textContent = 'コピー';
+      btn.setAttribute('aria-label', box.classList.contains('prompt') ? '指示の型をコピー' : 'コマンドをコピー');
+      btn.addEventListener('click', function () {
+        copyText(text).then(function () {
+          btn.textContent = 'コピーしました'; btn.classList.add('is-done');
+          setTimeout(function () { btn.textContent = 'コピー'; btn.classList.remove('is-done'); }, 1600);
+        }, function () { btn.textContent = '選択してコピーしてください'; });
+      });
+      box.appendChild(btn);
+    });
+
+    /* 2) チェックリスト（この端末のブラウザにだけ保存。保存できない環境でも表示は動く） */
+    var KEY = 'cc-roadmap-checklist-v1', state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input[type=checkbox]'));
+    var status = document.getElementById('check-status');
+    function update() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      if (status) { status.textContent = done === boxes.length ? 'すべて完了。次の段階へ進みましょう。' : boxes.length + '項目中 ' + done + '項目 完了'; }
+    }
+    boxes.forEach(function (b) {
+      if (state[b.id]) { b.checked = true; }
+      b.addEventListener('change', function () {
+        state[b.id] = b.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* 保存できない環境では、その場の表示だけ */ }
+        update();
+      });
+    });
+    update();
+
+    /* 3) ヘッダの影・読み進みバー・上へ戻る・いま見ている節 */
+    var header = document.querySelector('.site-header');
+    var bar = document.querySelector('.progress');
+    var totop = document.querySelector('.totop');
+    var links = Array.prototype.slice.call(document.querySelectorAll('.site-header__nav a'));
+    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    var ticking = false;
+    function onScroll() {
+      var y = window.scrollY || window.pageYOffset;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      if (header) { header.classList.toggle('is-scrolled', y > 8); }
+      if (bar) { bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0) + ')'; }
+      if (totop) { totop.classList.toggle('is-shown', y > 900); }
+      var current = -1;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i] && sections[i].getBoundingClientRect().top <= 120) { current = i; }
+      }
+      links.forEach(function (a, i) {
+        var on = i === current;
+        a.classList.toggle('is-active', on);
+        if (on) { a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); } }, { passive: true });
+    onScroll();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#B84A00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <title>画面の細部を見る虫眼鏡</title>
+  <rect x="5.5" y="7" width="30" height="27" rx="3" fill="#FFE2C7"/>
+  <path d="M5.5 14h30M11 10.5h.5M16 10.5h.5"/>
+  <circle cx="29.5" cy="28" r="10.5" fill="#FFE2C7"/>
+  <rect x="24.5" y="25" width="10" height="6" rx="1.5" fill="#FFD166"/>
+  <path d="m37 35.5 5.5 5.5"/>
+</svg>
