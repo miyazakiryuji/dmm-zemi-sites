@@ -552,12 +552,12 @@ The reader has ADHD. Output is not just brief. It is shaped so an ADHD brain can
       </div>
       <div class="explain-list__item">
         <p class="explain-list__term">③ skills コマンドで</p>
-        <p class="explain-list__value"><span class="explain-list__label">どうやって</span>ターミナルで <code>npx skills add 作者名/リポジトリ名 -a claude-code</code>。探すときは <code>npx skills find キーワード</code>、消すときは <code>npx skills remove スキル名</code></p>
-        <p class="explain-list__reason"><span class="explain-list__label">なぜ</span>Claude Code 以外の AI（Codex・Cursor など）にも同じスキルを入れられる。スキルのファイルが手元にコピーされるので、読んで書き換えられる。<code>-a claude-code</code> は Claude Code が読む場所に入れる指定で、付けないと、ほかの AI 用の共通の場所だけに入って Claude Code から見えないことがある。Node.js が必要</p>
+        <p class="explain-list__value"><span class="explain-list__label">どうやって</span>スキルを使いたいフォルダの中で、ターミナルから <code>npx skills add 作者名/リポジトリ名 -a claude-code</code>（デスクトップアプリは、そのフォルダを開いた「コード」タブのターミナル（<code>Ctrl</code> + <code>`</code>）で。ターミナル版は <code>cd</code> でそのフォルダに移ってから）。途中の質問は、Installation scope は Project、Installation method は Symlink のまま、Proceed は Yes、最後の find-skills は No で構わない。入れたら Claude Code を起動し直す（2026年9月24日時点）。探すときは <code>npx skills find キーワード</code>、消すときは <code>npx skills remove スキル名</code></p>
+        <p class="explain-list__reason"><span class="explain-list__label">なぜ</span>Claude Code 以外の AI（Codex・Cursor など）にも同じスキルを入れられる。スキルのファイルが手元にコピーされるので、読んで書き換えられる。<code>-a claude-code</code> は Claude Code が読む場所に入れる指定で、付けないと、ほかの AI 用の共通の場所だけに入って Claude Code から見えないことがある（Cursor も入れた PC では、前に選んだことがなければ、入れ先の一覧で Claude Code が外れている）。Project を選ぶと、コマンドを実行したフォルダの中に入るので、別の場所で実行すると、目的のフォルダの Claude Code からは見つからない。Node.js が必要</p>
       </div>
     </div>
     <div class="note">
-      <p><strong>表示は版によって変わることがあります。</strong>ボタンの名前が見つからないときは、デスクトップアプリ 2.2553 の表記（<span class="ui">プラグイン</span>・<span class="ui">プラグインを追加</span>・<span class="ui">プラグインを管理</span>・<span class="ui">カスタマイズ</span>）に近いものを探してください。作者のマーケットプレイスの登録には Git が必要です。デスクトップアプリで「マーケットプレイスを追加するにはGitが必要です」と出たら、Git を入れてからアプリを再起動します。</p>
+      <p><strong>表示は版によって変わることがあります。</strong>ボタンの名前が見つからないときは、デスクトップアプリ 2.7032 の表記（2026年9月24日時点。<span class="ui">プラグイン</span>・<span class="ui">プラグインを追加</span>・<span class="ui">プラグインを管理</span>・<span class="ui">カスタマイズ</span>）に近いものを探してください。作者のマーケットプレイスの登録には Git が必要です。デスクトップアプリで「マーケットプレイスを追加するにはGitが必要です」と出たら、Git を入れてからアプリを再起動します。</p>
     </div>
     <div class="term">
       <p class="term__title"><img src="assets/icons/icon-glossary.svg" alt="" width="20" height="20">用語</p>
@@ -567,6 +567,7 @@ The reader has ADHD. Output is not just brief. It is shaped so an ADHD brain can
         <dt>リポジトリ</dt><dd>GitHub 上の保管場所の単位。「作者名/リポジトリ名」の形で1つに決まる</dd>
         <dt>Git</dt><dd>ファイルの変更の履歴を記録するソフト。GitHub からリポジトリを取ってくるときにも使う</dd>
         <dt>Node.js・npx</dt><dd>Node.js は JavaScript を PC で動かすためのソフト。npx は、その上で道具をその場で取ってきて実行するコマンド</dd>
+        <dt>Project・Symlink（skills コマンドの質問）</dt><dd>Project は、コマンドを実行したフォルダの中（<code>.claude/skills</code>）に入れる範囲。<code>-g</code> を付けると、自分の PC のどのフォルダでも使える場所に入る。Symlink は、スキルの本体を1か所に置き、各 AI が読む場所からその本体へのリンクを作る入れ方</dd>
       </dl>
     </div>
 
@@ -790,7 +791,7 @@ claude plugin install caveman@caveman</pre>
     </article>
 
     <div class="note note--key">
-      <p><strong>入れなくても近いことができる：</strong>Claude Code には公式の出力スタイル「Concise」があり、ターミナルでは <code>/output-style concise</code> で、結果から書き始めて前置きを省く返事に切り替えられます（<code>/output-style</code> は v2.1.269 以降、Concise は v2.1.237 以降）。デスクトップアプリでは、設定ファイル <code>.claude/settings.local.json</code> に <code>"outputStyle": "Concise"</code> を書きます（Claude に頼めば書いてくれます）。まずこれを試し、足りなければスキルを入れる、という順番でも構いません。</p>
+      <p><strong>入れなくても近いことができる：</strong>Claude Code には公式の出力スタイル「Concise」があり、ターミナルでは <code>/output-style concise</code> で、結果から書き始めて前置きを省く返事に切り替えられます（<code>/output-style</code> は v2.1.269 以降、Concise は v2.1.237 以降。2026年9月24日時点では、Homebrew や WinGet で入れた Claude Code は1週間ほど前の版（v2.1.267〜268）で <code>/output-style</code> がまだ無いことがあり、そのときは <code>/config</code> の Output style から Concise を選べます）。デスクトップアプリでは、設定ファイル <code>.claude/settings.local.json</code> に <code>"outputStyle": "Concise"</code> を書きます（Claude に頼めば書いてくれます）。まずこれを試し、足りなければスキルを入れる、という順番でも構いません。</p>
     </div>
 
     <!-- B -->
@@ -1455,7 +1456,7 @@ mcp__*__forward</pre>
           <tr><td>ブラウザ欄<br>（デスクトップアプリ）</td><td>アプリの中のブラウザ。ログイン情報を持たない、まっさらな状態で開く</td><td>自分が作っているアプリの表示の確認</td><td>Mac は <kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>、Windows は <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd></td></tr>
           <tr><td>Playwright MCP<br>（Microsoft）</td><td>決めた手順を、何度でも同じように実行できる。★約3.7万</td><td>自分のアプリのテスト、決まった手順の繰り返し</td><td>公式プラグイン <code>playwright</code></td></tr>
           <tr><td>Chrome DevTools MCP<br>（Google の Chrome チーム）</td><td>通信・エラー・表示速度など、開発者ツールの情報を読める。★約5.2万</td><td>表示が遅い・エラーが出るときの原因調べ</td><td>公式プラグイン <code>chrome-devtools-mcp</code></td></tr>
-          <tr><td>agent-browser<br>（Vercel）</td><td>AI 向けに作られたブラウザ操作のコマンド。使うトークンが少ない。skills.sh 約88万インストール</td><td>ターミナルに慣れた人の繰り返し作業</td><td>本体を入れてから、skills コマンドで <code>vercel-labs/agent-browser</code> を入れる</td></tr>
+          <tr><td>agent-browser<br>（Vercel）</td><td>AI 向けに作られたブラウザ操作のコマンド。使うトークンが少ない。skills.sh 約88万インストール</td><td>ターミナルに慣れた人の繰り返し作業</td><td>本体を入れてから、skills コマンドで <code>vercel-labs/agent-browser</code> を入れる（最後に <code>-a claude-code</code> を付ける）</td></tr>
         </tbody>
       </table>
     </div>
@@ -1580,7 +1581,7 @@ Gmail への下書きの保存・送信・既読への変更はしないでく�
       <div class="pitfall"><p class="pitfall__title">「/plugin は使えない」と言われる</p><p class="pitfall__what">古い版を使っている／デスクトップアプリで送っている</p><p class="pitfall__how"><strong>対処：</strong>Claude Code を最新にする。デスクトップアプリは <span class="ui">＋</span> → <span class="ui">プラグイン</span> の画面から入れる</p></div>
       <div class="pitfall"><p class="pitfall__title">「マーケットプレイスを追加するにはGitが必要です」</p><p class="pitfall__what">PC に Git が入っていない（Windows で起きやすい）</p><p class="pitfall__how"><strong>対処：</strong>Git を入れてから、アプリを再起動する</p></div>
       <div class="pitfall"><p class="pitfall__title">入れたのに、スキルが候補に出ない</p><p class="pitfall__what">読み込み直しが済んでいない</p><p class="pitfall__how"><strong>対処：</strong><code>/reload-plugins</code> を送る。だめならアプリ（ターミナル）を再起動する</p></div>
-      <div class="pitfall"><p class="pitfall__title">npx skills で入れたのに、Claude Code で使えない</p><p class="pitfall__what">Claude Code が読まない場所（.agents/skills）に入った</p><p class="pitfall__how"><strong>対処：</strong><code>-a claude-code</code> を付けて入れ直す</p></div>
+      <div class="pitfall"><p class="pitfall__title">npx skills で入れたのに、Claude Code で使えない</p><p class="pitfall__what">Claude Code が読まない場所（.agents/skills）に入った／別のフォルダで実行した</p><p class="pitfall__how"><strong>対処：</strong>スキルを使うフォルダの中で、<code>-a claude-code</code> を付けて入れ直す</p></div>
       <div class="pitfall"><p class="pitfall__title">返事が短いまま戻らない</p><p class="pitfall__what">返事の形を変えるスキルが有効なまま</p><p class="pitfall__how"><strong>対処：</strong>「stop adhd mode」や <code>/caveman off</code> を送る。ずっと不要なら、プラグインを無効にする</p></div>
       <div class="pitfall"><p class="pitfall__title">コネクタが「! Needs authentication」</p><p class="pitfall__what">つないだあとのログインが済んでいない</p><p class="pitfall__how"><strong>対処：</strong><code>claude mcp add</code> で足したもの（Notion など）は、<code>/mcp</code> でそのつなぎ先を選んでログインする。claude.ai やデスクトップアプリで足したコネクタ（Gmail・Google カレンダーなど）は、claude.ai の「カスタマイズ」→「コネクタ」か、デスクトップアプリの <span class="ui">コネクタを管理</span> でつなぎ直す</p></div>
       <div class="pitfall"><p class="pitfall__title">ブラウザにつながらない</p><p class="pitfall__what">Chrome の拡張機能が止まっている／Chrome が起動していない</p><p class="pitfall__how"><strong>対処：</strong><code>/chrome</code> を開いて「Reconnect extension」。だめなら Chrome を再起動する</p></div>
@@ -1648,7 +1649,7 @@ Gmail への下書きの保存・送信・既読への変更はしないでく�
       <li>公式マーケットプレイスの収録内容：<a href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener">anthropics/claude-plugins-official</a>、<a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">anthropics/skills</a></li>
       <li>i-have-adhd の広まり：Enterprise DNA「AI Pulse」（2026-08-05）。例文は <a href="https://github.com/ayghri/i-have-adhd/blob/main/.github/readme/README.ja.md" target="_blank" rel="noopener">i-have-adhd の日本語 README</a></li>
       <li>ponytail の測定：<a href="https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-06-18-agentic.md" target="_blank" rel="noopener">benchmarks/results/2026-06-18-agentic.md</a></li>
-      <li>入れ方・画面・コマンド：Claude Code 公式ドキュメント（<a href="https://code.claude.com/docs/ja/discover-plugins" target="_blank" rel="noopener">プラグイン</a>・<a href="https://code.claude.com/docs/ja/skills" target="_blank" rel="noopener">スキル</a>・<a href="https://code.claude.com/docs/ja/mcp" target="_blank" rel="noopener">MCP</a>・<a href="https://code.claude.com/docs/ja/chrome" target="_blank" rel="noopener">Chrome</a>・<a href="https://code.claude.com/docs/ja/desktop" target="_blank" rel="noopener">デスクトップ</a>・<a href="https://code.claude.com/docs/ja/permission-modes" target="_blank" rel="noopener">権限モード</a>・<a href="https://code.claude.com/docs/ja/desktop-scheduled-tasks" target="_blank" rel="noopener">定期実行</a>・<a href="https://code.claude.com/docs/ja/output-styles" target="_blank" rel="noopener">出力スタイル</a>）、Claude デスクトップアプリ 2.2553 の日本語表示</li>
+      <li>入れ方・画面・コマンド：Claude Code 公式ドキュメント（<a href="https://code.claude.com/docs/ja/discover-plugins" target="_blank" rel="noopener">プラグイン</a>・<a href="https://code.claude.com/docs/ja/skills" target="_blank" rel="noopener">スキル</a>・<a href="https://code.claude.com/docs/ja/mcp" target="_blank" rel="noopener">MCP</a>・<a href="https://code.claude.com/docs/ja/chrome" target="_blank" rel="noopener">Chrome</a>・<a href="https://code.claude.com/docs/ja/desktop" target="_blank" rel="noopener">デスクトップ</a>・<a href="https://code.claude.com/docs/ja/permission-modes" target="_blank" rel="noopener">権限モード</a>・<a href="https://code.claude.com/docs/ja/desktop-scheduled-tasks" target="_blank" rel="noopener">定期実行</a>・<a href="https://code.claude.com/docs/ja/output-styles" target="_blank" rel="noopener">出力スタイル</a>）、Claude デスクトップアプリ 2.7032 の日本語表示（2026年9月24日に確認）</li>
       <li>安全な使い方：<a href="https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely" target="_blank" rel="noopener">Use Claude in Chrome safely</a>、<a href="https://code.claude.com/docs/ja/security" target="_blank" rel="noopener">公式ドキュメント「セキュリティ」</a></li>
       <li>公式講座：<a href="https://academy.claude.com/" target="_blank" rel="noopener">Claude Academy</a></li>
     </ol>

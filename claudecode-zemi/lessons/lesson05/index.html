@@ -815,7 +815,7 @@ a:hover { color: var(--accent-orange); }
       </div>
       <div class="agenda__item agenda__item--lecture">
         <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP21 Gemini APIキーの取得</h3>
-        <p class="agenda__desc"><strong>Google AI Studio</strong> で Gemini の API キーを無料取得し、アプリの入力欄に貼り付けて“実際に文章生成”まで。「記事を生成」で <strong>429 エラー</strong>（プラン確認）が出たら、無料枠で使える <strong>gemini-2.5-flash</strong> にモデル変更します（Claude Code に頼めば直してくれます）。</p>
+        <p class="agenda__desc"><strong>Google AI Studio</strong> で Gemini の API キーを無料取得し、アプリの入力欄に貼り付けて“実際に文章生成”まで。動画では「記事を生成」で <strong>429 エラー</strong>（プラン確認）が出たら <strong>gemini-2.5-flash</strong> にモデル変更していましたが、今（2026年9月24日時点）は 2.5 系を新しく始める人は使えません（<strong>404</strong>）。最初から <strong>gemini-3.5-flash-lite</strong> を指定します（Claude Code に頼めば直してくれます）。</p>
       </div>
       <div class="agenda__item agenda__item--lecture">
         <h3 class="agenda__title"><span class="agenda__phase-badge agenda__phase-badge--lecture">PHASE 2.2</span>EP22 コードの理解と修正</h3>
@@ -852,7 +852,7 @@ a:hover { color: var(--accent-orange); }
       <div class="ep-card">
         <p class="ep-card__num">EP21</p>
         <h3 class="ep-card__title">【実践②：生成AIアプリ開発】Gemini APIキーの取得</h3>
-        <p class="ep-card__desc"><strong>Google AI Studio</strong> から Gemini の API キーを無料で取得し、アプリの入力欄に貼り付けて“実際に文章生成”まで。「記事を生成」で <strong>429 エラー</strong>が出たら、無料枠で使える <strong>gemini-2.5-flash</strong> にモデル変更（Claude Code に頼めば修正してくれます）。</p>
+        <p class="ep-card__desc"><strong>Google AI Studio</strong> から Gemini の API キーを無料で取得し、アプリの入力欄に貼り付けて“実際に文章生成”まで。動画では <strong>429 エラー</strong>が出たら <strong>gemini-2.5-flash</strong> にモデル変更していましたが、今（2026年9月24日時点）は 2.5 系を新しく始める人は使えないため、最初から <strong>gemini-3.5-flash-lite</strong> を指定します（Claude Code に頼めば修正してくれます）。</p>
         <span class="ep-card__tag">実践② アプリ</span>
       </div>
       <div class="ep-card">
@@ -870,7 +870,7 @@ a:hover { color: var(--accent-orange); }
     </div>
 
     <p style="margin: 18px 0 0; font-size: 13px; color: var(--text-mute);">
-      ※ <strong>EP21「Gemini APIキーの取得」</strong> は、Google AI Studio の画面操作や <strong>429 エラー</strong>でつまずきやすいポイントです。エラーが出たら無料枠の <strong>gemini-2.5-flash</strong> に変えると解決することが多いので、うまくいかない場合も当日のLIVEでまとめてフォローします。
+      ※ <strong>EP21「Gemini APIキーの取得」</strong> は、Google AI Studio の画面操作やモデル名のエラーでつまずきやすいポイントです。動画では <strong>429 エラー</strong>が出たら <strong>gemini-2.5-flash</strong> に変えていましたが、今（2026年9月24日時点）は、新しく始める人が 2.5 系を呼ぶと <strong>404</strong>（no longer available to new users）で止まります。Claude Code に<strong>「新しい google-genai SDK に書き換えて、モデルは gemini-3.5-flash-lite にしてください」</strong>と最初に頼んでおくと、1回で済みます。うまくいかない場合も当日のLIVEでまとめてフォローします。
     </p>
   </div>
 </section>
@@ -893,8 +893,8 @@ a:hover { color: var(--accent-orange); }
       <div class="point">
         <div class="point__badge">2</div>
         <div>
-          <p class="point__title">API キーは<em>無料で取得</em>、429 エラーは<em>モデル変更</em>で回避</p>
-          <p class="point__body"><strong>Google AI Studio</strong> で Gemini の API キーを無料取得し、アプリに貼れば実際に文章が生成されます。「記事を生成」で <strong>429 エラー</strong>（プラン確認）が出たら、有料専用の Gemini 2.0 Flash ではなく、<strong>無料枠で使える gemini-2.5-flash</strong> に変更すればOK。エラー文はそのまま Claude Code に貼れば直してくれます。</p>
+          <p class="point__title">API キーは<em>無料で取得</em>、モデル名は<em>最初から指定</em></p>
+          <p class="point__body"><strong>Google AI Studio</strong> で Gemini の API キーを無料取得し、アプリに貼れば実際に文章が生成されます。動画では「記事を生成」で <strong>429 エラー</strong>（プラン確認）が出たら、有料専用の Gemini 2.0 Flash から <strong>gemini-2.5-flash</strong> に変更していました。今（2026年9月24日時点）は、2.0 Flash は提供終了し、2.5 系も新しく始める人は使えません。最初から <strong>gemini-3.5-flash-lite</strong> を指定すればOK（講師のプロジェクトでは無料で1日500回。自分の回数は AI Studio の「レート制限」で確かめられます）。エラー文はそのまま Claude Code に貼れば直してくれます。</p>
         </div>
       </div>
       <div class="point">
@@ -928,7 +928,7 @@ a:hover { color: var(--accent-orange); }
         </li>
         <li>
           <strong>EP21 を参考に、Gemini APIキーを取得してアプリを動かしてみた</strong>
-          <small>Google AI Studio で無料取得 → アプリに貼り付け。<strong>429 エラー</strong>は <code>gemini-2.5-flash</code> に変更。実際に文章生成まで行けると理解が深まります。詰まっても当日フォローします。</small>
+          <small>Google AI Studio で無料取得 → アプリに貼り付け。モデルは <code>gemini-3.5-flash-lite</code> を指定（動画の <code>gemini-2.5-flash</code> は、2026年9月24日時点では新しく始める人は使えません）。実際に文章生成まで行けると理解が深まります。詰まっても当日フォローします。</small>
         </li>
         <li>
           <strong>EP22 を参考に、app.py を Claude Code に解説させてみた</strong>
@@ -1027,7 +1027,7 @@ a:hover { color: var(--accent-orange); }
     <p class="section__kicker">When You're Stuck</p>
     <h2 class="section__title">分からないことが出てきたら<em>この順番</em>で</h2>
     <p class="section__lead">
-      学習中・課題実施中に詰まったら、以下のフローで進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。今回は <strong>Gemini APIキーの取得・モデル変更</strong>（429エラー → <code>gemini-2.5-flash</code>）や、<strong>Skills のインストール → Claude Code 再起動</strong>あたりで詰まりやすいです。<code>app.py</code> を編集したら Streamlit を再起動（<code>Ctrl+C</code> → <code>streamlit run app.py</code>）するのも忘れずに。気軽に投げてください。
+      学習中・課題実施中に詰まったら、以下のフローで進めてください。<strong>1人で抱え込まないこと</strong>が一番大事です。今回は <strong>Gemini APIキーの取得・モデルの指定</strong>（動画の <code>gemini-2.5-flash</code> は、2026年9月24日時点では新しく始める人は使えないので <code>gemini-3.5-flash-lite</code> に）や、<strong>Skills のインストール → Claude Code 再起動</strong>あたりで詰まりやすいです（Cursor も入れた PC では、<code>npx skills add</code> の最後に <code>-a claude-code</code> を付けないと Claude Code に入らないことがあります）。<code>app.py</code> を編集したら Streamlit を再起動（<code>Ctrl+C</code> → <code>streamlit run app.py</code>）するのも忘れずに。気軽に投げてください。
     </p>
 
     <div class="stuck">
