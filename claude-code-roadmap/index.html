@@ -744,7 +744,7 @@ claude plugin install i-have-adhd@i-have-adhd</pre>
           <p class="skill__hint">入力欄に <code>/i-have</code> まで打つと候補に出ます。その会話のあいだ有効で、止めるときは「stop adhd mode」と送ります。</p>
           <p class="skill__label">毎回自動で有効にする（Mac）</p>
 <pre class="cmd">touch ~/.claude/.i-have-adhd-always</pre>
-          <p class="skill__hint">このプラグインには、会話を始めるたびに動くフック（hooks/hooks.json）が入っていて、このファイルがあるときだけルールを読み込みます。フックは Node.js で動くので、<code>node --version</code> で番号が出ない PC では何も起きません。<span class="why">なぜ置くか：</span>毎回 <code>/i-have-adhd</code> を送らなくても、最初の返事から効くからです。戻すときはそのファイルを消します。Windows では Claude に「ホームの .claude フォルダに .i-have-adhd-always という空のファイルを作って」と頼みます。</p>
+          <p class="skill__hint">このプラグインには、会話を始めるたびに動くフック（hooks/hooks.json）が入っていて、このファイルがあるときだけルールを読み込みます。フックは Node.js で動くので、<code>node --version</code> で番号が出ない PC では何も起きません。<br><span class="why">なぜ置くか：</span>毎回 <code>/i-have-adhd</code> を送らなくても、最初の返事から効くからです。<br>戻すときはそのファイルを消します。<br>Windows では Claude に「ホームの .claude フォルダに .i-have-adhd-always という空のファイルを作って」と頼みます。</p>
           <p class="skill__link"><a href="https://github.com/ayghri/i-have-adhd" target="_blank" rel="noopener">作者のページ（GitHub・日本語 README あり）</a></p>
         </div>
       </div>
@@ -1063,7 +1063,7 @@ claude plugin install caveman@caveman</pre>
 <section class="section" id="try">
   <div class="section__inner">
     <div class="section__head"><span class="section__icon"><img src="assets/icons/icon-chat.svg" alt=""></span><div><p class="section__kicker">05</p><h2 class="section__title">やってみよう ― 3つの体験</h2></div></div>
-    <p class="section__lead">自分のPCで、次の3つを順に試します。どれも手動モードで行います。<span class="why">なぜ：</span>何が実行されるかを、実行の前に自分の目で確かめるためです。</p>
+    <p class="section__lead">自分のPCで、次の3つを順に試します。どれも手動モードで行います。<br><span class="why">なぜ：</span>何が実行されるかを、実行の前に自分の目で確かめるためです。</p>
     <ol class="steps">
       <li><span class="steps__n">1</span><div>
         <p class="steps__title">公式の一覧を眺める</p>
@@ -1123,7 +1123,7 @@ claude plugin install caveman@caveman</pre>
         <dt>Agent SDK</dt><dd>Claude Code と同じ仕組みを、自分のプログラムから使えるようにした部品。SDK は Software Development Kit の略</dd>
       </dl>
     </div>
-    <p>段階は目安です。仕事で必要なら、段階 3 の業務効率化から始めても構いません。そのときも、段階 1 の「権限モード」と「やり直し」だけは先に押さえます。<span class="why">なぜ：</span>外のサービスに触れる操作は、間違えたときの影響が PC の中より大きいからです。</p>
+    <p>段階は目安です。仕事で必要なら、段階 3 の業務効率化から始めても構いません。そのときも、段階 1 の「権限モード」と「やり直し」だけは先に押さえます。<br><span class="why">なぜ：</span>外のサービスに触れる操作は、間違えたときの影響が PC の中より大きいからです。</p>
 
     <!-- 段階1 -->
     <article class="level" id="level-1">
@@ -1232,7 +1232,7 @@ claude plugin install caveman@caveman</pre>
             <p class="level__why" style="margin-top:0">デスクトップアプリの「コード」タブで、サイドバーの <span class="ui">ルーティン</span> → <span class="ui">新しいルーチン</span> → <span class="ui">ローカル</span>。スケジュールは <span class="ui">平日</span>、指示は次のとおり。</p>
 <pre class="prompt" data-label="指示の型 ― そのまま貼る">今日の予定と、今日中に返信が要りそうなメールを表にまとめてください。
 メールの送信・削除・既読への変更、予定の変更はしないでください。</pre>
-            <p class="level__why">作業フォルダ（必須）を選び、権限モードは「手動」にします。保存したら <span class="ui">今すぐ実行</span> を押し、予定とメールを<strong>読む</strong>道具の確認にだけ <span class="ui">常に許可</span> を選びます。送信・削除・既読への変更には選びません。<span class="why">なぜ：</span>手動では、許可していない道具の所で実行が止まるからです。読む道具だけ許可すれば、毎朝の実行は止まらず、送信しようとしたときだけ止まります。</p>
+            <p class="level__why">作業フォルダ（必須）を選び、権限モードは「手動」にします。保存したら <span class="ui">今すぐ実行</span> を押し、予定とメールを<strong>読む</strong>道具の確認にだけ <span class="ui">常に許可</span> を選びます。送信・削除・既読への変更には選びません。<br><span class="why">なぜ：</span>手動では、許可していない道具の所で実行が止まるからです。読む道具だけ許可すれば、毎朝の実行は止まらず、送信しようとしたときだけ止まります。</p>
             <p class="level__why"><span class="why">なぜ定期実行にするか：</span>毎日手で送る指示は、忘れた日に止まります。定期実行にすると、人は結果を見て判断するだけになります。<strong>自分が見ていないときに動くので、送信・削除など外に影響する操作は入れず、「まとめて見せる」までにします。</strong></p>
           </div>
         </div>
@@ -1397,7 +1397,7 @@ Claude Code が提案するコマンドを読んで、許可してよいか判�
 mcp__*__send_message
 mcp__*__reply
 mcp__*__forward</pre>
-        <p>名前が違っていても警告は出ません。保存したら開き直し、オートモードのまま、宛先を自分のアドレスにしたテストメールの送信を頼んで、確認が出ることを確かめます。<span class="why">なぜ自分宛てか：</span>設定が効いていないと、そのまま送信されるからです。手動モードでは設定がなくても確認が出るので、確かめたことになりません。</p>
+        <p>名前が違っていても警告は出ません。保存したら開き直し、オートモードのまま、宛先を自分のアドレスにしたテストメールの送信を頼んで、確認が出ることを確かめます。<br><span class="why">なぜ自分宛てか：</span>設定が効いていないと、そのまま送信されるからです。手動モードでは設定がなくても確認が出るので、確かめたことになりません。</p>
         <p><span class="why">なぜ：</span>Pro・Max・Team プランでは、ターミナルの Claude Code は最初からオートモードで始まり、多くの操作を別の AI の判定で進めます。取り消せない操作だけは、人の確認を必ず通すようにしておきます。</p>
       </div>
     </details>
@@ -1418,7 +1418,7 @@ mcp__*__forward</pre>
         <p class="steps__title">ターミナルから</p>
         <p class="steps__desc">接続先の URL が分かっていれば、次のように追加し、会話の中で <code>/mcp</code> を開いてログインします。公式マーケットプレイスのプラグインでも入れられます（<code>/plugin install notion@claude-plugins-official</code> など）。</p>
 <pre class="cmd">claude mcp add --transport http notion https://mcp.notion.com/mcp</pre>
-        <p class="steps__desc">追加するときも、範囲（local・project・user）を <code>--scope</code> で選べます。project にすると、そのフォルダに <code>.mcp.json</code> というファイルができ、フォルダごと（Git などで）受け取った人も同じ設定を使います。<strong>人から受け取ったフォルダの .mcp.json は、中身を読んでから許可します。</strong><span class="why">なぜ：</span>.mcp.json には、自分の PC で起動するプログラムやデータの送り先が書かれていて、許可するとそれが動くからです。</p>
+        <p class="steps__desc">追加するときも、範囲（local・project・user）を <code>--scope</code> で選べます。project にすると、そのフォルダに <code>.mcp.json</code> というファイルができ、フォルダごと（Git などで）受け取った人も同じ設定を使います。<strong>人から受け取ったフォルダの .mcp.json は、中身を読んでから許可します。</strong><br><span class="why">なぜ：</span>.mcp.json には、自分の PC で起動するプログラムやデータの送り先が書かれていて、許可するとそれが動くからです。</p>
       </div></li>
     </ol>
 
@@ -1482,7 +1482,7 @@ mcp__*__forward</pre>
 2. 今日中に返信が要りそうなメール（差出人・件名・そう判断した理由）
 3. あとで読めばよいもの（件数だけ）
 メールの送信・削除・既読への変更、予定の変更はしないでください。</pre>
-        <p class="example__note"><span class="why">なぜ最初の1つにおすすめか：</span>読むだけで完結するので、読み違えても外のデータは変わらないからです。毎朝の確認がどれだけ短くなるかを、何日か続けて確かめます。</p>
+        <p class="example__note"><span class="why">なぜ最初の1つにおすすめか：</span>読むだけで完結するので、読み違えても外のデータは変わらないからです。<br>毎朝の確認がどれだけ短くなるかを、何日か続けて確かめます。</p>
       </div>
       <div class="example">
         <div class="example__head"><span class="example__n">実例 2</span><h4 class="example__title">問い合わせへの返信を、文案まで</h4><ul class="badges"><li class="badge">Gmail</li></ul></div>
@@ -1498,7 +1498,7 @@ Gmail への下書きの保存・送信・既読への変更はしないでく�
 （URL 1）
 （URL 2）
 （URL 3）</pre>
-        <p class="example__note"><span class="why">なぜ「読み取れなかった項目は空欄に」と書くか：</span>書いておかないと、読み取れなかった値を推測で埋めることがあるからです。空欄と理由があれば、自分で確かめに行けます。表を確かめてから「この表を pricing.csv に保存して」と頼みます。</p>
+        <p class="example__note"><span class="why">なぜ「読み取れなかった項目は空欄に」と書くか：</span>書いておかないと、読み取れなかった値を推測で埋めることがあるからです。空欄と理由があれば、自分で確かめに行けます。<br>表を確かめてから「この表を pricing.csv に保存して」と頼みます。</p>
       </div>
       <div class="example">
         <div class="example__head"><span class="example__n">実例 4</span><h4 class="example__title">議事録から、やることを抜き出して登録</h4><ul class="badges"><li class="badge">Google ドライブ</li><li class="badge">Notion</li></ul></div>
@@ -1559,7 +1559,7 @@ Gmail への下書きの保存・送信・既読への変更はしないでく�
 
     <h3 class="sub">続けるための3つの習慣</h3>
     <ol class="steps">
-      <li><span class="steps__n">1</span><div><p class="steps__title">週に1回、更新履歴を見る</p><p class="steps__desc"><code>/release-notes</code> を開きます。<span class="why">なぜ：</span>新しい機能は、知らなければ使えないからです。週1回なら、読む量も少なくて済みます。</p></div></li>
+      <li><span class="steps__n">1</span><div><p class="steps__title">週に1回、更新履歴を見る</p><p class="steps__desc"><code>/release-notes</code> を開きます。<br><span class="why">なぜ：</span>新しい機能は、知らなければ使えないからです。週1回なら、読む量も少なくて済みます。</p></div></li>
       <li><span class="steps__n">2</span><div><p class="steps__title">気になった機能を1つだけ、小さな作業で試す</p><p class="steps__desc"><span class="why">なぜ：</span>一度に複数を試すと、どれが効いたのか分からないからです。</p></div></li>
       <li><span class="steps__n">3</span><div><p class="steps__title">使えたら、CLAUDE.md かスキルに残す</p><p class="steps__desc"><span class="why">なぜ：</span>残さないと、次に同じ場面が来たときに思い出せないからです。残したものが、自分専用の使い方になっていきます。</p></div></li>
     </ol>
